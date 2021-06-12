@@ -1,0 +1,114 @@
+//Madrugada de Terror 
+//===== Descrição: ======================================== 
+//Evento que ocorre nas madrugadas, libera vários monstros
+
+-	script	Madrugada	-1,{
+
+OnClock0001:
+monster "prontera",0,0,"Deviling",1582,10; 
+monster "prontera",0,0,"Ghostring",1120,10;
+monster "prontera",0,0,"Angeling",1096,10;
+monster "prontera",0,0,"Archangeling",1388,10;
+monster "prontera",0,0,"Diabinho",1292,250;
+monster "prontera",0,0,"Wish Maiden",1931,75;
+monster "prontera",0,0,"Pesar Noturno",1768,10;
+monster "prontera",0,0,"Detardeurus",1719,10;
+announce "A Madrugada de Terror Começa Agora! Preparem-se bravos Guerreiros! Protejam Rune Midgard!", bc_all,0;
+end;
+
+OnClock0031:
+monster "prontera",0,0,"Lord Seyren",1646,3;
+monster "prontera",0,0,"Lord Seyren",1640,100;
+monster "prontera",0,0,"Algoz Eremes",1647,3;
+monster "prontera",0,0,"Algoz Eremes",1641,100;
+monster "prontera",0,0,"Mestre-Ferreiro Howard",1648,3;
+monster "prontera",0,0,"Mestre-Ferreiro Howard",1642,100;
+monster "prontera",0,0,"Suma-Sacerdotisa",1649,3;
+monster "prontera",0,0,"Suma-Sacerdotisa",1643,100;
+monster "prontera",0,0,"Atiradora de Elite",1650,3;
+monster "prontera",0,0,"Atiradora de Elite",1644,100;
+monster "prontera",0,0,"Arquimaga Kathryne",1651,3;
+monster "prontera",0,0,"Arquimaga Kathryne",1645,100;
+announce "Precisamos de toda ajuda prossivel para proteger Prontera!", bc_all,0;
+end;
+
+OnClock0101:
+monster "prontera",0,0,"Thanatos",1708,5;
+monster "prontera",0,0,"Odium de Thanatos",1704,10;
+monster "prontera",0,0,"Odium de Thanatos",1709,10;
+monster "prontera",0,0,"Despero de Thanatos",1705,10;
+monster "prontera",0,0,"Despero de Thanatos",1710,200;
+monster "prontera",0,0,"Maero de Thanatos",1706,10;
+monster "prontera",0,0,"Maero de Thanatos",1711,200;
+monster "prontera",0,0,"Pesar de Thanatos",1707,10;
+monster "prontera",0,0,"Pesar de Thanatos",1712,200;
+monster "prontera",0,0,"Senhora do Abrigo",1701,100;
+monster "prontera",0,0,"Lady Solace",1703,200;
+monster "prontera",0,0,"Baronesa da Retribuição",1702,200;
+monster "prontera",0,0,"Dama de Guarda",1700,200;
+monster "prontera",0,0,"Tao Gunka",1583,4;
+monster "prontera",0,0,"Cavaleiro da Tempestade",1251,5;
+announce "Tremam pobres mortais!! Thanatos chegou!! Cadê nosso HEROIS???", bc_all,0; 
+end; 
+
+OnClock0131:
+monster "prontera",0,0,"Tristan III",1875,200;
+monster "prontera",0,0,"Sombra de Nidhogg",2022,5;
+monster "prontera",0,0,"Duneyrr",2018,150;
+monster "prontera",0,0,"Valquíria",1765,30;
+monster "prontera",0,0,"Valquíria Randgris",1751,5;
+monster "prontera",0,0,"Valquíria",1891,100;
+monster "prontera",0,0,"Sombra da Inveja",1918,200;
+announce "Meu DEUS!!! AJUDEM-NOS em PRONTERA!!!", bc_all,0;
+end;
+
+OnClock0201:
+monster "prontera",0,0,"Bafomé",1039,30;
+monster "prontera",0,0,"Belzebu",1874,10;
+monster "prontera",0,0,"Deviling",1582,2;
+monster "prontera",0,0,"Cavaleiro do Abismo",1219,100;
+monster "prontera",0,0,"Cavaleiro Sanguinário",1268,100;
+monster "prontera",0,0,"Naght Sieger",1956,10;
+monster "prontera",0,0,"Sombra Obscura",2027,100;
+announce "...Bafomé?! ele não era esperado!!!! cuidaaadoo!", bc_all,0;
+end;
+
+OnClock0301:
+monster "prontera",0,0,"Kubkin",1980,300;
+monster "prontera",0,0,"Rastreador",1774,200;
+monster "prontera",0,0,"Mula Sem Cabeça",2071,200;
+monster "prontera",0,0,"Imperador Morroc",1916,5;
+monster "prontera",0,0,"Sacerdote Maldito",1198,200;
+monster "prontera",0,0,"Amon Ra",1511,20;
+monster "prontera",0,0,"Kiel D-01",1734,30;
+monster "prontera",0,0,"Entweihen Crothen",1957,2;
+announce "Óh Deus!!! Os monstros estão sem controle!", bc_all,0; 
+end;
+
+OnClock0401:
+monster "prontera",0,0,"Jakk",1130,200;
+monster "prontera",0,0,"Loli Ruri",1505,200;
+monster "prontera",0,0,"Drácula",1389,50;
+monster "prontera",0,0,"Boitatá",2068,50;
+monster "prontera",0,0,"Skeggiold",1754,100;
+monster "prontera",0,0,"Skogul",1752,100;
+monster "prontera",0,0,"Skeggiold",1755,100;
+monster "prontera",0,0,"Grande Demonio Bafomé",1929,1;
+announce "Tremam pobres mortais!! O Grande Bafomé chegou!! Cadê nossos HERÓIS???", bc_all,0; 
+end; 
+
+OnClock0501:
+announce "É Muito sangue espalhado por prontera!!! Quem irá nos salvar?", bc_all,0; 
+monster "prontera",0,0,"Ifrit",1832,10;
+monster "prontera",0,0,"Piamette",1930,100;
+monster "prontera",0,0,"Deviruchi",1109,200;
+monster "prontera",0,0,"Vigia do Jardim",1933,100;
+monster "prontera",0,0,"Zherlthsh",1482,100;
+monster "prontera",0,0,"Bispo Decadente",1871,10;
+end; 
+
+OnClock0601: 
+announce "Olhem! Está chegando o dia! A luz divina do Sol Espanta os Monstros!",0;
+killmonsterall "prontera"; announce "Parece que por hoje é só...",0;
+end; 
+}

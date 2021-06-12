@@ -1,0 +1,115 @@
+//===== Cronus Script ========================================
+//= Negociador Intermediário de Carregadores Kennedy
+//===== Por: =================================================
+//= eAthena Dev Team
+//===== Versão Atual: ========================================
+//= 1.2c
+//===== Compatível Com: ======================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Negocia Pacotes e Carregadores
+//===== Comentários Adicionais: ==============================
+//= 1.0 First version. [SinSloth]
+//= 1.1 Optimized version - Reduced to only one function [SinSloth]
+//= 1.2 Optimized^2, corrected npc's name [ultramage]
+//= 1.2a Optimized. Please, ommit extra NPC names [Lupus]
+//= 1.2b Traduzido [Sasuquinho e Deadly]
+//= 1.2c Revisado. [RoM]
+//============================================================
+
+que_ng,187,149,3	script	Loja de Carregadores	83,{
+	if(BaseJob == Job_Gunslinger) {
+		show "[Kenny]";
+		show "Eu sou o Negociador de Carregadores, Kenny!";
+		show "Se suas balas estão muito pesadas,";
+		show "venha falar comigo!";
+		next;
+		show "[Kenny]";
+		show "Eu posso montar para você Carregadores e Pacotes,";
+		show "que deixarão você carregar as";
+		show "Esferas por um peso menor!";
+		show "Vamos lá! Dê uma olhada!";
+		next;
+		switch(select("Pacote de Esferas de Relâmpago","Pacote de Esferas Cegantes","Pacote de Esferas Venenosas","Pacote de Esferas Congelantes","Pacote de Esferas de Chamas","Carregador","Carregador Sanguinário","Carregador de Prata","Cancelar")) {
+			case 1: callfunc "Func_Casing",13204,12144,"Esferas de Relâmpagos"; break;
+			case 2: callfunc "Func_Casing",13206,12145,"Esferas Cegantes"; break;
+			case 3: callfunc "Func_Casing",13205,12146,"Esferas Venenosas"; break;
+			case 4: callfunc "Func_Casing",13207,12147,"Esferas Congelantes"; break;
+			case 5: callfunc "Func_Casing",13203,12148,"Esferas de Chamas"; break;
+			case 6: callfunc "Func_Casing",13200,12149,"Projéteis"; break;
+			case 7: callfunc "Func_Casing",13202,12150,"Projéteis Sanguinários"; break;
+			case 8: callfunc "Func_Casing",13201,12151,"Projéteis de Prata"; break;
+			default:
+			show "[Kenny]";
+			show "Tudo bem. Se há";
+			show "alguma coisa a mais que eu possa fazer";
+			show "por você, por favor me diga.";
+			close;
+		}
+	}
+	show "[Kenny]";
+	show "Eu sou o Negociador de Carregadores, Kenny!";
+	show "Eu negocio Carregadores e Pacotes para Justiceiros.";
+	next;
+	show "[Kenny]";
+	show "Desculpe, mas parece que meus serviços não serão";
+	show "úteis para você, aventureiro.";
+	show "Ainda assim, caso conheça algum Justiceiro,";
+	show "diga para ele passar por aqui.";
+	close;
+}
+
+function	script	Func_Casing	{
+	show "[Kenny]";
+	show "" +getitemname(getarg(1))+ " irá";
+	show "custar 500 " +getarg(2);
+	show "e 500 zenys cada.";
+	next;
+	show "[Kenny]";
+	show "Você pode trocar no máximo 50.";
+	show "Digite 0 se você quiser cancelar.";
+	next;
+	input .@amount;
+	show "[Kenny]";
+	if(.@amount < 1) {
+		show "Tudo bem. Se há";
+		show "alguma coisa a mais que eu possa fazer";
+		show "por você, por favor me diga.";
+		close;
+	}
+	if(.@amount > 50) {
+		show "Você excedeu o limite!";
+		show "Tente novamente na próxima vez.";
+		close;
+	}
+	if(checkweight(getarg(1), .@amount) != 1) {
+		show "Você está com muito peso.";
+		show "Por favor limpe seu inventário.";
+		close;
+	}
+	if(countitem(getarg(0)) < 500*.@amount) {
+		show "Huh......";
+		show "Você não tem materiais o suficiente";
+		show "para trocar pelo";
+		show "número de itens que você quer.";
+		show "Por favor traga a";
+		show "quantidade correta de itens.";
+		close;
+	}
+	if(Zeny < 500*.@amount) {
+		show "Err... Você não tem o zeny suficiente.";
+		show "A taxa é 500 zeny para cada Carregador.";
+		show "Cheque sua quantidade de zeny e volte a falar comigo.";
+		close;
+	}
+	show "Ah muito bem!";
+	show "O número foi confirmado!";
+	if(getarg(1) < 12149)
+		show "Agora irei pegar seu Pacote.";
+	else
+		show "Agora irei pegar seu Carregador.";
+	set Zeny,Zeny-.@amount*500;
+	delitem getarg(0),.@amount*500;
+	additem getarg(1),.@amount;
+	close;
+}

@@ -1,0 +1,224 @@
+pvp_c_room,45,85,6	script	pbUnico	873,{
+
+set .@nome$, "[^0000FFpbUnico^000000]";
+
+show .@nome$;
+show "Olá, seja bem vindo! Em que posso ajudar-lo?";
+next;
+menu "- Dar Lance",LANCE,"- O que ganho?",GANHO,"- Como funciona?",FUNCIONA,"- Nada...",SAIR;
+
+LANCE:
+query_sql("SELECT logincount FROM login WHERE account_id = "+getcharid(3)+"", @verificardor);
+if(@verificardor<50 && getgmlevel()==0) goto NAO_ENTRA;
+if($menor_atv==0) goto DESATIVADO2;
+set @aposta_dada[0], 0;
+set @aposta_dada[1], 0;
+set @aposta_dada[2], 0;
+if (getgmlevel()>=20) {
+query_sql("SELECT COUNT(aposta) FROM j_menor WHERE apostador = "+getcharid(3)+"", @quant_aposta);
+query_sql("SELECT aposta FROM j_menor ORDER BY aposta ASC LIMIT 3", @aposta_dada);
+if(@quant_aposta >= 3) goto JA_APOSTOU;
+}else{
+query_sql("SELECT aposta FROM j_menor", @aposta_dada);
+query_sql("SELECT COUNT(aposta) FROM j_menor WHERE apostador = "+getcharid(3)+"", @quant_aposta);
+if(@quant_aposta >= 1) goto JA_APOSTOU;
+}
+query_sql("SELECT menor_unico FROM j_premios", @premio);
+show .@nome$;
+show "Você quer dar um lance? Será cobrado 5,000z para o lance! (VIP TOTAL é gratis) o prêmio desta rodada é "+@premio+" YGGs.";
+next;
+menu "Sim",CONTINUA,"Não",SAIR;
+
+CONTINUA:
+if (getgmlevel() <= 19) {
+if (Zeny < 5000) goto SEM_DINHEIRO;
+set Zeny, Zeny - 5000;
+}
+show .@nome$;
+show "Muito bem, me diga o palpite para registrar seu lance. ^FF0000Não^000000 utilize VIRGULA ou PONTO, caso coloque o numero será anulado e você perde a chance de participar!";
+if($menor_atv==0) goto DESATIVADO;
+next;
+show .@nome$;
+show "Digite o palpite, lembre-se somente o numero!";
+input @quant_atual;
+query_sql("INSERT INTO j_menor(aposta,apostador,apostador_char) VALUES ("+@quant_atual+","+getcharid(3)+","+getcharid(0)+")");
+next;
+show .@nome$;
+show "Seu lance foi registrado como ^FF0000"+@quant_atual+"^000000! Agora aguarde o prazo dessa rodada e torça para que o seu lance seja o MENOR e UNICO!";
+close;
+
+SEM_DINHEIRO:
+show .@nome$;
+show "Lamento mas você precisa pagar 5,000z para poder dar o lance.";
+close;
+
+
+DESATIVADO:
+next;
+show .@nome$;
+show "Desculpe mas o prazo para os lances ja encerrou, volte na próxima rodada.";
+close;
+
+DESATIVADO2:
+show .@nome$;
+show "Desculpe mas o prazo para os lances ja encerrou, volte na próxima rodada.";
+close;
+
+JA_APOSTOU:
+show .@nome$;
+show "Lamento, mas você já fez todos os lances possiveis dessa rodada.";
+show " ";
+if (getgmlevel()>=20) {
+show "- "+@aposta_dada[0];
+show "- "+@aposta_dada[1];
+show "- "+@aposta_dada[2];
+}else{
+show "- "+@aposta_dada;
+}
+close;
+
+GANHO:
+show .@nome$;
+show "A premiação varia de acordo com cada rodada, com no minimo ^0000FF100^000000 YGGs podendo chegar até ^0000FF400^000000 YGGs!";
+next;
+show .@nome$;
+show "A quantidade das YGGs você pode descobrir no momento do lance.";
+next;
+show .@nome$;
+show "No caso de VIP TOTAL essa premiação é 2x, ou seja, o dobro!";
+next;
+show .@nome$;
+show "Agora sua vez de mostrar que é bom de palpite! Espero seu lance!";
+close;
+
+FUNCIONA:
+show .@nome$;
+show "É bem simples, você já deve ter visto na TV algo parecido, não é verdade?";
+next;
+show .@nome$;
+show "Geralmente com nome como -Lance Perfeito, -Menor Lance, -Menor e Unico, Etc...";
+next;
+show .@nome$;
+show "Mas caso você não conheça preste atenção no que vou lhe dizer!";
+next;
+show .@nome$;
+show "Você vai dar um lance, ele será para TODA SUA CONTA, não importa com qual personagem der o lance!!";
+next;
+show .@nome$;
+show "Você tem direito a apenas um lance (em caso de VIP total são 3 lances). Após isso você deve aguardar o prazo para o encerramento da rodada.";
+next;
+show .@nome$;
+show "Se ao final da rodada, o lance que você deu, for o ^FF0000MENOR e o UNICO^000000 você VENCE!";
+next;
+show .@nome$;
+show "Viu como é facil? Agora quero ver se você é bom de palpite! Boa sorte!";
+close;
+
+SAIR:
+show .@nome$;
+show "Ok até breve!";
+close;
+
+NAO_ENTRA:
+show "[^0000FFpbGo da Sorte^000000]";
+show "Desculpe mas sua conta não pode participar dos jogos. Somente contas consideradas ativas podem participar!";
+close;
+
+OnClock0140:
+OnClock0940:
+OnClock1220:
+OnClock1440:
+OnClock1620:
+OnClock1840:
+OnClock1940:
+OnClock2120:
+OnClock2320:
+
+set $menor_atv, 0;
+query_sql("SELECT aposta, apostador, apostador_char, COUNT(aposta) AS resul FROM j_menor GROUP BY aposta ORDER BY resul ASC , aposta ASC", $@aposta, $@ganhador, $@char_ganhador,$@waunt);
+query_sql("SELECT menor_unico FROM j_premios",$@premio);
+query_sql("SELECT level FROM login WHERE account_id = "+$@ganhador+"",$@level);
+
+if($@level>=20) set $@premio, $@premio + $@premio;
+
+query_sql("SELECT creditos2 FROM login WHERE account_id = "+$@ganhador+"", $@verifi_ganhador);
+
+query_sql("SELECT `name` FROM `char` WHERE `char_id` = "+$@char_ganhador+"",$@nome_ganhador$);
+
+if($@waunt>=2) {
+announce "pbUnico: Não houve Vencedor nesta rodada! A proxima começará em breve, boa sorte!",0;
+query_sql("TRUNCATE TABLE j_menor");
+end;
+}else{
+announce "pbUnico: Vencedor desta rodada foi "+$@nome_ganhador$+". Com o lance de "+$@aposta+" e recebeu "+$@premio+" Ponto(s)!",0;
+announce "pbUnico: A proxima rodada começará em breve, boa sorte!!",0;
+}
+
+set $@verifi_ganhador, $@verifi_ganhador + $@premio;
+query_sql("UPDATE login SET creditos2 = "+$@verifi_ganhador+" WHERE account_id = "+$@ganhador+"");
+
+query_sql("TRUNCATE TABLE j_menor");
+query_sql("INSERT INTO mail(send_name,send_id,dest_name,dest_id,title,message,time) VALUES ('pbRO','0','"+$@nome_ganhador$+"','"+$@char_ganhador+"','pbUnico!','Parabens, voce ganhou com Menor e Unico lance no pbUnico! Voce pode pegar seu premio no Atendente de Troca. Você ganhou "+$@premio+" YGGs. Continue brincando e boa sorte!!',1230782411)");
+
+end;
+
+OnClock0155:
+OnClock0955:
+OnClock1235:
+OnClock1455:
+OnClock1635:
+OnClock1855:
+OnClock1955:
+OnClock2135:
+OnClock2335:
+
+set $@ramdomico, rand(100,400);
+query_sql("UPDATE j_premios SET menor_unico = "+$@ramdomico+"");
+set $menor_atv, 1;
+query_sql("TRUNCATE TABLE j_menor");
+
+announce "pbUnico: Esta liberada a nova rodada de lances, de seu palpite!",0;
+announce "pbUnico: O premio desta vez será "+$@ramdomico+" YGGs!",0;
+end;
+
+OnInit:
+set $menor_atv, 0;
+
+setcell "pvp_c_room",55,16,48,29,cell_novending,1;
+setcell "pvp_c_room",55,16,48,29,cell_nochat,1;
+setcell "pvp_c_room",27,83,93,30,cell_novending,1;
+setcell "pvp_c_room",27,83,93,30,cell_nochat,1;
+
+end;
+}
+
+//**********************************************************************************************************
+//**********************************************************************************************************
+//**********************************************************************************************************
+//**********************************************************************************************************
+prontera,156,176,5	script	pbGO da Sorte	715,{
+
+query_sql("SELECT logincount FROM login WHERE account_id = "+getcharid(3)+"", @verificardor);
+if(@verificardor<50 && getgmlevel()==0) goto NAO_ENTRA;
+
+show "[^0000FFpbGo da Sorte^000000]";
+show "Eu posso te levar para a sala de jogos do pbRO, gostaria de ir até lá?!";
+next;
+menu "Sim",SIM,"Não",NAO;
+
+NAO_ENTRA:
+show "[^0000FFpbGo da Sorte^000000]";
+show "Desculpe mas sua conta não pode participar dos jogos. Somente contas consideradas ativas podem participar!";
+close;
+
+SIM:
+warp "pvp_c_room",52,23;
+end;
+
+NAO:
+show "[pbGo da Sorte]";
+show "Tudo bem, mas depois não reclame se aquele palpite que você pensou em apostar for o ganhador hahahaha!";
+close;
+}
+
+pvp_c_room,52,18,0	warp	pbROSorte	1,1,prontera,155,155;

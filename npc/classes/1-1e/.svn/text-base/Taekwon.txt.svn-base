@@ -1,0 +1,438 @@
+//===== Cronus Script ========================================
+//= Quest para se tornar Taekwon
+//===== Por: =================================================
+//= Tsuyuki & Samuray22
+//===== Versão Atual: ========================================
+//= 1.2a
+//===== Comentários Adicionais: ==============================
+//= 1.0 Replaced previous TK Job Quest with this one [Tsuyuki]
+//= 1.1 Rewrote to the Aegis Standars. [Samuray22]
+//= 1.2 Fixed position the npc is facing. [Kisuka]
+//= 1.2a Traduzido e revisado de acordo com o bRO. [Mara]
+//============================================================
+
+payon,157,141,5	script	Fênix#TKJobChange	753,{
+	if(Upper == 2) {
+		show "[Fênix]";
+		show "Olá, criança.";
+		close;
+	} else if(Class == Job_Taekwon) {
+		show "[Fênix]";
+		show "Como está indo";
+		show "o seu treinamento? À medida que";
+		show "suas técnicas se tornam mais";
+		show "refinadas ou espetaculares,";
+		show "nunca se esqueça que você";
+		show "sempre poderá confiar no básico.";
+		close;
+	} else if(Class > Job_Novice) || (Class == Job_Novice && TK_Q == 0) {
+		show "[Fênix]";
+		show "Essa terra. Nosso mundo,";
+		show "que já foi belo, tem sido	";
+		show "arruinado pelo mal: existem";
+		show "muitos homens corrompidos pelas";
+		show "trevas, muitos monstros";
+		show "ameaçando os inocentes...";
+		next;
+		show "[Fênix]";
+		show "A destruição que reina nesse";
+		show "mundo é muito intensa para os";
+		show "humanos normais, que não podem";
+		show "se defender por conta própria";
+		show "contra adversidades tão poderosas. Mesmo";
+		show "assim, deve-se aspirar lutar contra as adversidades.";
+		next;
+		show "[Fênix]";
+		show "E por isso eu me dediquei";
+		show "a me tornar mais forte. Eu tenho treinado para";
+		show "alcança a iluminação, desenvolvendo";
+		show "uma arte para educar a mente e o corpo, e que";
+		show "eu desejo compartilhar com";
+		show "o mundo.";
+		next;
+		show "[Fênix]";
+		show "Eu posso não estar apto a mudar";
+		show "o mundo sozinho, mas eu nunca";
+		show "irei parar de treinar";
+		show "espiritualmente e fisicamente.";
+		show "Eu sei que a resposta virá";
+		show "com o tempo...";
+		next;
+		if (Class == Job_Novice && TK_Q == 0) {
+			goto L_change;
+		}
+		show "[Fênix]";
+		show "Nobre aventureiro:";
+		show "se você conhece alguém que";
+		show "ainda não tenha encontrado o seu caminho";
+		show "na vida, por favor, mande-o";
+		show "a mim. Se houver interesse,";
+		show "eu posso ensinar minha arte...";
+		close;
+L_change:
+		show "[Fênix]";
+		show "Se você ainda não decidiu";
+		show "que caminho seguir na vida";
+		show "eu gostaria que considerasse";
+		show "a opção de se tornar um praticante";
+		show "de minha arte. Não será fácil,";
+		show "mas irá te levar a";
+		show "uma força maior...";
+		next;
+		if(select("Certo, eu vou me juntar a você.","Não, obrigado.") == 1) {
+			if(getskilllv("NV_BASIC") < 9) {
+				show "[Fênix]";
+				show "Mas que pena! Você";
+				show "ainda não está pronto para";
+				show "começar a treinar sobre";
+				show "minha arte de ensinar com";
+				show "o seu atual nível de classe.";
+				show "Por favor, volte quando";
+				show "alcançar nível 9 de classe.";
+				close;
+			}
+			show "[Fênix]";
+			show "Muito bem... Eu aceito você";
+			show "como meu estudante. Ao começar";
+			show "o treinamento, seu corpo físico";
+			show "deve antes de tudo estar";
+			show "condicionado para";
+			show "poder executar as habilidades.";
+			show "que você irá aprender.";
+			next;
+			if(BaseLevel > 19) {
+				show "[Fênix]";
+				show "Hm. Eu vi que você treinou";
+				show "o suficiente seu físico";
+				show "como Aprendiz. Muito bom. Então deixe-me preparar para seu";
+				show "treinamento espiritual. Respire";
+				show "profundamente, e fale comigo quando estiver pronto.";
+				set TK_Q, 2;
+				close;
+			}
+			show "[Fênix]";
+			show "A mente não está necessariamente";
+			show "ligada aos limites do seu corpo,";
+			show "mas você não irá nunca alcançar o seu";
+			show "verdadeiro potencial sem integrar";
+			show "mente e corpo. Vá, ganhe mais ^ff00001";
+			show "Nível de Base^000000, e então retorne.";
+			next;
+			set TAEK_Q, BaseLevel;
+			set TK_Q, 1;
+			show "[Fênix]";
+			show "Eu entendo que essa não é";
+			show "uma tarefa fácil para Aprendizes,";
+			show "mas você deve se preparar para as";
+			show "durezas dessa profissão. Eu espero";
+			show "que você esteja mais forte";
+			show "da próxima vez que nos";
+			show "encontrarmos.";
+			close;
+		}
+			show "[Fênix]";
+			show "Eu entendo. A vida de alguém";
+			show "pode tomar muitos caminhos, mas";
+			show "você pode escolher viajar apenas por um deles";
+			show "por vez. Eu espero que você";
+			show "trabalhe para alcançar a iluminação em";
+			show "seu próprio caminho, aventureiro.";
+			close;
+	}
+	switch(TK_Q) {
+	case 1:
+		if(BaseLevel > TAEK_Q) {
+			set TK_Q, 2;
+			show "[Fênix]";
+			show "Bom. Eu sinto que você";
+			show "está mais sintonizado com sua";
+			show "força interior. Esse é o";
+			show "resultado natural do crescimento";
+			show "Nós estamos prontos para";
+			show "prosseguir";
+			show "com a próxima parte de nosso";
+			show "treinamento.";
+			close;
+		}
+			show "[Fênix]";
+			show "Você precisa ganhar mais ^ff00001";
+			show "Nível de Base^000000 para";
+			show "provar que você pode suportar";
+			show "o difícil treinamento dessa";
+			show "classe.";
+			close;
+	case 2:
+		show "[Fênix]";
+		show "Para o seu treinamento espiritual,";	
+		show "eu vou lhe perguntar uma série de";
+		show "questões para testar o seu espírito.";
+		show "para testar seu espírito.";
+		show "Relaxe. Responda da forma mais";
+		show "honestamente que você puder.";
+		show "Sua vontade e crença";
+		show "serão testadas.";
+		next;
+		show "[Fênix]";
+		show "Como um praticante da minha";
+		show "arte, a habilidade de tomar";
+		show "rapidamente a melhor decisão";
+		show "durante uma batalha, será necessária.";
+		show "Agora, nós vamos começar";
+		show "o interrogatório.";
+		next;
+		show "[Fênix]";
+		show "Quando você encontra";
+		show "grandes dificuldades, como você";
+		show "costuma geralmente reagir?";
+		next;
+		switch(select( "Eu encaro de cabeça erguida.:Evito-as de alguma maneira.:Me recomponho e analiso o problema.")) {
+		case 2:
+			show "[Fênix]";
+			show "Tolo! Como você espera";
+			show "amadurecer se foge dos";
+			show "desafios? O medo pode";
+			show "ser uma reação saudável que até";
+			show "pode salvar sua vida, mas a";
+			show "verdadeira covardia é desprezível.";
+			next;
+			show "[Fênix]";
+			show "Me desaponta ouvir";
+			show "você dizer isso. Nunca";
+			show "diga tal coisa para mim.";
+			show "Hmm. Contemple os significados";
+			show "da coragem e covardia e então";
+			show "venha falar comigo novamente.";
+			close;
+		case 3:
+			show "[Fênix]";
+			show "Recompor? É bom fazer isso";
+			show "após você ter sido derrotado.";
+			show "Mas é melhor enfrentar os";
+			show "problemas";
+			show "quando você se depara com eles.";
+			show "Você não terá sempre o";
+			show "luxo de se 'recompor'.";
+			next;
+			show "[Fênix]";
+			show "Os problemas podem ser antecipados";
+			show "e analisados, mas eu acho";
+			show "que recuar logo de início não é";
+			show "sábio.";
+			show "Contemple seus medos";
+			show "assim como aquilo que você define como fracasso.";
+			show "Então, volte até mim.";
+	close;
+		case 1:
+			show "[Fênix]";
+			show "Sim, essa é a resposta";
+			show "que eu queria. Mesmo que você não possa";
+			show "lidar com um problema no início, nós";
+			show "só podemos nos beneficiar de";
+			show "uma determinação tão forte. Não";
+			show "deixe nenhum obstáculo";
+			show "impedir você de progredir.";
+			next;
+			show "[Fênix]";
+			show "Mesmo se você fracasse, você";
+			show "só terá a aprender com a";
+			show "experiência de se dar";
+			show "por inteiro. Tentativas pela";
+			show "metade raramente geram";
+			show "resultados frutíferos.";
+			next;
+			show "[Fênix]";
+			show "Observando como você já";
+			show "entende a importância de";
+			show "possuir força de vontade, nós agora prosseguiremos";
+			show "para a próxima pergunta.";
+			next;
+		}
+		show "[Fênix]";
+		show "Em suas jornadas você irá";
+		show "encontrar muitas pessoas";
+		show "com histórias de vida";
+		show "e pontos de vista diferentes.";
+		show "Inevitavelmente, você irá";
+		show "encontrar alguém cujo estilo de vida";
+		show "você não poderá entender.";
+		next;
+		show "[Fênix]";
+		show "Da mesma maneira, essa pessoa não irá entender seu estilo de vida.";
+		show "Quando seus dois pontos de vista";
+		show "colidirem, causando um conflito intenso,";
+		show "de vista se chocarem,";
+		show "causando conflito, como";
+		show "como você irá reagir?";
+		next;
+		switch( select("Insistir que estou certo, sem medo.:Não me importar em conflitar os pontos de vista.:Aceitar as diferenças e aprender com elas.")) {
+		case 1:
+		show "[Fênix]";
+		show "É importante possuir sua própria";
+		show "opinião. Porém, você";
+		show "deve reconhecer que você pode";
+		show "estar errado e que um ponto de vista";
+		show "oposto pode ter";
+		show "seus méritos";
+		next;
+		show "[Fênix]";
+		show "Não há nenhuma resposta certa";
+		show "e a luz da verdade pode ter";
+		show "muitas nuances.";
+		show "Assim é o caminho da natureza.";
+		show "Forçar suas idéias sobre os outros";
+		show "é uma prática opressiva.";
+		next;
+		show "[Fênix]";
+		show "Não limite-se";
+		show "a um único ponto de vista e não";
+		show "atrapalhe seu crescimento";
+		show "concordando com uma única verdade.";
+		show "Pense sobre isso e";
+		show "depois venha falar comigo de novo.";
+		close;
+		case 2:
+			show "[Fênix]";
+			show "É importante se dar";
+			show "bem com os outros, mas";
+			show "você não trará nenhum";
+			show "valor a esse mundo";
+			show "sem suas próprias contribuições,";
+			show "pensamentos e opiniões.";
+			next;
+			show "[Fênix]";
+			show "Um conflito de ideais,";
+			show "quando conduzido com respeito por";
+			show "si mesmo e pelos outros, é uma";
+			show "grande oportunidade de ampliar";
+			show "o seu entendimento sobre";
+			show "o mundo como ele é";
+			show "para os outros.";
+			next;
+			show "[Fênix]";
+			show "Medite sobre essa idéia de";
+			show "estebelecer harmonia com";
+			show "seu eu interior e harmonia com";
+			show "outros indivíduos. Então, volte até mim.";
+	close;
+		case 3:
+			show "[Fênix]";
+			show "Bom. Você deve perceber";
+			show "as diferenças pelo que elas";
+			show "são de verdade. Você também deve";
+			show "usar de autocrítica com suas próprias";
+			show "visões das coisas com graça e";
+			show "respeito sincero.";
+			next;
+			show "[Fênix]";
+			show "É impossível saber tudo";
+			show "neste mundo.";
+			show "É impossível entender";
+			show "cada ponto de vista. Mas isso não";
+			show "significa";
+			show "que os pontos de vista que você não entende,";
+			show "não tenham seus méritos.";
+			next;
+			show "[Fênix]";
+			show "Aquele com o quem você";
+			show "discorda pode ter";
+			show "a resposta que você não conhece.";
+			show "Quando você estiver fraco,";
+			show "essa pessoa poderá ser sua";
+			show "maior ajuda. Lembre-se disso.";
+			next;
+		}
+		show "[Fênix]";
+			show "Eu estou satisfeito com";
+			show "as respostas que você";
+			show "me deu. Por favor,";
+			show "reflita por um tempo";
+			show "sobre o que discutimos.";
+			show "Quando sua mente estiver calma,";
+			show "volte e venha falar comigo.";
+		set TK_Q, 3;
+		close;
+	case 3:
+		show "[Fênix]";
+		show "Você esta se sentindo calmo";
+		show "e em paz? Eu irei te perguntar";
+		show "uma coisa muito importante.";
+		show "Me dê uma resposta honesta.";
+		next;
+		show "[Fênix]";
+		show "^ff0000Você está pronto para se dedicar";
+		show "à arte especial que";
+		show "eu vou te ensinar e a manter";
+		show "a dignidade de sua filosofia?^000000";
+		next;
+		if( select( "Sim.","Não.") == 1) {
+			show "[Fênix]";
+			show "Muito bem. Você não é mais";
+			show "somente um aluno.";
+			show "Agora lhe foram confiados";
+			show "os poderes e as responsabilidades";
+			show "de um discípulo do^ff0000Tae Kwon Do^000000.";
+			next;
+			show "[Fênix]";
+			show "'Tae Kwon' significa";
+			show "'socar e chutar',";
+			show "e 'Do' significa";
+			show "'arte'. Essa arte marcial é";
+			show "focada nas habilidades utilizando";
+			show "os punhos e pés.";
+			next;
+			show "[Fênix]";
+			show "Por favor, use essa disciplina";
+			show "para fortalecer seu corpo e mente,";
+			show "além de aprender as habilidades que";
+			show "se ajustam melhor a você";
+			show "Nunca deixe de treinar e nunca traga";
+			show "vergonha ao Tae Kwon Do.";
+			next;
+			callfunc "Job_Change",Job_Taekwon;
+			callfunc "F_ClearJobVar";
+			additem 2101,1; // Guard[0]
+			show "[Fênix]";
+			show "Você ainda é jovem, então";
+			show "eu acredito que você quer";
+			show "um título. Nesse caso, você agora se chama";
+			if(Sex == 0) {
+				show "^FF0000Garoto de Tae Kwon Do^000000.";
+			} else {
+				show "^FF0000Garota de Tae Kwon Do^000000.";
+			}
+			show "Sim, esse nome é bom. ";
+			next;
+			show "[Fênix]";
+			show "Por favor, pegue esse";
+			show "uniforme de treinamento";
+			show "e itens de defesa. Faça um";
+			show "bom uso desses presentes.";
+			show "Conforme você viaja e treina,";
+			show "mostre aos outros sobre nossa";
+			show "arte e aprenda o que puder";
+			show "em retorno.";
+			next;
+			show "[Fênix]";
+			show "Agora está na hora de";
+			show "embarcar na sua própria";
+			show "jornada em busca de novos";
+			show "desafios para desenvolver";
+			show "sua força. Siga seu caminho";
+			show "com orgulho, como um";
+			show "praticante de Tae Kwon Do!";
+			next;
+			show "[Fênix]";
+			show "Muito bem. Eu lhe desejo sorte.";
+			show "Espero vê-lo novamente em";
+			show "breve, "+strcharinfo(0)+".";
+			close;
+		}
+			show "[Fênix]";
+			show "Hmmm, talvez você não esteja";
+			show "tão preparado para progredir do";
+			show "seu status de estudande para o de um discípulo completo.";
+			show "Quando você se sentir preparado,";
+			show "volte e venha falar comigo.";
+			close;
+	}
+}

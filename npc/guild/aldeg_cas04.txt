@@ -1,106 +1,111 @@
-//===== eAthena Script =======================================
-//= War of Emperium (Al De baran)
-//===== By: ==================================================
+//===== Cronus Script ========================================
+//= Guerra do Emperium (Al De baran)
+//===== Por: =================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
-//= 1.1
-//===== Compatible With: =====================================
-//= eAthena SVN
-//===== Description: =========================================
-//= NPCs that relate to Al De Baran Guild Castle 4
+//===== Versão Atual: ========================================
+//= 1.0/1.2a
+//===== Compatível com: ======================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= NPCs relativos ao 4º Castelo de Al De Baran
 //===== Additional Comments: =================================
 //= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
-//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
+//= 1.1 Traduzido ao Português-BR de acordo com o bRo [Asus]
+//= 1.2 Corrigido erros [Soulblaker]
+//= 1.2a Revisado. [RoM]
 //============================================================
 
-// Guild Flag (Town)
+// Guild Flag (Cidade)
 //============================================================
-aldebaran,131,97,4	script	Wuerzburg#a4-1::Wuerzburg	722,{
+aldebaran,131,97,4	script	Rigel#a4-1::Wuerzburg	722,{
 	end;
 
-OnRecvCastleA04:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("aldeg_cas04",1);
-	end;
+	sleep 10000;
+	}
 }
 
-// Guild Flag (Outside Castle)
+// Guild Flag (Fora do Castelo)
 //============================================================
-alde_gld,239,246,2	script	Wuerzburg#a4-2::Wuerzburg2	722,{
+alde_gld,239,246,2	script	Rigel#a4-2::Wuerzburg2	722,{
 	set .@GID, GetCastleData("aldeg_cas04",1);
 	if (.@GID == 0) {
-		mes " [ Edict of the Divine Rune Midgard Kingdom ]";
-		mes " ";
-		mes "1. Follow the ordinance of The Divine Rune Midgard Kingdom, ";
-		mes "We declare that";
-		mes "there is no formal master of this castle.";
-		mes " ";
-		mes "2. To the one who can ";
-		mes "overcome all trials";
-		mes "and destroy the Emperium,";
-		mes "the king will endow the one with";
-		mes "ownership of this castle.";
+		show "[ Decreto do Reino de Rune-Midgard ]";
+		show " ";
+		show "1. Conforme a ordem do Reino de Rune-Midgard,";
+		show "declaro que não há nenhum";
+		show "dono formal deste castelo.";
+		show " ";
+		show "2. Se o seu Clã conseguir";
+		show "passar por todos os desafios";
+		show "e destruír o Emperium deste castelo,";
+		show "você será nomeado como o dono deste castelo.";
 	}
 	else {
 		if (getcharid(2) == .@GID) {
-			mes "Brave ones...";
-			mes "Do you wish to return to your honorable place?";
+			show "Bravo guerreiro...";
+			show "Você quer retornar ao seu honorável lugar?";
 			next;
-			if (select("Return to the guild castle.:Quit.") == 1) {
+			if (select("Voltar ao castelo do seu Clã:Cancelar") == 1) {
 				if (getcharid(2) == GetCastleData("aldeg_cas04",1)) {
 					warp "aldeg_cas04",45,88;
-					//warp "aldeg_cas04",116,217;
 					end;
 				}
 			}
 			close;
 		}
-		mes "[ Edict of the Divine Rune Midgard Kingdom ]";
-		mes " ";
-		mes "1. Following the ordinance of the";
-		mes "Divine Rune Midgard Kingdom,";
-		mes "we approve that this place is in";
-		mes "the private possession of ^ff0000" + GetGuildName(.@GID) + "^000000 Guild.";
-		mes " ";
-		mes "2. The guild Master of ^ff0000"+ GetGuildName(.@GID) + "^000000 Guild is";
-		mes "^FF0000" + GetGuildMaster(.@GID) + "^000000";
-		mes "If there is anyone who objects to this,";
-		mes " prove your strength and honor with a steel blade in your hand.";
+		show "[ Decreto do Reino de Rune-Midgard ]";
+		show " ";
+		show "1. Conforme o Pacto do Reino de Rune-Midgard,";
+		show "declaro que este castelo pertence";
+		show "ao Clã ^ff0000" + GetGuildName(.@GID) + "^000000.";
+		show " ";
+		show "2. O Líder do Clã ^ff0000"+ GetGuildName(.@GID) + "^000000 se chama";
+		show "^FF0000" + GetGuildMaster(.@GID) + "^000000.";
+		show "Se alguém se opõe a este decreto";
+		show "desembainhe sua espada para fazer valer sua vontade.";
 	}
 	close;
 
-OnRecvCastleA04:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("aldeg_cas04",1);
-	end;
+	sleep 10000;
+	}
 }
 
-alde_gld,239,239,2	duplicate(Wuerzburg2)	Wuerzburg#a4-3	722
+alde_gld,239,239,2	duplicate(Wuerzburg2)	Rigel#a4-3	722
 
-// Guild Flag (Inside Castle)
+// Guild Flag (Dentro do Castelo)
 //============================================================
-aldeg_cas04,167,61,2	script	Wuerzburg#a4-4::Wuerzburg3	722,{
+aldeg_cas04,167,61,2	script	Rigel#a4-4::Wuerzburg3	722,{
 	end;
 
-OnRecvCastleA04:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("aldeg_cas04",1);
-	end;
+	sleep 10000;
+	}
 }
 
-aldeg_cas04,164,90,2	duplicate(Wuerzburg3)	Wuerzburg#a4-5	722
-aldeg_cas04,129,193,2	duplicate(Wuerzburg3)	Wuerzburg#a4-6	722
-aldeg_cas04,112,206,2	duplicate(Wuerzburg3)	Wuerzburg#a4-7	722
-aldeg_cas04,113,212,2	duplicate(Wuerzburg3)	Wuerzburg#a4-8	722
-aldeg_cas04,77,117,2	duplicate(Wuerzburg3)	Wuerzburg#a4-9	722
-aldeg_cas04,186,42,2	duplicate(Wuerzburg3)	Wuerzburg#a4-10	722
-aldeg_cas04,30,69,2	duplicate(Wuerzburg3)	Wuerzburg#a4-11	722
-aldeg_cas04,55,97,2	duplicate(Wuerzburg3)	Wuerzburg#a4-12	722
-aldeg_cas04,45,98,2	duplicate(Wuerzburg3)	Wuerzburg#a4-13	722
-aldeg_cas04,33,116,2	duplicate(Wuerzburg3)	Wuerzburg#a4-14	722
-aldeg_cas04,130,180,2	duplicate(Wuerzburg3)	Wuerzburg#a4-15	722
-aldeg_cas04,129,193,2	duplicate(Wuerzburg3)	Wuerzburg#a4-16	722
-aldeg_cas04,33,107,2	duplicate(Wuerzburg3)	Wuerzburg#a4-17	722
-aldeg_cas04,133,220,2	duplicate(Wuerzburg3)	Wuerzburg#a4-18	722
-aldeg_cas04,169,22,2	duplicate(Wuerzburg3)	Wuerzburg#a4-19	722
-aldeg_cas04,169,15,2	duplicate(Wuerzburg3)	Wuerzburg#a4-20	722
+aldeg_cas04,164,90,2	duplicate(Wuerzburg3)	Rigel#a4-5	722
+aldeg_cas04,129,193,2	duplicate(Wuerzburg3)	Rigel#a4-6	722
+aldeg_cas04,112,206,2	duplicate(Wuerzburg3)	Rigel#a4-7	722
+aldeg_cas04,113,212,2	duplicate(Wuerzburg3)	Rigel#a4-8	722
+aldeg_cas04,77,117,2	duplicate(Wuerzburg3)	Rigel#a4-9	722
+aldeg_cas04,186,42,2	duplicate(Wuerzburg3)	Rigel#a4-10	722
+aldeg_cas04,30,69,2	duplicate(Wuerzburg3)	Rigel#a4-11	722
+aldeg_cas04,55,97,2	duplicate(Wuerzburg3)	Rigel#a4-12	722
+aldeg_cas04,45,98,2	duplicate(Wuerzburg3)	Rigel#a4-13	722
+aldeg_cas04,33,116,2	duplicate(Wuerzburg3)	Rigel#a4-14	722
+aldeg_cas04,130,180,2	duplicate(Wuerzburg3)	Rigel#a4-15	722
+aldeg_cas04,129,193,2	duplicate(Wuerzburg3)	Rigel#a4-16	722
+aldeg_cas04,33,107,2	duplicate(Wuerzburg3)	Rigel#a4-17	722
+aldeg_cas04,133,220,2	duplicate(Wuerzburg3)	Rigel#a4-18	722
+aldeg_cas04,169,22,2	duplicate(Wuerzburg3)	Rigel#a4-19	722
+aldeg_cas04,169,15,2	duplicate(Wuerzburg3)	Rigel#a4-20	722
 
 // AGIT Manager
 //============================================================
@@ -116,15 +121,15 @@ aldeg_cas04,67,116,0	duplicate(Gld_Guard_Template)	Guardian#aldeg_cas04	-1
 
 // Kafra Staff
 //============================================================
-aldeg_cas04,45,88,0	duplicate(Gld_Kafra_Template)	Kafra Staff#aldeg_cas04	117
+aldeg_cas04,45,88,0	duplicate(Gld_Kafra_Template)	Kafra#alde_cas04	117
 
-// Master's Room Exit
+// Saída da Sala do Mestre
 //============================================================
 aldeg_cas04,83,17,0	script	#switch_A04	111,{
-	mes " ";
-	mes "There's a small lever. Will you pull it? ";
+	show " ";
+	show "Existe uma pequena alavanca. Deseja puxá-la?";
 	next;
-	if(select("Pull.:Do not.") == 2) close;
+	if(select("Puxar:Não puxar") == 2) close;
 	warp "aldeg_cas04",67,117;
 	end;
 }

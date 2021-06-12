@@ -1,0 +1,15 @@
+guild_vs3.gat,0,0,0,0	monster	Cristal pbRO	1395,5,300000,300000
+guild_vs2-1.gat,0,0,0,0	monster	Cristal pbRO	1395,5,300000,300000
+guild_vs2-2.gat,0,0,0,0	monster	Cristal pbRO	1395,5,300000,300000
+prt_fild00.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild01.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild02.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild03.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild04.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild05.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild06.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild07.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild08.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild09.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild10.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000
+prt_fild11.gat,0,0,0,0	monster	Cristal pbRO	1395,5,900000,900000

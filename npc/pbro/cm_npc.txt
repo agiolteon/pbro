@@ -1,0 +1,2563 @@
+prt_church,20,164,5	script	 Arena de Eventos 	951,{
+if(getgmlevel() > 30){
+show "[Arena de Eventos]";
+show "Deseja ir para arena de eventos?";
+if(select("Sim:Não") == 2) close;
+warp "force_1-1",86,104;
+close;
+}
+end;
+}
+
+prt_church,21,177,5	script	 Teleportadora CM 	951,{
+if(getgmlevel() > 30){
+show "[Teleportadora CM]";
+show "Olá ^FF0000"+strcharinfo(0)+"^000000, deseja ir para a arena de CMs?";
+menu "Sim!",go,"Não, obrigado!",no;
+go:
+warp "sec_in02",139,56;
+close;
+end;
+
+no:
+next;
+show "[Teleportadora CM]";
+show "OK.";
+emotion e_no1;
+close;
+end;
+}
+else{
+show "[Teleportadora CM]";
+show "Você não tem permissão para falar comigo...";
+next;
+show "[Teleportadora CM]";
+show "Vou fingir que não vi você...";
+close;
+}
+}
+
+sec_in02,130,57,5	script	 Serviços CM#1-1 	806,{
+if(getgmlevel() > 30){
+show "[Serviços CM]";
+show "Selecione uma ação:";
+menu "Recallar Jogador",recall,"Recallar Grupo",recgrupo,"Desabilitar Skills",deskill,"Habilitar Skills",habskill,"Ligar PvP",on,"Desligar PvP",off,"Matar todos do mapa",kall,"Reviver todos do mapa",rall,"Ignorar ataques",imun,"Liberar receber ataques",kable,"Habilitar nome falso",fknm,"Salvar ponto de Retorno",retur,"Pegar Galhos Secos",gs1,"Pegar Galhos Sangrentos",gs2,"Pegar Emblema Bravura",emb,"Pegar Emblema Valor",emv,"Matar monstros do mapa",mkill,"Usar email",mail,"Ir para Sala de Espera",sala2,"Ir para Sala PvP",spvp,"Sair",sair;
+
+spvp:
+warp "prt_are01",160,254;
+close;
+end;
+
+sala2:
+warp "quiz_00",62,8;
+close;
+end;
+
+
+mkill:
+atcommand "@killmonster2";
+close;
+end;
+
+
+mail:
+openmail;
+close;
+end;
+
+
+defree:
+show "Digite o nome do player";
+next;
+input .@jogad$;
+charcommand "#option 0 0 0 "+.@jogad$+"";
+show "[Serviços CM]";
+show "Pronto.";
+close;
+end;
+
+gs1:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 604,@galho;
+close;
+end;
+
+gs2:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 12103,@galho;
+close;
+end;
+
+emb:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 7828,@galho;
+close;
+end;
+
+emv:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 7829,@galho;
+close;
+end;
+
+recall:
+show "Digite o nome do player";
+next;
+input .@player$;
+atcommand "@recall "+.@player$+"";
+close;
+end;
+
+recgrupo:
+show "Digite nome do grupo";
+next;
+input .@party$;
+atcommand "@partyrecall "+.@party$+"";
+close;
+end;
+
+deskill:
+atcommand "@skilloff";
+show "Pronto.";
+close;
+end;
+
+habskill:
+atcommand "@skillon";
+show "Pronto.";
+close;
+end;
+
+on:
+atcommand "@pvpon";
+show "Pronto.";
+close;
+end;
+
+off:
+atcommand "@pvpoff";
+show "Pronto.";
+close;
+end;
+
+kall:
+atcommand "@doommap";
+show "Pronto.";
+close;
+end;
+
+rall:
+atcommand "@raisemap";
+show "Pronto.";
+close;
+end;
+
+imun:
+atcommand "@monsterignore";
+show "Pronto.";
+close;
+end;
+
+fknm:
+show "Digite o Nome Falso";
+show "^0000FFColoque espaço para retornar ao nick normal^000000";
+next;
+input .@name$;
+atcommand "@fakename "+.@name$+"";
+show "[Serviços CM]";
+show "Pronto.";
+close;
+end;
+
+freeze:
+show "Digite o nome do player";
+next;
+input @jogad$;
+charcommand "#option "+@jogad$+" 2 0 0";
+show "[Serviços CM]";
+show "Pronto.";
+close;
+end;
+
+kable:
+atcommand "@killable";
+show "Pronto.";
+close;
+end;
+
+retur:
+savepoint "prt_church",21,169;
+show "Pronto.";
+emotion e_no1;
+close;
+end;
+
+sair:
+show "Volte quando precisar de mim.";
+emotion e_no1;
+warp "prt_church",21,169;
+close;
+end;
+}
+}
+
+
+prontera,6,6,4	script	 Hider 	-1,{
+OnPCLoginEvent:
+if(getgmlevel() > 20)
+{ 
+	atcommand "@hide";
+	atcommand "@speed 0";
+	end;
+}
+end;
+
+}
+
+
+quiz_00,53,14,5	script	 Serviços CM#1-2 	951,{
+if(getgmlevel() > 30){
+show "[Serviços CM]";
+show "Selecione uma ação:";
+menu "Recallar Jogador",recall,"Recallar Grupo",recgrupo,"Recallar Clã",recgcl,"Desabilitar Skills",deskill,"Habilitar Skills",habskill,"Ligar PvP",on,"Desligar PvP",off,"Matar todos do mapa",kall,"Reviver todos do mapa",rall,"Ignorar ataques",imun,"Liberar receber ataques",kable,"Habilitar nome falso",fknm,"Salvar ponto de Retorno",retur,"Pegar Galhos Secos",gs1,"Pegar Galhos Sangrentos",gs2,"Pegar Emblema Bravura",emb,"Pegar Emblema Valor",emv,"Matar monstros do mapa",mkill,"Usar email",mail,"Sala de Espera",leave,"Sala PvP",pny,"Arena de Eventos",arnv,"Limpar sala de Espera",lsalp,"Sair",sair;
+//menu "Recallar Jogador",recall,"Recallar Grupo",recgrupo,"Recallar Clã",recgcl,"Desabilitar Skills",deskill,"Habilitar Skills",habskill,"Ligar PvP",on,"Desligar PvP",off,"Matar todos do mapa",kall,"Reviver todos do mapa",rall,"Ignorar ataques",imun,"Liberar receber ataques",kable,"Habilitar nome falso",fknm,"Salvar ponto de Retorno",retur,"Pegar Galhos Secos",gsl,"Pegar Galhos Sangrentos",gs2,"Matar monstros do mapa",mkill,"Usar email",mail,"Sala de Espera",leave,"Sala PvP",pny,"Arena de Eventos",arnv,"Limpar sala de Espera",lsalp,"Sair",sair,"Refinar Chapéu",rfch,"Refinar Armadura",rfam,"Refinar Escudo",rfs,"Refinar Manto",rfg,"Refinar Arma",rfarm;
+
+OnInit:
+setmapflag "prt_are01",mf_partylock;
+end;
+
+rfarm:
+successrefitem 4;
+close;
+end;
+
+lsalp:
+mapwarp "quiz_00","prontera",156,191;
+close;
+end;
+
+rfg:
+successrefitem 5;
+close;
+end;
+
+
+rfs:
+successrefitem 3;
+close;
+end;
+
+rfam:
+successrefitem 2;
+close;
+end;
+
+
+rfch:
+successrefitem 1;
+close;
+end;
+
+recgcl:
+input @ggnome$;
+atcommand "@guildrecall "+@ggnome$+"";
+end;
+
+arnv:
+warp "force_1-1",86,104;
+close;
+end;
+
+
+pny:
+warp "prt_are01",160,254;
+close;
+end;
+
+
+leave:
+warp "sec_in02",139,56;
+close;
+end;
+
+mkill:
+atcommand "@killmonster2";
+close;
+end;
+
+
+mail:
+openmail;
+close;
+end;
+
+
+defree:
+show "Digite o nome do player";
+next;
+input .@jogad$;
+charcommand "#option 0 0 0 "+.@jogad$+"";
+show "[Serviços CM]";
+show "Pronto.";
+close;
+end;
+
+gs1:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 604,@galho;
+close;
+end;
+
+gs2:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 12103,@galho;
+close;
+end;
+
+emb:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 7828,@galho;
+close;
+end;
+
+emv:
+show "Quantos deseja?";
+next;
+input @galho;
+next;
+additem 7829,@galho;
+close;
+end;
+
+recall:
+show "Digite o nome do player";
+next;
+input .@player$;
+atcommand "@recall "+.@player$+"";
+close;
+end;
+
+recgrupo:
+show "Digite nome do grupo";
+next;
+input .@party$;
+atcommand "@partyrecall "+.@party$+"";
+close;
+end;
+
+deskill:
+atcommand "@skilloff";
+show "Pronto.";
+close;
+end;
+
+habskill:
+atcommand "@skillon";
+show "Pronto.";
+close;
+end;
+
+on:
+atcommand "@pvpon";
+show "Pronto.";
+close;
+end;
+
+off:
+atcommand "@pvpoff";
+show "Pronto.";
+close;
+end;
+
+kall:
+atcommand "@doommap";
+show "Pronto.";
+close;
+end;
+
+rall:
+atcommand "@raisemap";
+show "Pronto.";
+close;
+end;
+
+imun:
+atcommand "@monsterignore";
+show "Pronto.";
+close;
+end;
+
+fknm:
+show "Digite o Nome Falso";
+show "^0000FFColoque espaço para retornar ao nick normal^000000";
+next;
+input .@name$;
+atcommand "@fakename "+.@name$+"";
+show "[Serviços CM]";
+show "Pronto.";
+close;
+end;
+
+freeze:
+show "Digite o nome do player";
+next;
+input @jogad$;
+charcommand "#option "+@jogad$+" 2 0 0";
+show "[Serviços CM]";
+show "Pronto.";
+close;
+end;
+
+kable:
+atcommand "@killable";
+show "Pronto.";
+close;
+end;
+
+retur:
+savepoint "prt_church",21,169;
+show "Pronto.";
+emotion e_no1;
+close;
+end;
+
+sair:
+show "Volte quando precisar de mim.";
+emotion e_no1;
+warp "prt_church",21,169;
+close;
+end;
+
+
+}
+end;
+}
+
+quiz_00,1,1,5	script	 Funcoes#9210 	-1,{
+OnPCKillEvent:
+getmapxy(@mapn$,@Px,@Py,0,strcharinfo(0));
+if(@mapn$ == "prt_are01"){
+announce ""+strcharinfo(0)+" matou "+rid2name(killedrid)+", "+rid2name(killedrid)+" está fora de combate!",bc_map; }
+    end;
+}
+
+
+
+
+-	script	Setter#494	-1,{
+OnPCDieEvent:
+    getmapxy(@map$,$@x,$@y,0);
+    if(@map$ == "prt_are01" || @map$ == "quiz_00"){
+    sleep2 400;
+    warp "quiz_00",64,5;
+    sleep2 400;
+    atcommand "@alive";
+    end;
+    }
+    else {
+    end;
+    }
+
+
+}
+
+prt_are01,1,1,5	script	ArenaPvP	-1,{
+OnWhisperGlobal:
+if(getgmlevel() <= 30){ end; }
+getmapxy(@map$,@mapx,@mapy,0,strcharinfo(0));
+if(@map$ == "prt_are01" || @map$ == "force_1-1" || @map$ == "sec_in02" || @map$ == "quiz_00"){
+if(@whispervar1$ == "transportar jogadores"){ mapwarp @map$,"quiz_00",64,5; close; }
+if(@whispervar1$ == "reviver"){ atcommand "@raisemap"; close; }
+if(@whispervar1$ == "recall player"){ atcommand "@recall "+@whispervar2$+""; close; }
+show "[Serviços CM]";
+show "Selecione uma ação:";
+menu "Recallar Jogador",jog,"Recallar Grupo",grup,"Recallar Clã",grc,"Ligar GvG",gvo,"Ligar PvP",pvo,"Ligar PvP(No Guild)",pvpnsc,"Retirar barreiras",ini,"Desligar PvP/GvG(Ligar barreiras)",tend,"Reviver players",rvp,"Ligar Habilidades",lgk,"Desligar Habilidades",dgk,"NPC Norte",nor,"NPC Sul",sul,"NPC Leste",leste,"NPC Oeste",oeste;
+
+pvpnsc:
+pvpon "prt_are01";
+setmapflag "prt_are01",mf_pvp_noguild;
+close;
+end;
+
+gvo:
+atcommand "@gvgon";
+close;
+end;
+
+pvo:
+atcommand "@pvpon";
+close;
+end;
+
+
+grc:
+input @guildn$;
+removemapflag "quiz_00",mf_nowarp;
+atcommand "@guildrecall "+@guildn$+"";
+setmapflag "quiz_00",mf_nowarp;
+close;
+end;
+
+
+dgk:
+atcommand "@skilloff";
+close;
+end;
+
+lgk:
+atcommand "@skillon";
+close;
+end;
+
+mtp:
+atcommand "@doommap";
+close;
+end;
+
+rvp:
+atcommand "@raisemap";
+close;
+end;
+
+jog:
+input @jogador$;
+//removemapflag "quiz_00",mf_nowarp;
+atcommand "@recall "+@jogador$+"";
+//setmapflag "quiz_00",mf_nowarp;
+close;
+end;
+
+grup:
+input @partyv$;
+//removemapflag "quiz_00",mf_nowarp;
+atcommand "@partyrecall "+@partyv$+"";
+//setmapflag "quiz_00",mf_nowarp;
+close;
+end;
+
+ini:
+setcell "prt_are01",146,242,153,242,cell_walkable,1; //Norte
+setcell "prt_are01",57,153,57,146,cell_walkable,1; //Oeste
+setcell "prt_are01",146,57,153,57,cell_walkable,1; //Sul
+setcell "prt_are01",242,153,242,146,cell_walkable,1; //Leste
+close;
+end;
+
+
+tend:
+setcell "prt_are01",146,242,153,242,cell_walkable,0; //Norte
+setcell "prt_are01",57,153,57,146,cell_walkable,0; //Oeste
+setcell "prt_are01",146,57,153,57,cell_walkable,0; //Sul
+setcell "prt_are01",242,153,242,146,cell_walkable,0; //Leste
+atcommand "@gvgoff";
+atcommand "@pvpoff";
+close;
+end;
+
+
+nor:
+atcommand "@tonpc Controlador#1-1";
+close;
+end;
+
+sul:
+atcommand "@tonpc Controlador#1-2";
+close;
+end;
+
+leste:
+atcommand "@tonpc Controlador#1-3";
+close;
+end;
+
+
+oeste:
+atcommand "@tonpc Controlador#1-4";
+close;
+end;
+
+}else{ dispbottom "Você só pode usar esta opção em uma Arena dos CMs"; close; }
+}
+
+
+
+-	script	Controlador#1::Pcontrol	951,{
+if(getgmlevel() <= 30){ end; }
+show "[Serviços CM]";
+show "Selecione uma ação:";
+menu "Recallar Jogador",jog,"Recallar Grupo",grup,"Recallar Clã",grc,"Ligar GvG",gvo,"Ligar PvP",pvo,"Ligar PvP(No Guild)",pvpnsc,"Retirar barreiras",ini,"Desligar PvP/GvG(Ligar barreiras)",tend,"Reviver players",rvp,"Ligar Habilidades",lgk,"Desligar Habilidades",dgk,"NPC Norte",nor,"NPC Sul",sul,"NPC Leste",leste,"NPC Oeste",oeste;
+
+pvpnsc:
+pvpon "prt_are01";
+setmapflag "prt_are01",mf_pvp_noguild;
+close;
+end;
+
+gvo:
+atcommand "@gvgon";
+close;
+end;
+
+pvo:
+atcommand "@pvpon";
+close;
+end;
+
+
+grc:
+input @guildn$;
+//removemapflag "quiz_00",mf_nowarp;
+atcommand "@guildrecall "+@guildn$+"";
+//setmapflag "quiz_00",mf_nowarp;
+close;
+end;
+
+
+dgk:
+atcommand "@skilloff";
+close;
+end;
+
+lgk:
+atcommand "@skillon";
+close;
+end;
+
+mtp:
+atcommand "@doommap";
+close;
+end;
+
+rvp:
+atcommand "@raisemap";
+close;
+end;
+
+jog:
+input @jogador$;
+//removemapflag "quiz_00",mf_nowarp;
+atcommand "@recall "+@jogador$+"";
+//setmapflag "quiz_00",mf_nowarp;
+close;
+end;
+
+grup:
+input @partyv$;
+//removemapflag "quiz_00",mf_nowarp;
+atcommand "@partyrecall "+@partyv$+"";
+//setmapflag "quiz_00",mf_nowarp;
+close;
+end;
+
+ini:
+setcell "prt_are01",146,242,153,242,cell_walkable,1; //Norte
+setcell "prt_are01",57,153,57,146,cell_walkable,1; //Oeste
+setcell "prt_are01",146,57,153,57,cell_walkable,1; //Sul
+setcell "prt_are01",242,153,242,146,cell_walkable,1; //Leste
+close;
+end;
+
+
+tend:
+setcell "prt_are01",146,242,153,242,cell_walkable,0; //Norte
+setcell "prt_are01",57,153,57,146,cell_walkable,0; //Oeste
+setcell "prt_are01",146,57,153,57,cell_walkable,0; //Sul
+setcell "prt_are01",242,153,242,146,cell_walkable,0; //Leste
+atcommand "@gvgoff";
+atcommand "@pvpoff";
+close;
+end;
+
+
+nor:
+atcommand "@tonpc Controlador#1-1";
+close;
+end;
+
+sul:
+atcommand "@tonpc Controlador#1-2";
+close;
+end;
+
+leste:
+atcommand "@tonpc Controlador#1-3";
+close;
+end;
+
+
+oeste:
+atcommand "@tonpc Controlador#1-4";
+close;
+end;
+
+
+}
+
+-	script	Walls#484	-1,{
+
+OnInit:
+
+//<!---PRT_ARE01--->
+setcell "prt_are01",146,242,153,242,cell_walkable,0; //Norte
+setcell "prt_are01",57,153,57,146,cell_walkable,0; //Oeste
+setcell "prt_are01",146,57,153,57,cell_walkable,0; //Sul
+setcell "prt_are01",242,153,242,146,cell_walkable,0; //Leste
+
+
+
+/* Unsed
+//<!----FORCE_1-1----->
+setcell "force_1-1",1,1,300,300,cell_novending,1;
+setcell "force_1-1",1,1,300,300,cell_nochat,1;
+
+setcell "force_1-1",88,111,88,88,cell_walkable,0;
+setcell "force_1-1",89,88,111,88,cell_walkable,0;
+setcell "force_1-1",111,89,111,111,cell_walkable,0;
+setcell "force_1-1",89,111,110,111,cell_walkable,0;
+
+//<!---Barreiras de proteção---->
+setcell "force_1-1",87,113,113,86,cell_shootable,0;
+setcell "force_1-1",87,113,113,86,cell_landprotector,0;
+setcell "force_1-1",87,113,113,86,cell_basilica,0;
+*/
+
+
+
+
+}
+
+force_1-1,18,25,5	script	Saída	951,{
+if(getgmlevel() > 30){
+show "[Saída]";
+show "Voltar?";
+if(select("Sim:Não") == 2) close;
+warp "force_1-1",86,104;
+close;
+}
+show "[Saída]";
+show "Deseja sair?";
+if(select("Sim:Não") == 2) close;
+atcommand "@kick "+strcharinfo(0)+"";
+close;
+}
+
+
+
+force_1-1,86,104,5	script	Controlador#5-5	951,{
+if(getgmlevel() > 30){
+show "Selecione uma ação:";
+menu "Recallar Jogador",joga,"Recallar Grupo",grupa,"Recallar Clã",grca,"Ligar GvG",gvoa,"Ligar PvP",pvoa,"Desligar PvP/GvG",tenda,"Matar players(Todos do mapa)",mtpa,"Reviver players",rvpa,"Ligar Habilidades",lgka,"Desligar Habilidades",dgka,"Liberar visitantes",visit,"Desabilitar visitantes",retir,"Kickar jogador",kickj,"Mover Espectadores",movspc,"Ir para o centro",centrr;
+
+centrr:
+warp "force_1-1",96,101;
+close;
+end;
+
+
+movspc:
+mapwarp "force_1-1","force_1-1",25,26;
+close;
+end;
+
+
+kickj:
+input @njoga$;
+atcommand "@kick "+@njoga$+"";
+close;
+end;
+
+
+visit:
+show "Pronto!";
+if($liberp > 0) close;
+set $liberp, $liberp+1;
+close;
+end;
+
+
+retir:
+show "Pronto!";
+if($liberp <= 0 || $liberp == 2) close;
+set $liberp, $liberp-1;
+close;
+end;
+
+
+gvoa:
+atcommand "@gvgon";
+close;
+end;
+
+pvoa:
+atcommand "@pvpon";
+close;
+end;
+
+
+grca:
+input @guildn$;
+atcommand "@guildrecall "+@guildn$+"";
+close;
+end;
+
+
+dgka:
+atcommand "@skilloff";
+close;
+end;
+
+lgka:
+atcommand "@skillon";
+close;
+end;
+
+mtpa:
+atcommand "@doommap";
+close;
+end;
+
+rvpa:
+atcommand "@raisemap";
+close;
+end;
+
+
+joga:
+input @jogador$;
+atcommand "@recall "+@jogador$+"";
+close;
+end;
+
+grupa:
+input @partyv$;
+atcommand "@partyrecall "+@partyv$+"";
+close;
+end;
+
+
+tenda:
+atcommand "@gvgoff";
+atcommand "@pvpoff";
+close;
+end;
+
+
+}
+end;
+}
+
+
+
+force_1-1,149,148,5	script	Setter#499	-1,{
+OnPCDieEvent:
+    getmapxy(@map$,$@x,$@y,0);
+    if(@map$ == "force_1-1"){
+    sleep2 20;
+    warp "force_1-1",99,122;
+    sleep2 5;
+    atcommand "@alive";
+    end;
+    }
+    else {
+    end;
+    }
+}
+
+
+gonryun,139,142,5	script	Arena de Eventos	953,{
+if($liberp > 0){
+show "[Arena de Eventos]";
+
+show "Olá ^FF0000"+strcharinfo(0)+"^000000, gostaria de visitar a Arena de Eventos?";
+next;
+if(select("Não...:Sim, gostaria!")== 1){
+close;
+}
+next;
+if(getmapusers("force_1-1") >= 40 || $liberp != 1){
+show "Sinto muito, mas a arena está lotada!";
+show "Volte em um próximo evento...";
+close;
+}
+set @nchk, rand(3);
+dispbottom "Quando quiser sair basta relogar!";
+atcommand "@monsterignore";
+if(@nchk == 0)warp "force_1-1",75,101;
+if(@nchk == 1)warp "force_1-1",99,123;
+if(@nchk == 2)warp "force_1-1",124,101;
+}
+if($liberp == 0)
+show "[Arena de Eventos]";
+
+show "A arena de eventos está fechada no momento!";
+close;
+
+
+OnInit:
+set $liberp, 0;
+}
+
+
+prt_church,28,176,5	script	 Prêmios 	402,{
+if(getgmlevel() <= 99){ end; }
+show "[Prêmios]";
+show "Deseja pegar qual prêmio?";
+next;
+if(select("Itens ROPs:Hats/Equipamentos")==1){
+additem 12260,20;
+additem 12912,10;
+additem 14296,10;
+additem 14297,10;
+additem 13911,10;
+additem 12900,10;
+additem 13804,10;
+additem 13805,10;
+additem 13806,10;
+additem 13807,10;
+additem 13808,10;
+additem 12921,10;
+additem 12922,10;
+additem 12920,10;
+additem 12132,20;
+additem 7253,20;
+additem 7776,20;
+additem 14591,20;
+additem 14590,20;
+additem 14589,20;
+additem 14588,20;
+additem 14528,20;
+additem 12911,20;
+additem 14308,20;
+additem 14469,20;
+additem 14229,20;
+additem 677,20;
+additem 14004,20;
+additem 13946,20;
+additem 13947,20;
+additem 13948,20;
+additem 13949,20;
+additem 13950,20;
+additem 13945,20;
+additem 13941,20;
+additem 13847,20;
+additem 13848,20;
+additem 13710,20;
+additem 13635,20;
+additem 12977,20;
+additem 12982,20;
+additem 12981,20;
+additem 12980,20;
+additem 12979,20;
+additem 12978,20;
+additem 12259,20;
+additem 12226,20;
+additem 12225,20;
+additem 681,20;
+additem 12019,20;
+additem 14591,20;
+additem 7549,10;
+additem 12706,10;
+additem 12231,10;
+additem 12361,5;
+additem 12363,5;
+additem 12370,5;
+additem 6098,25;
+additem 6100,25;
+additem 6110,25;
+close;
+}
+next;
+menu 
+"Boneca de Alice",alice,
+"Gatinho Amarelo",gatm,
+"Chapéu de Archngeling",moth,
+"Chapéu de Gato",gato,
+"Máscara do Dia das Crianças",mcri,
+"Friend Wanted",friend,
+"Chapéu de 3° Aniv.",aniv,
+"Chapéu Bandeira Brasileira",brasi,
+"Beijo do Anjo",beijo,
+"Chapéu do Torcedor",torce,
+"Barrete Frígio",frig,
+"Fones Poringzor",fpog,
+"Elmo Sombrio",somb,
+"Chapéu de Deviling",devi,
+"Chapéu de Angeling",ange,
+"Venda da Takius",takius,
+"Capuz da Escuridão",escur,
+"Máscara Feliz",feliz,
+"Tiara de Cupido",cupid,
+"Boné Vermelho",bver,
+"Elmo das Valquírias",valk,
+"Fruto do Amor",frut,
+"Tiara de Orquídea",orqd,
+"Orelhas de Coelho Pretas",oclp,
+"Anel da Trapaça",anelt,
+"Anel de Kafra",akaf,
+"Anel de Aniversário",anivjpl,
+"Pantufas de Coelho",pantuf,
+"Elmo do Abismo",eabys,
+"Chapéu de Band. Australiana",ausflag,
+"Chapéu de Pesar",pthan,
+"Chapéu de Gato de Folha",gafolha,
+"Chapéu de Foca",cfoca,
+"Chapéu de Rosa-Selvagem",rselva,
+"Chapéu de Sting",csting2,
+"Carapuça do Saci",csaci,
+"Chapéu de Quati",cquati,
+"Chapéu de Tucano",tucano,
+"Gorro da Madonna",cmado,
+"Elmo de Anubis",anubis,
+"Elmo Draconiano",cdraco,
+"Boné de Carteiro",ccart,
+"Chapéu de Sapo",csapo,
+"Presilha da Pegada",cpegag,
+"Pente Vermelho",cpente,
+"Gravata Azul",cgrav,
+"Máscara de Saco de Papel",cmaskp,
+"Peixe Fresco",cpeixef,
+"Orelhas de Fada",cfada,
+"Chapéu de Galinha",cgali,
+"Gorro de Natal 2.0",gnatal2,
+"Lacinho Natalino",lcnat,
+"Chapéu de Poring Noel",hpnoel,
+"Máscara de Leão",lmasko,
+"Victory Wings",vicwin,
+"Chapéu Formoso",hatfor,
+"Tiara da Primavera",tprim,
+"Chapéu de Bebê Dragão",bdrag,
+"Boina de Coelho",bbunie,
+"Chapéu de Bebê Selvagem",bselv,
+"Chapéu de Poporing",hatpopor,
+"Chapéu de Bolo Poring",bolopor,
+"Espírito do Dragão de Ouro",espo,
+"Espírito do Dragão de Prata",espp,
+"Espírito do Dragão de Bronze",espb,
+"Chapéu de Mosqueteiro",mosquete,
+"Tiara de Nota Musical",notam,
+"Lápis Mordido",lmord,
+"Chapéu de Polvo",polvo,
+"Chapéu de Cowboy Errante",cberra,
+"Orgulho Pirata",ogpir,
+"Cartola Mágica",cmag,
+"Ovo de Coelho",cpet,
+"Escolher",escid,
+"Asas de Reginleif",cregi;
+//"Pulso de Ferro",pulso;
+
+
+escid:
+input @idhat;
+goto ppfim;
+end;
+
+cmag:
+set @idhat,5503;
+goto ppfim;
+end;
+
+cpet:
+set @idhat,9031;
+goto ppfim;
+end;
+
+ogpir:
+set @idhat,5501;
+goto ppfim;
+end;
+
+cberra:
+set @idhat,5409;
+goto ppfim;
+end;
+
+polvo:
+set @idhat,5554;
+goto ppfim;
+end;
+
+
+lmord:
+set @idhat,5574;
+goto ppfim;
+end;
+
+notam:
+set @idhat,5678;
+goto ppfim;
+end;
+
+mosquete:
+set @idhat,5469;
+goto ppfim;
+end;
+
+espb:
+set @idhat,5453;
+goto ppfim;
+end;
+
+espp:
+set @idhat,5452;
+goto ppfim;
+end;
+
+espo:
+set @idhat,5451;
+goto ppfim;
+end;
+
+bolopor:
+set @idhat,5415;
+goto ppfim;
+end;
+
+hatpopor:
+set @idhat,5352;
+goto ppfim;
+end;
+
+bselv:
+set @idhat,5572;
+goto ppfim;
+end;
+
+bbunie:
+set @idhat,5568;
+goto ppfim;
+end;
+
+bdrag:
+set @idhat,5531;
+goto ppfim;
+end;
+
+tprim:
+set @idhat,5547;
+goto ppfim;
+end;
+
+hatfor:
+set @idhat,5481;
+goto ppfim;
+end;
+
+vicwin:
+set @idhat,5357;
+goto ppfim;
+end;
+
+lmasko:
+set @idhat,5130;
+goto ppfim;
+end;
+
+hpnoel:
+set @idhat,5381;
+goto ppfim;
+end;
+
+lcnat:
+set @idhat,5382;
+goto ppfim;
+end;
+
+gnatal2:
+set @idhat,5384;
+goto ppfim;
+end;
+
+cregi:
+set @idhat,5471;
+goto ppfim;
+end;
+
+csting2:
+set @idhat,5509;
+goto ppfim;
+end;
+
+cgali:
+set @idhat,5431;
+goto ppfim;
+end;
+
+cfada:
+set @idhat,5402;
+goto ppfim;
+end;
+
+cpeixef:
+set @idhat,5403;
+goto ppfim;
+end;
+
+cmaskp:
+set @idhat,5410;
+goto ppfim;
+end;
+
+cgrav:
+set @idhat,5442;
+goto ppfim;
+end;
+
+cpente:
+set @idhat,5444;
+goto ppfim;
+end;
+
+cpegag:
+set @idhat,5446;
+goto ppfim;
+end;
+
+csapo:
+set @idhat,5447;
+goto ppfim;
+end;
+
+ccart:
+set @idhat,5466;
+goto ppfim;
+end;
+
+cdraco:
+set @idhat,5467;
+goto ppfim;
+end;
+
+anubis:
+set @idhat,5490;
+goto ppfim;
+end;
+
+cmado:
+set @idhat,5505;
+goto ppfim;
+end;
+
+tucano:
+set @idhat,5538;
+goto ppfim;
+end;
+
+cquati:
+set @idhat,5537;
+goto ppfim;
+end;
+
+csaci:
+set @idhat,5558;
+goto ppfim;
+end;
+
+csting:
+set @idhat,5509;
+goto ppfim;
+end;
+
+rselva:
+set @idhat,5557;
+goto ppfim;
+end;
+
+cfoca:
+set @idhat,5556;
+goto ppfim;
+end;
+
+gafolha:
+set @idhat,5555;
+goto ppfim;
+end;
+
+
+pthan:
+set @idhat,5563;
+goto ppfim;
+end;
+
+ausflag:
+set @idhat,5264;
+goto ppfim;
+end;
+
+eabys:
+set @idhat,5363;
+goto ppfim;
+end;
+
+valk:
+set @idhat,5171;
+goto ppfim;
+end;
+
+anivjpl:
+set @idhat,2631;
+goto ppfim;
+end;
+
+akaf:
+set @idhat,2640;
+goto ppfim;
+end;
+
+bver:
+set @idhat,5109;
+goto ppfim;
+end;
+
+
+orqd:
+set @idhat,5370;
+goto ppfim;
+end;
+
+
+cupid:
+set @idhat,5393;
+goto ppfim;
+end;
+
+
+takius:
+set @idhat,5101;
+goto ppfim;
+end;
+
+ange:
+set @idhat,5132;
+goto ppfim;
+end;
+
+
+pulso:
+set @idhat,2719;
+goto ppfim;
+end;
+
+pantuf:
+set @idhat,2415;
+goto ppfim;
+end;
+
+
+anelt:
+set @idhat,2620;
+goto ppfim;
+end;
+
+oclp:
+set @idhat,5213;
+goto ppfim;
+end;
+
+feliz:
+set @idhat,2278;
+goto ppfim;
+end;
+
+
+frut:
+set @idhat,5056;
+goto ppfim;
+end;
+
+escur:
+set @idhat,5304;
+goto ppfim;
+end;
+
+devi:
+set @idhat,5254;
+goto ppfim;
+end;
+
+somb:
+set @idhat,5373;
+goto ppfim;
+end;
+
+fpog:
+set @idhat,5151;
+goto ppfim;
+end;
+
+
+frig:
+set @idhat,5148;
+goto ppfim;
+end;
+
+
+torce:
+set @idhat,5150;
+goto ppfim;
+end;
+
+
+beijo:
+set @idhat,5125;
+goto ppfim;
+end;
+
+asph:
+set @idhat,2541;
+goto ppfim;
+end;
+
+bry:
+set @idhat,2383;
+goto ppfim;
+end;
+
+kaho:
+set @idhat,5013;
+goto ppfim;
+end;
+
+brasi:
+set @idhat,5308;
+goto ppfim;
+end;
+
+aniv:
+set @idhat,5318;
+goto ppfim;
+end;
+
+moth:
+set @idhat,5319;
+goto ppfim;
+end;
+
+friend:
+set @idhat,5339;
+goto ppfim;
+end;
+
+mcri:
+set @idhat,5203;
+goto ppfim;
+end;
+
+gato:
+set @idhat,5395;
+goto ppfim;
+end;
+
+gatm:
+set @idhat,5099;
+goto ppfim;
+end;
+
+alice:
+set @idhat,5137;
+goto ppfim;
+end;
+
+
+
+ppfim:
+if(select("Sem nome.:Com nome.")==1){ getitem @idhat,1; close; }
+show "[Prêmios]";
+show "Digite o nome do jogador(deve estar online)";
+next;
+input @ppjog$;
+getnameditem @idhat,@ppjog$;
+close;
+end;
+ 
+
+end;
+}
+
+
+prontera.gat,128,198,5	script	 Assistente de Prêmios 	855,{
+
+set @nnpc$, "[Assistente de Prêmios]";
+set @band, countitem(7253);
+show @nnpc$;
+show "Olá ^FF0000"+strcharinfo(0)+"^000000, gostaria de trocar algo?";
+show "Você tem ^FF0000"+@band+"^000000 bandeiras coreanas";
+next;
+menu
+//"Boneca de Alice ",alice,
+"Presilha de Girassol",pgsl,
+"Chapéu de Terceiro Aniversário",tcel,
+"Chapéu de Yao Jun",cyj,
+"Chapéu de outono do menestrel",outmen,
+"Pente vermelho",pvelm,
+"Máscara de tigre",tigree,
+"Lápis mordido",lpmm,
+"Tiara de dado",tdado,
+"Boneco de rosa selvagemr",brosa,
+"Boneca de lady tanee",ltanee,
+"Chapéu de bandeira australiana",astrl,
+"Máscara da morte",orqd,
+"Óculos pretos",ccprt,
+"Máscara de mergulho",merg;
+//"Anel da Trapaça",anelt,
+//"Anel de Kafra",akaf;
+
+merg:
+set @idhat,5397;
+set @prek,85;
+goto ppfim;
+end;
+
+ccprt:
+set @idhat,5401;
+set @prek,70;
+goto ppfim;
+end;
+
+astrl:
+set @idhat,5264;
+set @prek,120;
+goto ppfim;
+end;
+
+ltanee:
+set @idhat,5526;
+set @prek,180;
+goto ppfim;
+end;
+
+brosa:
+set @idhat,5557;
+set @prek,70;
+goto ppfim;
+end;
+
+tdado:
+set @idhat,5496;
+set @prek,90;
+goto ppfim;
+end;
+
+lpmm:
+set @idhat,5574;
+set @prek,60;
+goto ppfim;
+end;
+
+tigree:
+set @idhat,5485;
+set @prek,90;
+goto ppfim;
+end;
+
+pvelm:
+set @idhat,5444;
+set @prek,90;
+goto ppfim;
+end;
+
+outmen:
+set @idhat,5426;
+set @prek,120;
+goto ppfim;
+end;
+
+cyj:
+set @idhat,5367;
+set @prek,60;
+goto ppfim;
+end;
+
+tcel:
+set @idhat,5318;
+set @prek,50;
+goto ppfim;
+end;
+
+pgsl:
+set @idhat,5103;
+set @prek,90;
+goto ppfim;
+end;
+
+eleftwo:
+set @idhat,5259;
+set @prek,50;
+goto ppfim;
+end;
+
+ctlmg:
+set @idhat,5503;
+set @prek,150;
+goto ppfim;
+end;
+
+bfriend:
+set @idhat,5338;
+set @prek,30;
+goto ppfim;
+end;
+
+cpavo:
+set @idhat,5519;
+set @prek,150;
+goto ppfim;
+end;
+
+gtell:
+set @idhat,5265;
+set @prek,75;
+goto ppfim;
+end;
+
+majest:
+set @idhat,5481;
+set @prek,100;
+goto ppfim;
+end;
+
+cfreya:
+set@idhat,5306;
+set @prek,110;
+goto ppfim;
+end;
+
+anivjpl:
+set @idhat,2631;
+set @prek,15;
+goto ppfim;
+end;
+
+akaf:
+set @idhat,2640;
+set @prek,15;
+goto ppfim;
+end;
+
+orqd:
+set @idhat,5564;
+set @prek,80;
+goto ppfim;
+end;
+
+
+cupid:
+set @idhat,5393;
+set @prek,15;
+goto ppfim;
+end;
+
+
+takius:
+set @idhat,5101;
+set @prek,40;
+goto ppfim;
+end;
+
+ange:
+set @idhat,5132;
+set @prek,25;
+goto ppfim;
+end;
+
+
+pantuf:
+set @idhat,2415;
+set @prek,30;
+goto ppfim;
+end;
+
+
+anelt:
+set @idhat,2620;
+set @prek,25;
+goto ppfim;
+end;
+
+oclp:
+set @idhat,5213;
+set @prek,20;
+goto ppfim;
+end;
+
+
+frut:
+set @idhat,5056;
+set @prek,45;
+goto ppfim;
+end;
+
+escur:
+set @idhat,5304;
+set @prek,20;
+goto ppfim;
+end;
+
+devi:
+set @idhat,5254;
+set @prek,20;
+goto ppfim;
+end;
+
+somb:
+set @idhat,5373;
+set @prek,15;
+goto ppfim;
+end;
+
+fpog:
+set @idhat,5151;
+set @prek,25;
+goto ppfim;
+end;
+
+
+frig:
+set @idhat,5148;
+set @prek,30;
+goto ppfim;
+end;
+
+
+torce:
+set @idhat,5150;
+set @prek,35;
+goto ppfim;
+end;
+
+brasi:
+set @idhat,5308;
+set @prek,25;
+goto ppfim;
+end;
+
+aniv:
+set @idhat,5318;
+set @prek,20;
+goto ppfim;
+end;
+
+moth:
+set @idhat,5319;
+set @prek,65;
+goto ppfim;
+end;
+
+friend:
+set @idhat,5339;
+set @prek,15;
+goto ppfim;
+end;
+
+mcri:
+set @idhat,5203;
+set @prek,20;
+goto ppfim;
+end;
+
+gato:
+set @idhat,5395;
+set @prek,25;
+goto ppfim;
+end;
+
+gatm:
+set @idhat,5574;
+set @prek,80;
+goto ppfim;
+end;
+
+alice:
+set @idhat,5137;
+set @prek,95;
+goto ppfim;
+end;
+
+
+ppfim:
+next;
+show @nnpc$;
+show "^0000FF"+getitemname(@idhat)+"^000000, Humm...";
+next;
+show @nnpc$;
+show "Isto vai custar... ^FF0000"+@prek+"^000000 bandeiras";
+next;
+if(select("Cancelar:Pegar prêmio")==1) close;
+if(countitem(7253) < @prek){
+show @nnpc$;
+show "Você não tem bandeiras suficientes";
+close;
+}
+show @nnpc$;
+show "Aqui está";
+delitem 7253,@prek;
+getitem @idhat,1;
+close;
+end;
+
+
+}
+
+
+
+
+quiz_00,50,10,4	script	Funcionária Kafra#kfcm	112,{
+	cutin "kafra_06",2;
+	callfunc "F_Kafra",4,2,1,80,1000;
+}
+
+
+-	script	MenuCM	-1,{
+end;
+
+OnWhisperGlobal:
+if(getgmlevel() <= 30){ dispbottom "[Menu CM] Você não tem permissão para fazer isto."; end; } 
+set @nmpc$, "[Menu CM]";
+
+if(@whispervar1$ == "congelar"){ callsub congj; }
+if(@whispervar1$ == "descongelar"){ callsub scongj; }
+//if(@whispervar1$ == "shownpc"){ if(getgmlevel() >= 30){ callsub snpc; } }
+//if(@whispervar1$ == "hidenpc"){ if(getgmlevel() >= 30){ callsub hnpc; } }
+if(@whispervar1$ == "killmonster"){ callsub mat; }
+if(@whispervar1$ == "fakename"){ callsub fknm; }
+if(@whispervar1$ == "veritens"){ if(getgmlevel() >= 30){ callsub invil; } }
+if(@whispervar1$ == "mute"){ callsub mute; }
+if(@whispervar1$ == "show storage"){ callsub sstorage; }
+if(@whispervar1$ == "eqitens"){ if(getgmlevel() >= 30){ callsub ieqp; } }
+//if(@whispervar1$ == "change nick"){ callsub cnick; }
+if(@whispervar1$ == "resetar posição"){ callsub retr; }
+if(@whispervar1$ == "raise map"){ atcommand "@raisemap"; end; }
+if(@whispervar1$ == "sala pvp"){ warp "prt_are01",160,254; end; }
+if(@whispervar1$ == "sala de espera"){ warp "quiz_00",62,8; end; }
+if(@whispervar1$ == "mapmsg"){ announce @whispervar2$,bc_yellow|bc_map; end; }
+if(@whispervar1$ == "kick"){ atcommand "@kick "+@whispervar2$+""; end; }
+if(@whispervar1$ == "pesquisa"){ if(getgmlevel() >= 30){ callsub iptool; } }
+if(@whispervar1$ == "editar aviso"){ callsub laviso; }
+//if(@whispervar1$ == "delitem"){ callsub deleitem; }
+if(@whispervar1$ == "killer"){ atcommand "@killer"; end; }
+if(@whispervar1$ == "changesex"){ atcommand "@changesex"; end; }
+if(@whispervar1$ == "guild spy"){ atcommand "@guildspy "+@whispervar2$+""; end; }
+if(@whispervar1$ == "mapinfo"){ atcommand "@mapinfo"; end; }
+if(@whispervar1$ == "trocar dados"){ if(getgmlevel() > 30){ callsub dshuffle; }else{ end; } }
+if(@whispervar1$ == "char log"){ callsub clog; }
+if(@whispervar1$ == "cherry berry!"){ atcommand "@sakura"; end; }
+if(@whispervar1$ == "item search"){ callsub cfind; }
+if(@whispervar1$ == "mute area"){ atcommand "@mutearea "+@whispervar2$+""; end; }
+//if(@whispervar1$ == "ban"){ callsub ban; }
+if(@whispervar1$ == "party lock"){ getmapxy(@map$,@x,@y,0,strcharinfo(0)); setmapflag @map$,mf_partylock; dispbottom ""+@map$+" - party locked successfully."; end; }
+if(@whispervar1$ == "ajuda")
+{
+	dispbottom "[Lista de Comandos - CM]";
+	dispbottom "- comando#editar aviso - Edita o aviso de loguin de todos jogadores";
+	dispbottom "- comando#kick#nick do jogador - Kicka um jogador do map e char server";
+	dispbottom "- comando#congelar#nick do jogador - Congela um jogador";
+	//dispbottom "- comando#shownpc#nome do npc - Habilita um NPC";
+	//dispbottom "- comando#hidenpc#nome do npc - Esconde um NPC";
+	dispbottom "- comando#killmonster - Mata todos monstros do mapa";
+	dispbottom "- comando#fakename - Habilita nome fake";
+	dispbottom "- comando#veritens#nick do jogador - Olha inventário de um jogador";
+	dispbottom "- comando#eqitens#nick do jogador - Vê itens equipados de um jogador";
+	dispbottom "- comando#resetar posição - Reseta posição de um char";
+	dispbottom "- comando#raisemap - Ressucita jogadores do mapa";
+	//dispbottom "- comando#sala pvp - Teleporte para sala PvP";
+	dispbottom "- comando#sala de espera - Teleporte para sala de espera(quiz_00)";
+	dispbottom "- comando#mapmsg#mensagem - Manda uma mensagem apenas para o mapa";
+	dispbottom "- comando#killer - Permite atacar jogadores";
+	dispbottom "- comando#mute - Muta um jogador mesmo estano OFFLINE";
+	close; 
+}
+if(@whispervar0$ !=""){ dispbottom "Comando desconhecido."; dispbottom "Digite 'comando#ajuda' para ver a lista completa dos comandos."; close; } //Hang the PM and show a help message
+
+ban:
+set @id, 0;
+set @reason$, "";
+show "Nick?";
+next;
+input @nick$;
+next;
+query_sql "SELECT account_id FROM `char` WHERE `name` = '"+@nick$+"'", @id;
+if( !@id ){ show "Jogador não encontrado."; close; }
+show "Tempo?";
+show "Formato: 1y1m1d1h1mn";
+show "y = anos";
+show "m = meses";
+show "d = dias";
+show "h = horas";
+show "mn = minutos";
+next;
+input @time$;
+next;
+show "Razão?";
+show "Deve possuir mais do que 5 caracteres";
+input @reason$;
+if(@reason$ == "" || getstrlen(@reason$) <= 5){ show "Razão inválida"; callsub ban; }
+//query_sql "UPDATE `login` SET `reason` ='"+@reason$+"' WHERE `account_id`="+@id+"";
+//atcommand "@ban "+@time$+" "+@nick$+"";
+close;
+end;
+
+cfind:
+deletearray .@iaccid[0],127;
+set .@ifind, atoi(@whispervar2$);
+show "Onde deseja procurar?";
+next;
+switch(select("Armazém","Inventário")){
+case 1:
+	query_sql "SELECT account_id FROM `storage` WHERE `nameid` ="+.@ifind+" LIMIT 10", .@iaccid;
+	if( !.@iaccid[0] ){ show "Item não encontrado."; close; }
+	show "Pesquisando pelo item: ^FF0000"+getitemname(.@ifind)+"^000000";
+	for(set .@i, 0; .@i < getarraysize(.@iaccid); set .@i, .@i+1){
+	show "Account ID: ^1189D0"+.@iaccid[.@i]+"^000000";
+	show " ";
+	}
+break;
+case 2:
+	query_sql "SELECT account_id FROM `inventory` WHERE `nameid` ="+.@ifind+" LIMIT 10", .@iaccid;
+	if( !.@iaccid[0] ){ show "Item não encontrado."; close; }
+	show "Pesquisando pelo item: ^FF0000"+getitemname(.@ifind)+"^000000";
+	show " ";
+	for(set .@i, 0; .@i < getarraysize(.@iaccid); set .@i, .@i+1){
+	show "Acc ID: ^1189D0"+.@iaccid[.@i]+"^000000";
+	query_sql "SELECT name FROM `char` WHERE `char_id` ="+.@iaccid[.@i]+"", .@name$;
+	show "Nome: ^1189D0"+.@name$+"^000000";
+	show " ";
+	}
+break;
+}
+close;
+end;
+
+
+iptool:
+while(TRUE){
+	set .@idjog, 0;
+	deletearray .@accs$[0],127;
+	deletearray .@lgins$[0],127;
+	deletearray .@char$[0],127;
+	show "Oque deseja pesquisar?";
+	next;
+	switch(select("Consultar Contas(Dados).","Consulta IP(Servidor)","Consulta Email(Servidor)","Consultar Contas(Personagens).",""))
+	{
+	case 1:
+		show "Nick, Login ou ID da conta?";
+		next;
+		switch(select("Nick.","Login.","ID.")){
+		case 1: input .@jog$; query_sql "SELECT account_id FROM `char` WHERE `name` ='"+.@jog$+"'", .@idjog; set .@cid, 1; break;
+		case 2: input .@jog$; query_sql "SELECT account_id FROM `login` WHERE `userid` ='"+.@jog$+"'", .@idjog; set .@cid, 2; break;
+		case 3: input .@idjog; break;
+		}
+		next;
+		query_sql "SELECT last_ip,email,level,logincount,lastlogin,userid FROM login WHERE account_id ='"+.@idjog+"'", .@ip$, .@email$, .@gmlvl, .@lcount, .@llogin$, .@usid$;
+		if(.@idjog > 20000)
+		{
+			show "Jogador encontrado.";
+			if(.@cid == 2 || .@cid == 0){ show "Loguin: ^FF0000"+.@jog$+"^000000"; }
+			if(.@cid == 1){ show "Nick: ^FF0000"+.@jog$+"^000000"; show "Loguin: ^FF0000"+.@usid$+"^000000";  }
+			show "Account ID: ^FF0000"+.@idjog+"^000000";
+			show "IP adress: ^FF0000"+.@ip$+"^000000";
+			show "Email: ^FF0000"+.@email$+"^000000";
+			if(.@gmlvl < 1){ show "Usuário não é VIP."; }
+			if(.@gmlvl == 1){ show "Usuário VIP Comandos."; }
+			if(.@gmlvl == 10){ show "Usuário VIP Sala."; }
+			if(.@gmlvl >= 20){ show "Usuário VIP Total."; }
+			show "Login Count: ^FF0000"+.@lcount+"^000000";
+			show "Last Login: ^FF0000"+.@llogin$+"^000000";
+			next;
+			break;
+		}else{ show "Jogador não encontrado."; next; break; }
+	case 2:
+		show "IP?";
+		next;
+		input .@bip$;
+		query_sql "SELECT userid,email,lastlogin,logincount,level FROM `login` WHERE `last_ip`  ='"+.@bip$+"' LIMIT 100", .@accs$, .@mails$, .@lastl$, .@logct, .@glvl;
+		if(.@accs$[0] !="")
+		{
+			for(set .@i, 0; .@i < getarraysize(.@accs$); set .@i, .@i+1)
+			{	
+				show "Searching for IP adress: ^FF0000"+.@bip$+"^000000";
+				show "Login: ^0000FF"+.@accs$[.@i]+"^000000";
+				show "Email: ^8C2D83"+.@mails$[.@i]+"^000000";
+				show "Last Login: ^0AAD4B"+.@lastl$[.@i]+"^000000";
+				show "Login Count: ^76701B"+.@logct[.@i]+"^000000";
+				if(.@glvl[.@i] < 1){ show "Usuário não é VIP."; }
+				if(.@glvl[.@i] == 1){ show "Usuário VIP Comandos."; }
+				if(.@glvl[.@i] == 10){ show "Usuário VIP Sala."; }
+				if(.@glvl[.@i] >= 20){ show "Usuário VIP Total."; }
+				show " ";
+			}
+			next; break;
+		}else{ show "IP não encontrado."; next; break; }
+	case 3:
+		show "Email?";
+		next;
+		input .@email$;
+		next;
+		query_sql "SELECT userid,last_ip,lastlogin,logincount,level FROM `login` WHERE `email` = '"+.@email$+"' LIMIT 100", .@lgins$, .@ip$, .@lastl$, .@logct, .@glvl;
+		if(.@lgins$[0] ==""){ show "Email não encontrado."; next; break; }
+			for(set .@i, 0; .@i < getarraysize(.@lgins$); set .@i, .@i+1)
+			{	
+				show "Searching for Email: ^FF0000"+.@email$+"^000000";
+				show "Login: ^0000FF"+.@lgins$[.@i]+"^000000";
+				show "IP: ^8C2D83"+.@ip$[.@i]+"^000000";
+				show "Last Login: ^0AAD4B"+.@lastl$[.@i]+"^000000";
+				show "Login Count: ^76701B"+.@logct[.@i]+"^000000";
+				if(.@glvl[.@i] < 1){ show "Usuário não é VIP."; }
+				if(.@glvl[.@i] == 1){ show "Usuário VIP Comandos."; }
+				if(.@glvl[.@i] == 10){ show "Usuário VIP Sala."; }
+				if(.@glvl[.@i] >= 20){ show "Usuário VIP Total."; }
+				show " ";
+			}
+			next; break;
+	case 4:
+		show "Login?";
+		next;
+		input .@jog$;
+		query_sql "SELECT account_id FROM `login` WHERE `userid` ='"+.@jog$+"'", .@idjog;
+		if( !.@idjog ){ show "Login não encontrado."; next; break; }
+		query_sql "SELECT name,base_level,guild_id,online,char_id,class FROM `char` WHERE `account_id` ="+.@idjog+" LIMIT 18", .@char$, .@blvl, .@gid, .@on, .@chid, .@class;
+			for(set .@i, 0; .@i < getarraysize(.@char$); set .@i, .@i+1)
+			{	
+				show "Searching Characters of account ^FF0000"+.@idjog+"^000000";
+				show "Nick: ^0000FF"+.@char$[.@i]+"^000000";
+				show "Char ID: ^0000FF"+.@chid[.@i]+"^000000";
+				show "Class: ^0000FF"+jobname(.@class[.@i])+"^000000";
+				show "Base Level: ^0000FF"+.@blvl[.@i]+"^000000";
+				if(.@gid[.@i]){ show "Guild: ^0000FF"+getguildname(.@gid[.@i])+"^000000"; }
+				if(.@on[.@i]){ show "Jogador está ^58DD00ONLINE^000000"; }else{ show "Jogador está OFFLINE"; }
+				show " ";
+			}
+		next; break;
+	}
+}
+end;
+
+clog:
+deletearray .@time$[0],127;
+deletearray .@accid[0],127;
+set .@idjog, 0;
+set .@jog$, @whispervar2$;
+query_sql "SELECT time,char_msg,account_id FROM `charlog` WHERE `name` = '"+.@jog$+"' ORDER BY `time` DESC LIMIT 10", .@time$, .@msg$, .@accid;
+if( !.@accid[0]){ show "Jogador não encontrado."; close; }
+show "ID da conta: ^FF0000"+.@accid[0]+"^000000";
+for(set .@j, 0; .@j < getarraysize(.@time$); set .@j, .@j+1){
+show "Ação: ^0000FF"+.@msg$[.@j]+"^000000";
+show "Horário: ^0EDE28"+.@time$[.@j]+"^000000";
+}
+close;
+end;
+
+dshuffle:
+set .@idjog, 0;
+set .@jog$, @whispervar2$;
+query_sql "SELECT char_id,account_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idjog, .@idacc;
+if( !.@idjog ){ dispbottom "Jogador não encontrado."; close; end; }
+show "Jogador '"+.@jog$+"'(Account ID: '"+.@idacc+"')(Char ID: '"+.@idjog+"')";
+next;
+switch(select("Trocar senha.","Trocar email.","Resetar senha Kafra.")){
+case 1:
+	show "Nova senha?";
+	next;
+	input @npass$;
+	next;
+	show "Nova senha: ^FF0000"+@npass$+"^000000";
+	show "Confirmar isto?";
+	next;
+	if(select("Não.:Sim.")==1){ break; }
+	query_sql "UPDATE `login` SET `user_pass` = '"+@npass$+"' WHERE `login`.`account_id` ="+.@idacc+"";
+	show "Feito.";
+break;
+case 2:
+	show "Novo email?";
+	next;
+	input @nmail$;
+	next;
+	show "Novo email: ^FF0000"+@nmail$+"^000000";
+	show "Confirmar isto?";
+	next;
+	if(select("Não.:Sim.")==1){ break; }
+	query_sql "UPDATE `login` SET `email` = '"+@nmail$+"' WHERE `login`.`account_id` ="+.@idacc+"";
+	show "Feito.";
+break;
+case 3:
+	show "Deseja mesmo resetar a senha do armazém?";
+	next;
+	if(select("Não.:Sim.")==1){ break; }
+	query_sql "UPDATE `global_reg_value` SET `value` = '0' WHERE `global_reg_value`.`char_id` =0 AND `global_reg_value`.`str` = '#kafra_code' AND `global_reg_value`.`account_id` ="+.@idacc+"";
+	show "Feito.";
+break;
+}
+close;
+end;
+
+cnick:
+set .@idjog, 0;
+set .@jog$, @whispervar2$;
+set .@iddebug, 0;
+query_sql "SELECT char_id,account_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idjog, .@idacc;
+if( !.@idjog ){ dispbottom "Jogador não encontrado."; close; end; }
+show "Novo nick?";
+next;
+input .@nnick$;
+next;
+if(getstrlen(.@nnick$) < 4 || getstrlen(.@nnick$) > 22){ show "O nome deve ter entre 4 e 22 caracteres"; close; }
+query_sql "SELECT char_id FROM `char` WHERE `name` ='"+.@nnick$+"'",.@iddebug;
+if( .@iddebug ){ show "Nick já está em uso."; close; }
+show "Cor palette?";
+next;
+input .@pal;
+query_sql "UPDATE `char` SET `name` = '"+.@nnick$+"', `clothes_color`= '"+.@pal+"' WHERE `char`.`char_id` ="+.@idjog+"";
+show "Feito.";
+if(isloggedin(.@idacc)){ atcommand "@kick "+rid2name(.@idacc)+""; dispbottom "Jogador foi kickado para reiniciar seu nick."; }
+close;
+end;
+
+mute:
+show "Nick?";
+next;
+input .@jog$;
+next;
+show "Tempo em minutos?";
+next;
+input .@mtime;
+close2;
+query_sql "SELECT char_id,account_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idjog, .@idacc;
+if( !.@idjog ){ show "Jogador não encontrado."; close; }
+query_sql "UPDATE `char` SET `manner` = '-"+.@mtime+"' WHERE `char`.`char_id` ="+.@idjog+"";
+if(isloggedin(.@idacc)){ atcommand "@kick "+rid2name(.@idacc)+""; dispbottom "Jogador foi kickado para o mute entrar em vigor."; }
+end;
+
+criaritemantigoemblem:
+set .@idjog, 0;
+set .@jog$, @whispervar2$;
+query_sql "SELECT char_id,account_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idjog, .@idacc;
+if( !.@idjog ){ dispbottom "Jogador não encontrado."; close; end; }
+show "ID do item?";
+next;
+input .@iid;
+next;
+show "Quantidade?";
+next;
+input .@iqnt;
+close2;
+query_sql "SELECT amount FROM `storage` WHERE `account_id` ="+.@idacc+" AND `nameid` ="+.@iid+" AND `amount` >=1 LIMIT 1", .@amount;
+query_sql "SELECT id FROM `storage` ORDER BY `storage`.`id` DESC LIMIT 1", .@idmax;
+set .@idi, .@idmax+1;
+set .@type, getiteminfo(.@iid,2);
+if(.@type == 4 || .@type == 5 ){ set .@iqnt, 1; goto accins; }
+if( !.@amount ){ goto accins; }
+query_sql "UPDATE `storage` SET `amount` = amount+'"+.@iqnt+"' WHERE `storage`.`nameid` ="+.@iid+" AND `storage`.`account_id` ="+.@idacc+" LIMIT 1";
+dispbottom "Item "+getitemname(.@iid)+" adicionado com sucesso.";
+if(isloggedin(.@idacc)){ atcommand "@kick "+rid2name(.@idacc)+""; dispbottom "Jogador foi kickado para reiniciar seu storage."; }
+end;
+
+accins:
+query_sql("INSERT INTO `storage` (`account_id`, `nameid`, `amount`, `equip`, `identify`, `refine`, `attribute`, `card0`, `card1`, `card2`, `card3`, `expire_time`) VALUES ('"+.@idacc+"', '"+.@iid+"', '"+.@iqnt+"', '0', '1', '0', '0', '0', '0', '0', '0', '0')");
+dispbottom "Item "+getitemname(.@iid)+" adicionado com sucesso.";
+if(isloggedin(.@idacc)){ atcommand "@kick "+rid2name(.@idacc)+""; dispbottom "Jogador foi kickado para reiniciar seu storage."; }
+end;
+
+deleitem:
+show "Nick?";
+next;
+input .@njog$;
+set .@jog$, escape_sql(.@njog$);
+next;
+set .@idjog, getcharid(3,.@jog$);
+show "ID do item?";
+next;
+input .@id;
+next;
+show "Quantidade?";
+next;
+input .@qnt;
+next;
+show "Armazém ou inventário?";
+if(select("Inventário:Armazém")==2){ close2; set @jog$, .@jog$; set @qnt, .@qnt; set @id, .@id; set @type, 2; goto sdeleitem; }
+close2;
+if( !isloggedin(.@idjog) ){ set @jog, .@jog$; set @qnt, .@qnt; set @id, .@id; set @type, 1; goto sdeleitem; }
+set .@nick$, strcharinfo(0);
+if(attachrid(.@idjog)){ if(countitem(.@id) >= .@qnt){ delitem .@id,.@qnt; message .@nick$,""+.@qnt+" unidades do item '"+getitemname(.@id)+"'("+.@id+") deletados com sucesso do jogador '"+rid2name(.@idjog)+"'"; end; }else{ message .@nick$,"Jogador '"+rid2name(.@idjog)+"' tem apenas "+countitem(.@id)+" unidades do item '"+getitemname(.@id)+"'("+.@id+")"; end; } }
+end;
+
+sdeleitem:
+set .@amount, 0;
+set .@amounts, 0;
+set .@jog$, @jog$;
+set .@qnt, @qnt;
+set .@id, @id;
+set .@nick$, strcharinfo(0);
+set .@type, @type;
+set .@wrks, 0;
+query_sql "SELECT char_id,account_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idjog, .@idacc;
+switch(.@type)
+{
+case 1: //Inventário.
+query_sql "SELECT amount FROM `inventory` WHERE `char_id` ="+.@idjog+" AND `nameid` ="+.@id+" AND `amount` >=1 LIMIT 1", .@amount;
+if( !.@amount ){ message .@nick$,"(SQL)Não foi possível encontrar o item '"+getitemname(.@id)+"'("+.@id+") no inventário do jogador '"+.@jog$+"'"; break; }
+if(.@amount > .@qnt){ query_sql "UPDATE `inventory` SET `amount` = amount-'"+.@qnt+"' WHERE `nameid` ="+.@id+" AND `char_id` ="+.@idjog+""; message .@nick$,"(SQL)"+.@qnt+" unidades do item '"+getitemname(.@id)+"'("+.@id+") removidos com sucesso do jogador '"+.@jog$+"'(Jogador possuia '"+.@amount+"' unidades)"; break; }
+query_sql "DELETE FROM `inventory` WHERE `nameid` ="+.@id+" AND `char_id` ="+.@idjog+"";
+message .@nick$,"(SQL)"+.@amount+" unidades do item '"+getitemname(.@id)+"'("+.@id+") removidos com sucesso do jogador '"+.@jog$+"'(Jogador possuia '"+.@qnt+"' unidades)";
+break;
+
+case 2: //Armazém.
+query_sql "SELECT amount FROM `storage` WHERE `account_id` ="+.@idacc+" AND `nameid` ="+.@id+" AND `amount` >=1 LIMIT 1", .@amounts;
+if( !.@amounts ){ message .@nick$,"(SQL)Não foi possível encontrar o item '"+getitemname(.@id)+"'("+.@id+") no armazém do jogador '"+.@jog$+"'"; break; }
+if(.@amounts > .@qnt){ query_sql "UPDATE `storage` SET `amount` = amount-'"+.@qnt+"' WHERE `nameid` ="+.@id+" AND `account_id` ="+.@idacc+""; message .@nick$,"(SQL)"+.@qnt+" unidades do item '"+getitemname(.@id)+"'("+.@id+") removidos com sucesso do armazém do jogador '"+.@jog$+"'(Jogador possuia '"+.@amounts+"' unidades)"; set .@wrks, 1; break; }
+query_sql "DELETE FROM `storage` WHERE `nameid` ="+.@id+" AND `account_id` ="+.@idacc+"";
+message .@nick$,"(SQL)"+.@amounts+" unidades do item '"+getitemname(.@id)+"'("+.@id+") removidos com sucesso do jogador '"+.@jog$+"'(Jogador possuia '"+.@qnt+"' unidades)";
+set .@wrks, 1;
+break;
+}
+if(isloggedin(.@idacc) && .@wrks > 0){ atcommand "@kick "+rid2name(.@idacc)+""; dispbottom "Jogador foi kickado para reiniciar seu storage."; }
+end;
+
+laviso:
+show "Este aviso será exibido cada vez que um jogador logar no servidor.";
+next;
+input (.@mes$,5,600);
+next;
+show "A mensagem será exibida assim:";
+show "[Aviso] ^0000FF"+.@mes$+"^000000";
+show "Deseja mesmo prosseguir?";
+next;
+if(select("Não.:Sim.")==1) close;
+set $clifcmmes1$, .@mes$;
+show "Aviso editado.";
+close;
+end;
+
+snpc:
+input @npc$;
+atcommand "@shownpc "+@npc$+"";
+close;
+end;
+
+hnpc:
+input @npc$;
+atcommand "@hidenpc "+@npc$+"";
+close;
+end;
+
+mat:
+atcommand "@killmonster2";
+close;
+end;
+
+gsl:
+input @galho;
+next;
+additem 604,@galho;
+close;
+end;
+
+sala2:
+warp "quiz_00",62,8;
+close;
+end;
+
+spvp:
+warp "prt_are01",160,254;
+close;
+end;
+
+fknm:
+input @nome$;
+atcommand "@fakename "+@nome$+"";
+close;
+end;
+
+map:
+input @mensagem$;
+announce @mensagem$,bc_yellow|bc_map;
+close;
+end;
+
+
+retr:
+show @nmpc$;
+show "Esta opção deve ser usada apenas com a conta ^FF0000DESLOGADA^000000!";
+next;
+show @nmpc$;
+show "Nome do jogador?";
+next;
+input @jog$;
+set @idjog, getcharid(0,@jog$);
+query_sql("UPDATE `char` SET `last_map` = 'geffen',`last_x` = '101', `last_y` = '75' WHERE `char`.`name` ='"+@jog$+"'");
+show @nmpc$;
+show "Feito.";
+close;
+end;
+
+ieqp:
+set .@jog$, @whispervar2$;
+set .@idr, getcharid(3);
+set .@idjog, getcharid(3,.@jog$);
+if(attachrid(.@idjog)){
+set .@topc, getequipcardid(1,0);
+set .@mheadc, getequipcardid(9,0);
+set .@armorc, getequipcardid(2,0);
+set .@lhandc, getequipcardid(3,0);
+set .@rhandc1, getequipcardid(4,0);
+set .@rhandc2, getequipcardid(4,1);
+set .@rhandc3, getequipcardid(4,2);
+set .@rhandc4, getequipcardid(4,3);
+set .@garmentc, getequipcardid(5,0);
+set .@shoesc, getequipcardid(6,0);
+set .@lacessc, getequipcardid(7,0);
+set .@racessc, getequipcardid(8,0);
+
+set .@top, getequipid(1);
+set .@mhead, getequipid(9);
+set .@armor, getequipid(2);
+set .@lhand, getequipid(3);
+set .@rhand, getequipid(4);
+set .@garment, getequipid(5);
+set .@shoes, getequipid(6);
+set .@lacess, getequipid(7);
+set .@racess, getequipid(8);
+}
+if(attachrid(.@idr))
+dispbottom "------------ Displaying equiped itens and cards from: "+rid2name(.@idjog)+"(Account ID:"+.@idjog+") ----------";
+dispbottom "Top Head: "+getitemname(.@top)+" - Card: "+getitemname(.@topc)+"";
+dispbottom "Mid Head: "+getitemname(.@mhead)+" - Card: "+getitemname(.@mheadc)+"";
+dispbottom "Armor: "+getitemname(.@armor)+" - Card: "+getitemname(.@armorc)+"";
+dispbottom "Left Hand: "+getitemname(.@lhand)+" - Card: "+getitemname(.@lhandc)+"";
+dispbottom "Right Hand: "+getitemname(.@rhand)+" - Cards: "+getitemname(.@rhandc1)+", "+getitemname(.@rhandc2)+", "+getitemname(.@rhandc3)+", "+getitemname(.@rhandc4)+"";
+dispbottom "Garment: "+getitemname(.@garment)+" - Card: "+getitemname(.@garmentc)+"";
+dispbottom "Shoes: "+getitemname(.@shoes)+" - Card: "+getitemname(.@shoesc)+"";
+dispbottom "Acessorie: "+getitemname(.@lacess)+" - Card: "+getitemname(.@lacessc)+"";
+dispbottom "Acessorie: "+getitemname(.@racess)+" - Card: "+getitemname(.@racessc)+"";
+close;
+end;
+
+kick:
+input @jog$;
+atcommand "@kick "+@jog$+"";
+close;
+end;
+
+scongj:
+set .@jog$, @whispervar2$;
+set .@idr, getcharid(3);
+set .@nick$, strcharinfo(0);
+set .@idjog, getcharid(3,.@jog$);
+if(attachrid(.@idjog)){ atcommand "@option 0"; message .@nick$,"Jogador Descongelado com sucesso."; }else{ message .@nick$,"Jogador não encontrado."; }
+end;
+
+congj:
+set .@jog$, @whispervar2$;
+set .@idr, getcharid(3);
+set .@nick$, strcharinfo(0);
+set .@idjog, getcharid(3,.@jog$);
+if(attachrid(.@idjog)){ atcommand "@option 2"; message .@nick$,"Jogador Congelado com sucesso."; }else{ message .@nick$,"Jogador não encontrado."; }
+end;
+
+sstorage:
+deletearray .@nid[0],127;
+set .@jog$, @whispervar2$;
+query_sql "SELECT account_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idacc;
+if( !.@idacc ){ dispbottom "Jogador não encontrado."; end; }
+query_sql "SELECT nameid,amount,refine,card0,card1,card2,card3 FROM `storage` WHERE `account_id` ="+.@idacc+"", .@nid, .@amount, .@refine, .@card0, .@card1, .@card2, .@card3;
+show "^228C6CList of all storage itens from:";
+show "'"+.@jog$+"'(Account ID:"+.@idacc+")^000000";
+show " ";
+for(set .@j, 0; .@j < (getarraysize(.@nid)); set .@j, .@j + 1){
+show "^FF0000"+getitemname(.@nid[.@j])+"^000000("+.@nid[.@j]+")";
+show " - Amount: "+.@amount[.@j]+"";
+if(.@refine[.@j]){ show " - Refine: ^683678+"+.@refine[.@j]+"^000000"; }
+if(.@card0[.@j]){ show " - Card 1: ^0000FF"+getitemname(.@card0[.@j])+"^000000"; }
+if(.@card1[.@j]){ show " - Card 2: ^0000FF"+getitemname(.@card1[.@j])+"^000000"; }
+if(.@card2[.@j]){ show " - Card 3: ^0000FF"+getitemname(.@card2[.@j])+"^000000"; }
+if(.@card3[.@j]){ show " - Card 4: ^0000FF"+getitemname(.@card3[.@j])+"^000000"; }
+//show " ";
+}
+close;
+end;
+
+sinvil:
+set .@jog$, @jog$;
+query_sql "SELECT char_id FROM `char` WHERE `name` ='"+.@jog$+"'",.@idjog;
+query_sql "SELECT nameid,amount FROM `inventory` WHERE `char_id` ="+.@idjog+"", .@nid, .@amount;
+dispbottom "----------- List(SQL) of all itens from - "+.@jog$+" (Char ID:"+.@idjog+") -----------";
+for(set .@j, 0; .@j < (getarraysize(.@nid)); set .@j, .@j + 1){
+dispbottom ""+getitemname(.@nid[.@j])+" - Amount: "+.@amount[.@j]+" - ID: "+.@nid[.@j]+"";
+}
+end;
+
+invil:
+input .@jog$;
+set .@idr, getcharid(3);
+set .@idjog, getcharid(3,.@jog$);
+if( !isloggedin(.@idjog) ){ set @jog$, .@jog$; goto sinvil; }
+if(attachrid(.@idjog)){
+getinventorylist;
+for(set .@i, 0; .@i < (getarraysize(@inventorylist_id)); set .@i, .@i + 1){
+set .@inventoryi[.@i], @inventorylist_id[.@i];
+set .@inventoryq[.@i], @inventorylist_amount[.@i];
+}
+}
+if(attachrid(.@idr)){
+dispbottom "----------- List of all itens from - "+rid2name(.@idjog)+" (Account ID:"+.@idjog+") -----------";
+for(set .@j, 0; .@j < (getarraysize(.@inventoryi)); set .@j, .@j + 1){
+dispbottom ""+getitemname(.@inventoryi[.@j])+" - Amount: "+.@inventoryq[.@j]+" - ID: "+.@inventoryi[.@j]+"";
+}
+}
+close;
+end;
+
+/*
+OnPCLoginEvent:
+if($clifcmmes1$ == ""){ end; }
+dispbottom "[Aviso] "+$clifcmmes1$+"";
+end;
+*/
+
+}
+
+
+poring_w02,92,44,5	script	Contadora#teste	719,{
+if(getgmlevel() > 30){
+switch(select("Recallar jogador","Summonar Emperium")){
+case 1:
+	input @name$;
+	atcommand "@recall "+@name$+"";
+	close;
+case 2: break;
+}
+}
+if(mobcount("poring_w02","Contadora#teste::OnDie") > 0) { npctalk "Aguarde até o Emperium ser destruído"; close; }
+monster "poring_w02",98,41,"Emperium de Teste",1288,1,"Contadora#teste::OnDie";
+initnpctimer;
+close;
+end;
+
+
+OnTimer180000000:
+npctalk "Tempo esgotado.";
+killmonster "poring_w02","All";
+end;
+
+OnDie:
+//set @limit, @limit + 1;
+npctalk ""+strcharinfo(0)+" demorou "+(GetNpcTimer(0)/1000)+" segundos para quebrar o emperium";
+stopnpctimer;
+//if(@limit == 10){ warp "Save",0,0; close; }
+end;
+
+
+/*
+OnWhisperGlobal:
+if(@whispervar0$ == $senha$ || getgmlevel() > 30){ warp "poring_w02",93,40; close; }
+dispbottom "Senha errada.";
+end;
+*/
+
+}
+
+poring_w02,105,49,4	script	Funcionária Kafra#kfcm2	112,{
+	cutin "kafra_06",2;
+	callfunc "F_Kafra",4,2,1,80,1000;
+}
+
+-	script	Utilidades#pbRO	-1,{
+end;
+
+
+OnInit:
+setmapflag "prt_are01",mf_nostorage;
+setmapflag "quiz_00",mf_loadevent;
+setmapflag "prt_are01",mf_loadevent;
+setcell "lhz_fild03",0,0,400,400,cell_novending,1;
+setcell "prt_maze03",0,0,400,400,cell_novending,1;
+end;
+
+
+OnPCLoadMapEvent:
+getmapxy(@map$,@x,@y,0,strcharinfo(0));
+if(@map$ == "quiz_00" || @map$ == "prt_are01"){
+dispbottom "[Sala de Eventos] Limpando todos seus buffs.";
+sc_end SC_ALL;
+end;
+}
+end;
+}
+
+-	script	#Anunciador_Campal	-1,{
+	OnInit:
+		initnpctimer;
+		end;
+	
+	OnTimer5400000:
+		announce "Participe você também das Batalhas Campais!",8;
+		sleep 20000;
+		announce "Aliste-se com a emissária de Maroll no centro de Prontera!",8;
+		initnpctimer;
+		end;
+}
+
+
+prt_are01,157,251,5	duplicate(Pcontrol)	Controlador#1-1	951 //Norte
+prt_are01,140,47,5	duplicate(Pcontrol)	Controlador#1-2	951 //Sul
+prt_are01,254,142,5	duplicate(Pcontrol)	Controlador#1-3	951 //Leste
+prt_are01,46,159,5	duplicate(Pcontrol)	Controlador#1-4	951 //Oeste
+
+
+prt_are01	mapflag	nopenalty
+prt_are01	mapflag	noreturn
+prt_are01	mapflag	noteleport
+prt_are01	mapflag	nomemo
+prt_are01	mapflag	nosave	SavePoint
+prt_are01	mapflag	nobranch
+
+quiz_00	mapflag	nopenalty
+quiz_00	mapflag	noteleport
+quiz_00	mapflag	nomemo
+quiz_00	mapflag	noloot
+quiz_00	mapflag	noexp
+quiz_00	mapflag	nobranch
+quiz_00	mapflag	noreturn
+//quiz_00	mapflag	nowarp
+
+poring_w02	mapflag	noteleport
+poring_w02	mapflag	nomemo
+poring_w02	mapflag	nosave	SavePoint
+poring_w02	mapflag	nobranch
+
+sec_in02	mapflag	nopenalty
+sec_in02	mapflag	noteleport
+sec_in02	mapflag	nomemo
+sec_in02	mapflag	noloot
+sec_in02	mapflag	noexp
+
+/* Unsed, right?
+force_1-1	mapflag	nopenalty
+force_1-1	mapflag	noreturn
+force_1-1	mapflag	noicewall
+force_1-1	mapflag	nobranch
+force_1-1	mapflag	noteleport
+force_1-1	mapflag	nomemo
+force_1-1	mapflag	nosave	SavePoint
+*/
+
+prontera	mapflag	noskill
+iz_dun04	mapflag	nobranch

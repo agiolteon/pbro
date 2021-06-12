@@ -1539,8 +1539,14 @@ int skill_blown(struct block_list* src, struct block_list* target, int count, in
 	if(!(flag&0x1))
 		clif_blown(target);
 
-	if(target->type == BL_PC && map_getcell(target->m, target->x, target->y, CELL_CHKNPC))
-		npc_touch_areanpc((TBL_PC*)target, target->m, target->x, target->y); //Invoke area NPC
+	if( target->type == BL_PC )
+	{
+		if( map_getcell(target->m, target->x, target->y, CELL_CHKNPC) )
+			npc_touch_areanpc((TBL_PC*)target, target->m, target->x, target->y); //Invoke area NPC
+
+		if( ((TBL_PC*)target)->ontouch.npc_id )
+			npc_touchnext_areanpc(((TBL_PC*)target),false);
+	}
 
 	return count; //Return amount of knocked back cells.
 }
@@ -2780,18 +2786,24 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, int 
 	case NPC_EARTHQUAKE:
 	case NPC_PULSESTRIKE:
 	case NPC_HELLJUDGEMENT:
+	case NPC_VAMPIRE_GIFT:
 		if( flag&1 )
 		{	//Recursive invocation
 			// skill_area_temp[0] holds number of targets in area
 			// skill_area_temp[1] holds the id of the original target
 			// skill_area_temp[2] counts how many targets have already been processed
-			int sflag = skill_area_temp[0] & 0xFFF;
+			int sflag = skill_area_temp[0] & 0xFFF, heal;
 			if( flag&SD_LEVEL )
 				sflag |= SD_LEVEL; // -1 will be used in packets instead of the skill level
 			if( skill_area_temp[1] != bl->id && !(skill_get_inf2(skillid)&INF2_NPC_SKILL) )
 				sflag |= SD_ANIMATION; // original target gets no animation (as well as all NPC skills)
 
-			skill_attack(skill_get_type(skillid), src, src, bl, skillid, skilllv, tick, sflag);
+			heal = skill_attack(skill_get_type(skillid), src, src, bl, skillid, skilllv, tick, sflag);
+			if( skillid == NPC_VAMPIRE_GIFT && heal > 0 )
+			{
+				clif_skill_nodamage(NULL, src, AL_HEAL, heal, 1);
+				status_heal(src,heal,0,0);
+			}
 		}
 		else
 		{
@@ -3149,7 +3161,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 	if(status_isdead(src))
 		return 1;
 
-	if(src!=bl && status_isdead(bl) && skillid != ALL_RESURRECTION && skillid != PR_REDEMPTIO)
+	if( src != bl && status_isdead(bl) && skillid != ALL_RESURRECTION && skillid != PR_REDEMPTIO && skillid != NPC_WIDESOULDRAIN )
 		return 1;
 
 	tstatus = status_get_status_data(bl);
@@ -3955,6 +3967,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 	case GS_SPREADATTACK:
 	case NPC_EARTHQUAKE:
 		clif_skill_nodamage(src,bl,skillid,skilllv,1);
+	case NPC_VAMPIRE_GIFT:
 	case NPC_HELLJUDGEMENT:
 	case NPC_PULSESTRIKE:
 		skill_castend_damage_id(src, src, skillid, skilllv, tick, flag);
@@ -4472,7 +4485,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 	{
 		unsigned short location = 0;
 		int d = 0;
-		
+
 		//Rate in percent
 		if ( skillid == ST_FULLSTRIP ) {
 			i = 5 + 2*skilllv + (sstatus->dex - tstatus->dex)/5;
@@ -4734,9 +4747,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 		{
 			int x,y, dir = unit_getdir(src);
 
-		  	//Fails on noteleport maps, except for vs maps [Skotlex]
-			if(map[src->m].flag.noteleport &&
-				!(map_flag_vs(src->m) || map_flag_gvg2(src->m))
+		  	//Fails on noteleport maps, except for GvG and BG maps [Skotlex]
+			if( map[src->m].flag.noteleport &&
+				!(map[src->m].flag.battleground || map_flag_gvg2(src->m) )
 			) {
 				x = src->x;
 				y = src->y;
@@ -5242,7 +5255,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 
 	// Slim Pitcher
 	case CR_SLIMPITCHER:
-		if( dstmd && dstmd->class_ == MOBID_EMPERIUM )
+		// Updated to block Slim Pitcher from working on barricades and guardian stones.
+		if( dstmd && (dstmd->class_ == MOBID_EMPERIUM || (dstmd->class_ >= MOBID_BARRICADE1 && dstmd->class_ <= MOBID_GUARIDAN_STONE2)) )
 			break;
 		if (potion_hp || potion_sp) {
 			int hp = potion_hp, sp = potion_sp;
@@ -5668,6 +5682,18 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, in
 				skill_castend_nodamage_id);
 		}
 		break;
+	case NPC_WIDESOULDRAIN:
+		if (flag&1)
+			status_percent_damage(src,bl,0,((skilllv-1)%5+1)*20,false);
+		else {
+			skill_area_temp[2] = 0; //For SD_PREAMBLE
+			clif_skill_nodamage(src,bl,skillid,skilllv,1);
+			map_foreachinrange(skill_area_sub, bl,
+				skill_get_splash(skillid, skilllv),BL_CHAR,
+				src,skillid,skilllv,tick, flag|BCT_ENEMY|SD_PREAMBLE|1,
+				skill_castend_nodamage_id);
+		}
+		break;
 	default:
 		ShowWarning("skill_castend_nodamage_id: Unknown skill used:%d\n",skillid);
 		clif_skill_nodamage(src,bl,skillid,skilllv,1);
@@ -5921,6 +5947,9 @@ int skill_castend_id(int tid, unsigned int tick, int id, intptr data)
 				sc->data[SC_SPIRIT]->val3 == ud->skillid &&
 			  	ud->skillid != WZ_WATERBALL)
 				sc->data[SC_SPIRIT]->val3 = 0; //Clear bounced spell check.
+
+			if( sc->data[SC_DANCING] && skill_get_inf2(ud->skillid)&INF2_SONG_DANCE && sd )
+				skill_blockpc_start(sd,BD_ADAPTATION,3000);
 		}
 
 		if( sd && ud->skillid != SA_ABRACADABRA ) // Hocus-Pocus has just set the data so leave it as it is.[Inkfish]
@@ -7182,7 +7211,7 @@ static int skill_unit_onplace (struct skill_unit *src, struct block_list *bl, un
 		else if( sc )
 		{
 			int sec = skill_get_time2(sg->skill_id,sg->skill_lv);
-			if( status_change_start(bl,type,10000,sg->skill_lv,sg->group_id,0,0,sec,8) )
+			if( status_change_start(bl,type,10000,sg->skill_lv,1,sg->group_id,0,sec,8) )
 			{
 				const struct TimerData* td = sc->data[type]?get_timer(sc->data[type]->timer):NULL; 
 				if( td )
@@ -7768,8 +7797,8 @@ int skill_unit_onout (struct skill_unit *src, struct block_list *bl, unsigned in
 	type = status_skill2sc(sg->skill_id);
 	sce = (sc && type != -1)?sc->data[type]:NULL;
 
-	if (bl->prev==NULL || !src->alive || //Need to delete the trap if the source died.
-		(status_isdead(bl) && sg->unit_id != UNT_ANKLESNARE && sg->unit_id != UNT_SPIDERWEB))
+	if( bl->prev==NULL ||
+		(status_isdead(bl) && sg->unit_id != UNT_ANKLESNARE && sg->unit_id != UNT_SPIDERWEB) ) //Need to delete the trap if the source died.
 		return 0;
 
 	switch(sg->unit_id){
@@ -7794,7 +7823,7 @@ int skill_unit_onout (struct skill_unit *src, struct block_list *bl, unsigned in
 			struct block_list *target = map_id2bl(sg->val2);
 			if (target && target==bl)
 			{
-				if (sce && sce->val2 == sg->group_id)
+				if (sce && sce->val3 == sg->group_id)
 					status_change_end(bl,type,-1);
 				sg->limit = DIFF_TICK(tick,sg->tick)+1000;
 			}
@@ -8648,7 +8677,7 @@ int skill_check_condition_castend(struct map_session_data* sd, short skill, shor
 			return 0;
 		}
 	}
-	
+
 	if( sd->skillitem == skill ) // Casting finished (Item skill or Hocus-Pocus)
 		return 1;
 
@@ -8703,7 +8732,7 @@ int skill_check_condition_castend(struct map_session_data* sd, short skill, shor
 			return 0;
 		}
 		if (!(require.ammo&1<<sd->inventory_data[i]->look))
-		{	//Ammo type check. Send the "wrong weapon type" message
+		{   //Ammo type check. Send the "wrong weapon type" message
 			//which is the closest we have to wrong ammo type. [Skotlex]
 			clif_arrow_fail(sd,0); //Haplo suggested we just send the equip-arrows message instead. [Skotlex]
 			//clif_skill_fail(sd,skill,6,0);
@@ -10437,14 +10466,14 @@ static int skill_unit_timer_sub (DBKey key, void* data, va_list ap)
 		{
 			unit->range = -1; //Disable processed cell.
 			if (--group->val1 <= 0) // number of live cells
-	  		{	//All tiles were processed, disable skill.
+			{	//All tiles were processed, disable skill.
 				group->target_flag=BCT_NOONE;
 				group->bl_flag= BL_NUL;
 			}
 		}
 	}
 
-  	if( dissonance ) skill_dance_switch(unit, 1);
+	if( dissonance ) skill_dance_switch(unit, 1);
 
 	return 0;
 }
@@ -11165,6 +11194,9 @@ int skill_blockpc_start(struct map_session_data *sd, int skillid, int tick)
 		sd->blockskill[skillid] = 0;
 		return -1;
 	}
+
+	if( battle_config.display_status_timers )
+		clif_skill_cooldown(sd, skillid, tick);
 
 	sd->blockskill[skillid] = 0x1|(0xFE&add_timer(gettick()+tick,skill_blockpc_end,sd->bl.id,skillid));
 	return 0;

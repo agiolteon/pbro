@@ -1,0 +1,726 @@
+prontera,163,192,4	script	Coordenador de Entregas	833,{
+
+if(#fazendo==1) {
+if(countitem(#quest_item_id_01)>=#quest_item_quant_01 && countitem(#quest_item_id_02)>=#quest_item_quant_02 && countitem(#quest_item_id_03)>=#quest_item_quant_03) goto COMPLETA;
+}
+show "[Mestre das Entregas]";
+show "Olá, o que deseja de mim?";
+next;
+menu " - Quero um Serviço!",ADDQUEST2,
+	" - Trocar de Serviço",RESETA2,
+	" - Eu me esqueci do Serviço...",LEMBRAR,
+	" - Entregar Serviço!",ENTREGA,
+	" - Verificar estoque!",ESTOQUE,
+	" - Rank",RANK_02,
+	" - Pra que trabalhar?",PRAQUE,
+	" - Nada não...",SAIR;
+
+ADDQUEST2:
+RESETA2:
+RANK_02:
+show "[Mestre das Entregas]";
+show "Meus serviços acabaram, lamento. Agora somente quando eu estiver com muitas entregas que eu pedirei ajuda.";
+close;
+
+RANK_01:
+show "[Mestre das Entregas]";
+show "Qual rank gostaria de visualizar?";
+next;
+menu " - O meu",RANK_MEU," - Geral",RANK_GERAL," - Nenhum...",NENHUM;
+
+RANK_GERAL:
+show "[Mestre das Entregas]";
+show "Este rank estará disponivel nos proximos dias. Iremos aguardar que uma grande parte dos usuários completem os serviços.";
+close;
+
+RANK_MEU:
+show "[Mestre das Entregas]";
+show "Veja sua pontuação abaixo:";
+show " ";
+query_sql "SELECT desistencia,completo FROM rank_evento WHERE id_char ='"+getcharid(0)+"'", @desistencia, @completo;
+query_sql "SELECT desistencia2,completo2 FROM login WHERE account_id ='"+getcharid(3)+"'", @desistencia2, @completo2;
+show "PERSONAGEM";
+show "Serviços completos: "+@completo;
+show "Serviços abandonados: "+@desistencia;
+show " ";
+show "CONTA";
+show "Serviços completos: "+@completo2;
+show "Serviços abandonados: "+@desistencia2;
+show " ";
+set @completo, 0;
+set @completo2, 0;
+set @desistencia, 0;
+set @desistencia2, 0;
+close;
+
+NENHUM:
+show "[Mestre das Entregas]";
+show "Precisando estarei aqui!";
+close;
+
+ADDQUEST:
+if(#fazendo==1) goto ATIVADO;
+
+show "[Mestre das Entregas]";
+show "Que bom ve-lo!";
+show "Pretende me ajudar em algum serviço?";
+next;
+menu "Sim, claro.",SIM,"Talvez depois",SAIR;
+
+SIM:
+show "[Mestre das Entregas]";
+show "Opa, que bom, vejamos aqui o que tenho para você. Você só pode fazer ^FF000015 serviços por DIA^000000. As recompensas são de acordo com o valor, dificuldade e quantidade necessaria de cada item.";
+next;
+query_sql "SELECT feito FROM login WHERE account_id ='"+getcharid(3)+"'", @feito;
+if(@feito>=15) goto NAO_MAIS_FEITO;
+show "[Mestre das Entregas]";
+show "Aguarde enquanto eu vejo algum serviço para você!";
+goto CONTNUA;
+
+CONTNUA:
+query_sql "SELECT COUNT(*) FROM event_item", @quantidade;
+set #quest_item_01, rand(1,@quantidade);
+sleep2 1000;
+set #quest_item_02, rand(1,@quantidade);
+sleep2 1000;
+set #quest_item_03, rand(1,@quantidade);
+sleep2 1000;
+
+if(#quest_item_01==#quest_item_02 || #quest_item_01==#quest_item_03 || #quest_item_02==#quest_item_01 || #quest_item_02==#quest_item_03 || #quest_item_03==#quest_item_01 || #quest_item_03==#quest_item_02) goto CONTNUA;
+
+set @feito, @feito + 1;
+query_sql("UPDATE login SET feito = '"+@feito+"' WHERE account_id = '"+getcharid(3)+"'");
+
+set #quest_item_quant_01, rand(10,70);
+set #quest_item_quant_02, rand(10,50);
+set #quest_item_quant_03, rand(10,40);
+
+query_sql "SELECT nome,valor,id2 FROM event_item WHERE id ='"+#quest_item_01+"'", @item01$,@valor01,@id_do_item01;
+query_sql "SELECT nome,valor,id2 FROM event_item WHERE id ='"+#quest_item_02+"'", @item02$,@valor02,@id_do_item02;
+query_sql "SELECT nome,valor,id2 FROM event_item WHERE id ='"+#quest_item_03+"'", @item03$,@valor03,@id_do_item03;
+
+set @ganho1, #quest_item_quant_01 * @valor01;
+set @ganho2, #quest_item_quant_02 * @valor02;
+set @ganho3, #quest_item_quant_03 * @valor03;
+set @ganho4, @ganho1 + @ganho2;
+set @ganho5, @ganho3 + @ganho4;
+set #ganho, @ganho5 / 50;
+set #fazendo, 1;
+
+set #quest_item_nome_01$, @item01$;
+set #quest_item_nome_02$, @item02$;
+set #quest_item_nome_03$, @item03$;
+
+set #quest_item_id_01, @id_do_item01;
+set #quest_item_id_02, @id_do_item02;
+set #quest_item_id_03, @id_do_item03;
+
+show " ";
+show "Primeiro item:";
+show "- Item: ^FF0000" +@item01$+ "^000000";
+show "- Quantidade: ^FF0000" +#quest_item_quant_01+ "^000000";
+show " ";
+sleep2 3000;
+show "Segundo item:";
+show "- Item: ^FF0000" +@item02$+ "^000000";
+show "- Quantidade: ^FF0000" +#quest_item_quant_02+ "^000000";
+show " ";
+sleep2 3000;
+show "Terceiro item:";
+show "- Item: ^FF0000" +@item03$+ "^000000";
+show "- Quantidade: ^FF0000" +#quest_item_quant_03+ "^000000";
+show " ";
+show "Estes são os itens que você deve trazer para mim e lhe recompensarei com: ^FF0000" +#ganho+ "^000000 Pontos! Quantidade de serviços adquiridos no dia ^FF0000"+@feito+"^000000/^0000FF15^000000";
+close;
+
+
+ENTREGA:
+if(#fazendo==0) goto PRECISA;
+if(countitem(#quest_item_id_01)>=#quest_item_quant_01 && countitem(#quest_item_id_02)>=#quest_item_quant_02 && countitem(#quest_item_id_03)>=#quest_item_quant_03) goto COMPLETA;
+show "[Mestre das Entregas]";
+show "Você precisa estar com todos os itens, meus clientes são muito exigentes, não pode faltar NADA!!!";
+show " ";
+
+if(countitem(#quest_item_id_01)>=#quest_item_quant_01) {
+show #quest_item_nome_01$+": ^0000FF"+countitem(#quest_item_id_01)+"/"+#quest_item_quant_01+"^000000";
+}else{
+show #quest_item_nome_01$+": ^FF0000"+countitem(#quest_item_id_01)+"/"+#quest_item_quant_01+"^000000";
+}
+
+if(countitem(#quest_item_id_02)>=#quest_item_quant_02) {
+show #quest_item_nome_02$+": ^0000FF"+countitem(#quest_item_id_02)+"/"+#quest_item_quant_02+"^000000";
+}else{
+show #quest_item_nome_02$+": ^FF0000"+countitem(#quest_item_id_02)+"/"+#quest_item_quant_02+"^000000";
+}
+
+if(countitem(#quest_item_id_03)>=#quest_item_quant_03) {
+show #quest_item_nome_03$+": ^0000FF"+countitem(#quest_item_id_03)+"/"+#quest_item_quant_03+"^000000";
+}else{
+show #quest_item_nome_03$+": ^FF0000"+countitem(#quest_item_id_03)+"/"+#quest_item_quant_03+"^000000";
+}
+close;
+
+
+COMPLETA:
+show "[Mestre das Entregas]";
+show "Mais um serviço completo!";
+show "Obrigado pela ajuda, e como prometido lhe darei os pontos de troca.";
+
+query_sql "SELECT desistencia,completo FROM rank_evento WHERE id_char ='"+getcharid(0)+"'", @desistencia, @completo;
+
+if(@desistencia==0 && @completo==0) {
+query_sql("INSERT INTO rank_evento (id_char,completo) VALUES ("+getcharid(0)+",1)");
+set @completo, 1;
+}else{
+set @completo, @completo + 1;
+query_sql("UPDATE rank_evento SET completo = '"+@completo+"' WHERE id_char = '"+getcharid(0)+"'");
+}
+
+query_sql "SELECT completo2 FROM login WHERE account_id ='"+getcharid(3)+"'", @completo2;
+set @completo2, @completo2 + 1;
+query_sql("UPDATE login SET completo2 = '"+@completo2+"' WHERE account_id = '"+getcharid(3)+"'");
+
+delitem #quest_item_id_01,#quest_item_quant_01;
+delitem #quest_item_id_02,#quest_item_quant_02;
+delitem #quest_item_id_03,#quest_item_quant_03;
+set #quest_item_01, 0;
+set #quest_item_02, 0;
+set #quest_item_03, 0;
+set #quest_item_id_01,0;
+set #quest_item_id_02,0;
+set #quest_item_id_03,0;
+set #quest_item_quant_01,0;
+set #quest_item_quant_02,0;
+set #quest_item_quant_03,0;
+set #quest_item_nome_01$,0;
+set #quest_item_nome_02$,0;
+set #quest_item_nome_03$,0;
+
+next;
+show "[Mestre das Entregas]";
+show "Você recebeu ^FF0000"+#ganho+"^000000 pontos de troca";
+
+query_sql "SELECT creditos2 FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos2;
+set @creditos2, @creditos2 + #ganho;
+query_sql("UPDATE login SET creditos2 = '"+@creditos2+"' WHERE account_id = '"+getcharid(3)+"'");
+
+show "Seus pontos atuais são ^0000FF"+@creditos2+"^000000";
+show " ";
+show "Serviços completados ->";
+show "Personagem: "+@completo;
+show "Conta: "+@completo2;
+set #ganho, 0;
+set #fazendo, 0;
+set @completo, 0;
+set @completo2, 0;
+close;
+
+
+RESETA:
+if(#fazendo==0) goto PRECISA;
+show "[Mestre das Entregas]";
+show "Você tem certeza que quer cancelar seu serviço atual?";
+show "^FF0000Ao desistir você também perde 1 dos 15 serviços diarios disponiveis.^000000";
+next;
+menu "Sim",CANC,"Não",NCANC;
+
+CANC:
+show "[Mestre das Entregas]";
+show "Que pena... Eu estava precisando muito dessa entrega completa.";
+
+query_sql "SELECT desistencia,completo FROM rank_evento WHERE id_char ='"+getcharid(0)+"'", @desistencia, @completo;
+
+if(@desistencia==0 && @completo==0) {
+query_sql("INSERT INTO rank_evento (id_char,desistencia) VALUES ("+getcharid(0)+",1)");
+set @desistencia, 1;
+}else{
+set @desistencia, @desistencia + 1;
+query_sql("UPDATE rank_evento SET desistencia = '"+@desistencia+"' WHERE id_char = '"+getcharid(0)+"'");
+}
+
+query_sql "SELECT desistencia2 FROM login WHERE account_id ='"+getcharid(3)+"'", @desistencia2;
+set @desistencia2, @desistencia2 + 1;
+query_sql("UPDATE login SET desistencia2 = '"+@desistencia2+"' WHERE account_id = '"+getcharid(3)+"'");
+show " ";
+show "Desistencias ->";
+show "Personagem: "+@desistencia;
+show "Conta: "+@desistencia2;
+set @desistencia, 0;
+set @desistencia2, 0;
+set #quest_item_01, 0;
+set #quest_item_02, 0;
+set #quest_item_03, 0;
+set #fazendo, 0;
+set #ganho, 0;
+set #quest_item_id_01,0;
+set #quest_item_id_02,0;
+set #quest_item_id_03,0;
+set #quest_item_quant_01,0;
+set #quest_item_quant_02,0;
+set #quest_item_quant_03,0;
+set #quest_item_nome_01$,0;
+set #quest_item_nome_02$,0;
+set #quest_item_nome_03$,0;
+close;
+
+NAO_MAIS:
+show "[Mestre das Entregas]";
+show "Suas trocas de serviços acabaram por hoje, somente amanha você podera trocar.";
+close;
+
+NCANC:
+show "[Mestre das Entregas]";
+show "Uffa... Eu realmente estou precisando terminar essa entrega. Obrigado e espero que tenha sucesso na busca dos itens!";
+close;
+
+LEMBRAR:
+if(#fazendo==0) goto PRECISA;
+show "[Mestre das Entregas]";
+show "Heheheh normal, eu também me esqueço as vezes. Sorte que tenho tudo anotado aqui, deixe me ver para você.";
+next;
+show "[Mestre das Entregas]";
+show "Pronto, aqui esta: ";
+show " ";
+show "Era ^FF0000"+#quest_item_quant_01+"^000000 Unidades de ^FF0000"+#quest_item_nome_01$+"^000000";
+show "Mais ^FF0000"+#quest_item_quant_02+"^000000 Unidades de ^FF0000"+#quest_item_nome_02$+"^000000";
+show "E por fim ^FF0000"+#quest_item_quant_03+"^000000 Unidades de ^FF0000"+#quest_item_nome_03$+"^000000";
+show " ";
+show "Isso vai lhe render um total de "+#ganho+" pontos.";
+close;
+
+PRECISA:
+show "[Mestre das Entregas]";
+show "Você não esta fazendo nenhum serviço no momento.";
+close;
+
+PRAQUE:
+show "[Mestre das Entregas]";
+show "Como assim pra que trabalhar? Todo mundo precisa trabalhar...";
+next;
+show "[Mestre das Entregas]";
+show "Principalmente neste mês do Mercador, eu recebi varias encomendas, mas não estou dando conta de todas.";
+next;
+show "[Mestre das Entregas]";
+show "E outra... Eu estou meio sem dinheiro neste mês, mas não pense que se você trabalhar para mim ficara sem receber!";
+next;
+show "[Mestre das Entregas]";
+show "Tenho varias mercadorias em estoque, porem essas não são as coisas que mais vendem este mês, se você aceitar, a gente pode trocar durante os serviços prestados.";
+next;
+show "[Mestre das Entregas]";
+show "Você recebera pontos de entrega para cada serviço completo, e esses pontos terão seu valor de acordo com os itens que eu precisar que traga.";
+next;
+show "[Mestre das Entregas]";
+show "Caso queira um serviço me avisa, que negociaremos";
+close;
+
+NAO_MAIS_FEITO:
+show "[Mestre das Entregas]";
+show "Você já pegou os 15 serviços possiveis do dia, volte amanha e terei mais!";
+close;
+
+ATIVADO:
+show "[Mestre das Entregas]";
+show "Você ja esta fazendo um serviço, caso queira trocar fale comigo novamente! E vá logo, preciso disso rápido!";
+if(countitem(#quest_item_id_01)>=#quest_item_quant_01) {
+show #quest_item_nome_01$+": ^0000FF"+countitem(#quest_item_id_01)+"/"+#quest_item_quant_01+"^000000";
+}else{
+show #quest_item_nome_01$+": ^FF0000"+countitem(#quest_item_id_01)+"/"+#quest_item_quant_01+"^000000";
+}
+
+if(countitem(#quest_item_id_02)>=#quest_item_quant_02) {
+show #quest_item_nome_02$+": ^0000FF"+countitem(#quest_item_id_02)+"/"+#quest_item_quant_02+"^000000";
+}else{
+show #quest_item_nome_02$+": ^FF0000"+countitem(#quest_item_id_02)+"/"+#quest_item_quant_02+"^000000";
+}
+
+if(countitem(#quest_item_id_03)>=#quest_item_quant_03) {
+show #quest_item_nome_03$+": ^0000FF"+countitem(#quest_item_id_03)+"/"+#quest_item_quant_03+"^000000";
+}else{
+show #quest_item_nome_03$+": ^FF0000"+countitem(#quest_item_id_03)+"/"+#quest_item_quant_03+"^000000";
+}
+close;
+
+SAIR:
+show "[Mestre das Entregas]";
+show "Volte quando quiser, pois tenho muitas requisições para entregar!";
+close;
+
+ESTOQUE:
+show "[Mestre das Entregas]";
+show "Você pode trocar seus pontos de serviços pelos itens de meu estoque, confira minha lista.";
+set @creditos2,0;
+set @pact,0;
+next;
+menu "- Itens",ITEM,"- Combos",COMBOS,"- Sair",SAI;
+
+
+ITEM:
+show "[Mestre das Entregas]";
+show "Escolha os itens que você quer, o valor da troca esta entre ^FF0000[ ]^000000";
+query_sql "SELECT creditos2 FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos2;
+show "Pontos atuais: "+@creditos2;
+next;
+set @especial_item,0;
+menu "Caixa Especial de Pergaminhos [^0066FF90^000000]",ite01,
+	"Caixa de Abrasivos [^0066FF50^000000]",ite02,
+	"Caixa de Regeneração [^0066FF90^000000]",ite03,
+	"Caixa de Guerra Elite [^0066FF150^000000]",ite04,
+	"Caixa de Asas [^0066FF40^000000]",ite05,
+	"Línguas no Vapor [^0066FF110^000000]",ite06,
+	"Escorpiões no Vapor [^0066FF110^000000]",ite07,
+	"Coquetéis Sopro do Dragão [^0066FF100^000000]",ite08,
+	"Tônicos de Hwergelmir [^0066FF110^000000]",ite09,
+	"Nove Caudas Cozidas [^0066FF100^000000]",ite10,
+	"Sopas da Imortalidade [^0066FF110^000000]",ite11,
+	"Poção Média de Vida [^0066FF140^000000]",ite12,
+	"Manual de Combate [^0066FF1000^000000]",ite13,
+	"ROPS aleatorio [^0066FF5000^000000]",ite14,
+	"Goma de Mascar [^0066FF4500^000000]",ite15;
+
+
+ite01:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,13709;
+set @preco, 90;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite02:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,13718;
+set @preco, 50;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite03:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,13721;
+set @preco, 90;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite04:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,14003;
+set @preco, 150;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite05:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12910;
+set @preco, 40;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite06:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12250;
+set @preco, 110;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite07:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12251;
+set @preco, 110;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite08:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12252;
+set @preco, 100;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite09:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12253;
+set @preco, 110;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite10:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12254;
+set @preco, 100;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite11:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12255;
+set @preco, 110;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite12:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,13714;
+set @preco, 140;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite13:
+show "[Mestre das Entregas]";
+show "É realmente isso que deseja?";
+set @compra,12208;
+set @preco, 1000;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite14:
+query_sql "SELECT rops,rops2 FROM estoque", @s_rops,@s_rops2;
+if(@s_rops>=@s_rops2) goto ESGOTADO;
+show "[Mestre das Entregas]";
+show "O item será aleatorio. Ja foram trocados ^FF0000"+@s_rops+"^000000 de ^0000FF"+@s_rops2+"^000000.";
+set @s_rops, 0;
+show "Ao se esgotar os "+@s_rops2+" não será mais possivel trocar os pontos por estes itens, somente quanto chegar mais mercadorias. Deseja continuar?";
+set @ram1, rand(0,1);
+if(@ram1==0) {
+set @ram2, rand(0,15);
+set @ropi, 5138 + @ram2;
+}else{
+set @ram2, rand(0,8);
+set @ropi, 5180 + @ram2;
+}
+if(@ropi==5144 || @ropi==5145 || @ropi==5185 || @ropi==5180) set @ropi, 5147;
+set @compra,@ropi;
+set @preco, 5000;
+set @especial_item,1;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ite15:
+query_sql "SELECT drops,drops2 FROM estoque", @s_drop,@s_drop2;
+if(@s_drop>=@s_drop2) goto ESGOTADO2;
+show "[Mestre das Entregas]";
+show "Este item eu tenho apenas "+@s_drop2+", depois disso eu não o terei mais em meu estoque, somente depois de chegar mais mercadorias. Deseja trocar?";
+show "Eu ja troquei ^FF0000"+@s_drop+"^000000.";
+set @s_drop,0;
+set @compra,12210;
+set @preco, 4500;
+set @especial_item,2;
+next;
+menu "Sim",FINAL,"Não",SAI;
+
+ESGOTADO:
+show "[Mestre das Entregas]";
+show "Lamento, mas este item acabou no meu estoque, levaram os ^FF0000"+@s_rops2+"^000000 que eu tinha. Nos proximos dias devo estar recebendo mais!";
+close;
+
+ESGOTADO2:
+show "[Mestre das Entregas]";
+show "Lamento, mas este item acabou no meu estoque, levaram os ^FF0000"+@s_drop2+"^000000 que eu tinha. Nos proximos dias devo estar recebendo mais!";
+close;
+
+FINAL:
+query_sql "SELECT creditos2 FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos2;
+if(@creditos2<@preco) goto SEMC;
+set @creditos2, @creditos2 - @preco;
+query_sql("UPDATE login SET creditos2 = '"+@creditos2+"' WHERE account_id = '"+getcharid(3)+"'");
+additem @compra,1;
+
+if(@especial_item==1) {
+query_sql "SELECT rops FROM estoque", @s_rops;
+set @s_rops, @s_rops + 1;
+query_sql("UPDATE estoque SET rops = '"+@s_rops+"'");
+}
+if(@especial_item==2) {
+query_sql "SELECT drops FROM estoque", @s_drop;
+set @s_drop, @s_drop + 1;
+query_sql("UPDATE estoque SET drops = '"+@s_drop+"'");
+}
+set @s_rops,0;
+set @s_drop,0;
+set @especial_item,0;
+
+show "[Mestre das Entregas]";
+show "Faça bom proveito deste item!";
+close;
+
+COMBOS:
+show "[Mestre das Entregas]";
+show "Os combos são vários itens, como um pacote. Dependendo do caso, você sai com mais vantagens trocando os pontos por um combo. Os valores estão entre [ ]";
+query_sql "SELECT creditos2 FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos2;
+show "Pontos atuais: "+@creditos2;
+next;
+menu "Combo 1 [^0066FF500^000000]",PACOTE1,
+	"Combo 2 [^0066FF1000^000000]",PACOTE2,
+	"Combo 3 [^0066FF1500^000000]",PACOTE3,
+	"Combo 4 [^0066FF2000^000000]",PACOTE4,
+	"Combo 5 [^0066FF2500^000000]",PACOTE5;
+
+
+PACOTE1:
+if(@creditos2<500) goto SEMC;
+set @pact, 1;
+goto CONTINU;
+
+PACOTE2:
+if(@creditos2<1000) goto SEMC;
+set @pact, 2;
+goto CONTINU;
+
+PACOTE3:
+if(@creditos2<1500) goto SEMC;
+set @pact, 3;
+goto CONTINU;
+
+PACOTE4:
+if(@creditos2<2000) goto SEMC;
+set @pact, 4;
+goto CONTINU;
+
+PACOTE5:
+if(@creditos2<2500) goto SEMC;
+set @pact, 5;
+goto CONTINU;
+
+CONTINU:
+show "[Mestre das Entregas]";
+show "Seus pontos de troca: " +@creditos2;
+show "Verifique o peso de seu personagem, caso não haja espaços alguns itens podem cair no chão! (necessario 100 de peso livre)";
+next;
+menu "Sim, vamos la!",CONTINU2,"Não, deixe-me arrumar...",NAO2;
+
+CONTINU2:
+query_sql "SELECT creditos2 FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos2;
+if(@pact==1) set @creditos2, @creditos2 - 500;
+if(@pact==2) set @creditos2, @creditos2 - 1000;
+if(@pact==3) set @creditos2, @creditos2 - 1500;
+if(@pact==4) set @creditos2, @creditos2 - 2000;
+if(@pact==5) set @creditos2, @creditos2 - 2500;
+
+query_sql("UPDATE login SET creditos2 = '"+@creditos2+"' WHERE account_id = '"+getcharid(3)+"'");
+
+if(@pact==1) {
+additem 13709,1;
+additem 13717,1;
+additem 13720,1;
+additem 14003,1;
+additem 12910,1;
+additem 12250,1;
+additem 12251,1;
+additem 12252,1;
+additem 12253,1;
+additem 12254,1;
+additem 12255,1;
+additem 14535,1;
+goto CONTINU3;
+}
+
+
+if(@pact==2) {
+additem 13709,2;
+additem 13717,2;
+additem 13720,2;
+additem 14003,2;
+additem 12910,3;
+additem 12250,2;
+additem 12251,2;
+additem 12252,2;
+additem 12253,3;
+additem 12254,3;
+additem 12255,3;
+additem 14535,3;
+goto CONTINU3;
+}
+
+
+
+if(@pact==3) {
+additem 13709,4;
+additem 13717,4;
+additem 13720,4;
+additem 14003,4;
+additem 12910,5;
+additem 12250,5;
+additem 12251,3;
+additem 12252,3;
+additem 12253,3;
+additem 12254,4;
+additem 12255,4;
+additem 14535,5;
+goto CONTINU3;
+}
+
+
+
+if(@pact==4) {
+additem 13709,7;
+additem 13717,6;
+additem 13720,5;
+additem 14003,5;
+additem 12910,5;
+additem 12250,7;
+additem 12251,6;
+additem 12252,6;
+additem 12253,6;
+additem 12254,7;
+additem 12255,7;
+additem 14535,8;
+additem 12208,1;
+goto CONTINU3;
+}
+
+if(@pact==5) {
+additem 12208,2;
+additem 13709,10;
+additem 13717,8;
+additem 13720,8;
+additem 14003,8;
+additem 12910,8;
+additem 12250,10;
+additem 12251,10;
+additem 12252,10;
+additem 12253,10;
+additem 12254,10;
+additem 12255,10;
+additem 14535,10;
+goto CONTINU3;
+}
+
+CONTINU3:
+show "[Mestre das Entregas]";
+show "Faça um bom proveito dos itens, e divirta-se!!! E lembre-se que tenho muita entrega para realizar!";
+close;
+
+NAO2:
+show "[Mestre das Entregas]";
+show "Ok, guarde alguns itens antes de fazermos a troca!";
+close;
+
+SEMC:
+show "[Mestre das Entregas]";
+show "Desculpe, mas seus pontos de troca são insuficientes para nós continuarmos...";
+close;
+
+SAI:
+show "[Mestre das Entregas]";
+show "Até breve, precisando estou aqui.";
+set @especial_item,0;
+close;
+
+}
+
+-	script	Reseta_evento	-1,{
+	end;
+
+OnClock0001:
+query_sql("UPDATE login SET feito = '0'");
+	end;
+}

@@ -1,0 +1,47 @@
+//===== eAthena Script =======================================
+//= Brasilis Warp Script
+//===== By: ==================================================
+//= Ziu
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= eAthena TRUNK 14067+; RO Episode 13.x¿¿??
+//===== Description: =========================================
+//= Warp Points for brasilis
+//===== Additional Comments: =================================
+//= Preview version 1.0 [Ziu]
+//============================================================
+
+//======================Brasilis city============================
+brasilis,147,162,0 	warp	brasmuseo	1,1,bra_in01,17,137
+bra_in01,17,135,0	warp	brasmuseoout	1,1,brasilis,150,162
+//bra_in01,12,184,0	warp	brasilaseo	1,1,bra_in01,138,177 //Desabilitado para quest da loira.
+bra_in01,138,175,0	warp	brasilaseoout	1,1,bra_in01,12,181
+bra_in01,205,99,0	warp	cloatoaseo	1,1,bra_in01,138,177
+bra_in01,51,171,0 	warp	museo1	1,1,bra_in01,82,168
+bra_in01,51,145,0 	warp	museo2	1,1,bra_in01,82,142
+bra_in01,78,169,0 	warp	museo3	1,1,bra_in01,48,170
+bra_in01,78,142,0 	warp	museo4	1,1,bra_in01,48,144
+brasilis,274,151,0	warp	citytoinn	1,1,bra_in01,38,10
+bra_in01,38,7,0	warp	inntocity	1,1,brasilis,273,147
+bra_in01,31,29,0	warp	innfloo1	1,1,bra_in01,22,70
+bra_in01,25,70	warp	innfloo0	1,1,bra_in01,32,25
+bra_in01,82,26,0	warp	barout	1,1,bra_in01,50,27
+bra_in01,53,27,0	warp	barin	1,1,bra_in01,85,26
+bra_in01,157,23,0	warp	roomaexit	1,1,bra_in01,11,66
+bra_in01,8,66,0	warp	roomain	1,1,bra_in01,154,23
+bra_in01,148,56,0	warp	roombout	1,1,bra_in01,31,72
+bra_in01,31,75,0	warp	roombin	1,1,bra_in01,148,59
+bra_in01,53,67,0	warp	roomcin	1,1,bra_in01,87,67
+bra_in01,84,66,0	warp	roomcexit	1,1,bra_in01,49,66
+brasilis,63,71,0 	warp	brashouse	1,1,bra_in01,158,119
+bra_in01,158,116,0 	warp	inntocity2	1,1,brasilis,66,71
+
+//=======================Brasilis Dungeon========================
+bra_dun01,199,35,0	warp	dun01todun02	1,1,bra_dun02,261,262
+bra_dun02,262,265,0	warp	dun02todun01	1,1,bra_dun01,200,38
+//=======================Brasilis Jungle==========================
+brasilis,308,336,0 	warp	cityjungle	1,1,bra_fild01,77,33
+bra_fild01,72,34,0	warp	junglecity	1,1,brasilis,309,333
+
+

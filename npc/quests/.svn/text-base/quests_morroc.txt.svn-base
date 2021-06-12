@@ -1,0 +1,1922 @@
+//===== Cronus Script ======================================== 
+//= Quest NPCs related to Morroc
+//===== Por: ================================================= 
+//= kobra_k88
+//===== Versão Atual: ======================================== 
+//= 2.5b
+//===== Compatível com: ====================================== 
+//= Cronus SVN
+//===== Descrição: =========================================== 
+//= Stop Post / Binoculars Quest / Continental Guard
+//===== Changelog: =========================================== 
+//= 1.1 Fixed exploits [Lupus]
+//= 1.2 Added Dandelion's Request / Morroc Invasion quest. [SinSloth]
+//= 1.3 Updated dialogs from Binoculars Quest. [Samuray22]
+//= 1.3a added GM lvl check as in other invansion quests [Lupus]
+//= 1.4 Fixed a small bug in Dandelion's Request. [SinSloth]
+//= 1.5 Fixed a little bug with "Job_Alchemist" changed to "Job_Alchem". [Samuray22]
+//= 1.6 Fixed a nasty bug in last part of the quest. [SinSloth]
+//= 1.6a replaced item "names" with item id. [Lupus]
+//= 1.7 Fixed a bug with XP rewards. [SinSloth]
+//= 1.8 Fixed a bug which prevented reset of events. [SinSloth]
+//= 1.9 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 2.0a Corrected a Typo error ";;". [Samuray22]
+//= 2.1 Assassins will now get their request item. (bugreport:1220) [L0ne_W0lf]
+//= 2.2 Updated Binocular and Stop Post quests. [L0ne_W0lf]
+//= 2.3 Replaced effect numerics with constants. [Samuray22]
+//= 2.4 Implemented Ep. 12.1 Continental Guard Quest. [L0ne_W0lf]
+//=     Moved Dandelion's Request to a it's own file.
+//=     Added support NPCs required to finish Gaebolg quest.
+//= 2.4a Traduzido. [UzimaK]
+//= 2.4b Revisado. [RoM]
+//= 2.5 Corrigido um erro na Aglomeração Maligna nunca sendo reativada. [RoM]
+//= 2.5a Corrigido erro de sintaxe no script. [LEOzinn]
+//= 2.5b Corrigida algumas falas. [RoM]
+//============================================================ 
+
+//==================================================================================//
+// 				Stop Post Quest
+//==================================================================================//
+moc_ruins,113,181,4	script	William	89,{
+	mes "[William]";
+	mes "Bem-vindo à";
+	mes "Fábrica de ^3355FFPlacas^000000 MacMillan.";
+	next;
+	mes "[William]";
+	mes "A minha família, o Clã MacMillan, vem produzindo profissionalmente placas de trânsito há de 250 anos. Atualmente, estamos com muitos pedidos de ^3355FF Placas de Pare ^000000.";
+	next;
+	switch(select("Posso pedir uma ^3355FFPlaca^000000?:Cancelar")) {
+	case 1:
+		mes "[William]";
+		mes "Este é um ornamento único, a ^3355FFPlaca de Pare^000000, é um sinal de trânsito na estrada, que dobra como um ornamento cabelo! Isso, nós prometemos solenemente sobre a força de uma garantia de 100 anos.";
+		next;
+		mes "[William]";
+		mes "Para produzir uma ^3355FFPlaca de Pare^000000, precisamos ^00FF0091100^000000 de zenys, 50 ^00FF00Troncos^000000 e 1 ^00FF00Tintura Preta^000000.";
+		next;
+		if ((countitem(1019) > 49) && (countitem(983) > 0) && (Zeny >= 91100)) {
+			delitem 1019,50;  //Wooden_Block
+			delitem 983,1;  //Black_Dyestuffs
+			set Zeny,Zeny-91100;
+			mes "[William]";
+			mes "Aqui está a";
+			mes "^3355FFPlaca de Pare^000000 que";
+			mes "foi especialmente feita";
+			mes "só para você!";
+			mes "Obrigado pela visita!";
+			getitem 2272,1; // Stop_Post
+			close;
+		} else {
+			mes "[William]";
+			mes "Então ...";
+			mes "Quando você obter esses itens, vamos trocar eles pela Placa de Pare.";
+			close;
+		}
+	case 2:
+		mes "[William]";
+		mes "De qualquer forma, obrigado por vir à Fábrica MacMillan, mas pense em comprar algo da próxima vez, sim?";
+		close;
+	}
+}
+
+//==================================================================================//
+//				Binoculars Quest
+//==================================================================================//
+moc_ruins,118,176,4	script	Alquimista	64,{
+	mes "[Marius]";
+	mes "Olá, novo cliente!";
+	mes "Eu sei o que você vai falar. Você quer o Binóculos de mim, ceeeerto?";
+	next;
+	switch(select("O que é isso?:Fabricação:Ignore-o")) {
+	case 1:
+		mes "[Marius]";
+		mes "Hmm~!";
+		mes "Bem, o nome oficial para eles é ^FF0000Binóculos^000000! Um dispositivo óptico que funciona como um par de óculos campo, eles são projetados para utilização simultânea por ambos os olhos!";
+		next;
+		mes "[Marius]";
+		mes "Eles são constituídos por dois pequenos telescópios ingressos com um único dispositivo. Você pode organizar as lentes para produzir visão estereoscópica.";
+		next;
+		mes "[Marius]";
+		mes "Então?";
+		mes "Não é que";
+		mes "alguma coisa, hein?";
+		mes "Muhahahahahaha!";
+		mes ".....";
+		next;
+		mes "[Marius]";
+		mes "Hm? Você não parece";
+		mes "acreditar no que eu disse?";
+		mes "Ah, imbecil. Isso é real.";
+		next;
+		mes "[Marius]";
+		mes "Eu vou deixar você.";
+		mes "Eu preciso dos seguintes itens...";
+		mes "1 ^00FF00Quatro-Olhos^000000, 100 ^00FF00Aços^000000";
+		mes "e ^00FF0050000 Zenys^000000!";
+		close;
+	case 2:
+		if ((countitem(2243) > 0) && (countitem(999) > 99) && (Zeny >= 50000)) {
+		mes "[Marius]";
+		mes "Perfeito, perfeito!";
+		mes "Agora a minha obra vai ser concluída!";
+		mes "Muhahahaha!";
+			next;
+			delitem 2243,1;  //Spinning_Eyes
+			delitem 999,100;  //Steel
+			set Zeny,Zeny-50000;
+			mes "[Marius]";
+			mes "Aqui está!";
+			mes "Binóculos!";
+			getitem 2296,1; // Binoculars
+			next;
+			mes "[Marius]";
+			mes "Basta lembrar ...";
+			mes "Não olhe para onde você não possa, bom, pelo menos tente.";
+			close;
+		}
+		else {
+			mes "[Marius]";
+			Mes "Argggghhhhhhh!";
+			Mes "Você não trouxe os itens";
+			Mes "Como você se atreve a";
+			Mes "tentar me enganar?";
+			close;
+		}
+	case 3:
+		mes "[Marius]";
+		Mes "Ei você ~!";
+		mes "Agora você está na frente de Marius, um alquimista entre Alquimistas. Me ignorando, não é? Vamos lá, vou bater-te!";
+		close;
+	}
+}
+
+// Morroc Assassin Guild Bar
+// ============================================================
+morocc,43,108,5	script	Criança#dan_07	82,{
+	if (BaseClass == Job_Assassin) {
+		mes "[Jack]";
+		mes "Apesar da bagunça caótica em nossa cidade,";
+		mes "há ainda alguns dos que visitam aqui.";
+		mes "Talvez a fortaleza em si é um dos tipos..";
+		close;
+	} else {
+		if (countitem(7416) > 0) {
+			mes "[Jack]";
+			Mes "Uma carta de recomendação?";
+			mes "Oh, rapaz. Parece que você me trouxe uma relíquia muito, muito antiga.";
+			mes "Bem, acho que você deveria ir e ver o mestre.";
+			close;
+		} else {
+			mes "[Jack]";
+			Mes "Ei, o que estás a espreitar?";
+			mes "Você não tem coisas melhores a fazer? Seria melhor você ir para o abrigo e salvar o seu traseiro.";
+			close;
+		}
+	}
+}
+
+morocc,45,110,0	script	que_job01#01	45,2,2,{
+OnTouch:
+	if (BaseClass == Job_Assassin) {
+		warp "que_job01",9,94;
+		end;
+	} else {
+		mes "[Jack]";
+		Mes "Espere, essa é a área restrita ....";
+		Mes "......";
+		Mes "Oh, bem.";
+		next;
+		mes "[Jack]";
+		Mes "As coisas mudaram";
+		Mes "Faça o que quiser!";
+		close2;
+		warp "que_job01",9,94;
+		end;
+	}
+}
+
+que_job01,6,94,0	warp	morocc#01	2,2,morocc,45,103
+que_job01,17,48,0	warp	que_job01#02	2,2,que_job01,68,92
+que_job01,68,96,0	warp	que_job01#03	2,2,que_job01,17,53
+
+que_job01,80,77,0	script	que_job01#04	45,2,2,{
+OnTouch:
+	if (BaseClass == Job_Assassin) {
+		warp "que_job01",61,50;
+		end;
+	} else if (mao_request > 0) {
+		warp "que_job01",61,50;
+		end;
+	} else {
+		mes "[Litheron]";
+		Mes "Uau, você não está";
+		Mes "permitido a estar aqui.";
+		Mes "Ei, mestre! você,";
+		Mes "conheçe esse cara?";
+		next;
+		if (prt_curse == 24) {
+			mes "[" + strcharinfo(0) + "]";
+			mes "Eu não me importo com o que você disse, eu estou indo embora!!!";
+			next;
+			mes "[Litheron]";
+			mes "Ei, mestre-! O que vamos fazer com esse cara?";
+			Mes "Ele certamente parece ser durão!";
+			next;
+			mes "[Mestre]";
+			Mes "Hmm. Deixa-o fazer o que ele quer fazer.";
+			mes "Passando por uma porta não irá fazer qualquer diferença.";
+			next;
+			mes "[Litheron]";
+			Mes "Hah! Você ouviu isso?";
+			Mes "Muito bem, quanto a isto?";
+			Mes "Vou deixá-lo, se você me comprar uma bebida.";
+			mes "Além disso, você pode correr riscos aqui. Este lugar";
+			Mes "é cheio de Assassinos mortais.";
+			next;
+			switch(select("Claro:Por que deveria?!")) {
+			case 1:
+				if (Zeny >= 1000) {
+					mes "[Litheron]";
+					Mes "Heh, isso é o que";
+					Mes "Eu estou a falar!";
+					Mes "Ei, garçom! Traga-me";
+					Mes "a bebida! Eu gosto do teu";
+					Mes "estilo, aventureiro ...";
+					set zeny,zeny-1000;
+					next;
+					mes "[Litheron]";
+					Mes "Certo, você pode entrar,";
+					Mes "mas não se atreva a";
+					Mes "falar uma palavra sobre este";
+					Mes "bar para outra alma viva.";
+					close2;
+					warp "que_job01",61,50;
+					end;
+				} else {
+					mes "[Litheron]";
+					mes "Huh...";
+					Mes "Oh, não tem nem o";
+					Mes "suficiente para comprar";
+					Mes "uma água aqui. Oh menino ...";
+					Mes "Se você realmente quiser entrar,";
+					Mes "certifique-se de que tem dinheiro!";
+					close2;
+					warp "que_job01",85,77;
+					end;
+				}
+			case 2:
+				mes "[Litheron]";
+				Mes "Você não é o tipo saavy,";
+				Mes "é...? Está bem, está bem.";
+				Mes "Se você não vai me fazer";
+				Mes "um favor, então porquê";
+				Mes "devo ajudá-lo? Vai-te embora!";
+				close2;
+				warp "que_job01",85,77;
+				end;
+			}
+		}
+		else {
+			mes "[Mestre]";
+			Mes "Certifique-se que";
+			Mes "este é aceito";
+			Mes "para entrar.";
+			next;
+			mes "[Litheron]";
+			Mes "Você ouviu o homem.";
+			Mes "É melhor se retirar";
+			Mes "deste local, enquanto";
+			Mes "você ainda tem pernas ...";
+			close2;
+			warp "que_job01",85,77;
+			end;
+		}
+	}
+}
+
+que_job01,65,50,0	warp	que_job01#05	2,2,que_job01,84,77
+
+que_job01,81,79,5	script	Cavaleiro Ocioso#dan_08	733,{
+	mes "[Litheron]";
+	Mes "Qual é o problema?";
+	Mes "Oh, eu vejo ... Tu está";
+	Mes "provavelmente se perguntando por que";
+	Mes "um Cavaleiro como eu está em uma";
+	Mes "Replubicla de Assassinos Secreta.";
+	if (BaseClass == Job_Knight) {
+		mes "Que tal, hein?";
+	}
+	next;
+	mes "[Litheron]";
+	mes "Você sabe .. Eu só vim fazer uma curta pausa. Todo este trabalho de restauração está me matando.";
+	mes "É quase impossível de encontrar um lugar para beber um pouco esses dias, se você sabe o que quero dizer.";
+	close;
+}
+
+que_job01,82,95,3	script	Dono do Bar#moc_main01	46,{
+	if (checkweight(908,200) == 0) {
+		Mes "Espere um segundo!";
+		Mes "Agora, você está transportando";
+		Mes "demasiadas coisas com você.";
+		Mes "Por favor, volte depois,";
+		Mes "utilize o Serviço da Kafra";
+		Mes "para guardar alguns dos seus itens.";
+		close;
+	} if (BaseClass == Job_Assassin) {
+		mes "[Mestre]";
+		Mes "Por favor, venha";
+		Mes "tomar uma bebida?";
+	} else if ((BaseJob == Job_Thief) && (BaseClass != Job_Assassin)) {
+		mes "[Mestre]";
+		mes "...... Huh. Como é que um bandido como você chegou aqui?";
+		Mes "Bom, acho que Jack não fez o seu trabalho.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Ei, patrão, não seja tão duro. Nós conhecemos uns aos outros, não conhecemos?";
+		mes "Você não quer fazer mal ao seu velho amigo do coração ~";
+		next;
+		mes "[Mestre]";
+		Mes "Não importa o que diga.";
+		Mes "Então, o que vocês querem beber?";
+	} else {
+		mes "[Mestre]";
+		Mes ".... Hmm ...";
+		Mes "O que você quer para beber?";
+	}
+	next;
+	switch(select("Pedir uma bebida:Perguntar Sobre a Missão:Cancelar")) {
+	case 1:
+		mes "[Mestre]";
+		Mes "Neste lugar, eu só sirvo duas bebidas.";
+		Mes "Você quer um Sograt Tropical ou";
+		Mes "um Vermilion na Praia?";
+		next;
+		switch(select("Sograt Tropical:Vermilion na Praia:Vocês não oferecem nenhuma bebida grátis?")) {
+		case 1:
+			if (checkweight(908,200) == 0) {
+				mes "[Mestre]";
+				Mes "Ei, por que você traz";
+				Mes "tanta coisa com você?";
+				Mes "Eu não posso te dar alguma coisa";
+				Mes "para beber, se você não tem";
+				Mes "o espaço para transportá-lo ao redor.";
+				Mes "Limpe seu inventório!";
+				close;
+			} else {
+				if (BaseClass == Job_Assassin) {
+					if (Zeny < 800) {
+						mes "[Mestre]";
+						Mes "Você sabe que ...";
+						Mes "Eu estava indo para cobrá-lo";
+						Mes "800 zeny para esta bebida, mas";
+						Mes "parece que você não pode pagar";
+						Mes "agora. Volte quando";
+						Mes "você tiver o zeny, tudo bem?";
+					} else {
+						mes "[Mestre]";
+						Mes "A maioria dos barmens";
+						Mes "geralmente pedem 1000 zenys";
+						Mes "para essas coisas, mas eu só";
+						Mes "pedi 800. Aproveite,";
+						Mes "meu amigo, e venha beber";
+						Mes "profundamente como se fosse o fim da vida.";
+						set zeny,zeny-800;
+						getitem 12112,1; //Tropical_Sograt
+					}
+					close;
+				} else {
+					if (Zeny < 1000) {
+						mes "[Mestre]";
+						Mes "Ei, você não tem";
+						Mes "o zeny para esta bebida.";
+						Mes "Certifique-se de quando você voltar estará";
+						Mes "com 1.000 zenys, se quiser";
+						Mes "que eu faça alguma coisa, Ok?";
+						close;
+					} else {
+						mes "[Mestre]";
+						Mes "Para Assassinos, eu encargo";
+						Mes "800 zeny, mas para você, eu vou";
+						Mes "cobrar 1.000. sem";
+						Mes "ressentimentos, mas você";
+						Mes "já tem sorte de estar aqui.";
+						Mes "Ei, desfrute da sua bebida ~";;
+						set zeny,zeny-1000;
+						getitem 12112,1; //Tropical_Sograt
+						close;
+					}
+				}
+			}
+		case 2:
+			if (checkweight(908,200) == 0) {
+				mes "[Mestre]";
+				Mes "Ei, por que você traz";
+				Mes "tanta coisa com você?";
+				Mes "Eu não posso te dar alguma coisa";
+				Mes "para beber, se você não tem";
+				Mes "o espaço para transportá-lo ao redor.";
+				Mes "Limpe o seu inventário!";
+				close;
+			} else {
+				if (BaseClass == Job_Assassin) {
+					if (Zeny < 800) {
+						mes "[Mestre]";
+						Mes "Você sabe que...";
+						Mes "Eu estava indo para cobrá-lo";
+						Mes "800 zeny para esta bebida, mas";
+						Mes "parece que você não pode pagar";
+						Mes "agora. Volte quando";
+						Mes "você tiver o zeny, tudo bem?";
+					} else {
+						mes "[Mestre]";
+						Mes "A maioria dos barmens";
+						Mes "geralmente pedem 1000 zeny";
+						Mes "para essas coisas, mas eu só";
+						Mes "pedi 800. Aproveite,";
+						Mes "meu amigo, e venha beber";
+						Mes "profundamente como se fosse o fim da vida.";
+						set zeny,zeny-800;
+						getitem 12113,1; //Vermilion_The_Beach
+					}
+					close;
+				} else {
+					if (Zeny < 1000) {
+						mes "[Mestre]";
+						Mes "Ei, você não tem";
+						Mes "o zeny para esta bebida.";
+						Mes "Certifique-se de quando você voltar estará";
+						Mes "com 1.000 zenys, se quiser";
+						Mes "que eu faça alguma coisa, Ok?";
+						close;
+					} else {
+						mes "[Mestre]";
+						Mes "Para Assassinos, eu encargo";
+						Mes "800 zeny, mas para você, eu vou";
+						Mes "cobrar 1.000 zenys. Sem";
+						Mes "ressentimentos, mas você";
+						Mes "já tem sorte de estar aqui.";
+						Mes "Ei, desfrute da sua bebida ~";
+						set zeny,zeny-1000;
+						getitem 12113,1; //Vermilion_The_Beach
+						close;
+					}
+				}
+			}
+		case 3:
+			mes "[Mestre]";
+			Mes "O que você...?";
+			Mes "Eu disse,";
+			Mes "eu só sirvo dois";
+			Mes "tipos de bebidas. Se você quiser";
+			Mes "água, você terá que ";
+			Mes "ir em outro lugar.";
+			close;
+		}
+	case 2:
+		if (mao_request == 1) {
+			if (BaseClass == Job_Assassin) {
+				mes "[Mestre]";
+				Mes "Uma missão ...";
+				mes "Você não acha que não está um pouco tarde demais?";
+				mes "Todos os pedidos já foram cancelados e não há nada para você fazer";
+				mes "Além disso, há coisas mais importantes para se fazer. O trabalho de restauração da cidade é a mais urgente.";
+				close;
+			} else {
+				mes "[Mestre]";
+				mes "Huh?";
+				next;
+				select("Mostrar-lhe a carta de recomendação.");
+				if (countitem(7416) > 0) {
+					mes "[Mestre]";
+					Mes "Ah .. eu acho que você está pouco atrasado.";
+					mes "Eu não tenho nada para te dizer se isto é sobre o pedido enviado a cada guilda.";
+					mes "Sinto muito se você chegou até aqui por nada.";
+					close;
+				} else {
+					mes "[Mestre]";
+					Mes "O que você está falando?";
+					next;
+					Mes "[Mestre]";
+					mes "................ Você está olhando muito desconfiado agora.";
+					Mes " ";
+					Mes "Meninos, mostrem-lhe a porta!";
+					next;
+					Mes "[Garotos]";
+					Mes "- Sim, senhor!";
+					next;
+					mes "- Você foi expulso do local. -";
+					close2;
+					warp "morocc",45,106;
+					end;
+				}
+			}
+		} else {
+			if (BaseClass == Job_Assassin) {
+				mes "[Mestre]";
+				mes "Deixe-me dar um palpite. Você ainda não foi atribuído a quaisquer missão deste conjunto, não é?";
+				Mes "A propósito, você gosta deste lugar?";
+				next;
+				Mes "[Mestre]";
+				Mes "Você sabe, eu acho...";
+				mes "realmente amo este pequeno bar...";
+				mes "onde algumas empresas têm lugar secreto...";
+				next;
+				Mes "[Mestre]";
+				Mes "Se você quiser, eu vou recomendar";
+				Mes "você ao Mestre do Clã para";
+				Mes "uma missão. Até então, você";
+				Mes "tem de se concentrar em seu treinamento.";
+				Mes "E até a hora que você for treinar... Porquê";
+				Mes "que você não aprecia uma bebida?";
+				close;
+			} else {
+				mes "[Mestre]";
+				Mes "Missão ...?";
+				Mes "Vamos lá, do que ";
+				Mes "você está falando?";
+				Mes "Para de falar coisas louco,";
+				Mes "pegue algo para beber.";
+				close;
+			}
+		}
+	case 3:
+		mes "[Mestre]";
+		mes "Hmmm.";
+		close;
+	}
+}
+
+que_job01,49,49,5	script	Tao#dan_09	877,{
+	if (BaseClass == Job_Assassin) {
+		mes "[Tao]";
+		Mes "Bem-vindo, miau ~";
+		Mes "Como vai para fora, miau?";
+		next;
+		if (prt_curse == 24) {
+			switch(select("Marjana está aqui?:Estou aqui para te ver, Tao.")) {
+			case 1:
+				mes "[Tao]";
+				Mes "Este não é lugar para brincar, miau ..";
+				mes "... Ei, você pare de olhar para mim desse jeito, miau ..";
+				close;
+			case 2:
+				mes "[Tao]";
+				mes "Isso é tudo por causa daquele gajo chamado Raiyan Moore ou mais .. ou .. blar?";
+				Mes "Miau ... ..";
+				close;
+			}
+		} else {
+			mes "[Tao]";
+			mes "Isso é tudo por causa daquele gajo chamado Raiyan Moore ou mais .. ou .. blar?";
+			Mes "Miau ... ..";
+			next;
+			Mes "[Tao]";
+  			mes "Estou bem, você não tem nada para fazer aqui, então você se perdeu, miau?";
+			mes "Você sabe que esse lugar é proibido, miau.";
+			mes "Você pode até ser capaz de ir para aquele quarto, afinal, miau ~";
+			next;
+			Mes "[Tao]";
+			mes "Ou, então .... Você poderia? .. Ah, quem sabe, miau ..";
+			mes "Tao odeia o portão para ver mais, miau miau ~ ~";
+			close;
+		}
+	} else {
+		mes "[Tao]";
+		mes "E então, miau?";
+		next;
+		switch(select("Então, é só você, pequeno fedelho?:O que deu em você?!:Ei, pare de falar miau!")) {
+		case 1:
+			mes "[Tao]";
+			Mes "O que você está falando, miau!";
+			Mes "Tao é o maior detentor do portão!";
+			Mes "Nunca baixe a estimativa, miau!";
+			next;
+			Mes "[Tao]";
+			mes "Parece que você veio por algumas razões, mas nem sequer sonhou em obter a minha ajuda, miau!";
+			mes "Você acha que eu sou estúpido o suficiente para dizer que";
+			mes "o Mestre Marjana é aquele que está na sala à direita? Miau, miau, miau ~ ~";
+			close;
+		case 2:
+			mes "[Tao]";
+			mes "Você está olhando para baixo de mim porque eu sou um portão detentor?";
+			Mes "Grrrr ...";
+			next;
+			Mes "[Tao]";
+			mes "Saia daqui enquanto tiver chances!!!!";
+			close;
+		case 3:
+			mes "[Tao]";
+			Mes "Miau, miau.";
+			Mes "É uma longa história, miau.";
+			mes "Naquele dia, eu queria tanto um Laço Grande, miau.";
+			next;
+			Mes "[Tao]";
+			mes "Então eu saí procurando Rosas Selvagens, miau ...";
+			mes "Miau ...? Espere um minuto, por que estou contando esta história, miau?";
+			next;
+			Mes "[Tao]";
+			Mes "Krrrr!";
+			Mes "Quem diabos é você!?";
+			next;
+			Mes "[Tao]";
+			Mes "Sai daqui, miau !!!";
+			close;
+		}
+	}
+}
+
+que_job01,51,55,0	script	que_job01#room_1	45,1,1,{
+OnInit:
+	set $maobar_room,0;
+	end;
+
+Onreset:
+	set $maobar_room,0;
+	end;
+
+OnTouch:
+	if (prt_curse == 24) {
+		if ($maobar_room == 0) {
+			set $maobar_room,1;
+			donpcevent " #room1timer::OnEnable";
+			donpcevent "Marjana#poison::OnEnable";
+			mes "[Tao]";
+			Mes "Ah, esse lugar é protegido";
+			Mes "pela magia de segurança, de forma que você";
+			mes "só têm ^FF00004 minutos^000000 para permanecer";
+			Mes "aí. Não perca tempo, miau!";
+			close2;
+			warp "que_job01",11,7;
+			end;
+		} else {
+			mes "[Tao]";
+			Mes "Me desculpe, miau ~";
+			Mes "Alguém já está";
+			Mes "dentro. Basta voltar";
+			Mes "mais tarde, miau?";
+			close2;
+			warp "que_job01",52,50;
+			end;
+		}
+	} else if (mao_request > 0) {
+		if ($maobar_room == 0) {
+			set $maobar_room,1;
+			donpcevent " #room1timer::OnEnable";
+			donpcevent "Valdes#moc_master_1::OnEnable";
+			mes "[Tao]";
+			Mes "Ah, esse lugar é protegido";
+			Mes "pela magia de segurança, de forma que você";
+			mes "só têm ^FF00004 minutos^000000 para permanecer";
+			Mes "aí. Não perca tempo, miau!";
+			close2;
+			warp "que_job01",11,7;
+			end;
+		} else {
+			mes "[Tao]";
+			Mes "Me desculpe, miau ~";
+			Mes "Alguém já está";
+			Mes "dentro. Basta voltar";
+			Mes "mais tarde, miau?";
+			close2;
+			warp "que_job01",52,50;
+			end;
+		}
+	} else {
+		mes "[Tao]";
+		Mes "Que-quem é você?";
+		Mes "Este é uma área restrita,";
+		Mes "miau! Se você não";
+		Mes "tem permissão! Começe a ir para";
+		Mes "fora!";
+		close2;
+		warp "que_job01",52,50;
+		end;
+	}
+}
+
+que_job01,1,1,0	script	 #room1timer	844,{
+OnEnable:
+	initnpctimer;
+	mapannounce "que_job01","Você vai agora entrar na Zona Mestre, Área 1",bc_map,"0x70DBDB";
+	end;
+
+Onstop:
+	mapannounce "que_job01","A magia de segurança na Zona Mestre, Área 1 está desativada.",bc_map,"0x70DBDB";
+	donpcevent "#room1_warp::OnDisable";
+	donpcevent "Valdes#moc_master_1::OnDisable";
+	donpcevent "Marjana#poison::OnDisable";
+	donpcevent "que_job01#room_1::Onreset";
+	stopnpctimer;
+	end;
+
+OnTimer240000:
+	donpcevent "#room1_warp::OnEnable";
+	end;
+
+OnTimer245000:
+	donpcevent "#room1_warp::OnDisable";
+	donpcevent "Valdes#moc_master_1::OnDisable";
+	donpcevent "Marjana#poison::OnDisable";
+	end;
+
+OnTimer250000:
+	mapannounce "que_job01","A magia de segurança na Zona Mestre, Area 1 is está ativada.",bc_map,"0x70DBDB";
+	donpcevent "que_job01#room_1::Onreset";
+	stopnpctimer;
+	end;
+}
+
+que_job01,12,13,0	script	#room1_warp	-1,15,15,{
+OnInit:
+	disablenpc "#room1_warp";
+	end;
+
+OnEnable:
+	enablenpc "#room1_warp";
+	end;
+
+OnDisable:
+	disablenpc "#room1_warp";
+	end;
+
+OnTouch:
+	warp "que_job01",52,50;
+	end;
+}
+
+que_job01,51,44,0	warp	que_job01#room_2	1,1,que_job01,80,23
+
+que_job01,11,4,0	script	que_job01#room1_out	45,1,1,{
+OnTouch:
+	warp "que_job01",52,50;
+	donpcevent " #room1timer::OnStop";
+	end;
+}
+
+que_job01,80,27,0	warp	que_job01#room2_1_out	1,1,que_job01,52,50
+
+que_job01,16,21,5	script	Valdes#moc_master_1	55,{
+	if (BaseClass == Job_Assassin) {
+		mes "[Valdes]";
+		mes "O que é isso? Não tenho nada para lhe pedir para fazer.";
+		mes "Poderia me deixar sozinha? Eu tenho uma cabeça ruim";
+		next;
+		mes "[Valdes]";
+		Mes "Vou lhe pedir ajuda uma outra hora.";
+		Mes "Você está muito apaixonado depois de tudo.";
+	} else {
+		mes "[Valdez]";
+		Mes ".... Desculpa, mas você poderia sair? ";
+		Mes "Estou realmente inmplorando agora.";
+		mes "Se você está aqui para o pedido que fizemos anteriormente, você pode apenas esquecer-se.";
+	}
+	if (countitem(7417) > 0) {
+		delitem 7417,countitem(7417); //Mission_ScrollA
+	}
+	if (countitem(7418) > 0) {
+		delitem 7418,countitem(7418); //Mission_ScrollB
+	}
+	if (countitem(7416) > 0) {
+		delitem 7416,countitem(7416); //Letter_Of_Recommend
+	}
+	close;
+
+OnInit:
+	disablenpc "Valdes#moc_master_1";
+	end;
+
+OnEnable:
+	enablenpc "Valdes#moc_master_1";
+	end;
+
+OnDisable:
+	disablenpc "Valdes#moc_master_1";
+	end;
+}
+
+yuno_in04,180,106,3	script	Garota#moc_girl1	73,{
+	mes "[" + strcharinfo(0) + "]";
+	Mes "Desculpe, mas gostaria de lhe";
+	Mes "fazer uma pergunta?";
+	next;
+	Mes "[Yunia]";
+	Mes "Eh? Oh, desculpe-me, fiquei";
+	Mes "tão ocupado lendo esse livro!";
+	Mes "Então, o que";
+	Mes "você quer me perguntar?";
+	next;
+	select ("O que você está lendo?");
+	Mes "[Yunia]";
+	mes "Ah! Este é um dos melhores livros de Josué Vansei.";
+	mes "O personagem principal é um escritor, e é tão comovente que esse cara escreve uma história de sua amante ...";
+	next;
+	Mes "[Yunia]";
+	Mes "Ah.. eu não posso esperar para ver Especial Hoein...";
+	mes "É isto, você pode dar uma olhada se você quiser.";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	Mes "Oh, agora, eu não devia.";
+	mes "Parece que a capa é evolta por uma fita vermelha,";
+	Mes "que.. eu penso ser para somente adultos.";
+	Mes "per.. perdoe-me ~!";
+	close;
+}
+
+morocc_in,46,125,5	script	Assistente#moc_ex1	729,{
+	mes "[Sephit]";
+	Mes "Eu sempre acreditei em Satanás..";
+	mes "Haah ... Acho que é bom estar vivo, depois de tudo.";
+	next;
+	Mes "[Sephit]";
+	mes "Quem iria pensar que realmente veria Satanás enquanto vivo...?";
+	close;
+}
+
+que_job01,70,84,1	script	Garota#moc_ex002	882,{
+	mes "[Garota]";
+	Mes "Oh, o mundo.. o mundo está condenado..";
+	Mes "-chorando-";
+	Mes "Nada parece estar funcionando agora..";
+	emotion e_sob;
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	Mes ".... Tsk tsk ....";
+	mes "Bom céus.. Eu não posso acreditar que essa menina é bebê, que tristeza...";
+	close;
+}
+
+// Continental Guard Quest
+// ============================================================
+moc_fild20,354,183,3	script	Guarda Continental#01a::MocConGuard	707,3,3,{
+	if ((rebirth_moc_edq == 0) && (rebirth_moc_edq < 4)) {
+		mes "[Guarda Continental]";
+		mes "Não são permitidos civis na área além deste ponto.";
+		mes "Este local é extremamente perigoso para você.";
+		next;
+		switch(select("Cancelar:Pergunte o que aconteceu")) {
+		case 1:
+			close;
+		case 2:
+			mes "[Guarda Continental]";
+			mes "Você não sabe? O Imperador Morroc foi ressuscitado e eclodiu de Morroc onde ele estava confinado.";
+			next;
+			Mes "[Guarda Continental]";
+			mes "Sua ressurreição causou danos irreparáveis para a vila e para o deserto à sua volta, e agora ele se mudou para o Sograt Deserto.";
+			next;
+			Mes "[Guarda Continental]";
+			mes "Estamos aqui para levar a cabo as ordens do Reino Prontera prevenindo os civis, além dos membros da Guarda de Morroc, de acessar a área.";
+			next;
+			Mes "[Guarda Continental]";
+			mes "Se você quiser saber mais informações, sugiro que você vá falar com o encarregado da Guarda Continental do local do acidente, em Morroc.";
+			next;
+			switch(select("Cancelar:Sobre a Localização da Guarda")) {
+			case 1:
+				close;
+			case 2:
+				mes "[Guarda Continental]";
+				mes "O guarda com que pretende conversar estar em um acampamento construído no centro de Morroc.";
+				next;
+				Mes "[Guarda Continental]";
+				mes "Se quiser, posso enviar-lhe lá diretamente.";
+				next;
+				switch(select("Não, obrigado.:Me leve por favor")) {
+				case 1:
+					mes "[Guarda Continental]";
+					mes "Estou vendo. Bem, então, para sua segurança, por favor, deixe esta área perigosa, o mais rápido possível.";
+					close;
+				case 2:
+					mes "[Guarda Continental]";
+					mes "Ótimo. Vou lhe-enviar a Morroc.";
+					close2;
+					warp "morocc",160,61;
+					end;
+				}
+			}
+		}
+	} else if ((rebirth_moc_edq > 3) && (rebirth_moc_edq < 8)) {
+		mes "[Guarda Continental]";
+		mes "Não são permitidos civis na área além deste ponto.";
+		mes "Este local é extremamente perigoso para você.";
+		next;
+		switch(select("Cancelar:Entrar no campo para investigar:Mover para Área do Acidente")) {
+		case 1:
+			close;
+		case 2:
+			if ($@re_moc < 3) {
+				getpartymember(getcharid(1));
+				set .@partymembercount,$@partymembercount;
+				copyarray .@partymembername$[0],$@partymembername$[0],.@partymembercount;
+				while (.@partymembercount >= 0) {
+					set .@name$,.@partymembername$[.@partymembercount];
+					if (isloggedin(getcharid(3,.@name$))) {
+						set .@onlinemembers,.@onlinemembers + 1;
+					}
+					set .@partymembercount,.@partymembercount - 1;
+				}
+				if ((.@onlinemembers > 1) && (countitem(7826) > 0)) {
+					mes "[Guarda Continental]";
+					mes "......";
+					next;
+					Mes "[Guarda Continental]";
+					mes "Sim, eu já confirmei que você é um membro da Guarda continental. Desejo-vos boa sorte para realizar sua missão.";
+					next;
+					Mes "[Guarda Continental]";
+					mes "Eu vou lhe-enviar ao campo em breve. Use a teia no campo de entrada para voltar a esta área";
+					close2;
+					warp "moc_fild21",38,193;
+					end;
+				} else if ((.@onlinemembers < 2) && (countitem(7826) > 0)) {
+					Mes "[Guarda Continental]";
+					mes "Bem-vindo, aos membros da Guarda continental. Tenho uma ordem especial do Chefe Balrog para você, então deixe-me lêr a ordem para você.";
+					next;
+					Mes "[Guarda Continental]";
+					mes "Devido aos perigos desta área, tenho a ordem de proibir os membros da Guarda Continental de investigar a área sozinho. Organize um grupo de pelo menos 2 membros para levar a cabo a sua missão a partir de agora.";
+					next;
+					Mes "[Guarda Continental]";
+					mes "... Você compreende, certo? Volte para a cidade, traga um grupo de pelo menos 2 membros. Obrigado.";
+					close;
+				} else if (countitem(7826) < 1) {
+					Mes "[Guarda Continental]";
+					mes "Apenas os membros da Guarda Continental com Certificados são autorizados a prosseguir para além deste ponto.";
+					close;
+				} else {
+					close;
+				}
+			} else {
+				mes "[Guarda Continental]";
+				mes "Recebemos ordens da Sede para bloquear o acesso a esta área, uma vez que um fenômeno espaço-tempo invulgar foi detectado a partir do campo de Morroc.";
+				next;
+				Mes "[Guarda Continental]";
+				mes "Precisamos esperar até que o fenômeno pare, após então vamos deixá-lo prosseguir com as investigações.";
+				close;
+			}
+		case 3:
+			mes "[Guarda Continental]";
+			mes "Ótimo. Vou lhe-enviar a Morroc.";
+			close2;
+			warp "morocc",160,61;
+			end;
+		}
+	}
+	else if (rebirth_moc_edq == 8) {
+		Mes "[Guarda Continental]";
+		mes "Ah, você é um aventureiro que trabalha para a Guarda Continental. Prazer em conhecê-lo. Sinta-se livre para me perguntar, se você precisa da minha ajuda.";
+		next;
+		switch(select("Entrar no campo para investigar:Retornar para Morroc:Cancelar")) {
+		case 1:
+			getpartymember(getcharid(1));
+			set .@partymembercount,$@partymembercount;
+			copyarray .@partymembername$[0],$@partymembername$[0],.@partymembercount;
+			while (.@partymembercount >= 0) {
+				set .@name$,.@partymembername$[.@partymembercount];
+				if (isloggedin(getcharid(3,.@name$))) {
+					set .@onlinemembers,.@onlinemembers + 1;
+				}
+				set .@partymembercount,.@partymembercount - 1;
+			}
+			if ((.@onlinemembers > 1) && (countitem(7826) > 0)) {
+				Mes "[Guarda Continental]";
+				Mes "......";
+				next;
+				Mes "[Guarda Continental]";
+				mes "Sim, eu já confirmei que você é um membro da Guarda Continental. Desejo-vos boa sorte para realizar sua missão.";
+				next;
+				Mes "[Guarda Continental]";
+				mes "Eu vou lhe-enviar ao campo em breve. Use a teia na entrada do campo para voltar a esta área.";
+				close2;
+				warp "moc_fild22",38,193;
+				end;
+			} else if ((.@onlinemembers < 2) && (countitem(7826) > 0)) {
+				Mes "[Guarda Continental]";
+				mes "Bem-vindo, os membros da Guarda continental. Tenho uma ordem especial do Chefe Balrog para você, então deixe-me lê-lo para você.";
+				next;
+				Mes "[Guarda Continental]";
+				mes "Devido aos perigos desta área, tenho a ordem de proibir os membros da Guarda Continental de investigar a área sozinho. Organize um grupo de pelo menos 2 membros para levar a cabo a sua missão a partir de agora.";
+				next;
+				Mes "[Guarda Continental]";
+				mes "... Por favor, volte para a cidade, e volte com um grupo de pelo menos 2 membros. Obrigado.";
+				close;
+			} else if (countitem(7826) < 1) {
+				mes "[Guarda Continental]";
+				mes "Apenas os membros da Guarda continental com Certificados são autorizados a prosseguir para além deste ponto.";
+				close;
+			} else {
+				end;
+			}
+		case 2:
+			mes "[Guarda Continental]";
+			mes "Ótimo. Vou lhe-enviar a Morroc.";
+			close2;
+			warp "morocc",160,61;
+			end;
+		case 3:
+			close;
+		}
+	} else {
+		end;
+	}
+
+//OnTouch2:
+OnTouch:
+	mes "[Guarda Continental]";
+	mes "Civis não são permitidas na área para além desse ponto.";
+	mes "Este local é extremamente perigoso para você.";
+	close;
+	end;
+}
+
+moc_fild20,354,174,3	duplicate(MocConGuard)	Guarda Continental#02a	707,3,3
+moc_fild20,38,174,5	duplicate(MocConGuard)	Guarda Continental#03a	707,3,3
+moc_fild20,38,183,5	duplicate(MocConGuard)	Guarda Continental#04a	707,3,3
+moc_fild20,189,21,7	duplicate(MocConGuard)	Guarda Continental#05a	707,3,3
+moc_fild20,200,21,7	duplicate(MocConGuard)	Guarda Continental#06a	707,3,3
+moc_fild20,203,336,5	duplicate(MocConGuard)	Guarda Continental#07a	707,3,3
+moc_fild20,215,336,3	duplicate(MocConGuard)	Guarda Continental#08a	707,3,3
+
+prontera,164,304,3	script	Guarda Continental#01b::ConMessenger	997,3,3,{
+	set .@area$,strnpcinfo(2);
+	if (.@area$ == "01b") { set .@area$,"Prontera"; }
+	else if (.@area$ == "02b") { set .@area$,"Geffen"; }
+	else if (.@area$ == "03b") { set .@area$,"Payon"; }
+	else if (.@area$ == "04b") { set .@area$,"Alberta"; }
+	else if (.@area$ == "05b") { set .@area$,"Al De Baran"; }
+	if (BaseLevel > 79) {
+		Mes "[Mensageiro da Guarda Continental]";
+		mes "Bom dia, " + strcharinfo (0) + ". Nós não temos o luxo do tempo nesta situação difícil e eu vou tentar fazer isto rápido.";
+		next;
+		Mes "[Mensageiro da Guarda Continental]";
+		mes "Eu sou um mensageiro enviado para " + .@area$ + " da Sede da Guarda Continental de Morroc. O meu dever é apresentar essa importante mensagem para o maior número renomados aventureiros como você. Estou feliz de encontrá-lo, "+ strcharinfo (0) +".";
+		next;
+		select ("Morroc Continental Sede da Guarda?");
+		Mes "[Mensageiro da Guarda Continental]";
+		mes "O Tempo estar para esgotar-se, por isso eu só posso dar-lhe uma breve explicação.";
+		next;
+		Mes "[Mensageiro Da Guarda Continental]";
+		mes "Imperador Morroc, o hediondo demônio preso nas profundezas do subsolo Morroc durante séculos, foi ressuscitado e está livre.";
+		next;
+		Mes "[Mensageiro da Guarda Continental]";
+		mes "Com o renascimento do Imperador Morroc, Morroc  foi completamente devastada.";
+		next;
+		Mes "[Mensageiro da Guarda Continental]";
+		mes "Todas as mortes e sofrimento ... Em qualquer outro lugar deve parecer o céu, em comparação com o que está acontecendo em torno de Morroc.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "A Guarda Continental de Morroc organizou um grupo para lutar contra o Imperador Morroc e trazer alívio a esta situação difícil. Estou aqui para informar toda o Reino de Rune-Midgard sobre esta catástrofe.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Precisamos da sua ajuda, "+ strcharinfo (0) +". Precisamos aventureiros com reputação como você para selar o Imperador Morroc novamente.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Para mais informações, por favor fale com o comandante da Guarda Continental de Morroc. Ele está esperando por você, "+ strcharinfo (0) +".";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "A sede da Guarda Continental está localizado perto do centro do Palácio de Morroc, por isso, vá falar com o chefe, logo que possível.";
+		close;
+	} else {
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Eu sou um mensageiro do da Sede da Guarda Continental de Morroc, e eu venho para "+ .@area$ +" com uma mensagem urgente para toda a gente aqui em Rune-Midgard.";
+		next;
+		select("Sede da Guarda Continental de Morroc?");
+		mes "[Mensageiro da Guarda Continental]";
+		mes "O Tempo está a esgotar-se, por isso eu só posso dar-lhe uma breve explicação.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Imperador Morroc, o hediondo demônio preso nas profundezas do subsolo de Morroc durante séculos, foi ressuscitado e está livre.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Com o renascimento do Imperador Morroc, Morroc foi completamente devastada.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Todas as mortes e sofrimento ... Em qualquer outro lugar deve parecer o céu, em comparação com o que está acontecendo em torno de Morroc.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "A Guarda Continental de Morroc organizou um grupo para lutar contra o Imperador Morroc e trazer alívio a esta situação difícil. Estou aqui para informar todo o Reino de Rune-Midgard sobre esta catástrofe.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Parte do meu dever é ajudar a recrutar aventureiros de todo o mundo para ajudar a conduzir o Imperador Morroc de volta para o confinamento. Não será fácil, mas ele foi derrotado uma vez antes. O Imperador Morroc pode ser selado novamente.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Pelo menos 70% de Morroc foi destruída pela chuva radioativa causada pela ressurreição do Imperador Morroc.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "O deserto em torno de Morroc também virou uma terra de morte após ter sido reivindicado pelo Imperador Morroc e seus poderosos Doppelgangers e Underlings.";
+		mes "Portanto, atenda o meu aviso, fique longe da área de Morroc a menos que você estiver em uma missão organizada pela Guarda Continental de Morroc.";
+		close;
+	}
+
+OnTouch:
+	if (BaseLevel > 79) {
+		mes "[Mensageiro da Guarda Continental]";
+		mes "Você é "+ strcharinfo(0) +"?";
+		mes "Ah, muito bem. Tenho uma mensagem extremamente importante para você.";
+		next;
+		mes "[Mensageiro da Guarda Continental]";
+		mes "A situação é urgente, por favor me escute cuidadosamente.";
+		close;
+	}
+	end;
+}
+
+geffen,128,90,3	duplicate(ConMessenger)	Guarda Continental#02b	997,3,3
+payon,200,113,3	duplicate(ConMessenger)	Guarda Continental#03b	997,3,3
+alberta,127,64,3	duplicate(ConMessenger)	Guarda Continental#04b	998,3,3
+aldebaran,135,128,3	duplicate(ConMessenger)	Guarda Continental#05b	998,3,3
+
+morocc,176,103,3	script	Oficial Continental	754,{
+	if (rebirth_moc_edq > 3) {
+		mes "[Oficial da Guarda Continental]";
+		mes "Em nome da Guarda Continental, agradeço-lhe o seu esforço. Agora, deixe-me ver se eu recebemos qualquer notícia da sede que você deve saber ...";
+		next;
+		mes "[Oficial da Guarda Continental]";
+		mes "Hmm...";
+		next;
+		mes "[Oficial da Guarda Continental]";
+		mes "Nada ainda. Por favor, prosseguir a sua missão atual. Mais uma vez, obrigado.";
+		close;
+	} else if (rebirth_moc_edq == 0) {
+		mes "[Oficial da Guarda Continental]";
+		mes "Bem-vindo à subjugação Centro de Informações de Morroc. Como posso te ajudar?";
+		next;
+		switch(select("Que lugar é este?:Estou aqui para voluntário.:Fale-me sobre a situação da cidade.")) {
+		case 1:
+			mes "[Oficial da Guarda Continental]";
+			mes "Estou aqui para ajudar aventureiros que desejam ser voluntários e ajudar a Guarda Continental a combater o Imperador Morroc.";
+			next;
+			mes "[Oficial da Guarda Continental]";
+			mes "Tenho a certeza que você já está ciente de que o Imperador Morroc revivido ameaça a paz de Todo Reino de Rune-Midgard, e se o Imperador Morroc permanecer a vagar livre, ele irá devorar o mundo inteiro.";
+			next;
+			mes "[Oficial da Guarda Continental]";
+			mes "A Guarda Continental atualmente está planejando uma série de contramedidas para reprimir o Imperador Morroc sob a ordem do reino.";
+			next;
+			mes "[Oficial da Guarda Continental]";
+			mes "Se você foi convidado pelo nosso mensageiro, ou está confiante em suas habilidades, nós encorajamos você a ser um voluntário para da Guarda Continental e trazer paz de volta a este continente.";
+			close;
+		case 2:
+			if (BaseLevel > 79) {
+				mes "[Oficial da Guarda Continental]";
+				mes "Bem-vindo, "+ strcharinfo (0) +". Estava esperando por você. Presumo que o nosso mensageiro tenha lhe informado da nossa situação.";
+				next;
+				mes "[Oficial da Guarda Continental]";
+				mes "Seu pedido está sendo processado imediatamente. Aguarde.";
+				next;
+				mes "[Oficial da Guarda Continental]";
+				mes "Agora vá falar com o Chefe Balrog da Guarda continental. Você pode encontrá-lo no centro.";
+				set rebirth_moc_edq,1;
+				//getquest(3050),1;
+				close;
+			} else {
+				mes "[Oficial da Guarda Continental]";
+				mes "Eu vós Aplauso pela vossa coragem, mas você vai precisar mais do que apenas coragem para nos ajudar.";
+				next;
+				mes "[Oficial da Guarda Continental]";
+				mes "O Imperador Morroc é o mais poderoso mal que existe no mundo inteiro.";
+				next;
+				mes "[Oficial da Guarda Continental]";
+				mes "Eu recomendo fortemente que você pense sobre sua própria segurança por agora. Quando chegar a batalha final, estou certo de que nenhum lugar será seguro.";
+				close;
+			}
+		case 3:
+			mes "[Oficial da Guarda Continental]";
+			mes "Como você pode ver, a situação não pode ser pior. A aldeia e arredores foram imediatamente destruídos pelo Imperador Morroc na hora da sua ressurreição.";
+			next;
+			mes "[Oficial da Guarda Continental]";
+			mes "Uma vez que a Guarda Continental espalhou mensageiros por toda a parte do reino, muitos aventureiros vieram para este lugar, mas ... Eu tenho medo que ainda pode não ser suficiente para derrotar o demônio.";
+			next;
+			mes "[Oficial da Guarda Continental]";
+			mes "Por favor, siga as nossas instruções, pelo menos em torno desta área, e fique fora de perigo por enquanto.";
+			close;
+		}
+	} else {
+		mes "[Oficial da Guarda Continental]";
+		mes "Seu pedido já foi registrado. Por favor, vá falar com o Chefe Balrog.";
+		close;
+	}
+}
+
+morocc,159,113,3	script	Chefe Balrog	752,{
+	if (rebirth_moc_edq == 0) {
+		mes "[Chefe Balrog]";
+		mes "Você veio aqui em um momento ruim, mas é bom conhecê-lo. Eu sou o Chefe Balrog da Guarda Continental. Fomos enviado para Morroc, a fim de suprimir o Imperador Morroc... Iremos precisar de toda a força e sorte que podemos reunir.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Sinto muito, mas estou muito ocupado com a verificação de todos esses pedidos de futuros Guardas Continentais, para cumprimentar você aventureiros um por um.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Ouça, talvez fosse mais útil se você falar com outras pessoas em primeiro lugar. Eu tenho certeza que um dos outros ou pelos nossos mensageiros irão ajudá-lo.";
+		close;
+	} else if (rebirth_moc_edq == 1) {
+		mes "[Chefe Balrog]";
+		mes "Você veio aqui em um momento ruim, mas é bom conhecê-lo. Eu sou o Chefe Balrog Da Guarda Continental. Fomos enviado para Morroc, a fim de suprimir o Imperador Morroc... Iremos precisar de toda a força e sorte que podemos reunir.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Parece que você tem negócios comigo. Por favor, faça-lo breve já que não dispomos de muito tempo em minhas mãos. Há muitas coisas que eu preciso cuidar...";
+		next;
+		switch(select("Pergunte sobre a Guarda Continental:Eu quero me juntar a Guarda Continental.:Cancelar")) {
+		case 1:
+			mes "[Chefe Balrog]";
+			mes "Os danos que o Imperador Morroc tem causado são óbvios, dando apenas um olhar em volta desta área.";
+			mes "O que é assustador é que tudo isto foi causado apenas por ele sair da prisão. Basta pensar no prejuízo que poderia fazer se ele for deixado para vagar livremente.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Morroc está totalmente destruída, e o Imperador Morroc já alegou posse do Deserto de Sograt.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Eu não tenho qualquer dúvida de que se não for devidamente controlado, o Imperador Morroc assumirá todo o Continente de Midgaard. Nós temos que pará-lo agora mesmo antes que todo o mundo sofra.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "É por isso que o reino tem ordenado nos soldados a formar a elite da Guarda Continental, e recrutar aventureiros com reputação em todo o mundo para que possamos fazer uma posição unida contra o Imperador Morroc.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Claro, vai ser extremamente difícil... Teremos necessidade de fazer sacrifícios... Eu não estou mesmo certo se podemos vencer. Ainda assim, o destino do mundo está em jogo, e temos de fazer alguma coisa.";
+			close;
+		case 2:
+			mes "[Chefe Balrog]";
+			mes "Heim? Você quer se juntar a nós e voluntários para a Guarda Continental?";
+			next;
+			if (BaseLevel > 79) {
+				mes "[Chefe Balrog]";
+				mes "Qual e o seu nome? "+ strcharinfo(0) +"? Ah sim, eu ouvi falar de você.";
+				next;
+				mes "[Chefe Balrog] ";
+				mes "Hmm, ocorre-me que você não entende o perigo envolvido em tudo isto. Você tem alguma idéia de quão poderoso o Imperador Morroc é?";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você não será capaz de nos ajudar se você não entender completamente os riscos. Eu vi milhares de aventureiros jogando sua vida fora por pensar que poderia derrotar o Imperador Morroc com sua própria força.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Estamos perante uma ameaça que irá determinar o futuro do mundo, e idiotas que não podem trabalhar em uma equipe vão ser passivos, e não ativos.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Sinto muito, mas inexperientes aventureiros seria apenas uma pedra em nosso caminho. Espero que compreendam. Se você realmente quiser nos ajudar, então por favor foque em seu treinamento.";
+				next;
+				switch(select("Cancelar:Perguntar novamente")) {
+				case 1:
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Olha, eu entendo o seu entusiasmo, mas você está errado se acha que pode nos ajudar. Eu não tenho tempo para explicar completamente o perigo que todos nós estamos enfrentando.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "O Imperador Morroc não é nada como os monstros que você pode ter encontrado. Na melhor das hipóteses você jogue sua vida fora, mas existe a chance que você pode ter um dos meus homens mortos por seus erros e incompetência. Eu não posso ter isso!";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Por favor, compreendam que isto é para seu próprio bem. Lute contra alguns Porings ou qualquer outra pessoa poderia ser um bom jogo para o seu nível.";
+					next;
+					switch(select("Cancelar:Deixe-me Partircipar!")) {
+					case 1:
+						close;
+					case 2:
+						mes "[Chefe Balrog]";
+						mes "Por que você é tão persistente? Você não pode compreender que não significa que não? Deixe-me dizer isto mais uma vez.";
+						next;
+						mes "[Chefe Balrog]";
+						mes "Estamos muito ocupados lutando contra o Imperador Morroc para assistir depois novatos como você. Você deseja apenas jogar sua vida fora.";
+						next;
+						mes "[Chefe Balrog]";
+						mes "Pare de me incomodar. Você não deseja ser nada, só mais um fardo.";
+						next;
+						switch(select("Desistir:Dê-me uma chance para provar!")) {
+						case 1:
+							close;
+						case 2:
+							mes "[Chefe Balrog]";
+							mes "Heim? Você quer uma chance para provar?";
+							next;
+							mes "[" + strcharinfo(0) + "]";
+							mes "Sim, farei o que for preciso para aderir à Guarda Continental!";
+							next;
+							mes "[Chefe Balrog]";
+							mes "Hmm...";
+							next;
+							mes "[Chefe Balrog]";
+							mes "Interessante. Você tem a minha atenção. Tudo bem, eu acho que é apenas justo que eu reconheça a sua força se você pode lidar com algo para mim.";
+							next;
+							mes "[Chefe Balrog]";
+							mes "A Guarda Continental está em alerta máximo em torno desta vila e do deserto. Temos de estar preparados no caso o Imperador Morroc apareça.";
+							next;
+							mes "[Chefe Balrog]";
+							mes "Soldados nescessitam de lenha para manter as fogueiras queimando a noite toda, porém estamos sofrendo uma escassez de lenha.";
+							next;
+							mes "[Chefe Balrog]";
+							mes "Acontece que eu ouvi dizer que os monstros do Calabouço de Magma tem uma chama eterna e pode resolver nossos problemas de fogueiras. Eu quero você para reunir essas chamas para nós.";
+							next;
+							switch(select("Isso é muito difícil! Deixe-me pensar nisso!:Nenhum problema.")) {
+							case 1:
+								mes "[Chefe Balrog]";
+								mes "Hmpf, eu estava certo. Eu sabia que não seria capaz de lidar com essa uma tarefa simples. Eu não deveria ter perdido meu tempo com você.";
+								close;
+							case 2:
+								mes "[Chefe Balrog]";
+								mes "Excelente! Volte com ^0000FF30 Lenhas em Brasa^000000. Estarei esperando pelo seu retorno.";
+								set rebirth_moc_edq,2;
+								//deletequest(3050);
+								//getquest(3051),1;
+								close;
+							}
+						}
+					}
+				}
+			} else {
+				mes "[Chefe Balrog]";
+				mes "O quê? Como você pode pensar em juntar-nos, mesmo quando não tem quaisquer competências reais para oferecer?";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Eu garanto que você simplesmente arrastará meus soldados para baixo com você. Você só pode ser uma ameaça para o Imperador Morroc em seus sonhos.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você não será capaz de nos ajudar se você não entender completamente os riscos. Eu vi milhares de aventureiros jogando sua vida fora por pensar que poderia derrotar o Imperador com sua própria força.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Estamos perante uma ameaça que irá determinar o futuro do mundo, e idiotas que não podem trabalhar em uma equipe vai ser passivos, e não ativos.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Sinto muito, mas inexperientes aventureiros seria apenas pedras em nosso caminho. Espero que compreendam. Se você realmente quiser nos ajudar, então por favor foque em seu treinamento.";
+				close;
+			}
+		case 3:
+			close;
+		}
+	} else if (rebirth_moc_edq == 2) {
+		mes "[Chefe Balrog]";
+		mes "Então, você encontrou as ^0000FF30 Lenhas em Brasa^000000? Ou você veio de mãos vazias?";
+		next;
+		if (countitem(7098) >= 30) {
+			mes "[Chefe Balrog]";
+			mes "Vamos ver... Um, dois, três... trinta, você trouxe todos. Bem, esta foi uma tarefa muito simples. Tudo o que é necessário é um pouco de tempo e esforço. Qualquer um poderia fazê-lo.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Obrigado por trazer os Lenhas em Brasa, você é mais forte do que eu esperava.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Agora vai me deixar juntar a Guarda Continental?";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Não, recolher essas chamas foi muito fácil, em comparação com o que vamos fazer.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Eu ainda não estou convencido de que você é bom o suficiente para se juntar a nós. Deixe-me pensar... Humm...";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "Eu sabia que você não iria me aceitar tão fácilmente. Estou pronto. Pergunte-me o que quiser.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Ah, eu tenho uma idéia. Agora, que é um aliado operação, nós aceite alguns soldados mercenários da República Schwaltzvalt para se juntar a Guarda Continental.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Estes mercenários nunca viram o deserto, e eles estão tendo problemas para realizar operações no calor, ar seco, e Tempestades de Areia. Não é culpa deles, mas eles poderiam ter uma pequena ajuda, uma vez que está fora do seu elemento.";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "(Este cara parece ameaçador, mas ele parece ter um bom coração.)";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Agora, eu me lembro que a audiência dos monstros na caverna de gelo do norte têm congelado corações. Aqueles corações podem ser capazes de aliviar os soldados a partir do calor.";
+			next;
+			switch(select("Isso é muito difícil!:Nenhum problema. Quantos você quer?")) {
+			case 1:
+				mes "[Chefe Balrog]";
+				mes "Eu sabia que ia ser muito difícil para você. Estou contente por ter finalmente realizado o seu limite antes que fosse tarde demais. É preciso sabedoria para reconhecer a sua fraqueza.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Seria melhor você se arrumar e voltar de onde você veio. Você vai querer ficar longe daqui quando o Imperador Morroc atacar.";
+				close;
+			case 2:
+				mes "[Chefe Balrog]";
+				mes "Hã?! Tem certeza de que podemos trazer esses? Humm...";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Bem... Se você insiste eu vou lhe dar uma chance, então... vou precisar de pelo menos 50 desses corações congelados.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Por favor, traga-me ^0000FF50 Corações Glaciais^000000. Quanto mais rápido trazer eles aqui, melhor.";
+				delitem 7098,30; //Live_Coal
+				set rebirth_moc_edq,3;
+				//deletequest(3051);
+				//getquest(3052),1;
+				close;
+			}
+		} else {
+			mes "[Chefe Balrog]";
+			mes "Umm ... Você não ouviu o que eu disse? Eu disse 30 Lenhas em Brasa, 30.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Agora, saia daqui. Se você sentiu vontade de desistir, não é problema meu. Agora vá!";
+			close;
+		}
+	} else if (rebirth_moc_edq == 3) {
+		mes "[Chefe Balrog]";
+		mes "Então, você encontrou os 50 Corações Glaciais?";
+		next;
+		if (countitem(7561) >= 50) {
+			mes "[Chefe Balrog]";
+			mes "Obrigado. Tenho certeza que meus soldados apreciarão isto... Estes caras não são acostumados ao deserto, e poderão usar isto como alívio.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Bem ... Parece que você ganhou um presente.";
+			delitem 7561,50; //Ice_Heart
+			getitem 7826,1; //Continental_Guard_Paper
+			set rebirth_moc_edq,4;
+			//deletequest(3052);
+			//getquest(3053),1;
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "O que é isto?";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Se você ler você vai saber. É um certificado que comprova que você é um membro da Guarda Continental. Admito que estou impressionado com suas habilidades e espiritualidade.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Bem-vindo a Guarda Continental, meu amigo. Você está preparado para arriscar sua vida em prol da paz no mundo?";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Sua missão a partir daqui, será simples, mas extremamente difícil: você irá juntar-se ao resto da Guarda Continental para impedir que o Imperador Morroc revive plenamente o seu verdadeiro poder.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Meus soldados estão arriscando suas vidas à luta contra os Servos do Imperador, a fim de torná-la mais segura para os seus companheiros de viagem para o Covil de Morroc";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Parece que a sua ajuda poderia ser útil depois de tudo. Boa Sorte.";
+			close;
+		} else {
+			mes "[Chefe Balrog]";
+			mes "Umm ... Você não ouviu o que eu disse? Eu disse 50 Corações Glaciais, 50.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Agora, saia daqui. Se você sentiu vontade de desistir, não é problema meu. Agora vá!";
+			close;
+		}
+	} else if (rebirth_moc_edq == 4) {
+		mes "[Chefe Balrog]";
+		mes "Acho que você se beneficiará com uma completa informação situacional. Devo beneficiar você agora?";
+		next;
+		switch(select("Sim:Não")) {
+		case 1:
+			mes "[Chefe Balrog]";
+			mes "Eu vou dizer a você algumas informações básicas sobre a luta contra o Imperador Morroc como um membro da Guarda Continental.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Você se lembra como Morroc era antes? Você iria se lembrar se estivesse aqui antes.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Agora, todas as entradas de Morroc para outras aldeias estão atualmente sob nosso controle.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "A principal razão para isto é porque o Imperador Morroc foi avistado no Deserto Sograt, mas há uma outra razão importante.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "O Imperador Morroc vem causando lacunas desnaturais no nosso tempo-espaço contínuo. As lacunas são isoladas para esta área por agora, mas não podemos ter a certeza se vai espalhar.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Devido as lacunas no tempo-espaço, o terreno do Deserto Sograt mudou, e algumas partes do deserto desapareceram.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Além disso, a situação chegou a piorar desde que os Servos do Imperador Morroc começou a aparecer, e outros monstros tornaram-se influenciados pelo seu poder.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Isso é tudo que sabemos até agora. Se você sair, você verá o que quero dizer ... Você pode até mesmo ver horrores de que nós não descobrimos ainda. Se você precisar de mais informações, por favor, falar com o Jornal Continental.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Favor fazer o seu melhor para segurar o Imperador Morroc. Não se esqueça que o futuro do continente está nas nossas mãos. Dispensados";
+			close;
+		case 2:
+			mes "[Chefe Balrog]";
+			mes "Entendo. Mantenha o seu bom trabalho na luta contra o Imperador Morroc. Não se esqueça que o futuro do continente está nas nossas mãos.";
+			close;
+		}
+	} else if (rebirth_moc_edq == 5) {
+		mes "[Chefe Balrog]";
+		mes "Wah ... O quê? Você realmente derrotou o Imperador Morroc?";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Como? Você tem alguma prova de sua vitória?";
+		next;
+		mes "[Chefe Balrog]";
+		mes "... Não, eu não posso simplesmente aceitar e confiar na sua conta verbais. Quero dizer, se você tiver concluído essa importante missão, você deve trazer-me algumas provas.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Volte, e traga a prova da sua vitória .";
+		close;
+	}
+	else if (rebirth_moc_edq == 6) {
+		mes "[Chefe Balrog]";
+		mes "O quê? Você realmente derrotou o Imperador Morroc?";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Como? Você tem alguma prova de sua vitória?";
+		next;
+		if (countitem(7820) > 0) {
+			mes "[Chefe Balrog]";
+			mes "N... Não é isso?";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Uau ... Acho que esta é realmente a pele do Imperador Morroc. Parabéns, soldado. Você acabou de salvar este mundo e as pessoas que estão sendo consumidos pela destruição e do mal.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Acho que você feriu gravimente o Imperador Morroc, e ele recuou para um tempo-espaço vazio. Sem dúvida ele está tentando recuperar suas forças agora.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Lamento que não podemos prosseguir em Morroc além desta dimensão. Estou feliz, porém, você quase derrotou o Imperador Morroc, e ele está em em algum lugar recuperando sua forças. Por agora, de qualquer maneira.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Os nossos investigadores podem ser capazes de descobrir alguns fatos novos importantes deste pedaço de pele... Precisamos aprender tudo que puder sobre esse monstro pois assim será possível paz no futuro do nosso mundo.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Mais uma vez, agradeço o seu serviço em nome da Guarda Continental e da Guarda de Rune-Midgard. Vou relatar sua grande conquista para Sua Majestade imediatamente.";
+			next;
+			delitem 7820,1; //Morroc_Skin
+			getexp 2000000,0;
+			set rebirth_moc_edq,7;
+			//deletequest(3055);
+			//getquest(3056),1;
+			mes "[Chefe Balrog]";
+			mes "Eu tenho algumas coisas preparadas para dar como uma recompensa para você. Vamos ver... Tenho três itens. Qual você gostaria de receber?";
+			next;
+			switch(select("1. Selo da Guarda Continental:2. Pedra Encantada de Morroc: 3. Anel Morroc")) {
+			case 1:
+				mes "[Chefe Balrog]";
+				mes "O Selo da Guarda Continental é um dado extremamente valioso para recompensa diretamente a partir do reino tribunal. É um símbolo de força.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "AS opções do acessorio são: ^0000FFSP+50, +3% Velocidade de Ataque^000000.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você realmente deseja o Selo da Guarda Continental?";
+				next;
+				switch(select("1. Sim.:2. Não.")) {
+				case 1:
+					mes "[Chefe Balrog]";
+					mes "Ótimo, então eu vou recompensar-te com o Selo da Guarda Continental. Parabéns.";
+					next;
+					getitem 2730,1; //Morroc_Seal
+					set rebirth_moc_edq,8;
+					//deletequest(3056);
+					mes "[Chefe Balrog]";
+					mes "Eu espero que você tenha em mente que a nossa batalha está longe de ter acabado. Nosso inimigo é o rei dos demônios... receio que o Imperador Morroc irá retornar algum dia.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Desfrute da sua vitória, mas fique sempre alerta e vigilante. Eu sempre estarei aqui para ajudar e recompensar-te por seu serviço.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Você deve ir descansar agora. Não se preocupe, nós vamos cuidar de tudo aqui.";
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Não tem problema. Tome o seu tempo para pensar e, em seguida, fale comigo de novo.";
+					close;
+				}
+			case 2:
+				mes "[Chefe Balrog]";
+				mes "A Pedra Encantada de Morroc é um item extremamente valioso para servir de recompensa, e é um símbolo de prosperidade e de mana.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "As opções do acessorio são: ^0000FFSP+50, -1% Tempo de Conjuração^000000.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você realmente deseja uma Pedra Encantada de Morroc?";
+				next;
+				switch(select("1. Sim.:2. Não.")) {
+				case 1:
+					mes "[Chefe Balrog]";
+					mes "Ótimo, então eu vou recompensar-te com uma Pedra Encantada de Morroc. Parabéns.";
+					next;
+					getitem 2731,1; //Morroc_Charm_Stone
+					set rebirth_moc_edq,8;
+					//deletequest(3056);
+					mes "[Chefe Balrog]";
+					mes "Eu espero que você tenha em mente que a nossa batalha está longe de terminar. Nosso inimigo é o rei dos demônios... temo que o Imperador Morroc retornará algum dia.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Desfrute da sua vitória, mas fique sempre alerta e vigilante. Eu sempre estarei aqui para ajudar e recompensar-te por seu serviço.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Você deve ir descansar agora. Não se preocupe, nós vamos cuidar de tudo aqui.";
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Não tem problema. Tome o seu tempo para pensar e, em seguida, fale comigo de novo.";
+					close;
+				}
+			case 3:
+				mes "[Chefe Balrog]";
+				mes "O Anel de Morroc é um item extremamente valioso para servir de recompensa, e é um símbolo de prosperidade e de mana.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "As opções do acessorio são: ^0000FFCRI + 5^000000.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você realmente deseja um Anel de Morroc?";
+				next;
+				switch(select("1. Sim.:2. Não.")) {
+				case 1:
+					mes "[Chefe Balrog]";
+					mes "Ótimo, então eu vou recompensar-te com um Anel de Morroc. Parabéns..";
+					next;
+					getitem 2732,1; //Morroc_Ring
+					set rebirth_moc_edq,8;
+					//deletequest(3056);
+					mes "[Chefe Balrog]";
+					mes "Eu espero que você tenha em mente que a nossa batalha está longe de terminar. Nosso inimigo é o rei dos demônios... Temo que o Imperador Morroc retornará algum dia.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Desfrute da sua vitória, mas fique sempre alerta e vigilante. Eu sempre estarei aqui para ajudar e recompensar-te por seu serviço.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Você deve ir descansar agora. Não se preocupe, nós vamos cuidar de tudo aqui.";
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Não tem problema. Tome o seu tempo para pensar e, em seguida, fale comigo de novo.";
+					close;
+				}
+			}
+		} else {
+			mes "[Chefe Balrog]";
+			mes "... Não, eu não posso simplesmente aceitar e confiar na sua conta verbais. Quero dizer, se você tiver concluído uma tão importante missão, você deve trazer-me algumas provas.";
+			next;
+			mes "[Chefe Balrog]";
+			mes "Volte, e traga a prova.";
+			close;
+		}
+	} else if (rebirth_moc_edq == 7) {
+		mes "[Chefe Balrog]";
+			mes "Eu tenho algumas coisas preparadas para dar como uma recompensa para você. Vamos ver ... Tenho três itens. Qual você gostaria de receber?";
+			next;
+			switch(select("1. Selo da Guarda Continental: 2. Pedra Encantada de Morroc: 3. Morroc Anel")) {
+			case 1:
+				mes "[Chefe Balrog]";
+				mes "O Selo da Guarda Continental é um dado extremamente valioso para recompensa directamente a partir do reino tribunal. É um símbolo de força.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "AS opções do acessorio são: ^0000FFSP+50, +3% Velocidade de Ataque^000000.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você realmente deseja o Selo da Guarda Continental ?";
+				next;
+				switch(select("1. Sim.:2. Não.")) {
+				case 1:
+					mes "[Chefe Balrog]";
+					mes "Ótimo, então eu vou recompensar-te com o Selo da Guarda Continental. Parabéns.";
+					next;
+					getitem 2730,1; //Morroc_Seal
+					set rebirth_moc_edq,8;
+					//deletequest(3056);
+					mes "[Chefe Balrog]";
+					mes "Eu espero que você tenha em mente que a nossa batalha está longe de ter acabado. Nosso inimigo é o rei dos demônios... Receio que o Imperador Morroc irá retornar algum dia.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Desfrute da sua vitória, mas fique sempre alerta e vigilante. Eu sempre estarei aqui para ajudar e recompensar-te por seu serviço.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Você deve ir descansar agora. Não se preocupe, nós vamos cuidar de tudo aqui.";
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Não tem problema. Tome o seu tempo para pensar e, em seguida, fale comigo de novo.";
+					close;
+				}
+		case 2:
+			mes "[Chefe Balrog]";
+				mes "A Pedra Encantada de Morroc é um item extremamente valioso para servir de recompensa , e é um símbolo de prosperidade e de mana.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "As opções do acessorio são: ^0000FFSP+50, -1% Tempo de Conjuração^000000.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você realmente deseja uma Pedra Encantada de Morroc?";
+				next;
+				switch(select("1. Sim.:2. Não.")) {
+				case 1:
+					mes "[Chefe Balrog]";
+					mes "Ótimo, então eu vou recompensar-te com uma Pedra Encantada de Morroc. Parabéns.";
+					next;
+					getitem 2731,1; //Morroc_Charm_Stone
+					set rebirth_moc_edq,8;
+					//deletequest(3056);
+					mes "[Chefe Balrog]";
+					mes "Eu espero que você tenha em mente que a nossa batalha está longe de terminar. Nosso inimigo é o rei dos demônios... Temo que o Imperador Morroc retornará algum dia.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Desfrute da sua vitória, mas fique sempre alerta e vigilante. Eu sempre estarei aqui para ajudar e recompensar-te por seu serviço.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Você deve ir descansar agora. Não se preocupe, nós vamos cuidar de tudo aqui.";
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Não tem problema. Tome o seu tempo para pensar e, em seguida, fale comigo de novo.";
+					close;
+				}
+		case 3:
+			mes "[Chefe Balrog]";
+				mes "O Anel de Morroc é um item extremamente valioso para servir de recompensa, e é um símbolo de prosperidade e de mana.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "As opções do acessorio são: ^0000FFCRI + 5^000000.";
+				next;
+				mes "[Chefe Balrog]";
+				mes "Você realmente deseja um Anel de Morroc?";
+				next;
+				switch(select("1. Sim.:2. Não.")) {
+				case 1:
+					mes "[Chefe Balrog]";
+					mes "Ótimo, então eu vou recompensar-te com um Anel de Morroc. Parabéns..";
+					next;
+					getitem 2732,1; //Morroc_Ring
+					set rebirth_moc_edq,8;
+					//deletequest(3056);
+					mes "[Chefe Balrog]";
+					mes "Eu espero que você tenha em mente que a nossa batalha está longe de terminar. Nosso inimigo é o rei dos demônios... Temo que o Imperador Morroc retornará algum dia.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Desfrute da sua vitória, mas fique sempre alerta e vigilante. Eu sempre estarei aqui para ajudar e recompensar-te por seu serviço.";
+					next;
+					mes "[Chefe Balrog]";
+					mes "Você deve ir descansar agora. Não se preocupe, nós vamos cuidar de tudo aqui.";
+					close;
+				case 2:
+					mes "[Chefe Balrog]";
+					mes "Não tem problema. Tome o seu tempo para pensar e, em seguida, fale comigo de novo.";
+					close;
+			}
+		}
+	} else if (rebirth_moc_edq == 8) {
+		mes "[Chefe Balrog]";
+		mes "Ouvi dizer que o reino está planejando o envio de um grande grupo de pesquisadores para investigar o outro mundo, para onde o Imperador Morroc tenha escapado.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Isso significa que dá tempo para nós dois - você e eu - para chegar ao trabalho. Quem sabe quando Morroc retornará a praga contra nós?";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Por favor mantenha o bom trabalho, e não se esqueça de que o futuro do continente e do reino depende de nós.";
+		close;
+	} else {
+		mes "[Chefe Balrog]";
+		mes "Você veio aqui em um momento ruim, mas é bom conhecê-lo. Eu sou o Chefe Balrog Da Guarda Continental. Fomos enviado para Morroc, a fim de suprimir o Imperador Morroc... Iremos precisar de toda a força e sorte que podemos reunir.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Sinto muito, mas estou muito ocupado com a verificação de todos esses pedidos de futuros Guardas Continetais, para cumprimentar você aventureiros um por um.";
+		next;
+		mes "[Chefe Balrog]";
+		mes "Ouça, talvez fosse mais útil se você falar com outras pessoas em primeiro lugar. Eu tenho certeza que um dos outros ou pelos nossos mensageiros vai ser melhor para ajudá-lo.";
+		close;
+	}
+}
+
+moc_fild21,38,193,0	script	Morocc Timer#edq	-1,6,6,{
+OnInit:
+	set $@re_moc,0;
+	end;
+
+OnTouch:
+	if ($@re_moc == 0) {
+		set $@re_moc,1;
+		donpcevent "Satan Broadcast#edq::OnEnable";
+	}
+	end;
+}
+
+moc_fild21,1,1,0	script	Satan Broadcast#edq	844,{
+OnInit:
+	disablenpc "Satan Broadcast#edq";
+	end;
+
+OnEnable:
+	enablenpc "Satan Broadcast#edq";
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	mapannounce "moc_fild21","Imperador Morroc: Estou muito impressionado com vocês fracotes.",bc_map,"0xFFFF00";
+	end;
+
+OnTimer15000:
+	mapannounce "moc_fild21","Imperador Morroc: Você pode bem como lidar com todas as suas lamentações agora. Vou jogar sua vida fora em breve!",bc_map,"0xFFFF00";
+	end;
+
+OnTimer25000:
+	mapannounce "moc_fild21","Imperador Morroc: É apenas uma questão de tempo até eu chegar, vocês são inúteis insetos. Basta um pouco mais ...",bc_map,"0xFFFF00";
+	stopnpctimer;
+	end;
+
+OnDisable:
+	disablenpc "Satan Broadcast#edq";
+	end;
+}
+
+moc_fild21,178,239,0	script	Aglomeração Maligna#edq	844,1,1,{
+	if (((rebirth_moc_edq == 4) || (rebirth_moc_edq == 7)) && ($@re_moc == 1)) {
+		set $@re_moc,2;
+		mes "Vaguei pelo tempo-espaço onde escuridão é dada vida, você instintivamente retrocedeu.";
+		next;
+		mes "Você pode sentir o poder das trevas e o aumento do fosso onde luz e trevas se misturava.";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Wah...!";
+		close2;
+		donpcevent "Satan Summon#edq::OnEnable";
+		end;
+	} else {
+		mes "Vagou pelo tempo-espaço onde escuridão é dada vida, você instintivamente retrocedeu.";
+		next;
+		mes "Você pode sentir o poder das trevas e o aumento do fosso onde luz e trevas se misturava.";
+		close;
+	}
+
+OnInit:
+	enablenpc "Aglomeração Maligna#edq";
+	end;
+
+OnEnable:
+	enablenpc "Aglomeração Maligna#edq";
+	end;
+
+OnDisable:
+	disablenpc "Aglomeração Maligna#edq";
+	donpcevent "Lacuna no Tempo-Espaço#e::OnEnable";
+	end;
+}
+
+moc_fild21,177,239,0	script	Lacuna no Tempo-Espaço#e	844,1,1,{
+	if ((rebirth_moc_edq == 4) && ($@re_moc == 3)) {
+		mes "A lacuna no tempo-espaço da assustadora escuridão parece dissipar quando o Imperador Morroc vai sumindo.";
+		next;
+		mes "Você pode ver os fragmentos flutuando no fosso, e as luzes estão radiantes agora diminuem os seus movimentos.";
+		next;
+		mes "Estique a mão e pegue um fragmento.";
+		getitem 7820,1; //Morroc_Skin
+		set rebirth_moc_edq,6;
+		//deletequest(3053);
+		//getquest(3055),1;
+		close;
+	} else {
+		mes "Lentamente, erraticamente, a misteriosa cortina de escuridão lança sobre seus olhos como você cravar o tempo-espaço vazio.";
+		next;
+		mes "Você acha que é perigoso para chegar mais perto.";
+		close;
+	}
+
+OnInit:
+	disablenpc "Lacuna no Tempo-Espaço#e";
+	end;
+
+OnEnable:
+	initnpctimer;
+	enablenpc "Lacuna no Tempo-Espaço#e";
+	end;
+
+OnDisable:
+	stopnpctimer;
+	disablenpc "Lacuna no Tempo-Espaço#e";
+	donpcevent "Aglomeração Maligna#edq::OnEnable";
+	set $@re_moc,0;
+	end;
+
+OnTimer1800000:
+	set $@re_moc,4;
+	end;
+
+OnTimer21600000:
+	stopnpctimer;
+	set $@re_moc,0;
+	donpcevent "Lacuna no Tempo-Espaço#e::OnDisable";
+	end;
+}
+
+moc_fild21,3,1,0	script	Satan Summon#edq	844,{
+OnInit:
+	disablenpc "Satan Summon#edq";
+	end;
+
+OnEnable:
+	enablenpc "Satan Summon#edq";
+	initnpctimer;
+	monster "moc_fild21",177,217,"Imperador Morroc",1916,1,"Satan Summon#edq::OnMyMobDead";
+	end;
+
+OnDisable:
+	stopnpctimer;
+	killmonster "moc_fild21","Satan Summon#edq::OnMyMobDead";
+	set $@re_moc,0;
+	disablenpc "Satan Summon#edq";
+	end;
+
+OnMyMobDead:
+	set $@re_moc,3;
+	mapannounce "moc_fild21","Vou deixar viver um pouco. Vocês nunca vão me encontrar por este tempo-espaço!",bc_map,"0xFFFF00";
+	donpcevent "Lacuna no Tempo-Espaço#e::OnEnable";
+	donpcevent "Satan Broadcast#edq::OnDisable";
+	donpcevent "Aglomeração Maligna#edq::OnDisable";
+	disablenpc "Satan Summon#edq";
+	end;
+
+OnTimer5400000:
+	mapannounce "moc_fild21","Fracotes Vocês não podem sequer me arranhar!",bc_map,"0xFFFF00";
+	end;
+
+OnTimer5415000:
+	mapannounce "moc_fild21","Eu não tenho tempo para isso! Vá embora!",bc_map,"0xFFFF00";
+	stopnpctimer;
+	killmonster "moc_fild21","Satan Summon#edq::OnMyMobDead";
+	set $@re_moc,0;
+	donpcevent "Satan Summon#edq::OnDisable";
+	end;
+}

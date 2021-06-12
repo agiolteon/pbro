@@ -1,0 +1,601 @@
+prontera,159,192,4	script	Banco pbRO	903,{
+
+//NOME DO NPC
+set .@nome$, "[Banco pbRO]";
+
+//LEVEL MINIMO PARA ACESSAR O BANCO
+set .@level_min, 1;
+
+//LIMITE DE ZENY NOS PERSONAGENS, ATUAL DO SERVER
+set .@limite_z, "2000000000";
+
+//ID DAS MOEDAS
+set .@id_moeda_1, 671; //MOEDA 1
+set .@id_moeda_2, 675; //MOEDA 2
+set .@id_moeda_3, 673; //MOEDA 3
+set .@id_moeda_4, 677; //MOEDA 4
+set .@id_moeda_5, 674; //MOEDA 5
+
+//ID DAS SEEDS E YGGS
+set .@id_seed, 608;
+set .@id_ygg, 607;
+
+//NOME DAS MOEDAS
+set .@nome_moeda_1$, "Moeda de Ouro"; //VALOR ALTO
+set .@nome_moeda_2$, "Moeda de Prata"; //VALOR MEDIO
+set .@nome_moeda_3$, "Moeda de Bronze"; //MENOR VALOR
+set .@nome_moeda_4$, "Moeda de Platina"; //SEED VALOR 250
+set .@nome_moeda_5$, "Moeda de Mytrl"; //YGG VALOR 250
+
+//VALOR EM ZENY DAS MOEDAS OU YGG
+set .@valor_moeda_1, "2000000000"; //MOEDA 1
+set .@valor_moeda_2, "1000000000"; //MOEDA 2
+set .@valor_moeda_3, "500000000";  //MOEDA 3
+set .@valor_moeda_4, "250";  //MOEDA 4
+set .@valor_moeda_5, "250";  //MOEDA 5
+
+
+//INICIO DO NPC *********************************************************************************
+show .@nome$;
+show "Ola! Hoje é um otimo dia para negocios, não é verdade? Mas diga, por que veio até mim?";
+next;
+menu "- Trocar Zeny",GS_Z,"- Trocar Seed/YGG",GS_S,"- Informações?",T_COMO,"- Sair",T_SAIR;
+
+//"- Banco de Zenys",T_BANCO,
+
+GS_Z:
+menu "- Trocar Zeny -> Moeda",T_ZM,"- Trocar Moeda -> Zeny",T_MZ,"- Sair",T_SAIR;
+
+GS_S:
+menu "- Trocar Seed/YGG -> Moeda",T_SY_M,"- Trocar Moeda -> SEED/YGG",T_M_SY,"- Sair",T_SAIR;
+
+T_SY_M:
+if(countitem(.@id_seed) < 250 && countitem(.@id_ygg) < 250) goto T_SEM_SY;
+show .@nome$;
+show "Então você quer trocar suas Seeds/ygg por moedas? Vamos então a troca.";
+next;
+menu .@nome_moeda_4$+" (vale "+.@valor_moeda_4+" SEED)",T_SY_4,.@nome_moeda_5$+" (vale "+.@valor_moeda_5+" YGG)",T_SY_5,"Sair",T_SAIR;
+
+T_SY_4:
+if(countitem(.@id_seed) < 250) goto T_SEM_SY;
+delitem .@id_seed,250;
+additem .@id_moeda_4,1;
+show .@nome$;
+show "Muito bom! Pegue sua moeda e me de as seeds, tudo certo?";
+close;
+
+T_SY_5:
+if(countitem(.@id_ygg) < 250) goto T_SEM_SY;
+delitem .@id_ygg,250;
+additem .@id_moeda_5,1;
+show .@nome$;
+show "Muito bom! Pegue sua moeda e me de as yggs, tudo certo?";
+close;
+
+T_M_SY:
+if(countitem(.@id_moeda_4) < 1 && countitem(.@id_moeda_5) < 1) goto T_SEM_SY_2;
+show .@nome$;
+show "Então você quer trocar suas moedas por Seed/ygg? Vamos então a troca.";
+show "^FF0000CUIDADO^000000 com o peso! Certifique-se de ter espaço suficiente!";
+next;
+menu .@valor_moeda_4+" Seed (1 "+.@nome_moeda_4$+")",T_SYM_4,.@valor_moeda_5+" YGG (1 "+.@nome_moeda_5$+")",T_SYM_5,"Sair",T_SAIR;
+
+T_SYM_4:
+if(countitem(.@id_moeda_4) < 1) goto T_SEM_MOS;
+delitem .@id_moeda_4,1;
+additem .@id_seed,250;
+show .@nome$;
+show "Muito bom! Pegue suas Seeds e me de a moeda de volta, Até a próxima!";
+close;
+
+T_SYM_5:
+if(countitem(.@id_moeda_5) < 1) goto T_SEM_MOS;
+delitem .@id_moeda_5,1;
+additem .@id_ygg,250;
+show .@nome$;
+show "Muito bom! Pegue suas Yggs e me de a moeda de volta, Até a próxima!";
+close;
+
+T_ZM:
+if(Zeny<.@valor_moeda_3) goto T_VALOR_MIM;
+show .@nome$;
+show "Ótimo! Que tipo de moeda gostaria de trocar?";
+next;
+menu .@nome_moeda_1$+" (Custo "+.@valor_moeda_1+" Zenys)",T_ZM_1,.@nome_moeda_2$+" (Custo "+.@valor_moeda_2+" Zenys)",T_ZM_2,.@nome_moeda_3$+" (Custo "+.@valor_moeda_3+" Zenys)",T_ZM_3,"Sair",T_SAIR;
+
+T_ZM_1:
+if(Zeny<.@valor_moeda_1) goto T_VALOR_MIM_ZM1;
+set Zeny, Zeny-.@valor_moeda_1;
+additem .@id_moeda_1,1;
+show .@nome$;
+show "Muito bem, ai esta sua moeda. E seu dinheiro ja esta comigo, precisando dele novamente você pode pegar comigo de volta.";
+close;
+
+T_ZM_2:
+if(Zeny<.@valor_moeda_2) goto T_VALOR_MIM_ZM2;
+set Zeny, Zeny-.@valor_moeda_2;
+additem .@id_moeda_2,1;
+show .@nome$;
+show "Muito bem, ai esta sua moeda. E seu dinheiro ja esta comigo, precisando dele novamente você pode pegar comigo de volta.";
+close;
+
+T_ZM_3:
+if(Zeny<.@valor_moeda_3) goto T_VALOR_MIM_ZM3;
+set Zeny, Zeny-.@valor_moeda_3;
+additem .@id_moeda_3,1;
+show .@nome$;
+show "Muito bem, ai esta sua moeda. E seu dinheiro ja esta comigo, precisando dele novamente você pode pegar comigo de volta.";
+close;
+
+T_MZ:
+if(countitem(.@id_moeda_1) < 1 && countitem(.@id_moeda_2) < 1 && countitem(.@id_moeda_3) < 1) goto T_SEM_MOEDA;
+show .@nome$;
+show "Veio pegar seu dinheiro de volta? Qual era a quantia?";
+next;
+menu .@valor_moeda_1+" Zenys (1 "+.@nome_moeda_1$+")",T_MZ_1,.@valor_moeda_2+" Zenys (1 "+.@nome_moeda_2$+")",T_MZ_2,.@valor_moeda_3+" Zenys (1 "+.@nome_moeda_3$+")",T_MZ_3,"Sair",T_SAIR;
+
+T_MZ_1:
+if(Zeny>(.@limite_z-.@valor_moeda_1)) goto T_PERDA;
+if(countitem(.@id_moeda_1) < 1) goto T_SEM_M_G;
+delitem .@id_moeda_1,1;
+set Zeny, Zeny+.@valor_moeda_1;
+show .@nome$;
+show "Seu dinheiro ficou seguro comigo, pegue-o de volta, mas devolva minha moeda...";
+close;
+
+T_MZ_2:
+if(Zeny>(.@limite_z-.@valor_moeda_2)) goto T_PERDA;
+if(countitem(.@id_moeda_2) < 1) goto T_SEM_M_G;
+delitem .@id_moeda_2,1;
+set Zeny, Zeny+.@valor_moeda_2;
+show .@nome$;
+show "Seu dinheiro ficou seguro comigo, pegue-o de volta, mas devolva minha moeda...";
+close;
+
+T_MZ_3:
+if(Zeny>(.@limite_z-.@valor_moeda_3)) goto T_PERDA;
+if(countitem(.@id_moeda_3) < 1) goto T_SEM_M_G;
+delitem .@id_moeda_3,1;
+set Zeny, Zeny+.@valor_moeda_3;
+show .@nome$;
+show "Seu dinheiro ficou seguro comigo, pegue-o de volta, mas devolva minha moeda...";
+close;
+
+
+T_BANCO:
+if(getgmlevel()<.@level_min) goto SEM_ACESS;
+show .@nome$;
+show "Muito bem, o que deseja fazer hoje?";
+next;
+menu "Sacar",T_SAC,"Depositar",T_DEP,"Sair",T_SAIR;
+
+T_DEP:
+set @t_sacar, 0;
+query_sql "SELECT `dinheiro` FROM `login` WHERE account_id ='"+getcharid(3)+"'", @t_sacar;
+show .@nome$;
+show "Seu Saldo atual é de "+@t_sacar+" Zenys";
+show "Quanto deseja depositar?";
+next;
+menu "1,000,000",DEP_10,"10,000,000",DEP_110,"20,000,000",DEP_20,"30,000,000",DEP_30,"40,000,000",DEP_40,"50,000,000",DEP_50,"60,000,000",DEP_60,"70,000,000",DEP_70,"80,000,000",DEP_80,"90,000,000",DEP_90,"Outro valor",PRO_1;
+
+PRO_1:
+menu "100,000,000",DEP_100,"110,000,000",DEP_101,"120,000,000",DEP_102,"130,000,000",DEP_103,"140,000,000",DEP_104,"150,000,000",DEP_105,"160,000,000",DEP_106,"170,000,000",DEP_107,"180,000,000",DEP_108,"190,000,000",DEP_109,"Outro valor",PRO_3;
+
+PRO_3:
+menu "200.000.000",DEP_200,"300.000.000",DEP_203,"400.000.000",DEP_204,"500.000.000",DEP_205,"Sair",T_SAIR;
+
+DEP_10:
+if(Zeny<1000000) goto NECESSA;
+set @deposit_p, 1000000;
+goto FINALI_DEP;
+
+DEP_110:
+if(Zeny<10000000) goto NECESSA;
+set @deposit_p, 10000000;
+goto FINALI_DEP;
+
+DEP_20:
+if(Zeny<20000000) goto NECESSA;
+set @deposit_p, 20000000;
+goto FINALI_DEP;
+
+DEP_30:
+if(Zeny<30000000) goto NECESSA;
+set @deposit_p, 30000000;
+goto FINALI_DEP;
+
+DEP_40:
+if(Zeny<40000000) goto NECESSA;
+set @deposit_p, 40000000;
+goto FINALI_DEP;
+
+DEP_50:
+if(Zeny<50000000) goto NECESSA;
+set @deposit_p, 50000000;
+goto FINALI_DEP;
+
+DEP_60:
+if(Zeny<600000) goto NECESSA;
+set @deposit_p, 60000000;
+goto FINALI_DEP;
+
+DEP_70:
+if(Zeny<700000) goto NECESSA;
+set @deposit_p, 70000000;
+goto FINALI_DEP;
+
+DEP_80:
+if(Zeny<80000000) goto NECESSA;
+set @deposit_p, 80000000;
+goto FINALI_DEP;
+
+DEP_90:
+if(Zeny<90000000) goto NECESSA;
+set @deposit_p, 90000000;
+goto FINALI_DEP;
+
+DEP_100:
+if(Zeny<100000000) goto NECESSA;
+set @deposit_p, 100000000;
+goto FINALI_DEP;
+
+DEP_101:
+if(Zeny<110000000) goto NECESSA;
+set @deposit_p, 110000000;
+goto FINALI_DEP;
+
+DEP_102:
+if(Zeny<120000000) goto NECESSA;
+set @deposit_p, 120000000;
+goto FINALI_DEP;
+
+DEP_103:
+if(Zeny<130000000) goto NECESSA;
+set @deposit_p, 130000000;
+goto FINALI_DEP;
+
+DEP_104:
+if(Zeny<140000000) goto NECESSA;
+set @deposit_p, 140000000;
+goto FINALI_DEP;
+
+DEP_105:
+if(Zeny<150000000) goto NECESSA;
+set @deposit_p, 150000000;
+goto FINALI_DEP;
+
+DEP_106:
+if(Zeny<160000000) goto NECESSA;
+set @deposit_p, 160000000;
+goto FINALI_DEP;
+
+DEP_107:
+if(Zeny<170000000) goto NECESSA;
+set @deposit_p, 170000000;
+goto FINALI_DEP;
+
+DEP_108:
+if(Zeny<180000000) goto NECESSA;
+set @deposit_p, 180000000;
+goto FINALI_DEP;
+
+DEP_109:
+if(Zeny<190000000) goto NECESSA;
+set @deposit_p, 190000000;
+goto FINALI_DEP;
+
+DEP_200:
+if(Zeny<200000000) goto NECESSA;
+set @deposit_p, 200000000;
+goto FINALI_DEP;
+
+DEP_203:
+if(Zeny<300000000) goto NECESSA;
+set @deposit_p, 300000000;
+goto FINALI_DEP;
+
+DEP_204:
+if(Zeny<400000000) goto NECESSA;
+set @deposit_p, 400000000;
+goto FINALI_DEP;
+
+DEP_205:
+if(Zeny<500000000) goto NECESSA;
+set @deposit_p, 500000000;
+goto FINALI_DEP;
+
+
+FINALI_DEP:
+show .@nome$;
+show "Você realmente deseja depositar "+@deposit_p+" zenys em sua conta?";
+next;
+menu "Sim",SIM_DP,"Não",T_SAIR;
+
+SIM_DP:
+set Zeny, Zeny-@deposit_p;
+query_sql "UPDATE `login` SET `dinheiro` = dinheiro + "+@deposit_p+" WHERE account_id = "+getcharid(3)+"";
+show .@nome$;
+show "Seu dinheiro ja esta na conta, obrigado e volte sempre!";
+close;
+
+T_SAC:
+set @t_dep, 0;
+query_sql "SELECT `dinheiro` FROM `login` WHERE account_id ='"+getcharid(3)+"'", @t_dep;
+if(@t_dep==0) goto SEM_SALDO;
+show .@nome$;
+show "Seu Saldo atual é de "+@t_dep+" Zenys";
+show "Quanto deseja sacar?";
+next;
+menu "1,000,000",SDEP_10,"10,000,000",SDEP_110,"20,000,000",SDEP_20,"30,000,000",SDEP_30,"40,000,000",SDEP_40,"50,000,000",SDEP_50,"60,000,000",SDEP_60,"70,000,000",SDEP_70,"80,000,000",SDEP_80,"90,000,000",SDEP_90,"Outro valor",PRO_2;
+
+PRO_2:
+menu "100,000,000",SDEP_100,"110,000,000",SDEP_101,"120,000,000",SDEP_102,"130,000,000",SDEP_103,"140,000,000",SDEP_104,"150,000,000",SDEP_105,"160,000,000",SDEP_106,"170,000,000",SDEP_107,"180,000,000",SDEP_108,"190,000,000",SDEP_109,"Outro valor",PRO_4;
+
+PRO_4:
+menu "200.000.000",SDEP_200,"300.000.000",SDEP_203,"400.000.000",SDEP_204,"500.000.000",SDEP_205,"Sair",T_SAIR;
+
+SDEP_10:
+if(Zeny>(.@limite_z-1000000)) goto NECESSAS;
+if(@t_dep<1000000) goto SAL_INSU;
+set @deposit_ps, 1000000;
+goto FINALI_DEPS;
+
+SDEP_110:
+if(Zeny>(.@limite_z-10000000)) goto NECESSAS;
+if(@t_dep<10000000) goto SAL_INSU;
+set @deposit_ps, 10000000;
+goto FINALI_DEPS;
+
+SDEP_20:
+if(Zeny>(.@limite_z-20000000)) goto NECESSAS;
+if(@t_dep<20000000) goto SAL_INSU;
+set @deposit_ps, 20000000;
+goto FINALI_DEPS;
+
+SDEP_30:
+if(Zeny>(.@limite_z-30000000)) goto NECESSAS;
+if(@t_dep<30000000) goto SAL_INSU;
+set @deposit_ps, 30000000;
+goto FINALI_DEPS;
+
+SDEP_40:
+if(Zeny>(.@limite_z-40000000)) goto NECESSAS;
+if(@t_dep<40000000) goto SAL_INSU;
+set @deposit_ps, 40000000;
+goto FINALI_DEPS;
+
+SDEP_50:
+if(Zeny>(.@limite_z-50000000)) goto NECESSAS;
+if(@t_dep<50000000) goto SAL_INSU;
+set @deposit_ps, 50000000;
+goto FINALI_DEPS;
+
+SDEP_60:
+if(Zeny>(.@limite_z-60000000)) goto NECESSAS;
+if(@t_dep<60000000) goto SAL_INSU;
+set @deposit_ps, 60000000;
+goto FINALI_DEPS;
+
+SDEP_70:
+if(Zeny>(.@limite_z-70000000)) goto NECESSAS;
+if(@t_dep<70000000) goto SAL_INSU;
+set @deposit_ps, 70000000;
+goto FINALI_DEPS;
+
+SDEP_80:
+if(Zeny>(.@limite_z-80000000)) goto NECESSAS;
+if(@t_dep<80000000) goto SAL_INSU;
+set @deposit_ps, 80000000;
+goto FINALI_DEPS;
+
+SDEP_90:
+if(Zeny>(.@limite_z-90000000)) goto NECESSAS;
+if(@t_dep<90000000) goto SAL_INSU;
+set @deposit_ps, 90000000;
+goto FINALI_DEPS;
+
+SDEP_100:
+if(Zeny>(.@limite_z-100000000)) goto NECESSAS;
+if(@t_dep<100000000) goto SAL_INSU;
+set @deposit_ps, 100000000;
+goto FINALI_DEPS;
+
+SDEP_101:
+if(Zeny>(.@limite_z-110000000)) goto NECESSAS;
+if(@t_dep<110000000) goto SAL_INSU;
+set @deposit_ps, 110000000;
+goto FINALI_DEPS;
+
+SDEP_102:
+if(Zeny>(.@limite_z-120000000)) goto NECESSAS;
+if(@t_dep<120000000) goto SAL_INSU;
+set @deposit_ps, 120000000;
+goto FINALI_DEPS;
+
+SDEP_103:
+if(Zeny>(.@limite_z-130000000)) goto NECESSAS;
+if(@t_dep<130000000) goto SAL_INSU;
+set @deposit_ps, 130000000;
+goto FINALI_DEPS;
+
+SDEP_104:
+if(Zeny>(.@limite_z-140000000)) goto NECESSAS;
+if(@t_dep<140000000) goto SAL_INSU;
+set @deposit_ps, 140000000;
+goto FINALI_DEPS;
+
+SDEP_105:
+if(Zeny>(.@limite_z-150000000)) goto NECESSAS;
+if(@t_dep<150000000) goto SAL_INSU;
+set @deposit_ps, 150000000;
+goto FINALI_DEPS;
+
+SDEP_106:
+if(Zeny>(.@limite_z-160000000)) goto NECESSAS;
+if(@t_dep<160000000) goto SAL_INSU;
+set @deposit_ps, 160000000;
+goto FINALI_DEPS;
+
+SDEP_107:
+if(Zeny>(.@limite_z-170000000)) goto NECESSAS;
+if(@t_dep<170000000) goto SAL_INSU;
+set @deposit_ps, 170000000;
+goto FINALI_DEPS;
+
+SDEP_108:
+if(Zeny>(.@limite_z-180000000)) goto NECESSAS;
+if(@t_dep<180000000) goto SAL_INSU;
+set @deposit_ps, 180000000;
+goto FINALI_DEPS;
+
+SDEP_109:
+if(Zeny>(.@limite_z-190000000)) goto NECESSAS;
+if(@t_dep<190000000) goto SAL_INSU;
+set @deposit_ps, 190000000;
+goto FINALI_DEPS;
+
+SDEP_200:
+if(Zeny<(.@limite_z-200000000)) goto NECESSAS;
+set @deposit_ps, 200000000;
+goto FINALI_DEPS;
+
+SDEP_203:
+if(Zeny<(.@limite_z-300000000)) goto NECESSAS;
+set @deposit_ps, 300000000;
+goto FINALI_DEPS;
+
+SDEP_204:
+if(Zeny<(.@limite_z-400000000)) goto NECESSAS;
+set @deposit_ps, 400000000;
+goto FINALI_DEPS;
+
+SDEP_205:
+if(Zeny<(.@limite_z-500000000)) goto NECESSAS;
+set @deposit_ps, 500000000;
+goto FINALI_DEPS;
+
+FINALI_DEPS:
+show .@nome$;
+show "Deseja sacar agora?";
+next;
+menu "Sim",T_SAC_AG,"Não",T_SAIR;
+
+T_SAC_AG:
+set Zeny, Zeny+@deposit_ps;
+query_sql "UPDATE `login` SET `dinheiro` = dinheiro - "+@deposit_ps+" WHERE account_id = "+getcharid(3)+"";
+show .@nome$;
+show "Prontinho! Obrigado e volte sempre!";
+close;
+
+SAL_INSU:
+show .@nome$;
+show "Infelizmente você não possui todo este dinheiro para saque...";
+close;
+
+NECESSAS:
+show .@nome$;
+show "Você não pode sacar este valor, por que seu Zeny ira passar do limite atual do servidor!";
+close;
+
+NECESSA:
+show .@nome$;
+show "Seu dinheiro esta incompleto, conte ele novamente...";
+close;
+
+SEM_SALDO:
+show .@nome$;
+show "Você não tem zenys em sua conta.";
+close;
+
+SEM_ACESS:
+show .@nome$;
+show "Desculpe, mas somente VIPs podem utilizar o banco.";
+close;
+
+T_SEM_M_G:
+show .@nome$;
+show "Não esqueceu de alguma coisa? Talvez a moeda, não foi?";
+close;
+
+T_COMO:
+show .@nome$;
+show "Vou explicar melhor...";
+show "Devido a alguns itens custerem mais do que o limite de zeny por personagens (^FF0000"+.@limite_z+"^000000 Zenys)";
+next;
+show .@nome$;
+show "A pbgo resolveu implementar o sistema de troca de por Moedas.";
+next;
+show .@nome$;
+show "Essas moedas podem ser trocadas comigo por ZENYs (cada um com seu valor) e tambem voce podera trocar seu Zeny por moedas!";
+next;
+show .@nome$;
+show "Segue os valores das Moedas:";
+show " ";
+show .@nome_moeda_1$+" -> "+.@valor_moeda_1+" Zenys";
+show .@nome_moeda_2$+" -> "+.@valor_moeda_2+" Zenys";
+show .@nome_moeda_3$+" -> "+.@valor_moeda_3+" Zenys";
+next;
+show .@nome$;
+show "Qualquer outra duvido você pode procurar nosso forum ou entrar em contato com o suporte.";
+close;
+
+T_PERDA:
+show .@nome$;
+show "A troca não pode ser feita, pois você esta com Zenys alem do permitido para essa troca.";
+next;
+show .@nome$;
+show "Veja o ^FF0000EXEMPLO^000000 para você entender melhor:";
+show " ";
+set @t_exemplo, .@limite_z - .@valor_moeda_3 + 5;
+show "Seu Zeny: 50";
+show "Limite de Zeny: 200";
+show "Valor da Troca: 200";
+next;
+show .@nome$;
+show "No exemplo dado você perderia os 50z que você possui, por que o limite do server seria 200z.";
+next;
+show .@nome$;
+show "Portanto, certifique-se de que possui lugar para o zeny que deseja trocar pela moeda, pois a troca não será realizada se houve perda de seu ZENY!";
+close;
+
+T_SEM_MOS:
+show .@nome$;
+show "Você precisa ter pelo menos uma moeda para trocarmos.";
+close;
+
+T_SEM_SY:
+show .@nome$;
+show "Você não esta esquecendo das yggs?";
+close;
+
+T_SEM_SY_2:
+show .@nome$;
+show "Você não esta esquecendo das moedas?";
+close;
+
+T_SEM_MOEDA:
+show .@nome$;
+show "Você precisa ter pelo menos uma moeda para trocar comigo.";
+close;
+
+T_VALOR_MIM_ZM1:
+T_VALOR_MIM_ZM2:
+T_VALOR_MIM_ZM3:
+show .@nome$;
+show "Você não possui zenys suficientes";
+close;
+
+T_VALOR_MIM:
+show .@nome$;
+show "Desculpe mas o valor minimo para a troca de moedas é "+.@valor_moeda_3+" Zenys. E no momento você não possui este valor.";
+close;
+
+T_SAIR:
+show .@nome$;
+show "Tenho muitas moedas, precisando de algum me procure.";
+close;
+
+}
+
+aldebaran,147,117,3	duplicate(Banco pbRO)	Banco pbRO#bnc1	903
+izlude,135,117,3	duplicate(Banco pbRO)	Banco pbRO#bnc2	903

@@ -1,0 +1,280 @@
+// Troca de Nick
+//====================================================================================== 
+function	script	F_TrocarNick	{
+
+show "[Trocar Nome do Personagem]";
+show " ";
+show "Então você deseja trocar o nome de seu personagem!";
+show " ";
+show "Por favor use apenas letras e números.";
+goto MUDAR_NICK;
+
+MUDAR_NICK:
+next;
+show "Informe seu novo nome:";
+show " ";
+set @nv_nick$, "";
+set @existe$, "";
+input @nv_nick$;
+goto CHECAR_NICK;
+
+CHECAR_NICK:
+if(getstrlen(@nv_nick$)<5 || getstrlen(@nv_nick$)>22 || callfunc("strverificar",@nv_nick$)) {
+show "^FF0000O novo nome deve ter de 5 à 22 letrar/números.";
+set @nv_nick$, "";
+goto MUDAR_NICK;
+}
+query_sql "SELECT `account_id` FROM `char` WHERE `name` ='"+@nv_nick$+"'",@existe$;	
+if(@existe$=="") {
+goto PODE_MUDAR;
+}else{
+show "^FF0000Este nome já esta em uso, por favor escolha outro.";
+set @existe$, "";
+goto MUDAR_NICK;
+}
+
+PODE_MUDAR:
+show "Nome: ^FF0000"+@nv_nick$+" ^000000disponivel, Deseja alterar?";
+show " ";
+show "^000000* Você será desconectado após a troca e com isso seu novo nome estará ativo.";
+menu "Sim, altere agora mesmo!.",OK_TROCA,"Não, Vou escolher outro.",MUDAR_NICK;
+
+OK_TROCA:
+
+query_sql "SELECT `account_id` FROM `char` WHERE `name` ='"+@nv_nick$+"'",@existe$;	
+if(@existe$=="") {
+
+query_sql "UPDATE `char` SET `name` = '"+escape_sql(@nv_nick$)+"' WHERE `name` ='"+escape_sql(strcharinfo(0))+"'";
+query_sql "UPDATE `guild` SET `master` = '"+escape_sql(@nv_nick$)+"' WHERE `master` ='"+escape_sql(strcharinfo(0))+"'";
+query_sql "UPDATE `guild_member` SET `name` = '"+escape_sql(@nv_nick$)+"' WHERE `name` ='"+escape_sql(strcharinfo(0))+"'";
+query_sql "UPDATE `guild_expulsion` SET `name` = '"+escape_sql(@nv_nick$)+"' WHERE `name` ='"+escape_sql(strcharinfo(0))+"'";
+query_sql "UPDATE `pvp` SET `name` = '"+escape_sql(@nv_nick$)+"' WHERE `name` ='"+escape_sql(strcharinfo(0))+"'";
+query_sql "UPDATE `chargdt` SET `char_name` = '"+escape_sql(@nv_nick$)+"' WHERE `char_name` ='"+escape_sql(strcharinfo(0))+"'";
+atcommand "@kick "+strcharinfo(0)+"";
+
+}else{
+atcommand "@kick "+strcharinfo(0)+"";
+}
+
+end;
+
+}
+
+// Verificar Caracteres no Nome
+//====================================================================================== 
+function	script	strverificar	{
+
+	if( compare(@nv_nick$,"["))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"]"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$," "))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$," "))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"'"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"|"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"("))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,")"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"#"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"%"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"@"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"$"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"+"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"*"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"/"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"\\"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"="))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"¬"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"°"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"º"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"ª"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"¨"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"!"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,";"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,":"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,">"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"<"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"^"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"}"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"{"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"~"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"?"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"´"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"`"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,","))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"¹"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"²"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"³"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"£"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"¢"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"&"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else if(compare(@nv_nick$,"†"))
+	{
+		show "^FF0000Nome invalido por favor não utilize caracteres especiais. Utilize apenas LETRAS E NÚMEROS.";
+		return 1;
+	}
+	else {	
+		return 0;
+	}
+}

@@ -1,0 +1,70 @@
+prontera,159,176,6	script	VIP da Copa	912,{
+set .@name$, "[VIP da Copa]";
+
+show .@name$;
+show "Ei amigo, o que você esta achando da Copa de 2010?";
+show "Eu estou gostando muito! Mas o que quer de mim no momento?";
+next;
+menu "Quero meu prêmio",PEGAR,"Quero informações",INFOR_COPA,"Sair",SAIR;
+
+PEGAR:
+show .@name$;
+query_sql("SELECT promocao FROM login WHERE account_id="+getcharid(3)+"",@premio);
+query_sql("SELECT id_item, quantidade FROM premios WHERE id="+@premio+"",@id_it,@qt_it);
+if(@id_it==0) { goto SEM_PREMIO; }
+show "Uhu! Mais uma vitória! Espero que continue torcendo para o Brasil! Você já sabe que quanto mais vitória mais prêmio você ganha!";
+goto ADD_IT;
+
+ADD_IT:
+additem @id_it,@qt_it;
+query_sql("UPDATE login SET promocao = promocao+1 WHERE account_id="+getcharid(3)+"");
+show "Faça bom proveito do seu item!";
+set @id_it,0;
+set @qt_it,0;
+next;
+goto CHEK;
+close;
+
+CHEK:
+set @premio, @premio + 1;
+query_sql("SELECT id_item, quantidade FROM premios WHERE id="+@premio+"",@id_it,@qt_it);
+if(@id_it==0) { goto SEM_PREMIO2; }
+show .@name$;
+show "Você tem direito a mais itens, gostaria de receber agora?";
+next;
+menu "Sim",ADD_IT2,"Não",NAOIT;
+
+ADD_IT2:
+show .@name$;
+goto ADD_IT;
+
+NAOIT:
+show .@name$;
+show "Ok, seu item esta guardado comigo. Volte quando precisar!";
+close;
+
+SEM_PREMIO2:
+show .@name$;
+show "Por enquanto você já recebeu os prêmio que é seu por direito, aguarde os próximos!";
+close;
+
+SEM_PREMIO:
+show "Infelizmente não tenho nenhum prêmio para você no momento.";
+close;
+
+INFOR_COPA:
+show .@name$;
+show "A copa premiada da prêmios para os usuários que fizeram doações de VIP TOTAL nos dias 10 e 11 de Junho.";
+next;
+show .@name$;
+show "Mas com uma condição, o Brasil tem que vencer o jogo para que receba o prêmio. Eles são liberados um dia após o jogo do Brasil.";
+next;
+show .@name$;
+show "Caso o Brasil perca, ninguém recebera prêmios.";
+close;
+
+SAIR:
+show .@name$;
+show "Já que não precisa de nada, eu vou me preparar para assistir o jogo. Até breve e vamos torcer pelo Brasil!";
+close;
+}

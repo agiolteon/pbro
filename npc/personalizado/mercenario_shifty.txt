@@ -1,0 +1,145 @@
+//===== Cronus Script ================================================= 
+//= Mercenário Shifty
+//===== Por: ==========================================================
+//= acky - god@acky.com
+//===== Versão Atual: ================================================= 
+//= 1.3
+//===== Descrição: ==================================================== 
+//= Jogadores compram Ninjas para assassinar outros jogadores
+//===== Changelog: ==================================================== 
+//= 1.0 Script incicial. [acky]
+//= 1.1 Traduzido. [Mehah]
+//= 1.1a Corrigido algumas traduções. [Mehah]
+//= 1.2 Otimizado e algumas correções. [RoM]
+//= 1.3 Removido a variável do npc_athena.conf (ele não existe mais). [RoM]
+//=====================================================================
+
+morocc,148,86,5	script	Mercenário Shifty	725,{
+
+//========== Configuração: ==========
+// Custo para cada ninja:
+set .@custo,250000;
+//===================================
+
+	show "[Mercenário Shifty]";
+	show "O que você deseja?";
+	set .@loop,1;
+	while(.@loop){
+		next;
+		if(getgmlevel() > 90) set .@menu$,select("Comprar Ninjas","Assassinar alguém","Verificar seus Ninjas","Adicionar Ninjas","Cancelar");
+		else set .@menu$,select("Comprar Ninjas","Assassinar alguém","Verificar seus Ninjas","","Cancelar");
+		switch(.@menu$){
+
+			Case 1:
+			show "[Mercenário Shifty]";
+			show "Quantos ninjas você deseja comprar?";
+			show "Há ^0000FF" + $ninja_avail + "^000000 ninjas disponíveis.";
+			show "Custa ^0000FF" + .@custo + " zeny ^000000cada um.";
+			digit @buy;
+			next;
+			show "[Mercenário Shifty]";
+			if($ninja_avail < 1){
+				show "Não há nenhum ninja disponível para comprar.";
+				close;
+				}
+			if($ninja_avail < @buy){
+				show "A quantidade de ninjas que você quer não está disponível.";
+				break;
+				}
+			set @price,@buy*.@custo;
+			if(Zeny < @price){
+				show "Você não tem o zeny necessário.";
+				close;
+				}
+			show "Isso custará a você ^0000FF"+@price+" zeny^000000.";
+			next;
+			if(select("Continuar","Cancelar") == 2) close;
+			set Zeny,Zeny-@price;
+			set #ninjas,#ninjas+@buy;
+			set $ninja_avail,$ninja_avail-@buy;
+			show "[Mercenário Shifty]";
+			show "Obrigado.";
+			close;
+
+			Case 2:
+			show "[Mercenário Shifty]";
+			if(agitcheck()){
+				show "Desculpe, todos meus ninjas estão ocupados na Guerra de Emperium.";
+				close;
+				}
+			show "Ponha o nome do alvo.";
+			show "^FF0000Datilografe o nome exatamente, se não, eu não poderei encontrar a vítima.^000000";
+			next;
+			if(select("Continuar","Cancelar") == 2) close;
+			digit @name$;
+			show "[Mercenário Shifty]";
+			show "Ninjas Ativos: "+#ninjas;
+			show "Ninjas Descansando: "+#ninjasr;
+			show "Quantos você quer emitir?";
+			digit @number;
+			next;
+			show "[Mercenário Shifty]";
+			if (@number < 1){
+				show "Você não pode emitir nenhum ninja ou quantidade negativa.";
+				break;
+				}
+			if (@number > #ninjas){
+				show "Você não tem esta quantidade de ninjas.";
+				break;
+				}
+			if (@number > 10){
+				show "Você só pode emitir 10 ninjas no máximo.";
+				break;
+				}
+			set @chance,rand(1,12);
+			set #ninjas,#ninjas-@number;
+			set #ninjas,#ninjas+#ninjasr;
+			set #ninjasr,0;
+			show "Emitindo ninjas agora.";
+			next;
+			show "[Mercenário Shifty]";
+			if(@number < @chance){
+				set @ninjasurvived,rand (1,@number);
+				set #ninjasr,@number-@ninjasurvived;
+				show "Seu ataque falhou e somente ^FF0000"+#ninjasr+"^000000 Ninjas sobreviveram.";
+				announce @name$+" sobreviveu os ataque dos Ninjas de "+strcharinfo(0)+".",8;
+				close;
+				}
+			set @ninjasurvived,rand (1,@number);
+			set #ninjasr,@number-@ninjasurvived;
+			show "Seu ataque foi bem sucedido, mas somente ^FF0000"+#ninjasr+"^000000 Ninjas sobreviveram.";
+			atcommand strcharinfo(0) + "@kill "+@name$;
+			announce @name$+" foi assassinado pelos Ninjas de "+strcharinfo(0)+".",8;
+			close;
+
+			Case 3:
+			show "[Mercenário Shifty]";
+			show "Você tem:";
+			show "^FF0000" + #ninjas + "^000000 Ninjas Ativos.";
+			show "^0000FF" + #ninjasr + "^000000 Ninjas Descansando.";
+			break;
+
+			Case 4:
+			show "[Mercenário Shifty]";
+			show "Quantos ninjas disponíveis você deseja adicionar?";
+			next;
+			digit @add;
+			set $ninja_avail,$ninja_avail+@add;
+			show "[Mercenário Shifty]";
+			show ""+@add+" ninjas adicionados. Total de "+$ninja_avail+" disponíveis.";
+			close;
+
+			Case 5:
+			close;
+			}
+		}
+
+OnInit:
+	set $ninja_avail,$ninja_avail+1;
+	end;
+
+OnMinute00:
+	if(gettime(3)%2 == 1 && gettime(3) > 10) set $ninja_avail,$ninja_avail+2;
+	end;
+
+}

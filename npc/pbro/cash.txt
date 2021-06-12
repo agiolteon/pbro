@@ -1,0 +1,157 @@
+job3_war01,23,26,3	script	Recepcionista	858,{
+show "-   ^977117Central de Lojas pbRO^000000   -";
+next;
+if(select("Voltar para Prontera:Cancelar")==2){ close; }
+warp "prontera",156,187;
+close;
+
+OnInit:
+setcell "job3_war01",0,0,350,350,cell_novending,1;
+end;
+}
+
+//job3_war01,20,31,5	cashshop	Lançamentos	882,5227:41,5228:41,5229:41,5219:38,5230:32,5231:32,5232:32,5233:32,5234:32,2237:30,5237:26,5236:26,5235:26,5145:35,5273:28,5274:28,5275:28,5276:28,5819:41,5818:41,5334:27,5319:27,5405:29,5508:36,5317:39,5496:42,5397:43,5277:40,5466:48,5375:51,5505:39,5497:40,5554:43,5289:49,5470:60,5592:61,5135:65,5563:67
+//job3_war01,29,31,3	cashshop	Outros ROPS#a	882,5414:36,5300:47,5531:68,5437:45,5404:42,5139:10,5305:17,5393:12,5383:16,5133:13,5255:16,5474:10,5412:10,5530:12,5464:18,5346:9,5363:15,5477:11,5204:31,5502:19,5558:15,5473:12,5465:15,5480:18,5539:15,5538:16,5529:25,5509:12,5410:20,5332:12,5403:13,5402:18,5420:19,5421:20,5442:15,5447:16,5467:18
+//job3_war01,29,22,9	cashshop	Outros ROPS#b	882,5411:51,5100:32,5499:43,5537:39,5556:46,5527:50,5413:36,5510:49,5146:15,5253:12,5388:18,5379:16,5324:12,5358:16,5283:12,5243:12,5225:10,5206:9,5307:10,5294:10,5288:18,5360:15,5102:10,5257:8,5339:7,5291:15,5311:17,5213:9,5362:10,5315:8,5256:10,5476:15,5498:19,5471:38,5490:18
+
+
+
+
+//=== Premiador do Sistema de indicação ====//
+
+job3_war01,20,31,5	script	Prêmios Indicação	882,{
+while(TRUE){
+Init:
+	query_sql "SELECT pontos FROM login WHERE account_id ='"+getcharid(3)+"'", @indipts;
+	show @npc$;
+	show "^FF0000"+strcharinfo(0)+"^000000, deseja trocar Pontos de Indicação por Itens?";
+	show " ";
+	show "Você tem ^0941C4"+@indipts+"^000000 Pontos de Indicação.";
+	next;
+	if(@indipts == 25 || @indipts == 28){ if(#lbaccess < 3 && !#PI_bought && !getgmlevel() ){ show @npc$; show "Você precisa confirmar sua presença 3 vezes antes de comprar algo.";  close; } } //Prevent exploit creating new accounts with 25 points
+	if( !#PI_bought ){ set #PI_bought, 1; }
+	switch(select(
+		"Cartão Kafra (10un) ^FF0000[25 pontos]^000000",
+		"Neuralizador (10un) ^FF0000[60 pontos]^000000",
+		"Assumptio (20un) ^FF0000[50 pontos]^000000",
+		"Pergaminho Benção (20un) ^FF0000[20 pontos]^000000",
+		"Pergaminho Agilidade (20un) ^FF0000[20 pontos]^000000",
+		"Elunium Enriquecido (10un) ^FF0000[50 pontos]^000000",
+		"Oridecon Enriquecido (10un) ^FF0000[50 pontos]^000000",
+		"Passe Anti-Gravitacional ^FF0000[280 pontos]^000000",
+		"Taça Nevada ^FF0000[30 pontos]^000000",
+		"Caixão Tenebroso ^FF0000[30 pontos]^000000",
+		"Carta de Amor ^FF0000[30 pontos]^000000",
+		"Roupa de Praia ^FF0000[5 pontos]^000000",
+		"Bolsa do Papai Noel ^FF0000[5 pontos]^000000",
+		"Pudim de Guyak (10un) ^FF0000[35 pontos]^000000",
+		"Caixa de Veneno Mortal (10un) ^FF0000[30 pontos]^000000",
+		"Teia de Aranha (30un) ^FF0000[30 pontos]^000000",
+		"Caixa de Adrenalina(30un) ^FF0000[30 pontos]^000000",
+		"Kit Reparação de Barricada ^FF0000[20 pontos]^000000",
+		"","","",""))
+		{
+			case 1: set @id,12909; set @price,25; break;
+			case 2: set @id,12911; set @price,60; break;
+			case 3: set @id,12916; set @price,50; break;
+			case 4: set @id,12913; set @price,20; break;
+			case 5: set @id,12914; set @price,20; break;
+			case 6: set @id,12920; set @price,50; break;
+			case 7: set @id,12921; set @price,50; break;
+			case 8: set @id,13710; set @price,280; break;
+			case 9: set @id,12361; set @price,30; break;
+			case 10: set @id,12363; set @price,30; break;
+			case 11: set @id,12370; set @price,30; break;
+			case 12: set @id,12260; set @price,5; break;
+			case 13: set @id,12132; set @price,5; break;
+			case 14: set @id,12710; set @price,35; break;
+			case 15: set @id,14004; set @price,30; break;
+			case 16: set @id,1025; set @price,30; break;
+			case 17: set @id,12918; set @price,40; break;
+			case 28: set @id,14287; set @price,20; break;
+			case 29: 
+			case 20: 
+			case 21: 
+			case 22: 
+			case 23: 
+			case 24: 
+			case 25:
+		}
+		show @npc$;
+		show "Isto vai custar ^FF0000"+@price+" pontos^000000";
+		show "Deseja mesmo continuar?";
+		next;
+		if(select("Sim.:Não.")==2){ callsub Init; }
+		show @npc$;
+		if(@indipts < @price){ show "Você não tem ^FF0000"+@price+"^000000 Pontos de Indicação."; next; callsub Init; }
+		query_sql("UPDATE login SET pontos = pontos-'"+@price+"' WHERE account_id ='"+getcharid(3)+"'");
+		switch(@id)
+		{
+			case 12710: getitem @id,10; break;
+			case 1025: getitem @id,30; break;
+			case 12258: getitem @id,25; break;
+			default: getitem @id,1; break;
+		}
+	show "Pronto... Aqui está!";
+	next;
+	cutin "",255;
+	close;
+	end;
+} //While end.
+
+
+
+
+
+OnPCLoginEvent:
+if( !#vipdelay ){ end; }
+if(#vipdelay > gettimetick(2)){ dispbottom "[Controle VIP] Tempo restante até VIP expirar: " + callfunc("Time2Str",#vipdelay) + ""; end; }
+if(#vipdelay < gettimetick(2))
+{
+	dispbottom "[Controle VIP] Seu VIP acabou.";
+	query_sql("UPDATE `login` SET `level` = '0' WHERE `login`.`account_id` ='"+getcharid(3)+"'");
+	set #vipdelay, 0;
+}
+end;
+}
+
+
+
+
+
+
+
+function	script	VIPShuffle	{
+//arg(0) -> tempo de VIP, em segundos, pra facilitar: 86400 segundos é 1 dia.
+//arg(1) -> tipo de VIP, comando(1) ou sala(10).
+//arg(2) -> preço do VIP em pontos de indicação
+
+
+
+query_sql "SELECT pontos FROM login WHERE account_id ='"+getcharid(3)+"'", @indipts;
+set .@npc$, "["+getarg(3)+"]";
+show .@npc$;
+if(getarg(2) > @indipts){ show "Você não tem ^FF0000"+getarg(2)+"^000000 pontos de indicação."; next; return; }
+if(getarg(1) > 1){ set .@vip$, "Sala"; }else{ set .@vip$, "Comandos"; }
+show "Tem certeza que deseja comprar ^0000FF"+getarg(0)/86400+"^000000 dias de VIP ^209B79"+.@vip$+"^000000 por ^FF0000"+getarg(2)+"^000000 pontos de indicação?";
+next;
+if(select("Não.:Sim.")==1){ return; }
+query_sql("UPDATE login SET pontos = pontos-'"+getarg(2)+"' WHERE account_id ='"+getcharid(3)+"'");
+set #vipdelay, gettimetick(2)+getarg(0);
+query_sql("UPDATE `login` SET `level` = '"+getarg(1)+"' WHERE `login`.`account_id` ='"+getcharid(3)+"'");
+logmes "'"+strcharinfo(0)+"'("+getcharid(3)+") comprou "+getarg(0)/86400+" dias de VIP "+.@vip$+" por "+getarg(2)+" pontos - Data: "+gettimestr("%Y-%m/%d %H:%M:%S",21)+""; //Log who bought for safe care
+show .@npc$;
+show "VIP ativado com sucesso!";
+show "Você será relogado para completar a ativação.";
+close2;
+atcommand "@kick "+strcharinfo(0)+"";
+end;
+return;
+}
+
+
+job3_war01	mapflag	noskill
+job3_war01	mapflag	nomemo
+job3_war01	mapflag	noteleport
+job3_war01	mapflag	nobranch
+job3_war01	mapflag	nosave	SavePoint

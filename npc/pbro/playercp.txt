@@ -1,0 +1,398 @@
+prontera,168,192,3	script	Painel de Controle#1-1	920,{
+
+	//Cooldown bruteforce prevent for PIN - in seconds
+	set .@pin_cooldown, 60;
+	
+	//Max input for PIN
+	set .@max_pin, 9999;
+	set .@min_pin, 1000;
+	
+	//Ask for PIN again if already were auth? 0 = Yes. 1 = No.
+	set .@cp_authrc, 1;
+	
+	//Max attempts to auth
+	set .@cp_maxattp, 4;
+	
+	
+	
+	
+	
+	query_sql("SELECT `PIN` FROM `login` WHERE `account_id`="+getcharid(3)+" LIMIT 1",@acc_pin);
+	
+	show "[Painel de Controle]";
+	show "Olá, ^FF0000"+strcharinfo(0)+"^000000";
+	show "Deseja acessar seu painel de controle?";
+	next;
+	if(select("- Sim.:- Não.")==2) close; 
+	
+	//Cooldown output
+	if( #CP_pindelay > gettimetick(2) )
+	{
+		show "[Painel de Controle]";
+		show "Você errou sua senha PIN mais de ^FF0000"+.@cp_maxattp+"^000000 vezes.";
+		show "Tempo restante para poder acessar o painel novamente: ^FF0000"+callfunc("Time2Str",#CP_pindelay)+"^000000";
+		close;
+	}
+	
+	//PIN detected, ask for check
+	if( @acc_pin && !@cp_canpass )
+	{
+		show "[Painel de Controle]";
+		show "Insira sua senha.";
+		show "Máximo número de tentativas: ^FF0000"+.@cp_maxattp+"^000000";
+		show "Tentativas falhas: ^FF0000"+#CP_trycount+"^000000";
+		next;
+		input @try_pid;
+		
+		//Wrong PIN
+		if(@try_pid !=@acc_pin || @try_pid > .@max_pin || @try_pid < .@min_pin)
+		{
+			set #CP_trycount, #CP_trycount+1;
+			show "[Painel de Controle]";
+			show "Senha incorreta.";
+			show "Tentativas falhas: ^FF0000"+#CP_trycount+"^000000";
+			
+			//Over attempted
+			if(#CP_trycount >= .@cp_maxattp)
+			{
+				set #CP_trycount, 0;
+				set #CP_pindelay, gettimetick(2) + .@pin_cooldown; 
+				show "Seu acesso ao painel foi bloqueado por ^FF0000"+(.@pin_cooldown/60)+" minuto(s).^000000"; 
+			}
+			close;
+		}
+		
+		//PIN matches
+		else
+		{
+			set #CP_trycount, 0;
+			show "[Painel de Controle]";
+			show "PIN correto.";
+			show "^0000FFVocê agora está autenticado^000000.";
+			next;
+		}
+	}
+	
+	//Register an PIN
+	else if( !@cp_canpass )
+	{
+		show "[Painel de Controle]";
+		show "Vejo que você,";
+		show "não possui um PIN registrado ainda.";
+		show "Deseja cadastrá-lo?";
+		next;
+		if(select("- Sim.:- Não.")==2) close;
+		show "[Painel de Controle]";
+		show "Digite o PIN desejado.";
+		show "^FF0000Seu PIN deve "+((getstrlen(atoi(.@max_pin)) == getstrlen(atoi(.@min_pin))) ? "conter "+getstrlen(atoi(.@min_pin))+" números":"ser entre "+getstrlen(atoi(.@min_pin))+" e "+getstrlen(atoi(.@max_pin))+" números")+" ^000000";
+		next;
+		input @try_pin;
+		
+		//Save PIN
+		if(@try_pin <= .@max_pin && @try_pin >= .@min_pin)
+		{
+			show "[Painel de Controle]";
+			show "PIN digitado: '^FF0000"+@try_pin+"^000000'";
+			show "^218F1BVOCÊ TEM CERTEZA QUE DESEJA ESCOLHER ESTE PIN?^000000";
+			show "^0000FFNÃO HÁ MODO ALGUM DE SE RECUPERAR SEU PIN, PARA SE RECUPERAR/TROCAR QUALQUER DADO DA CONTA SERÁ REQUERIDO SEU NÚMERO DE PIN^000000";
+			next;
+			if(select("- Não.:- Sim.")==1) close;
+			query_sql("UPDATE `login` SET `PIN`="+@try_pin+" WHERE `account_id`="+getcharid(3)+" LIMIT 1");
+			show "[Painel de Controle]";
+			show "PIN cadastrado com sucesso.";
+			close;
+		}
+		
+		//PIN wont fit on parameters
+		else
+		{
+			show "[Painel de Controle]";
+			show "O PIN digitado é inválido.";
+			close;
+		}
+	}
+	
+	
+	
+	
+	//Auth is OK, you are allowed to access CP
+	set @cp_canpass, .@cp_authrc;
+	
+	//Fill account data
+	query_sql("SELECT `userid`,`user_pass`,`email`,`logincount`,`invite`,`pbgo` FROM `login` WHERE `account_id`="+getcharid(3)+"", @userid$, @user_pass$, @email$, @lgcount, @invite, @pbgo);
+	
+	
+	
+	
+	show "[^3240C0Painel de Controle^000000]";
+	show "Login: ^FF0000"+@userid$+"^000000";
+//	show "Senha: ^FF0000"+@user_pass$+"^000000";
+	show "Email: ^FF0000"+@email$+"^000000";
+	show "Logou: ^FF0000"+@lgcount+"^000000 vezes";
+	show "Pontos pbGO: ^FF0000"+@pbgo+"^000000 pontos";
+//	show "Pontos de Cash: ^FF0000"+#CASHPOINTS+"^000000";
+	show "Senha do Armazém Kafra: ^FF0000"+#kafra_code+"^000000";
+	show "";
+	show "Você pode criar ^FF0000"+@invite+"^000000 nova(s) conta(s)";
+	show "";
+	
+	//Non-VIP
+	if( !getgmlevel() )
+	{
+		show "^FF0000Você não é um usuário VIP^000000.";
+	}
+	
+	//VIP commands
+	else if(getgmlevel()  == 1)
+	{
+		show "^FF0000Você é um usuário VIP^000000.";
+	}
+	
+	//VIP room
+	else if(getgmlevel() == 10)
+	{
+		show "^FF0000Você é um usuário VIP^000000.";
+	}
+	
+	//VIP total
+	else if(getgmlevel() > 10)
+	{
+		show "^FF0000Você é um usuário VIP^000000.";
+	}
+
+	show "";
+	show "Oque deseja fazer?";
+	next;
+	
+	
+	switch(select("- Trocar Senha","- Trocar Email","- Trocar Posição Char (Tela de Login)","- Verificar Logs","- Resetar Posição","- Transferir Zeny","- Criar Nova Conta",""))
+	{
+	
+		show "[^3240C0Painel de Controle^000000]";
+		
+		//Pass change
+		case 1:
+			show "Senha atual: ^FF0000"+@user_pass$+"^000000";
+			show "Insira nova senha.";
+			show "^FF0000Nova senha deve ter no mínimo 4 digitos e no máximo 20 e não é aconselhado inserir nenhum tipo de caracter especial^000000.";
+			next;
+			input @try_pass$;
+			show "[^3240C0Painel de Controle^000000]";
+			if(getstrlen(@try_pass$) < 4 || getstrlen(@try_pass$) > 20 || callfunc("strcheck_spell",@try_pass$) )
+			{
+				show "Senha inválida.";
+				close;
+			}
+			show "Senha escolhida: ^0000FF"+@try_pass$+"^000000";
+			show "Você deseja realmente trocá-la?";
+			next;
+			if(select("- Não.:- Sim.")==1) close;
+			query_sql("UPDATE `login` SET `user_pass`='"+escape_sql(@try_pass$)+"' WHERE `account_id`="+getcharid(3)+" LIMIT 1");
+			show "[^3240C0Painel de Controle^000000]";
+			show "Senha trocada com sucesso.";
+			show "Nova senha: ^0000FF"+@try_pass$+"^000000";
+		break;
+		
+		//Mail change
+		case 2:
+			show "Email atual: ^FF0000"+@email$+"^000000";
+			show "Insira novo email.";
+			show "^FF0000Sem o servidor do email, no caso se o email for usuario@servidor.com.br você deve digitar apenas o usuario^000000";
+			next;
+			input @try_email$;
+			show "[^3240C0Painel de Controle^000000]";
+			show "Qual o servidor do email? Escolha um da lista ou a opção para digitar o servidor de seu email.";
+			next;
+			switch(select("@hotmail.com","@gmail.com","Digitar Servidor"))
+			{
+				case 1: set @at_mail$, "@hotmail.com"; break;
+				case 2: set @at_mail$, "@gmail.com"; break;
+				
+				default:
+					show "Digite seu servidor de email, no caso se o email for usuario@servidor.com.br você deve digitar apenas o @servidor.com.br correspondente ao seu. (Ex: @uol.com.br, @yahoo.com, etc)";	
+					input @try_at$;
+					if( !compare(@try_at$,"@") )
+					{
+						show "[^3240C0Painel de Controle^000000]";
+						show "Email inválido.";
+						show "Você deve utilizar @servidor.com.br (Ex: @uol.com.br, @yahoo.com, etc). Não esqueça do @";
+						close;
+					}
+					set @at_mail$, @try_at$;
+				break;
+			}
+			set @try_email$, @try_email$ + @at_mail$;
+			next;
+			show "Email escolhido: ^0000FF"+@try_email$+"^000000";
+			show "Você deseja realmente trocá-lo?";
+			next;
+			if(select("- Não.:- Sim.")==1) close;
+			query_sql("UPDATE `login` SET `email`='"+escape_sql(@try_email$)+"' WHERE `account_id` ="+getcharid(3)+" LIMIT 1");
+			show "[^3240C0Painel de Controle^000000]";
+			show "Email trocado.";
+			show "Novo email: ^0000FF"+@try_email$+"^000000";
+		break;
+		
+		//Swap char position
+		case 3:
+			show "Ordenando chares por posição de login...";
+			next;
+			query_sql("SELECT `name`,`char_id`,`char_num` FROM `char` WHERE `account_id`="+getcharid(3)+" ORDER BY `char`.`char_num` ASC", @nameindex_handle$, @cid_handle, @pos_handle);
+			show "Posição - Nome";
+			for(set @i,0; @i < getarraysize(@cid_handle); set @i, @i+1)
+			{
+				show "^FF0000"+@pos_handle[@i]+"^000000 - ^0000FF"+@nameindex_handle$[@i]+"^000000";
+			}
+			show "Insira a posição do char que deseja trocar.";
+			next;
+			input @cp_chartoin;
+			show "[^3240C0Painel de Controle^000000]";
+			if(@cp_chartoin < 0 || @cp_chartoin > 18)
+			{
+				show "Número digitado vai além do número possível.";
+				close;
+			}
+			
+			set @lock_posin, callfunc("index2alocpos",@cp_chartoin);
+			
+			//TODO: ask to input again
+			if(@lock_posin == -1)
+			{
+				show "Não há nenhum char ocupando esta posição.";
+				close;
+			}
+			show "Char selecionado: ^FF0000"+@nameindex_handle$[@lock_posin]+"^000000";
+			show "Deseja movê-lo para qual posição?";
+			next;
+			input @cp_chartoff;
+			show "[^3240C0Painel de Controle^000000]";
+			if(@cp_chartoff < 0 || @cp_chartoff > 18)
+			{
+				show "Número digitado vai além do número possível.";
+				close;
+			}
+			
+			set @lock_posoff, callfunc("index2alocpos",@cp_chartoff);
+			
+			if(@lock_posoff == -1)
+			{
+				show "Não há nenhum char ocupando esta posição.";
+				show "Deseja mesmo movê-lo para esta posição?";
+				next;
+				if(select("- Não.:- Sim.")==1) close;
+				query_sql("UPDATE `char` SET `char_num`="+@cp_chartoff+" WHERE `char_id`="+@cid_handle[@lock_posin]+" LIMIT 1");
+				show "[^3240C0Painel de Controle^000000]";
+				show "Feito!";
+				close;
+			}
+			
+			show "Posição ocupada por:";
+			show "^FF0000"+@pos_handle[@lock_posoff]+" - "+@nameindex_handle$[@lock_posoff]+"^000000";
+			show "^0000FFDESEJA MESMO TROCÁ-LOS DE POSIÇÃO?^000000";
+			next;
+			if(select("- Não.:- Sim.")==1) close;
+			show "[^3240C0Painel de Controle^000000]";
+			show "Feito!";
+			//First posit input char
+			query_sql("UPDATE `char` SET `char_num`="+@cp_chartoff+" WHERE `char_id`="+@cid_handle[@lock_posin]+" LIMIT 1");
+			
+			//Then re-alocate left char
+			query_sql("UPDATE `char` SET `char_num`="+@cp_chartoin+" WHERE `char_id`="+@cid_handle[@lock_posoff]+" LIMIT 1");
+		break;
+		
+		//Stalkin log
+		case 4:
+			show "Esta opção não está disponível ainda.";
+			close;
+			
+			
+			show "Qual log deseja verificar?";
+			next;
+			if(select("- Não.:- Sim.")==1) close;
+			switch(select("- Trade log.","","",""))
+			{
+				case 1:
+					query_sql("SELECT `name`,`char_id` FROM `char` WHERE `account_id`="+getcharid(3)+" ORDER BY `char`.`char_num` ASC", @logname_handle$, @logcid_handle);
+					show "Posição - Nome";
+					for(set @i,0; @i < getarraysize(@logcid_handle); set @i, @i+1)
+					{
+						show "^FF0000"+@i+"^000000 - ^0000FF"+@logname_handle$[@i]+"^000000";
+					}
+					show "Insira posição do char que deseja visualiar:";
+					next;
+					input @try_slog;
+					show "[^3240C0Painel de Controle^000000]";
+					if(@try_slog > getarraysize(@logcid_handle))
+					{
+						show "Posição inválida.";
+						close;
+					}
+					query_sql("SELECT `time`,`nameid`,`amount`,`refine`,`card0`,`card1`,`card2`,`card3`,`map` FROM `picklog` WHERE `type`= 'T' AND `char_id`="+@try_slog+" LIMIT 10",
+					@log_time$, @log_nameid, @log_amount, @log_refine, @log_card0, @log_card1, @log_card2, @log_card3, @map$);
+					
+					
+				break;
+			}
+		case 5:
+			show "Esta opção não está disponível ainda.";
+			close;
+		break;
+		
+		case 6:
+			show "Esta opção não está disponível ainda.";
+			close;
+		break;
+		
+		case 7:
+			if(@invite < 1)
+			{
+				show "Que pena! Você não pode criar novas contas!";
+				show "";
+				show "Para você conseguir criar novas contas, você deve participar de algum Evento ou VIP Premiado que lhe de crédito para criar conta!";
+			close;
+			} else {
+				callfunc "F_NovaConta";
+			}
+		break;
+	}
+	close;
+	
+}
+
+
+//Function works in order to prevent special character strings on email, pass, whatever
+//Returns:
+//1 = Contains manned character
+//0 = Passed by, its clean
+
+function	script	strcheck_spell	{
+
+	if( compare("%",getarg(0)) )
+	{
+		return 1;
+	}
+	
+	return 0;
+}
+
+
+//Convert position login screen to array alocated position
+//Return:
+//-1: fail, isn't on the array
+//X: position in login screen
+
+function	script	index2alocpos	{
+
+	for(set @j,0; @j < getarraysize(@cid_handle); set @j, @j+1)
+	{
+		if(getarg(0) == @pos_handle[@j])
+		{
+			//Return array pos
+			return @j;
+		}
+	}
+	
+	//No matches found
+	return -1;
+	
+}

@@ -1,0 +1,61 @@
+prontera,156,180,4	script	Evento do Baú	406,{
+set .@name$, "[Senhor dos Baús]";
+
+set @pt, 0;
+
+query_sql("SELECT aniversario FROM login WHERE account_id = "+getcharid(3)+"",@pt);
+
+if(@pt==0) GOTO SAIR_S;
+
+show .@name$;
+show "Olá meu amigo, o que deseja hoje? Quer trocar seus "+@pt+" pontos por qual prêmio?";
+next;
+menu "- YGG (2 pontos)",YGG_A,"- Seed (1 ponto)",SEED_A,"- Sair",SAIR;
+
+YGG_A:
+set @pega, @pt / 2;
+show .@name$;
+show "Você pode pegar "+@pega+" YGGs. Quantas você gostaria de pegar agora?";
+next;
+input @qt;
+if(@qt == 0) { goto SAIR; }
+show .@name$;
+if(@qt > @pega) {
+show "Digite a quantidade que você tem direito.";
+next;
+goto YGG_A;
+}
+getitem 607, @qt;
+set @atu, @qt * 2;
+query_sql("UPDATE login SET aniversario = aniversario - "+@atu+" WHERE account_id = "+getcharid(3)+"");
+show "Ai está seu item, faça um bom uso.";
+close;
+
+SEED_A:
+show .@name$;
+show "Você pode pegar "+@pt+" YGGs. Quantas você gostaria de pegar agora?";
+next;
+input @qt;
+if(@qt == 0) { goto SAIR; }
+show .@name$;
+if(@qt > @pt) {
+show "Digite a quantidade que você tem direito.";
+next;
+goto SEED_A;
+}
+getitem 608, @qt;
+query_sql("UPDATE login SET aniversario = aniversario - "+@qt+" WHERE account_id = "+getcharid(3)+"");
+show "Ai está seu item, faça um bom uso.";
+close;
+
+SAIR:
+show .@name$;
+show "Ok, quando quiser estarei aqui!";
+close;
+
+SAIR_S:
+show .@name$;
+show "Que pena... Você não possui pontos!";
+close;
+
+}

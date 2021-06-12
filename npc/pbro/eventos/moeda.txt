@@ -1,0 +1,439 @@
+// 671 - MOEDA DE OURO
+// 675 - MOEDA DE PRATA
+// 673 - MOEDA DE BRONZE
+// 674 - MOEDA DE MYTHRIL
+// 677 - MOEDA DE PLATINA
+
+
+// Cambista
+
+
+prontera.gat,148,193,5	script	Economista	47,{
+
+show "[Economista]";
+show "Sou um dos mais renomados economistas de toda Rune-Midgard.";
+show "Portanto seja breve e diga logo o que quer de mim.";
+next;
+menu "Quero trocar itens",TROCA,"Quero saber mais sobre economia",INFO,"Qual a cotação do dia?",COTACAO,"Não quero nada",SAIR;
+
+TROCA:
+show "[Economista]";
+show "Vamos aos negócios!";
+show "Me diga por qual item deseja trocar.";
+next;
+menu "Taco",ITEM01,"Ba Gua",ITEM02,"Boneco de Osíris",ITEM03,"Boneco de Bafomé",ITEM04,"Mão Divina",ITEM05,"Ferradura em Chamas",ITEM06,"Ametista",ITEM07,"Coração Incandescente",ITEM08,"Rédeas",ITEM09;
+
+ITEM01:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(1529) < 1) { goto No_Item; }
+else { goto Yes_Item01; }
+
+ITEM02:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(7169) < 1) { goto No_Item; }
+else {goto Yes_Item02;}
+
+ITEM03:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(751) < 1) { goto No_Item; }
+else { goto Yes_Item03; }
+
+ITEM04:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(750) < 1) { goto No_Item; }
+else { goto Yes_Item04; }
+
+ITEM05:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(1009) < 17) { goto No_Item; }
+else { goto Yes_Item05; }
+
+ITEM06:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(7120) < 22) { goto No_Item; }
+else { goto Yes_Item06; }
+
+ITEM07:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(719) < 50) { goto No_Item; }
+else { goto Yes_Item07; }
+
+ITEM08:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(7097) < 36) { goto No_Item; }
+else { goto Yes_Item08; }
+
+ITEM09:
+show "[Economista]";
+show "Vamos ver se é possivel realizar a troca...";
+next;
+if (countitem(1064) < 14) { goto No_Item; }
+else { goto Yes_Item09; }
+
+No_Item:
+show "[Economista]";
+show "Desculpe, mas você não tem os itens necessarios para fazer a troca.";
+show "Volte quando tiver os itens...";
+close;
+
+Yes_Item01:
+show "[Economista]";
+show "É... Vamos aos negócios!";
+show "Me de os itens, que lhe darei a moeda.";
+delitem 1529,1;
+next;
+show "[Economista]";
+show "Ok, obrigado.";
+show "Volte sempre!";
+additem 674,1;
+close;
+
+Yes_Item02:
+show "[Economista]";
+show "Então... Vamos aos negócios!";
+show "Me de os item, que lhe darei a moeda.";
+delitem 7169,1;
+next;
+show "[Economista]";
+show "Tudo nos conformes, obrigado.";
+show "Volte sempre! E faremos trocas novamente";
+next;
+show "[Economista]";
+show "Aqui está sua moeda.";
+additem 674,1;
+show "Faça bom proveito!";
+close;
+
+Yes_Item03:
+show "[Economista]";
+show "Pois bem, vamos aos negócios!";
+show "Me de os item, que lhe darei a moeda.";
+delitem 751,1;
+next;
+show "[Economista]";
+show "Certinho, obrigado.";
+show "Aqui está sua moeda.";
+show "Faça bom proveito!";
+additem 674,1;
+close;
+
+Yes_Item04:
+show "[Economista]";
+show "Então... Vamos aos negócios!";
+show "Me de os item, que lhe darei a moeda.";
+delitem 750,1;
+next;
+show "[Economista]";
+show "Tudo certo, obrigado.";
+show "Volte sempre!";
+additem 674,1;
+close;
+
+Yes_Item05:
+show "[Economista]";
+show "Me de os item, que lhe darei a moeda.";
+delitem 1009,17;
+next;
+show "[Economista]";
+show "Volte sempre para negociarmos mais alguma coisa!";
+additem 674,1;
+close;
+
+Yes_Item06:
+show "[Economista]";
+show "Por favor me entregue os itens.";
+delitem 7120,22;
+next;
+show "[Economista]";
+show "Hmm... Vejamos...";
+show "Está tudo certo, muito obrigado. Faça bom proveito!";
+additem 674,1;
+close;
+
+Yes_Item07:
+show "[Economista]";
+show "Por favor me entregue os itens.";
+delitem 719,50;
+next;
+show "[Economista]";
+show "Está tudo certo, muito obrigado.";
+additem 674,1;
+close;
+
+Yes_Item08:
+show "[Economista]";
+show "Por favor me entregue os itens.";
+delitem 7097,36;
+next;
+show "[Economista]";
+show "Muito obrigado. Faça bom proveito!";
+additem 674,1;
+close;
+
+Yes_Item09:
+show "[Economista]";
+show "Por favor me entregue os itens.";
+delitem 1064,14;
+next;
+show "[Economista]";
+show "Está tudo certo, muito obrigado.";
+additem 674,1;
+close;
+
+INFO:
+show "[Economista]";
+show "Economia é o estudo dos processos de produção, circulação, distribuição consumo de bens... Etc.";
+next;
+show "[Economista]";
+show "Compliquei não foi?";
+show "Bom, irei simplicicar explicando como eu trabalho, assim você entendera melhor o que quero dizer.";
+next;
+show "[Economista]";
+show "Eu faço ^EF1B04Troca de Mercadorias^000000 e as pago em ^0F1FE3MOEDAS^000000 a qual tem um valor grande no mercado";
+next;
+show "Mas você deve estar pensando...";
+show "Pra que moedas se eu tenho a mercadoria?";
+show "Que eu posso trocar por outras mercadorias";
+next;
+show "[Economista]";
+show "Pois bem, a muito tempo atras era feito dessa forma, hoje em dia poucos aceitam aqui entre nós, acho que sou o unico da cidade que ainda aceita este tipo de negociação...";
+next;
+show "[Economista]";
+show "É desvantajoso para ambas as partes trocar mercadorias por mercadorias por isso temos esse Câmbio";
+show "(^0F1FE3Câmbio^000000: troca de moedas/mercadorias)";
+next;
+show "[Economista]";
+show "Resumindo eu sou um Cambista e você pode trocar suas mercadorias comigo por moedas, que você precisa para negociar no Negociador pbRO.";
+next;
+show "[Economista]";
+show "Se precisar de mais alguma informação me procure novamente.";
+show "Até breve!";
+next;
+show "[Economista]";
+show "Ah... Não se esqueça";
+show "^E82C0BConfira a cotação dos itens^000000 só estou aceitando itens valiosos ao meu ver";
+close;
+
+COTACAO:
+show "[Economista]";
+show "Hoje a procura esta grande.";
+show "Confira na lista os itens...";
+next;
+show "[Economista]";
+show "Abaixo alguns das mercadorias que estou procurando:";
+show "^34E40EPROCURO^000000 - ^E9310AQUANTIDADE^000000 - ^5772F1PAGO^000000";
+show " ";
+show "^34E40ETaco^000000 - ^E9310A1^000000 - ^5772F11 Moeda ^000000";
+show "^34E40EBa Gua^000000 - ^E9310A1^000000 - ^5772F11 Moeda ^000000";
+show "^34E40EBoneco de Osíris^000000 - ^E9310A1^000000 - ^5772F11 Moeda ^000000";
+show "^34E40EBoneco de Bafomé^000000 - ^E9310A1^000000 - ^5772F11 Moeda ^000000";
+show "^34E40EMão Divina^000000 - ^E9310A17^000000 - ^5772F11 Moeda ^000000";
+show "^34E40EFerradura em Chamas^000000 - ^E9310A22^000000 - ^5772F11 Moeda ^000000";
+show "^34E40EAmetista^000000 - ^E9310A50^000000 - ^5772F11 Moeda ^000000";
+show "^34E40ECoração Incandescente^000000 - ^E9310A36^000000 - ^5772F11 Moeda ^000000";
+show "^34E40ERédeas^000000 - ^E9310A14^000000 - ^5772F11 Moeda ^000000";
+next;
+show "[Economista]";
+show "Faça bom proveito, até a próxima visita";
+close;
+
+SAIR:
+show "[Economista]";
+show "...";
+show "Não me gaste meu tempo!";
+show "Volte quando tiver algo interessante...";
+close;
+}
+
+// Negociador pbRO
+
+prontera.gat,150,193,5	script	Negociador pbRO	61,{
+
+show "[Negociador pbRO]";
+show "Olá, em que posso ajuda-lo";
+next;
+menu "Mostre-me o mercado",MERCADO,"Quem é você?",QUEM,"Hmm, deixa pra la",SAIR;
+
+MERCADO:
+show "[Negociador pbRO]";
+show "Veja minhas mercadorias!";
+show "Disponivel no momento:";
+show "Obs: O numero que estiver dentro do [^34E40Ex^000000] corresponde ao numero de moedas necessárias para efetuar a troca";
+next;
+menu "Pergaminho da Adrenalina [^34E40E1^000000]",ADRENALINA,"Pergaminho do Vento [^34E40E1^000000]",VENTO,"Assumptio [^34E40E2^000000]",ASSUM,"Aspersio [^34E40E1^000000]",ASPERSIO,"Aumentar Agilidade [^34E40E1^000000]",AGI,"Bênção [^34E40E2^000000]",BENCAO,"Seguro de Vida [^34E40E1^000000]",SEGURO;
+
+ADRENALINA:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas suficientes para a troca";
+next;
+if (countitem(674) < 1) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado";
+show "Por favor me entregue a moeda";
+delitem 674,1;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12220,1;
+close;
+
+VENTO:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 1) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado, por favor me entregue a moeda.";
+delitem 674,1;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12219,1;
+close;
+
+ASSUM:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 2) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado";
+show "Por favor me entregue as moedas";
+delitem 674,2;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12218,1;
+close;
+
+ASPERSIO:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 1) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado";
+show "Por favor me entregue a moeda";
+delitem 674,1;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12217,1;
+close;
+
+AGI:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 1) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado";
+show "Por favor me entregue a moeda";
+delitem 674,1;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12216,1;
+close;
+
+BENCAO:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 2) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado, por favor me entregue as moedas.";
+delitem 674,2;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12215,1;
+close;
+
+SEGURO:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 1) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado";
+show "Por favor me entregue a moeda";
+delitem 674,1;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12209,1;
+close;
+
+ASAS:
+show "[Negociador pbRO]";
+show "Vejamos se você tem moedas";
+show "suficientes para a troca";
+next;
+if (countitem(674) < 3) goto No_Item;
+show "[Negociador pbRO]";
+show "Hmm, Ótimo!";
+show "Negócio fechado, por favor me entregue as moedas.";
+delitem 674,3;
+next;
+show "[Negociador pbRO]";
+show "Muito bem, aqui esta seu item";
+additem 12212,1;
+close;
+
+QUEM:
+show "[Negociador pbRO]";
+show "Sou um negociante comum...";
+show "Mas apenas negocio coisas valiosas e de meu interesse";
+show "você tem algo de valioso";
+next;
+menu "Sim, possuo",TROCA,"Infelizmente não",NAO_P;
+
+NAO_P:
+show "[Negociador pbRO]";
+show "Ah... que pena...";
+show "Volte quando tiver algo interessante, estarei aqui!";
+close;
+
+No_Item:
+show "[Negociador pbRO]";
+show "Infelizmente você não tem itens suficientes para realizar a troca.";
+show "Lamento mas não poderei fazer nada.";
+show "Volte quando tiver dinheiro!!";
+close;
+
+SAIR:
+show "[Negociador pbRO]";
+show "OK, boa sorte";
+show "Volte sempre!";
+close;
+}

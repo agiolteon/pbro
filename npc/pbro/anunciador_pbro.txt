@@ -1,0 +1,132 @@
+prontera.gat,1,1,1	script	anuncio_pbro	-1,{
+
+OnClock0025:
+announce "AVISO: NUNCA forneça sua senha a ninguém! GMs e ADMINs não pedem seus dados!",0;
+announce "AVISO: Caso veja alguém se passando por membro da Equipe pbGO, DENUNCIE!",0;
+end;
+
+OnClock0125:
+announce "AVISO: Visite o site/fórum da pbGO e sempre fique por dentro das novidades do pbRO!",0;
+end;
+
+OnClock0225:
+announce "AVISO: NUNCA informe seu LOGIN/SENHA/EMAIL a nenhum outro player ou GM/ADMIN.",0;
+announce "AVISO: Os seus dados devem pertencer apenas a você e mais ninguém!",0;
+end;
+
+OnClock0325:
+announce "AVISO: Altere sua senha regularmente, isso ajudara a proteger sua conta.",0;
+announce "AVISO: Jamais forneça os dados de sua conta para um GM/ADMIN! Denuncie caso aconteça!",0;
+end;
+
+OnClock0425:
+announce "AVISO: CUIDADO COM EMAIL FALSO!",0;
+announce "AVISO: Jamais utilize os links enviados por email!",0;
+announce "AVISO: Caso receba um email em nome da pbGO, entre no site para verificar o assunto tratado.",0;
+announce "AVISO: Se o assunto NÃO estiver na area de noticias da pbGO, CUIDADO o email é FALSO!",0;
+end;
+
+OnClock0525:
+announce "AVISO: Tome cuidado com sua confirmação VIP!",0;
+announce "AVISO: NUNCA forneça os dados de seu comprovante pelo jogo.",0;
+announce "AVISO: Muito menos para outros players ou GM/ADMIN. Faça somente pelo site do pbRO!!",0;
+end;
+
+OnClock0625:
+announce "AVISO: NUNCA forneça sua senha a ninguem! GMs e ADMINs não solicitam seus dados!",0;
+announce "AVISO: Caso veja alguém se passando por membro da Equipe pbGO, DENUNCIE!",0;
+end;
+
+OnClock0725:
+announce "AVISO: Visite o site/fórum da pbGO e sempre fique por dentro das novidades do pbRO!",0;
+end;
+
+OnClock0825:
+announce "AVISO: Altere sua senha regularmente, isso ajudara a proteger sua conta.",0;
+announce "AVISO: Jamais forneça os dados de sua conta para um GM/ADMIN! Denuncie caso aconteça!",0;
+end;
+
+OnClock0925:
+announce "AVISO: NUNCA informe seu LOGIN/SENHA/EMAIL a nenhum outro player ou GM/ADMIN.",0;
+announce "AVISO: Os seus dados devem pertencer apenas a você e mais ninguém!",0;
+end;
+
+OnClock1025:
+announce "AVISO: CUIDADO COM EMAIL FALSO!",0;
+announce "AVISO: Jamais utilize os links enviados por email!",0;
+announce "AVISO: Caso receba um email em nome da pbGO, entre no site para verificar o assunto tratado.",0;
+announce "AVISO: Se o assunto NÃO estiver na area de noticias da pbGO, CUIDADO o email é FALSO!",0;
+end;
+
+OnClock1125:
+announce "AVISO: Visite o site/fórum da pbGO e sempre fique por dentro das novidades do pbRO!",0;
+end;
+
+OnClock1225:
+announce "AVISO: Altere sua senha regularmente, isso ajudara a proteger sua conta.",0;
+announce "AVISO: Jamais forneça os dados de sua conta para um GM/ADMIN! Denuncie caso aconteça!",0;
+end;
+
+OnClock1325:
+announce "AVISO: Tome cuidado com sua confirmação VIP!",0;
+announce "AVISO: NUNCA forneça os dados de seu comprovante pelo jogo.",0;
+announce "AVISO: Muito menos para outros players ou GM/ADMIN. Faça somente pelo site do pbRO!!",0;
+end;
+
+OnClock1425:
+announce "AVISO: NUNCA informe seu LOGIN/SENHA/EMAIL a nenhum outro player ou GM/ADMIN.",0;
+announce "AVISO: Os seus dados devem pertencer apenas a você e mais ninguém!",0;
+end;
+
+OnClock1525:
+announce "AVISO: CUIDADO COM EMAIL FALSO!",0;
+announce "AVISO: Jamais utilize os links enviados por email!",0;
+announce "AVISO: Caso receba um email em nome da pbGO, entre no site para verificar o assunto tratado.",0;
+announce "AVISO: Se o assunto NÃO estiver na area de noticias da pbGO, CUIDADO o email é FALSO!",0;
+end;
+
+OnClock1625:
+announce "AVISO: NUNCA informe seu LOGIN/SENHA/EMAIL a nenhum outro player ou GM/ADMIN.",0;
+announce "AVISO: Os seus dados devem pertencer apenas a você e mais ninguém!",0;
+end;
+
+OnClock1725:
+announce "AVISO: Tome cuidado com sua confirmação VIP!",0;
+announce "AVISO: NUNCA forneça os dados de seu comprovante pelo jogo.",0;
+announce "AVISO: Muito menos para outros players ou GM/ADMIN. Faça somente pelo site do pbRO!!",0;
+end;
+
+OnClock1825:
+announce "AVISO: Visite o site/fórum da pbGO e sempre fique por dentro das novidades do pbRO!",0;
+announce "AVISO: NUNCA forneça sua senha a ninguem! GMs e ADMINs não solicitam seus dados!",0;
+announce "AVISO: Caso veja alguém se passando por membro da Equipe pbGO, DENUNCIE!",0;
+end;
+
+OnClock1925:
+announce "AVISO: CUIDADO COM EMAIL FALSO!",0;
+announce "AVISO: NUNCA utilize os links de atalho enviados por email!",0;
+announce "AVISO: Caso receba um email em nome da pbGO, entre no site para verificar o assunto tratado.",0;
+announce "AVISO: Se o assunto NÃO estiver na area de noticias da pbGO, CUIDADO o email é FALSO!",0;
+end;
+
+OnClock2025:
+announce "AVISO: Visite o site/fórum da pbGO e sempre fique por dentro das novidades do pbRO!",0;
+end;
+
+OnClock2125:
+announce "AVISO: Tome cuidado com sua confirmação VIP!",0;
+announce "AVISO: NUNCA forneça os dados de seu comprovante pelo jogo.",0;
+announce "AVISO: Muito menos para outros players ou GM/ADMIN. Faça somente pelo site do pbRO!!",0;
+end;
+
+OnClock2225:
+announce "AVISO: NUNCA forneça sua senha a ninguem! GMs e ADMINs não solicitam seus dados!",0;
+announce "AVISO: Caso veja alguém se passando por membro da Equipe pbGO, DENUNCIE!",0;
+end;
+
+OnClock2325:
+announce "AVISO: Tome cuidado com sua confirmação VIP!",0;
+announce "AVISO: NUNCA forneça os dados de seu comprovante pelo jogo.",0;
+announce "AVISO: Muito menos para outros players ou GM/ADMIN. Faça somente pelo site do pbRO!!",0;
+end;
+}

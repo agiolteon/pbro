@@ -1,0 +1,57 @@
+prontera,156,179,4	script	VIP Premiado	907,{
+
+if(getgmlevel()==0) goto AVISO;
+show "[VIP Premiado]";
+show "^FF0000Obrigado por Participar do VIP Premiado!!!^000000";
+show " ";
+show "Se você adquiriu um VIP Premiado você irá receber:";
+show " ";
+show "Pontos pbGO + Pacote de Consumiveis + Ovo Surpresa que ao ser aberto lhe dará 1 dos itens informado no site.";
+show " ";
+show "Caso você não tenha adquirido um VIP Premiado, acesse nosso site e confira como!";
+next;
+show "[VIP Premiado]";
+show "Lembre-se de não estar com muito peso para poder pegar seus itens, caso contrario os mesmos irão cair no chão!";
+show "";
+show "Agora que você já esta por dentro, me diga oque deseja?";
+next;
+menu "Receber Itens",SIM,"Voltar Mais Tarde",NAO;
+
+SIM:
+set @creditos,0;
+query_sql "SELECT promocao FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos;
+if(@creditos<1) goto SEMPONTO;
+set @creditos, @creditos - 1;
+query_sql("UPDATE login SET promocao = '"+@creditos+"' WHERE account_id = '"+getcharid(3)+"'");
+
+query_sql "SELECT bandeiras FROM login WHERE account_id ='"+getcharid(3)+"'", @sbands;
+getitem 12925,@sbands;
+
+if(getgmlevel()>1){
+getitem 12210,5;
+getitem 14533,10;
+getitem 12214,5;
+getitem 12710,100;
+}
+
+query_sql("UPDATE login SET bandeiras = '0' WHERE account_id ='"+getcharid(3)+"'");
+show "[VIP Premiado]";
+show "Pronto! Ai estão seus itens... Obrigado por ajudar o pbRO!";
+close;
+
+SEMPONTO:
+show "[VIP Premiado]";
+show "Você não pode fazer trocas comigo! Você ja recebeu ou não tem direito a receber os itens!!";
+close;
+
+NAO:
+show "[VIP Premiado]";
+show "Até breve!";
+close;
+
+AVISO:
+show "[VIP Premiado]";
+show "Eu entrego o ITENS dos usuários que fizeram doações nos dias do VIP Premiado.";
+close;
+}
+

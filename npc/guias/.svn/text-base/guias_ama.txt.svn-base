@@ -1,0 +1,119 @@
+//===== Cronus Script ========================================
+//= Guia de Amatsu
+//===== Por: =================================================
+//= MasterOfMuppets; L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.3a
+//===== Compatível com: ======================================
+//= Cronus SVN
+//===== Changelog: ===========================================
+//= 1.0 First version [MasterOfMuppets]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.1a Traduzido [Lucius~]
+//= 1.3 Script Reestruturado. [Mehah]
+//= 1.3a Revisado [RoM]
+//============================================================
+
+amatsu,207,89,3	script	Guia de Amatsu#1::Ama_Guide	758,{
+	show "[Amachang]";
+	show "Bem-vindo a Amatsu,";
+	show "a cidade da população amável";
+	show "e lindas flores de cereja.";
+	next;
+	show "[Amachang]";
+	show "Eu sou Amachang,";
+	show "a 13ª Miss Amatsu.";
+	show "Eu vou guiá-lo pela cidade";
+	show "como Miss Amatsu.";
+	show "Por favor, me fale";
+	show "se quiser saber de alguma coisa.";
+	next;
+	switch(select("Palácio","Loja de Utilidades","Loja de Armas","Bar")){
+	case 1:
+		viewpoint 1,85,235,0,0xFF3355;
+		show "[Amachang]";
+		show "No mini-mapa,";
+		show "va para ^FF3355+^000000";
+		show "para encontrar o Palácio.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	case 2:
+		viewpoint 1,96,118,1,0xCE6300;
+		show "[Amachang]";
+		show "No mini-mapa,";
+		show "va para ^CE6300+^000000";
+		show "para achar a Loja de Utilidades.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	case 3:
+		viewpoint 1,132,117,2,0x55FF33;
+		show "[Amachang]";
+		show "No mini-mapa,";
+		show "va para ^55FF33+^000000";
+		show "para achar a Loja de Armas.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	case 4:
+		viewpoint 1,217,116,3,0x3355FF;
+		show "[Amachang]";
+		show "No mini-mapa,";
+		show "va para ^3355FF+^000000";
+		show "para encontrar o Bar.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	}
+}
+
+amatsu,251,283,4	script	Guia de Amatsu#2::Ama_Guide2	767,{
+	show "[Guia]";
+	show "Bem-vindo, turista de";
+	show "Rune-Midgard.";
+	show "Eu sou o guia da";
+	show "nossa linda cidade, Amatsu.";
+	next;
+	show "[Guia]";
+	show "O que está procurando?";
+	next;
+	switch(select("Palácio","Loja de Utilidades","Loja de Armas","Bar")){
+	case 1:
+		viewpoint 1,85,235,0,0xFF3355;
+		show "[Guia]";
+		show "No mini-mapa,";
+		show "va para ^FF3355+^000000";
+		show "para encontrar o Palácio.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	case 2:
+		viewpoint 1,96,118,1,0xCE6300;
+		show "[Guia]";
+		show "No mini-mapa,";
+		show "va para ^CE6300+^000000";
+		show "para achar a Loja de Utilidades.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	case 3:
+		viewpoint 1,132,117,2,0x55FF33;
+		show "[Guia]";
+		show "No mini-mapa,";
+		show "va para ^55FF33+^000000";
+		show "para achar a Loja de Armas.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	case 4:
+		viewpoint 1,217,116,3,0x3355FF;
+		show "[Guia]";
+		show "No mini-mapa,";
+		show "va para ^3355FF+^000000";
+		show "para encontrar o Bar.";
+		show "Tenha uma boa estadia";
+		show "em Amatsu.";
+		close;
+	}
+}

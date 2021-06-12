@@ -1,0 +1,1417 @@
+prontera.gat,156,181,5	script	Premiador pbRO	833,{
+
+set @namep1$, "Elmo Fechado";
+set @premio1, 5131;
+set @preco1, 20;
+
+set @namep2$, "Chapéu de Angeling";
+set @premio2, 5132;
+set @preco2, 32;
+
+set @namep3$, "Chapéu de Ovelha";
+set @premio3, 5133;
+set @preco3, 10;
+
+set @namep4$, "Cabeça de Abóbora";
+set @premio4, 5134;
+set @preco4, 26;
+
+set @namep5$, "Olho do Ciclope";
+set @premio5, 5135;
+set @preco5, 22;
+
+set @namep6$, "Chapéu do Olho Mágico";
+set @premio6, 5138;
+set @preco6, 25;
+
+set @namep7$, "Hibiscus";
+set @premio7, 5139;
+set @preco7, 10;
+
+set @namep8$, ",Chapéu de Jibóia";
+set @premio8, 5388;
+set @preco8, 43;
+
+set @namep9$, "Elmo de Samurai";
+set @premio9, 5142;
+set @preco9, 28;
+
+set @namep10$, "Máscara de Kabuki";
+set @premio10, 5143;
+set @preco10, 28;
+
+set @namep11$, "Chapéu de Elefante";
+set @premio11, 5146;
+set @preco11, 26;
+
+set @namep12$, "Boné";
+set @premio12, 5147;
+set @preco12, 25;
+
+set @namep13$, "Tiara de Prata";
+set @premio13, 5149;
+set @preco13, 23;
+
+set @namep14$, "Fones Poringzor Ex71";
+set @premio14, 5151;
+set @preco14, 30;
+
+set @namep15$, "Coroa Chinesa";
+set @premio15, 5152;
+set @preco15, 21;
+
+set @namep16$, "Presilha de Angeling";
+set @premio16, 5153;
+set @preco16, 18;
+
+set @namep17$, "Tiara Dourada";
+set @premio17, 5179;
+set @preco17, 30;
+
+set @namep18$, "Másc. Senhor das Trevas";
+set @premio18, 5181;
+set @preco18, 45;
+
+set @namep19$, "Chapéu de Cachorrinho";
+set @premio19, 5182;
+set @preco19, 35;
+
+set @namep20$, "Chapéu de Ninho";
+set @premio20, 5183;
+set @preco20, 20;
+
+set @namep21$, "Quepe de Oficial";
+set @premio21, 5184;
+set @preco21, 36;
+
+set @namep22$, "Grinalda de Flores";
+set @premio22, 5185;
+set @preco22, 28;
+
+set @namep23$, "Tiara de Planta Carnívora";
+set @premio23, 5186;
+set @preco23, 23;
+
+set @namep24$, "Lacinhos Floridos";
+set @premio24, 5187;
+set @preco24, 20;
+
+set @namep25$, "Chapéu de Menestrel";
+set @premio25, 5188;
+set @preco25, 32;
+
+set @namep26$, "Lacinho";
+set @premio26, 5191;
+set @preco26, 15;
+
+set @namep27$, "Chapéu de Coelhinho";
+set @premio27, 5198;
+set @preco27, 35;
+
+set @namep28$, "Flor Romântica Branca";
+set @premio28, 5206;
+set @preco28, 25;
+
+set @namep29$, "Lendárias Asas de Anjo";
+set @premio29, 5210;
+set @preco29, 40;
+
+set @namep30$, "Chapéu de Donzela";
+set @premio30, 5211;
+set @preco30, 40;
+
+set @namep31$, "Chapéu de Satélite";
+set @premio31, 5212;
+set @preco31, 35;
+
+set @namep32$, "Orelhas de Coelho Pretas";
+set @premio32, 5213;
+set @preco32, 35;
+
+set @namep33$, "Chapéu da Flor do Luar";
+set @premio33, 5214;
+set @preco33, 45;
+
+set @namep34$, "Gatinho Sonâmbulo";
+set @premio34, 5219;
+set @preco34, 40;
+
+set @namep35$, "Chapéu de Parada";
+set @premio35, 5225;
+set @preco35, 37;
+
+set @namep36$, "Hélices 2.0";
+set @premio36, 5226;
+set @preco36, 36;
+
+set @namep37$, "Chapéu de Deviruchi";
+set @premio37, 5227;
+set @preco37, 46;
+
+set @namep38$, "Gatinho Dorminhoco";
+set @premio38, 5232;
+set @preco38, 40;
+
+set @namep39$, "Gorro";
+set @premio39, 5235;
+set @preco39, 36;
+
+set @namep40$, "Mestre Arcano";
+set @premio40, 5238;
+set @preco40, 30;
+
+set @namep41$, "Chapéu de Nove Caudas";
+set @premio41, 5252;
+set @preco41, 35;
+
+set @namep42$, "Boneca de Lif";
+set @premio42, 5253;
+set @preco42, 44;
+
+set @namep43$, "Chapéu de Deviling";
+set @premio43, 5254;
+set @preco43, 43;
+
+set @namep44$, "Família Poring";
+set @premio44, 5255;
+set @preco44, 40;
+
+set @namep45$, "Penacho da Valquíria";
+set @premio45, 5256;
+set @preco45, 44;
+
+set @namep46$, "Bandana de Mecânico";
+set @premio46, 5277;
+set @preco46, 40;
+
+set @namep47$, "Chapéu de Pintinho";
+set @premio47, 5283;
+set @preco47, 38;
+
+set @namep48$, "Coroa da Flor de Lótus";
+set @premio48, 5284;
+set @preco48, 41;
+
+set @namep49$, "Presilha de Cata-Vento";
+set @premio49, 5285;
+set @preco49, 34;
+
+set @namep50$, "Asas de Peco-Peco";
+set @premio50, 5286;
+set @preco50, 37;
+
+set @namep51$, "Chapéu de Piquenique";
+set @premio51, 5287;
+set @preco51, 30;
+
+set @namep52$, "Óculos Vermelhos";
+set @premio52, 5288;
+set @preco52, 30;
+
+set @namep53$, "Chapéu de Vanilmirth";
+set @premio53, 5289;
+set @preco53, 38;
+
+set @namep54$, "Chapéu de Coelhinho";
+set @premio54, 5290;
+set @preco54, 41;
+
+set @namep55$, "Chapéu de Chaleira";
+set @premio55, 5291;
+set @preco55, 27;
+
+set @namep56$, "Troféu do Caçador de Dragões";
+set @premio56, 5292;
+set @preco56, 30;
+
+set @namep57$, "Chapéu de Lamen";
+set @premio57, 5293;
+set @preco57, 28;
+
+set @namep58$, "Capuz de Sussurro";
+set @premio58, 5294;
+set @preco58, 45;
+
+set @namep59$, "Coroa de Flores";
+set @premio59, 5303;
+set @preco59, 25;
+
+set @namep60$, "Capuz da Escuridão";
+set @premio60, 5304;
+set @preco60, 45;
+
+set @namep61$, "Chapéu de Carmen Miranda";
+set @premio61, 5307;
+set @preco61, 40;
+
+set @namep62$, "Chapéu da Bandeira Brasileira";
+set @premio62, 5308;
+set @preco62, 35;
+
+set @namep63$, "Tiara da Lâmpada Acesa";
+set @premio63, 5310;
+set @preco63, 22;
+
+set @namep64$, "Hibiscus Gigante";
+set @premio64, 5311;
+set @preco64, 15;
+
+set @namep65$, "Chapéu do Governador";
+set @premio65, 5312;
+set @preco65, 36;
+
+set @namep66$, "Coroa de Ouro";
+set @premio66, 5313;
+set @preco66, 40;
+
+set @namep67$, "Máscara do Mason";
+set @premio67, 5314;
+set @preco67, 45;
+
+set @namep68$, "Rastreador GZ";
+set @premio68, 5315;
+set @preco68, 29;
+
+set @namep69$, "Chapéu de Frevo";
+set @premio69, 5316;
+set @preco69, 30;
+
+set @namep70$, "Chapéu de Pescador";
+set @premio70, 5317;
+set @preco70, 30;
+
+set @namep71$, "Lencinho";
+set @premio71, 5322;
+set @preco71, 20;
+
+set @namep72$, "Boneca da Lady Solace";
+set @premio72, 5324;
+set @preco72, 43;
+
+set @namep73$, "Olhos Biônicos";
+set @premio73, 5325;
+set @preco73, 30;
+
+set @namep74$, "Asinhas de Peco Peco";
+set @premio74, 5358;
+set @preco74, 44;
+
+set @namep75$, "Chapéu do Capitão";
+set @premio75, 5359;
+set @preco75, 40;
+
+set @namep76$, "Orelhas Felinas";
+set @premio76, 5360;
+set @preco76, 40;
+
+set @namep77$, "Pergaminho de Ninpou";
+set @premio77, 5362;
+set @preco77, 30;
+
+set @namep78$, "Disfarce de Peixe";
+set @premio78, 5380;
+set @preco78, 35;
+
+set @namep79$, "Chapéu de Caça";
+set @premio79, 5383;
+set @preco79, 30;
+
+set @namep80$, "Lacinho Meigo";
+set @premio80, 5140;
+set @preco80, 23;
+
+set @namep81$, "Lendárias Asas de Demônio [novo]";
+set @premio81, 5376;
+set @preco81, 55;
+
+set @namep82$, "Elmo Sombrio [novo]";
+set @premio82, 5373;
+set @preco82, 75;
+
+set @namep83$, "Chapéu de Rideword [novo]";
+set @premio83, 5208;
+set @preco83, 50;
+
+set @namep84$, "Cartola de Coelho [novo]";
+set @premio84, 5378;
+set @preco84, 50;
+
+set @namep85$, "Boina Romântica [novo]";
+set @premio85, 5379;
+set @preco85, 55;
+
+set @namep86$, "Tiara de Kafra Gatinha [novo]";
+set @premio86, 5387;
+set @preco86, 58;
+
+set @namep87$, "Chapéu de Jibóia [novo]";
+set @premio87, 5388;
+set @preco87, 60;
+
+set @namep88$, "Espírito Olímpico [novo]";
+set @premio88, 5389;
+set @preco88, 48;
+
+set @namep89$, "Chapéu de Gatinho Tagarela [novo]";
+set @premio89, 5372;
+set @preco89, 70;
+
+set @namep90$, "Boina Rosa [novo]";
+set @premio90, 5200;
+set @preco90, 40;
+
+set @namep91$, "Tiara de Orquídea [novo]";
+set @premio91, 5370;
+set @preco91, 45;
+
+set @namep92$, "Máscara de Fugitivo [novo]";
+set @premio92, 5361;
+set @preco92, 70;
+
+set @nameg$, 0;
+set @precog, 0;
+set @premiog, 0;
+set @comprado,0;
+
+
+//Inicio NPC
+show "[Premiador pbRO]";
+show "Olá, em que posso ajudar?";
+next;
+if(getgmlevel() > 19) {
+menu "Trocar Bandeiras",BANDEIRA,"Trocar Bandeiras (VIP)",VIP_BAND,"Onde conseguir bandeiras?",ONDE_B,"Sair",SAIR;
+}else{
+menu "Trocar Bandeiras",BANDEIRA,"Onde conseguir bandeiras?",ONDE_B,"Sair",SAIR;
+}
+
+ONDE_B:
+show "[Premiador pbRO]";
+show "Acesse nosso site e veja todos os eventos que estão ocorrendo para adquirir bandeiras e troca-las por itens!";
+close;
+
+VIP_BAND:
+show "[Premiador pbRO]";
+show "Estes são os itens que somente os usuarios VIP TOTAL tem acesso";
+show "Aqui você pode trocar bandeiras por itens exclusivos. Obs: Os itens do VIP TOTAL é possivel adquirir apenas 1 (UM) de cada!";
+next;
+show "[Premiador pbRO]";
+show "Confira a lista! Você como VIP TOTAL recebe um desconto de ^FF00005^000000 bandeiras em TODOS os itens, tanto para os itens VIP TOTAL como para os itens comuns!.";
+show "^FF0000Obs^000000: O que esta entre colchetes é o valor do item em bandeiras.";
+show "Ex: [0]";
+next;
+
+menu "- "+@namep14$+" [^FF0000"+@preco14+"^000000]",TROCA14,
+"- "+@namep18$+" [^FF0000"+@preco18+"^000000]",TROCA18,
+"- "+@namep19$+" [^FF0000"+@preco19+"^000000]",TROCA19,
+"- "+@namep21$+" [^FF0000"+@preco21+"^000000]",TROCA21,
+"- "+@namep27$+" [^FF0000"+@preco27+"^000000]",TROCA27,
+"- "+@namep29$+" [^FF0000"+@preco29+"^000000]",TROCA29,
+"- "+@namep36$+" [^FF0000"+@preco36+"^000000]",TROCA36,
+"- "+@namep37$+" [^FF0000"+@preco37+"^000000]",TROCA37,
+"- "+@namep86$+" [^FF0000"+@preco86+"^000000]",TROCA86,
+"- "+@namep87$+" [^FF0000"+@preco87+"^000000]",TROCA87,
+"- Proximo ->", PRO_VIP;
+
+PRO_VIP:
+menu "- "+@namep39$+" [^FF0000"+@preco39+"^000000]",TROCA39,
+"- "+@namep40$+" [^FF0000"+@preco40+"^000000]",TROCA40,
+"- "+@namep42$+" [^FF0000"+@preco42+"^000000]",TROCA42,
+"- "+@namep43$+" [^FF0000"+@preco43+"^000000]",TROCA43,
+"- "+@namep45$+" [^FF0000"+@preco45+"^000000]",TROCA45,
+"- "+@namep50$+" [^FF0000"+@preco50+"^000000]",TROCA50,
+"- "+@namep53$+" [^FF0000"+@preco53+"^000000]",TROCA53,
+"- "+@namep58$+" [^FF0000"+@preco58+"^000000]",TROCA58,
+"- "+@namep83$+" [^FF0000"+@preco83+"^000000]",TROCA83,
+"- "+@namep85$+" [^FF0000"+@preco85+"^000000]",TROCA85,
+"- Proximo ->", PRO_VIP1;
+
+pro_VIP1:
+menu "- "+@namep60$+" [^FF0000"+@preco60+"^000000]",TROCA60,
+"- "+@namep61$+" [^FF0000"+@preco61+"^000000]",TROCA61,
+"- "+@namep66$+" [^FF0000"+@preco66+"^000000]",TROCA66,
+"- "+@namep67$+" [^FF0000"+@preco67+"^000000]",TROCA67,
+"- "+@namep72$+" [^FF0000"+@preco72+"^000000]",TROCA72,
+"- "+@namep74$+" [^FF0000"+@preco74+"^000000]",TROCA74,
+"- "+@namep81$+" [^FF0000"+@preco81+"^000000]",TROCA81,
+"- "+@namep82$+" [^FF0000"+@preco82+"^000000]",TROCA82,
+"- "+@namep89$+" [^FF0000"+@preco89+"^000000]",TROCA89,
+"- "+@namep92$+" [^FF0000"+@preco92+"^000000]",TROCA92,
+"Sair", SAIR;
+
+
+BANDEIRA:
+show "[Premiador pbRO]";
+show "Confira minha lista de itens abaixo!";
+show "Obs: O que esta entre colchetes é o valor do item em bandeiras.";
+show "Ex: [0]";
+next;
+
+menu "- "+@namep1$+" [^FF0000"+@preco1+"^000000]",TROCA1,
+"- "+@namep2$+" [^FF0000"+@preco2+"^000000]",TROCA2,
+"- "+@namep3$+" [^FF0000"+@preco3+"^000000]",TROCA3,
+"- "+@namep4$+" [^FF0000"+@preco4+"^000000]",TROCA4,
+"- "+@namep5$+" [^FF0000"+@preco5+"^000000]",TROCA5,
+"- "+@namep6$+" [^FF0000"+@preco6+"^000000]",TROCA6,
+"- "+@namep7$+" [^FF0000"+@preco7+"^000000]",TROCA7,
+"- "+@namep80$+" [^FF0000"+@preco80+"^000000]",TROCA80,
+"- "+@namep84$+" [^FF0000"+@preco84+"^000000]",TROCA84,
+"- Proximo ->",PRO_MENU01;
+
+PRO_MENU01:
+menu "- "+@namep9$+" [^FF0000"+@preco9+"^000000]",TROCA9,
+"- "+@namep10$+" [^FF0000"+@preco10+"^000000]",TROCA10,
+"- "+@namep11$+" [^FF0000"+@preco11+"^000000]",TROCA11,
+"- "+@namep12$+" [^FF0000"+@preco12+"^000000]",TROCA12,
+"- "+@namep13$+" [^FF0000"+@preco13+"^000000]",TROCA13,
+"- "+@namep15$+" [^FF0000"+@preco15+"^000000]",TROCA15,
+"- "+@namep16$+" [^FF0000"+@preco16+"^000000]",TROCA16,
+"- "+@namep17$+" [^FF0000"+@preco17+"^000000]",TROCA17,
+"- "+@namep90$+" [^FF0000"+@preco90+"^000000]",TROCA90,
+"- "+@namep88$+" [^FF0000"+@preco88+"^000000]",TROCA88,
+"- Proximo ->",PRO_MENU02;
+
+PRO_MENU02:
+menu "- "+@namep20$+" [^FF0000"+@preco20+"^000000]",TROCA20,
+"- "+@namep22$+" [^FF0000"+@preco22+"^000000]",TROCA22,
+"- "+@namep23$+" [^FF0000"+@preco23+"^000000]",TROCA23,
+"- "+@namep24$+" [^FF0000"+@preco24+"^000000]",TROCA24,
+"- "+@namep25$+" [^FF0000"+@preco25+"^000000]",TROCA25,
+"- "+@namep26$+" [^FF0000"+@preco26+"^000000]",TROCA26,
+"- "+@namep28$+" [^FF0000"+@preco28+"^000000]",TROCA28,
+"- "+@namep30$+" [^FF0000"+@preco30+"^000000]",TROCA30,
+"- "+@namep91$+" [^FF0000"+@preco91+"^000000]",TROCA91,
+"- Proximo ->",PRO_MENU03;
+
+PRO_MENU03:
+menu "- "+@namep31$+" [^FF0000"+@preco31+"^000000]",TROCA31,
+"- "+@namep32$+" [^FF0000"+@preco32+"^000000]",TROCA32,
+"- "+@namep33$+" [^FF0000"+@preco33+"^000000]",TROCA33,
+"- "+@namep34$+" [^FF0000"+@preco34+"^000000]",TROCA34,
+"- "+@namep35$+" [^FF0000"+@preco35+"^000000]",TROCA35,
+"- "+@namep38$+" [^FF0000"+@preco38+"^000000]",TROCA38,
+"- "+@namep41$+" [^FF0000"+@preco41+"^000000]",TROCA41,
+"- "+@namep44$+" [^FF0000"+@preco44+"^000000]",TROCA44,
+"- Proximo ->",PRO_MENU04;
+
+PRO_MENU04:
+menu "- "+@namep46$+" [^FF0000"+@preco46+"^000000]",TROCA46,
+"- "+@namep47$+" [^FF0000"+@preco47+"^000000]",TROCA47,
+"- "+@namep48$+" [^FF0000"+@preco48+"^000000]",TROCA48,
+"- "+@namep49$+" [^FF0000"+@preco49+"^000000]",TROCA49,
+"- "+@namep51$+" [^FF0000"+@preco51+"^000000]",TROCA51,
+"- "+@namep52$+" [^FF0000"+@preco52+"^000000]",TROCA52,
+"- "+@namep54$+" [^FF0000"+@preco54+"^000000]",TROCA54,
+"- "+@namep55$+" [^FF0000"+@preco55+"^000000]",TROCA55,
+"- Proximo ->",PRO_MENU05;
+
+PRO_MENU05:
+menu "- "+@namep56$+" [^FF0000"+@preco56+"^000000]",TROCA56,
+"- "+@namep57$+" [^FF0000"+@preco57+"^000000]",TROCA57,
+"- "+@namep59$+" [^FF0000"+@preco59+"^000000]",TROCA59,
+"- "+@namep62$+" [^FF0000"+@preco62+"^000000]",TROCA62,
+"- "+@namep63$+" [^FF0000"+@preco63+"^000000]",TROCA63,
+"- "+@namep64$+" [^FF0000"+@preco64+"^000000]",TROCA64,
+"- "+@namep65$+" [^FF0000"+@preco65+"^000000]",TROCA65,
+"- "+@namep68$+" [^FF0000"+@preco68+"^000000]",TROCA68,
+"- Proximo ->",PRO_MENU06;
+
+PRO_MENU06:
+menu "- "+@namep69$+" [^FF0000"+@preco69+"^000000]",TROCA69,
+"- "+@namep70$+" [^FF0000"+@preco70+"^000000]",TROCA70,
+"- "+@namep71$+" [^FF0000"+@preco71+"^000000]",TROCA71,
+"- "+@namep73$+" [^FF0000"+@preco73+"^000000]",TROCA73,
+"- "+@namep75$+" [^FF0000"+@preco75+"^000000]",TROCA75,
+"- "+@namep76$+" [^FF0000"+@preco76+"^000000]",TROCA76,
+"- "+@namep77$+" [^FF0000"+@preco77+"^000000]",TROCA77,
+"- "+@namep78$+" [^FF0000"+@preco78+"^000000]",TROCA78,
+"- "+@namep79$+" [^FF0000"+@preco79+"^000000]",TROCA79,
+"Sair",SAIR;
+
+
+TROCA1:
+set @nameg$, @namep1$;
+set @precog, @preco1;
+set @premiog, @premio1;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA2:
+set @nameg$, @namep2$;
+set @precog, @preco2;
+set @premiog, @premio2;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA3:
+set @nameg$, @namep3$;
+set @precog, @preco3;
+set @premiog, @premio3;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA4:
+set @nameg$, @namep4$;
+set @precog, @preco4;
+set @premiog, @premio4;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA5:
+set @nameg$, @namep5$;
+set @precog, @preco5;
+set @premiog, @premio5;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA6:
+set @nameg$, @namep6$;
+set @precog, @preco6;
+set @premiog, @premio6;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA7:
+set @nameg$, @namep7$;
+set @precog, @preco7;
+set @premiog, @premio7;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA8:
+if(#comprado8==1) goto SO_UM;
+set @nameg$, @namep8$;
+set @precog, @preco8;
+set @premiog, @premio8;
+set @comprado, 8;
+goto TROCAG;
+
+TROCA9:
+set @nameg$, @namep9$;
+set @precog, @preco9;
+set @premiog, @premio9;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA10:
+set @nameg$, @namep10$;
+set @precog, @preco10;
+set @premiog, @premio10;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA11:
+set @nameg$, @namep11$;
+set @precog, @preco11;
+set @premiog, @premio11;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA12:
+set @nameg$, @namep12$;
+set @precog, @preco12;
+set @premiog, @premio12;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA13:
+set @nameg$, @namep13$;
+set @precog, @preco13;
+set @premiog, @premio13;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA14:
+if(#comprado14==1) goto SO_UM;
+set @nameg$, @namep14$;
+set @precog, @preco14;
+set @premiog, @premio14;
+set @comprado, 14;
+goto TROCAG;
+
+TROCA15:
+set @nameg$, @namep15$;
+set @precog, @preco15;
+set @premiog, @premio15;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA16:
+set @nameg$, @namep16$;
+set @precog, @preco16;
+set @premiog, @premio16;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA17:
+set @nameg$, @namep17$;
+set @precog, @preco17;
+set @premiog, @premio17;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA18:
+if(#comprado18==1) goto SO_UM;
+set @nameg$, @namep18$;
+set @precog, @preco18;
+set @premiog, @premio18;
+set @comprado, 18;
+goto TROCAG;
+
+TROCA19:
+if(#comprado19==1) goto SO_UM;
+set @nameg$, @namep19$;
+set @precog, @preco19;
+set @premiog, @premio19;
+set @comprado, 19;
+goto TROCAG;
+
+TROCA20:
+set @nameg$, @namep20$;
+set @precog, @preco20;
+set @premiog, @premio20;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA21:
+if(#comprado21==1) goto SO_UM;
+set @nameg$, @namep21$;
+set @precog, @preco21;
+set @premiog, @premio21;
+set @comprado, 21;
+goto TROCAG;
+
+TROCA22:
+set @nameg$, @namep22$;
+set @precog, @preco22;
+set @premiog, @premio22;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA23:
+set @nameg$, @namep23$;
+set @precog, @preco23;
+set @premiog, @premio23;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA24:
+set @nameg$, @namep24$;
+set @precog, @preco24;
+set @premiog, @premio24;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA25:
+set @nameg$, @namep25$;
+set @precog, @preco25;
+set @premiog, @premio25;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA26:
+set @nameg$, @namep26$;
+set @precog, @preco26;
+set @premiog, @premio26;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA27:
+if(#comprado27==1) goto SO_UM;
+set @nameg$, @namep27$;
+set @precog, @preco27;
+set @premiog, @premio27;
+set @comprado, 27;
+goto TROCAG;
+
+TROCA28:
+set @nameg$, @namep28$;
+set @precog, @preco28;
+set @premiog, @premio28;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA29:
+if(#comprado29==1) goto SO_UM;
+set @nameg$, @namep29$;
+set @precog, @preco29;
+set @premiog, @premio29;
+set @comprado, 29;
+goto TROCAG;
+
+TROCA30:
+set @nameg$, @namep30$;
+set @precog, @preco30;
+set @premiog, @premio30;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA31:
+set @nameg$, @namep31$;
+set @precog, @preco31;
+set @premiog, @premio31;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA32:
+set @nameg$, @namep32$;
+set @precog, @preco32;
+set @premiog, @premio32;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA33:
+set @nameg$, @namep33$;
+set @precog, @preco33;
+set @premiog, @premio33;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA34:
+set @nameg$, @namep34$;
+set @precog, @preco34;
+set @premiog, @premio34;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA35:
+set @nameg$, @namep35$;
+set @precog, @preco35;
+set @premiog, @premio35;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA36:
+if(#comprado36==1) goto SO_UM;
+set @nameg$, @namep36$;
+set @precog, @preco36;
+set @premiog, @premio36;
+set @comprado, 36;
+goto TROCAG;
+
+TROCA37:
+if(#comprado37==1) goto SO_UM;
+set @nameg$, @namep37$;
+set @precog, @preco37;
+set @premiog, @premio37;
+set @comprado, 37;
+goto TROCAG;
+
+TROCA38:
+set @nameg$, @namep38$;
+set @precog, @preco38;
+set @premiog, @premio38;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA39:
+if(#comprado39==1) goto SO_UM;
+set @nameg$, @namep39$;
+set @precog, @preco39;
+set @premiog, @premio39;
+set @comprado, 39;
+goto TROCAG;
+
+TROCA40:
+if(#comprado40==1) goto SO_UM;
+set @nameg$, @namep40$;
+set @precog, @preco40;
+set @premiog, @premio40;
+set @comprado, 40;
+goto TROCAG;
+
+TROCA41:
+set @nameg$, @namep41$;
+set @precog, @preco41;
+set @premiog, @premio41;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA42:
+if(#comprado42==1) goto SO_UM;
+set @nameg$, @namep42$;
+set @precog, @preco42;
+set @premiog, @premio42;
+set @comprado, 42;
+goto TROCAG;
+
+TROCA43:
+if(#comprado43==1) goto SO_UM;
+set @nameg$, @namep43$;
+set @precog, @preco43;
+set @premiog, @premio43;
+set @comprado, 43;
+goto TROCAG;
+
+TROCA44:
+set @nameg$, @namep44$;
+set @precog, @preco44;
+set @premiog, @premio44;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA45:
+if(#comprado45==1) goto SO_UM;
+set @nameg$, @namep45$;
+set @precog, @preco45;
+set @premiog, @premio45;
+set @comprado, 45;
+goto TROCAG;
+
+TROCA46:
+set @nameg$, @namep46$;
+set @precog, @preco46;
+set @premiog, @premio46;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA47:
+set @nameg$, @namep47$;
+set @precog, @preco47;
+set @premiog, @premio47;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA48:
+set @nameg$, @namep48$;
+set @precog, @preco48;
+set @premiog, @premio48;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA49:
+set @nameg$, @namep49$;
+set @precog, @preco49;
+set @premiog, @premio49;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA50:
+if(#comprado50==1) goto SO_UM;
+set @nameg$, @namep50$;
+set @precog, @preco50;
+set @premiog, @premio50;
+set @comprado, 50;
+goto TROCAG;
+
+TROCA51:
+set @nameg$, @namep51$;
+set @precog, @preco51;
+set @premiog, @premio51;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA52:
+set @nameg$, @namep52$;
+set @precog, @preco52;
+set @premiog, @premio52;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA53:
+if(#comprado53==1) goto SO_UM;
+set @nameg$, @namep53$;
+set @precog, @preco53;
+set @premiog, @premio53;
+set @comprado, 53;
+goto TROCAG;
+
+TROCA54:
+set @nameg$, @namep54$;
+set @precog, @preco54;
+set @premiog, @premio54;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA55:
+set @nameg$, @namep55$;
+set @precog, @preco55;
+set @premiog, @premio55;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA56:
+set @nameg$, @namep56$;
+set @precog, @preco56;
+set @premiog, @premio56;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA57:
+set @nameg$, @namep57$;
+set @precog, @preco57;
+set @premiog, @premio57;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA58:
+if(#comprado58==1) goto SO_UM;
+set @nameg$, @namep58$;
+set @precog, @preco58;
+set @premiog, @premio58;
+set @comprado, 58;
+goto TROCAG;
+
+TROCA59:
+set @nameg$, @namep59$;
+set @precog, @preco59;
+set @premiog, @premio59;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA60:
+if(#comprado60==1) goto SO_UM;
+set @nameg$, @namep60$;
+set @precog, @preco60;
+set @premiog, @premio60;
+set @comprado, 60;
+goto TROCAG;
+
+TROCA61:
+if(#comprado61==1) goto SO_UM;
+set @nameg$, @namep61$;
+set @precog, @preco61;
+set @premiog, @premio61;
+set @comprado, 61;
+goto TROCAG;
+
+TROCA62:
+set @nameg$, @namep62$;
+set @precog, @preco62;
+set @premiog, @premio62;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA63:
+set @nameg$, @namep63$;
+set @precog, @preco63;
+set @premiog, @premio63;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA64:
+set @nameg$, @namep64$;
+set @precog, @preco64;
+set @premiog, @premio64;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA65:
+set @nameg$, @namep65$;
+set @precog, @preco65;
+set @premiog, @premio65;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA66:
+if(#comprado66==1) goto SO_UM;
+set @nameg$, @namep66$;
+set @precog, @preco66;
+set @premiog, @premio66;
+set @comprado, 66;
+goto TROCAG;
+
+TROCA67:
+if(#comprado67==1) goto SO_UM;
+set @nameg$, @namep67$;
+set @precog, @preco67;
+set @premiog, @premio67;
+set @comprado, 67;
+goto TROCAG;
+
+TROCA68:
+set @nameg$, @namep68$;
+set @precog, @preco68;
+set @premiog, @premio68;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA69:
+set @nameg$, @namep69$;
+set @precog, @preco69;
+set @premiog, @premio69;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA70:
+set @nameg$, @namep70$;
+set @precog, @preco70;
+set @premiog, @premio70;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA71:
+set @nameg$, @namep71$;
+set @precog, @preco71;
+set @premiog, @premio71;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA72:
+if(#comprado72==1) goto SO_UM;
+set @nameg$, @namep72$;
+set @precog, @preco72;
+set @premiog, @premio72;
+set @comprado, 72;
+goto TROCAG;
+
+TROCA73:
+set @nameg$, @namep73$;
+set @precog, @preco73;
+set @premiog, @premio73;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA74:
+if(#comprado74==1) goto SO_UM;
+set @nameg$, @namep74$;
+set @precog, @preco74;
+set @premiog, @premio74;
+set @comprado, 74;
+goto TROCAG;
+
+TROCA75:
+set @nameg$, @namep75$;
+set @precog, @preco75;
+set @premiog, @premio75;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA76:
+set @nameg$, @namep76$;
+set @precog, @preco76;
+set @premiog, @premio76;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA77:
+set @nameg$, @namep77$;
+set @precog, @preco77;
+set @premiog, @premio77;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA78:
+set @nameg$, @namep78$;
+set @precog, @preco78;
+set @premiog, @premio78;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA79:
+set @nameg$, @namep79$;
+set @precog, @preco79;
+set @premiog, @premio79;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA80:
+set @nameg$, @namep80$;
+set @precog, @preco80;
+set @premiog, @premio80;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA81:
+if(#comprado81==1) goto SO_UM;
+set @nameg$, @namep81$;
+set @precog, @preco81;
+set @premiog, @premio81;
+set @comprado, 81;
+goto TROCAG;
+
+TROCA82:
+if(#comprado82==1) goto SO_UM;
+set @nameg$, @namep82$;
+set @precog, @preco82;
+set @premiog, @premio82;
+set @comprado, 82;
+goto TROCAG;
+
+TROCA83:
+if(#comprado83==1) goto SO_UM;
+set @nameg$, @namep83$;
+set @precog, @preco83;
+set @premiog, @premio83;
+set @comprado, 83;
+goto TROCAG;
+
+TROCA84:
+set @nameg$, @namep84$;
+set @precog, @preco84;
+set @premiog, @premio84;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA85:
+if(#comprado85==1) goto SO_UM;
+set @nameg$, @namep85$;
+set @precog, @preco85;
+set @premiog, @premio85;
+set @comprado, 85;
+goto TROCAG;
+
+TROCA86:
+if(#comprado86==1) goto SO_UM;
+set @nameg$, @namep86$;
+set @precog, @preco86;
+set @premiog, @premio86;
+set @comprado, 86;
+goto TROCAG;
+
+TROCA87:
+if(#comprado87==1) goto SO_UM;
+set @nameg$, @namep87$;
+set @precog, @preco87;
+set @premiog, @premio87;
+set @comprado, 87;
+goto TROCAG;
+
+TROCA88:
+set @nameg$, @namep88$;
+set @precog, @preco88;
+set @premiog, @premio88;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA89:
+if(#comprado89==1) goto SO_UM;
+set @nameg$, @namep89$;
+set @precog, @preco89;
+set @premiog, @premio89;
+set @comprado, 89;
+goto TROCAG;
+
+TROCA90:
+set @nameg$, @namep90$;
+set @precog, @preco90;
+set @premiog, @premio90;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA91:
+set @nameg$, @namep91$;
+set @precog, @preco91;
+set @premiog, @premio91;
+set @comprado, 0;
+goto TROCAG;
+
+TROCA92:
+if(#comprado92==1) goto SO_UM;
+set @nameg$, @namep92$;
+set @precog, @preco92;
+set @premiog, @premio92;
+set @comprado, 92;
+goto TROCAG;
+
+
+TROCAG:
+show "[Premiador pbRO]";
+show "Você realmente deseja levar um(a) ^FF0000"+@nameg$+"^000000 ?";
+if(getgmlevel() > 19) {
+set @precog, @precog - 5; }
+show "Isso vai lhe custar ^FF0000"+@precog+"^000000 Bandeiras.";
+next;
+menu "Sim, é isso mesmo",SIMS,"Não. Quero outro",NAON;
+
+SIMS:
+show "[Premiador pbRO]";
+show "Ok. Vejamos, você esta com todas as bandeiras necessarias?!";
+next;
+if(countitem(7549) < @precog) goto NO_BAN;
+show "[Premiador pbRO]";
+show "É... estar tudo certo, vamos aos negocios rápido. Tem mais gente querendo ser atendido!!";
+next;
+if(countitem(7549) < @precog) goto NO_BAN;
+if(@comprado==0){
+delitem 7549,@precog;
+additem @premiog,1;
+show "[Premiador pbRO]";
+show "Ai esta seu item, faça bom proveito. E lembre-se precisando estou aqui para realizarmos mais trocas!";
+close;
+}else{
+
+if(countitem(7549) < @precog) goto NO_BAN;
+
+if(@comprado==8) {
+set #comprado8, 1;
+goto DESENV;
+}
+
+if(@comprado==14) {
+set #comprado14, 1;
+goto DESENV;
+}
+
+if(@comprado==18) {
+set #comprado18, 1;
+goto DESENV;
+}
+
+if(@comprado==19) {
+set #comprado19, 1;
+goto DESENV;
+}
+
+if(@comprado==21) {
+set #comprado21, 1;
+goto DESENV;
+}
+
+if(@comprado==27) {
+set #comprado27, 1;
+goto DESENV;
+}
+
+if(@comprado==29) {
+set #comprado29, 1;
+goto DESENV;
+}
+
+if(@comprado==36) {
+set #comprado36, 1;
+goto DESENV;
+}
+
+if(@comprado==37) {
+set #comprado37, 1;
+goto DESENV;
+}
+
+if(@comprado==39) {
+set #comprado39, 1;
+goto DESENV;
+}
+
+if(@comprado==40) {
+set #comprado40, 1;
+goto DESENV;
+}
+
+if(@comprado==42) {
+set #comprado42, 1;
+goto DESENV;
+}
+
+if(@comprado==43) {
+set #comprado43, 1;
+goto DESENV;
+}
+
+if(@comprado==45) {
+set #comprado45, 1;
+goto DESENV;
+}
+
+if(@comprado==50) {
+set #comprado50, 1;
+goto DESENV;
+}
+
+if(@comprado==53) {
+set #comprado53, 1;
+goto DESENV;
+}
+
+if(@comprado==58) {
+set #comprado58, 1;
+goto DESENV;
+}
+
+if(@comprado==60) {
+set #comprado60, 1;
+goto DESENV;
+}
+
+if(@comprado==61) {
+set #comprado61, 1;
+goto DESENV;
+}
+
+if(@comprado==66) {
+set #comprado66, 1;
+goto DESENV;
+}
+
+if(@comprado==67) {
+set #comprado67, 1;
+goto DESENV;
+}
+
+if(@comprado==72) {
+set #comprado72, 1;
+goto DESENV;
+}
+
+if(@comprado==74) {
+set #comprado74, 1;
+goto DESENV;
+}
+
+if(@comprado==81) {
+set #comprado81, 1;
+goto DESENV;
+}
+
+if(@comprado==82) {
+set #comprado82, 1;
+goto DESENV;
+}
+
+if(@comprado==83) {
+set #comprado83, 1;
+goto DESENV;
+}
+
+if(@comprado==85) {
+set #comprado85, 1;
+goto DESENV;
+}
+
+if(@comprado==86) {
+set #comprado86, 1;
+goto DESENV;
+}
+
+if(@comprado==87) {
+set #comprado87, 1;
+goto DESENV;
+}
+
+if(@comprado==89) {
+set #comprado89, 1;
+goto DESENV;
+}
+
+if(@comprado==92) {
+set #comprado92, 1;
+goto DESENV;
+}
+}
+
+DESENV:
+delitem 7549,@precog;
+additem @premiog,1;
+show "[Premiador pbRO]";
+show "Ai esta seu item, faça bom proveito. Este é um item que pode ser adquirido apenas uma vez!! E lembre-se precisando estou aqui para realizarmos mais trocas!";
+close;
+
+SO_UM:
+show "[Premiador pbRO]";
+show "Desculpe mas este item você pode levar apenas um!";
+close;
+
+NO_BAN:
+show "[Premiador pbRO]";
+show "Você não tem bandeiras suficientes!";
+close;
+
+NAON:
+show "[Premiador pbRO]";
+show "Vamos lá, escolha outro que seja de seu agrado.";
+close;
+
+SAIR:
+show "[Premiador pbRO]";
+show "Esta certo, volte quando puder!";
+close;
+}

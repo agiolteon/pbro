@@ -1,0 +1,174 @@
+//===== Cronus Script ========================================
+//= Quest Habilidade de Mago
+//===== Por: =================================================
+//= kobra_k88
+//===== Versão Atuak: ========================================
+//= 1.6b
+//===== Compatível com: ====================================== 
+//= Cronus SVN
+//===== Descrição: =========================================== 
+//= [Aegis Conversion]
+//= Quest da Habilidade: Proteção Arcana
+//===== Comentários Adicionais: ============================== 
+//= 1.5 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//= 1.6 Fixed a typo in job check. (Bugreport:1531) [L0ne_W0lf]
+//= 1.6a Traduzido script [The Joker]
+//= 1.6b Revisão Geral do Script [Mara]
+//============================================================
+
+geffen_in,151,119,4	script	Grande Mago#qsk_mg	64,{
+	show "[BLIZZARDRISS]";
+	show "Ei ! Meu amigo !";
+	show "Eu estou vendo que você é um mago.";
+	show "Conheça a si mesmo para descobrir as";
+	show "suas habilidades secretas!";
+	next;
+	switch(select("Sobre as habilidades secretas de mago:Sobre a habilidade ^3355FF' Proteção Arcana '^000000:Terminar a conversa")) {
+	case 1:
+		show "[BLIZZARDRISS]";
+		show "Por muitos anos eu";
+		show "eu andei estudando a antiga";
+		show "magia de Geffen.";
+		show "Recentemente, eu descobri sobre uma";
+		show "grande habilidade esquecida! ! !";
+		show "Isso não é ótimo?";
+		next;
+		show "[BLIZZARDRISS]";
+		show "Essa habilidade usa sua energia";
+		show "mental para bloquear ataques contra você.";
+		show "Funciona como um escudo ou armadura mágico.";
+		show "Só algumas pessoas podem";
+		show "usar esta grande habilidade.";
+		next;
+		show "[BLIZZARDRISS]";
+		show "Mas a melhor parte é que eu posso";
+		show "usar essa habilidade! ! !";
+		show "Eu posso usá-la para me proteger de ataques !";
+		show "hah hah hah !!";
+		next;
+		show "[BLIZZARDRISS]";
+		show "Ok Ok, não fique muito animado.";
+		show "Ouça com atenção o que eu irei dizer.";
+		show "Aqueles que usam essa magia devem";
+		show "liberar a energia e habilidades";
+		show "que estão presas neles mesmos !";
+		next;
+		show "[BLIZZARDRISS]";
+		show "Se você quer mesmo aprender essa habilidade, você";
+		show "deve primeiro trazer alguns itens usados";
+		show "durante o processo.";
+		next;
+		show "[BLIZZARDRISS]";
+		show "3 ^3355FFBolinha de Gude^000000 ";
+		show "1 ^3355FFDiamante de 1 quilate^000000 ";
+		show "5 ^3355FFCasca^000000 ";
+		show "1 ^3355FFCasca Rija^000000 ";
+		show "Traga-me estes itens.";
+		next;
+		show "[BLIZZARDRISS]";
+		show "Além disso, mais uma coisa. . .";
+		show "Você deve ter uma certa experiência";
+		show "com a arte da magia. Quer dizer que";
+		show "você deve ter um nivel de classe de Mago 35 ou mais.";
+		next;
+		show "[BLIZZARDRISS]";
+		show "Bruxos já tem uma grande";
+		show "experiência no mundo da magia";
+		show "e não necessitam de nível de classe.";
+		show "Em qualquer caso, ambos devem estar";
+		show "treinados nessa arte e ter";
+		show "um alto grau de poder mental e físico.";
+		next;
+		show "[BLIZZARDRISS]";
+		show "OK . .";
+		show "Não há nada mais a dizer, você está interessado?";
+		close;
+	case 2:
+		if (getskilllv("MG_ENERGYCOAT") == 1) {
+			show "[BLIZZARDRISS]";
+			show "Eu posso ver que você já ";
+			show "desenvolveu essa habilidade.";
+			show "Sua habilidade com a 'Proteção Arcana' ";
+			show "é evidente.";
+			show "Eu sinto muito, ";
+			show "eu não tenho mais nada para ensiná-lo ...";
+			close;
+		}
+		else {
+			if (countitem(746) > 2 && countitem(730) > 0 && countitem(935) > 4 && countitem(943) > 0) {
+				if ((JobLevel > 34 && BaseJob == Job_Mage) || BaseJob == Job_Wizard || BaseJob == Job_Sage) {
+					show "[BLIZZARDRISS]";
+					show "Ok, eu irei atender seu pedido.";
+					show "Eu irei acordar sua energia adormecida . .";
+					show ". . . . . .";
+					show ". . . . . . . . . . . . .";
+					show ". . . . . . . . . . . . . . . . . . . . . . . . . .";
+					next;
+					show "[BLIZZARDRISS]";
+					show "Poderes antigos de";
+					show "Geffen! Eu procuro a iluminação e";
+					show "a honra de sua presença. ";
+					show "Eu me humilho diante de você!";
+					show " ...";
+					next;
+					show "[BLIZZARDRISS]";
+					show "Conceda-me o seu poder!";
+					show "Libere o espirito";
+					show "Escudo de Mana! Armadura de Metal!";
+					show ". . . . . . . . . . . .";
+					show "PROTEÇÃO ARCANA! ! !";
+					next;
+					delitem 746,3; //Glass_Bead
+					delitem 730,1; //Crystal_Jewel
+					delitem 935,5; //Shell
+					delitem 943,1; //Solid_Shell
+					skill "MG_ENERGYCOAT",1,0;
+					show "[BLIZZARDRISS]";
+					show ". . . . .";
+					show "Pronto. . .";
+					show "Agora você possui";
+					show "a habilidade de elite ^3355FF' Proteção Arcana '^000000 .";
+					show "Use-a bem.";
+					next;
+					show "[BLIZZARDRISS]";
+					show "Não ouse manchar o nome da";
+					show "nossa classe usando mal";
+					show "esta ou qualquer habilidade.";
+					show "Sua nova habilidade traz novas responsabilidades.";
+					close;
+				}
+			}
+			show "[BLIZZARDRISS]";
+			show "Ei!!";
+			show "Você não ouviu a minha explicação ? !";
+			show "Você não está com tudo preparado para";
+			show "que eu possa lhe ajudar.";
+			show "Cheque se você tem tudo o que eu pedi.";
+			next;
+			show "[BLIZZARDRISS]";
+			show "Se você precisar que eu explique";
+			show "de novo, venha me perguntar.";
+			show "Eu ficarei feliz em explicar";
+			show "se você quiser ouvir. . .";
+			close;
+		}
+	case 3:
+		show "[BLIZZARDRISS]";
+		show "O homem sábio deve ter muita paciência !";
+		show "Prepare-se novamente,";
+		show "e volte quando você estiver pronto.";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= v1.0a Now using functions found in "Global_Functions.txt"
+//= for class checks.[kobra_k88]
+//= 1.2 Added Baby Class Support [Lupus]
+//= 1.3 Removed callfunc Is_####_Class in favor of baseClass [Silentdragon]
+//= 1.4 Fixed exploit [Lupus]
+//= 1.4a Fixed some typos [IVBela]
+//= 1.4b changed perm. variables to temp ones [Lupus]
+//============================================================

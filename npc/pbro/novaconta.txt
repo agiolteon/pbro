@@ -1,0 +1,88 @@
+// Criar Nova Conta
+//====================================================================================== 
+function	script	F_NovaConta	{
+show " ";
+show "Então você deseja criar uma nova conta no pbRO!";
+show " ";
+show "Use apenas letras e números.";
+goto NOVA_CONTA;
+
+NOVA_CONTA:
+next;
+show "Informe o ^FF0000LOGIN^000000 desejado:";
+show " ";
+set @nv_nick$, "";
+set @existe$, "";
+input @nv_nick$;
+goto CHECAR_LOGIN;
+
+CHECAR_LOGIN:
+if(getstrlen(@nv_nick$)<5 || getstrlen(@nv_nick$)>20 || callfunc("strverificar",@nv_nick$)) {
+show "^FF0000O Login deve ter de 5 à 20 letrar/números.";
+set @nv_nick$, "";
+goto NOVA_CONTA;
+}
+query_sql "SELECT `userid` FROM `login` WHERE `userid` ='"+@nv_nick$+"'",@existe$;	
+if(@existe$=="") {
+goto PODE_MUDAR;
+}else{
+show "^FF0000Este login já existe, por favor escolha outro.";
+set @existe$, "";
+goto NOVA_CONTA;
+}
+
+SAIR:
+next;
+show "OK, volte quando precisar de mim.";
+close;
+
+PODE_MUDAR:
+show "Login: ^FF0000"+@nv_nick$+" ^000000disponivel, Deseja criar esta nova conta?";
+show " ";
+menu "Sim, agora mesmo!.",OK_TROCA,"Não, obrigado!",SAIR;
+
+OK_TROCA:
+next;
+show "Informe a ^FF0000SENHA^000000 desejada para a conta "+@nv_nick$+":";
+show " ";
+input @nv_senha$;
+next;
+show "Informe o ^FF0000SEXO^000000 da sua conta:";
+menu "Masculino",FM,"Feminino",FF;
+
+FM:
+set @nv_sexo$, "M";
+set @nv_sexon$, "Masculino";
+next;
+goto FINALIZAR;
+
+FF:
+set @nv_sexo$, "F";
+set @nv_sexon$, "Feminino";
+next;
+goto FINALIZAR;
+
+FINALIZAR:
+
+query_sql "SELECT `userid` FROM `login` WHERE `userid` ='"+@nv_nick$+"'",@existe$;	
+if(@existe$=="") {
+
+query_sql "UPDATE `login` SET `invite` = `invite` - 1 WHERE `account_id` ='"+getcharid(3)+"'";
+query_sql "INSERT INTO `login` (`userid`, `user_pass`, `sex`, `email`, `level`, `referencia`, `invite`, `pbgo`) VALUES ('"+escape_sql(@nv_nick$)+"', '"+escape_sql(@nv_senha$)+"', '"+escape_sql(@nv_sexo$)+"', 'aguardando@cadastro', '15', '"+getcharid(3)+"', '0', '0');";
+
+show "PRONTO! conta criada com sucesso! abaixo todos os dados:";
+show " ";
+show "Login: ^FF0000"+@nv_nick$+" ^000000";
+show "Senha: ^FF0000"+@nv_senha$+" ^000000";
+show "Sexo: ^FF0000"+@nv_sexon$+" ^000000";
+show " ";
+show "Agora basta logar na nova conta e cadastrar o PIN e EMAIL.";
+close;
+
+}else{
+show "Algum problema ocorreu durante a criação da nova conta. Tente novamente mais tarde...";
+}
+
+end;
+
+}

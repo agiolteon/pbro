@@ -1,16 +1,16 @@
-//===== eAthena Script =======================================
-//= Map flags that disable use of Butterfly wings
-//===== By: ==================================================
+//===== Cronus Script ========================================
+//= Map flags para desabilitar o uso de Butterfly wings
+//===== Por: =================================================
 //= eAthena Dev Team
-//= 1.4a [Lupus]
-//===== Notes: ===============================================
-//= For disabling Fly wings use noteleport
+//===== Versão Atual: ========================================
+//= 1.6
+//===== Changelog: ===========================================
 //= 1.3 According to the patch, enabled Butterfly wings in the Castles [Lupus]
 //= 1.4 Enabled Butterfly wings on PvP maps. [Skotlex]
 //= 1.4a Added job_knt. [Samuray22]
 //= 1.5 Commented out new_zone entries. [L0ne_W0lf]
 //= 1.6 Enabled B. wings on all maps but que_hugel. [L0ne_W0lf]
-//===== Current Version: =====================================
+//============================================================
 
 // Cities ========================
 //ayo_in01	mapflag	noreturn
@@ -44,7 +44,7 @@
 //payon_in01	mapflag	noreturn
 //payon_in02	mapflag	noreturn
 //payon_in03	mapflag	noreturn
-//prt_are_in	mapflag	noreturn
+prt_are_in	mapflag	noreturn
 //prt_are01	mapflag	noreturn
 //prt_castle	mapflag	noreturn
 //prt_church	mapflag	noreturn
@@ -134,16 +134,16 @@ que_hugel	mapflag	noreturn
 //nguild_prt	mapflag	noreturn
 
 // GvG Arenas ===================
-//guild_vs1	mapflag	noreturn
-//guild_vs2	mapflag	noreturn
-//guild_vs3	mapflag	noreturn
-//guild_vs4	mapflag	noreturn
-//guild_vs5	mapflag	noreturn
+guild_vs1	mapflag	noreturn
+guild_vs2	mapflag	noreturn
+guild_vs3	mapflag	noreturn
+guild_vs4	mapflag	noreturn
+guild_vs5	mapflag	noreturn
 
 // Arenas =====================>\\
-//arena_room	mapflag	noreturn
-//sec_in01	mapflag	noreturn
-//sec_in02	mapflag	noreturn
+arena_room	mapflag	noreturn
+sec_in01	mapflag	noreturn
+sec_in02	mapflag	noreturn
 
 // PvP Arenas=======================
 //pvp_y_room	mapflag	noreturn
@@ -228,4 +228,4 @@ que_hugel	mapflag	noreturn
 //pvp_n_8-3	mapflag	noreturn
 //pvp_n_8-4	mapflag	noreturn
 //pvp_n_8-5	mapflag	noreturn
-//pvp_2vs2	mapflag	noreturn
+pvp_2vs2	mapflag	noreturn

@@ -176,6 +176,7 @@ bc_pc	0
 bc_npc	8
 bc_yellow	0
 bc_blue	16
+bc_woe	32
 
 mf_nomemo	0
 mf_noteleport	1
@@ -223,6 +224,8 @@ mf_loadevent 42
 mf_nochat	43
 mf_noexppenalty	44
 mf_guildlock	45
+mf_nostorage    46 
+mf_noguildstorage       47
 
 cell_walkable	0
 cell_shootable	1
@@ -550,6 +553,17 @@ IG_Easter_Scroll	49
 IG_Pierre_Treasurebox	50
 IG_Cherish_Box	51
 IG_Cherish_Box_Ori	52
+IG_SurpNatal    53
+IG_SurpAngel    54
+IG_SurpMalig    55
+IG_MochilaV     56
+IG_MochilaH     57
+IG_OvoNamorados 58
+IG_OvoAmatsu    59
+IG_OvoDragao    60
+IG_PergFauna    61
+IG_OvoMajoru    62
+IG_OvoFada      63
 
 SC_ALL -1
 SC_STONE	0
@@ -1793,3 +1807,17 @@ TW_TOWER	812
 HAVEQUEST	0
 PLAYTIME	1
 HUNTING		2
+
+FW_DONTCARE	0
+FW_THIN	100
+FW_EXTRALIGHT	200
+FW_LIGHT	300
+FW_NORMAL	400
+FW_MEDIUM	500
+FW_SEMIBOLD	600
+FW_BOLD	700
+FW_EXTRABOLD	800
+FW_HEAVY	900
+
+TRUE	1
+FALSE	0

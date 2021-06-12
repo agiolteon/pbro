@@ -1,0 +1,234 @@
+//===== Cronus Script ========================================
+//= Guia das Cidades de Louyang
+//===== Por: =================================================
+//= jAthena/Tsuyuki; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2b
+//===== Compatível com: ======================================
+//= Cronus SVN
+//===== Changelog: ===========================================
+//= Fully working
+//= 0.5 Added first, Japanese version [Tsuyuki]
+//= 1.0 Translated to English from iRO NPC Dialogue (100% Official) [Tsuyuki]
+//= 1.1 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.2 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.2a Traduzido. [Frozen Cirius]
+//= 1.2b Revisado. [RoM]
+//============================================================
+
+louyang,213,213,3	script	Soldado#BA::LouGuide	825,{
+	show "[Soldado]";
+	show "Bem-vindo a Louyang,";
+	show "a cidade com uma longa";
+	show "e colorida história.";
+	next;
+	show "[Soldado]";
+	show "Recentemente nós construímos";
+	show "uma ponte através do oceano para";
+	show "acumular trocas culturais positivas";
+	show "com as outras nações.";
+	next;
+	show "[Soldado]";
+	show "Louyang é bem conhecida por suas muitas especialidades e por sua rica história. Aqui você pode achar coisas que são únicas de nossa terra.";
+	next;
+	show "[Soldado]";
+	show "Aproveite seu tempo";
+	show "e que você curta sua";
+	show "estadia aqui em Louyang.";
+	next;
+	switch(select("Indicações","Remover Indicações","Cancelar")) {
+	case 1:
+		show "[Soldado]";
+		show "Para onde você gostaria de ir?";
+		next;
+		switch(select("Castelo do Dragão","Consultório Médico","Prefeitura","Loja de Armas","Loja de Utilidades","Taverna","Cancelar")) {
+		case 1:
+			show "[Soldado]";
+			show "O Castelo do Dragão é localizado no ^FF3355+^000000. É onde todos os nobres moram, incluindo nosso mestre.";
+			next;
+			show "[Soldado]";
+			show "Como você é um forasteiro, seria apropriado você visitar nosso mestre primeiro.";
+			viewpoint 1,218,255,2,0xFF3355;
+			break;
+		case 2:
+			show "[Soldado]";
+			show "Nós temos uma médica muito habilidosa.";
+			show "Você pode encontrar o consultório dela no ^CE6300+^000000.";
+			next;
+			show "[Soldado]";
+			show "Dizem por aí que não há";
+			show "doença que ela não consiga curar. Bem, eu não posso garantir se é verdade ou não.";
+			viewpoint 1,263,94,3,0xCE6300;
+			break;
+		case 3:
+			show "[Soldado]";
+			show "Nós temos uma Prefeitura onde o governo federal opera.";
+			show "Ela está localizada no ^A5BAAD+^000000.";
+			next;
+			show "[Soldado]";
+			show "Se você tiver qualquer problema,";
+			show "você deve falar com os";
+			show "funcionários na Prefeitura.";
+			viewpoint 1,309,80,4,0xA5BAAD;
+			break;
+		case 4:
+			show "[Soldado]";
+			show "A Loja de Armas é localizada no ^55FF33+^000000.";
+			next;
+			show "[Soldado]";
+			show "Lá você vai ver";
+			show "maravilhosas armas forjadas";
+			show "pelos mais experientes";
+			show "ferreiros de Louyang.";
+			viewpoint 1,145,174,5,0x55FF33;
+			break;
+		case 5:
+			show "[Soldado]";
+			show "A Loja de Utilidades é localizada no ^3355FF+^000000.";
+			next;
+			show "[Soldado]";
+			show "Conhecer o inimigo";
+			show "já é meia batalha ganha!";
+			show "E também é mais seguro se preparar do que se lamentar depois. Porque você não vai lá fazer uma visita?";
+			viewpoint 1,135,98,6,0x3355FF;
+			break;
+		case 6:
+			show "[Soldado]";
+			show "Quando se sentir cansado de sua jornada, eu sugiro que visite a Taverna. Ela é localizada no ^00FF00+^000000.";
+			next;
+			show "[Soldado]";
+			show "A Taverna é um bom lugar para";
+			show "conhecer outros turistas, bem como ouvir informações que possam lhe ser úteis.";
+			viewpoint 1,280,167,7,0x00FF00;
+			break;
+		case 7:
+			show "[Soldado]";
+			show "Se você quer remover as indicações no seu mini-mapa,";
+			show "por favor selecione 'Remover Indicações' no menu.";
+		}
+		break;
+	case 2:
+		viewpoint 2,218,255,2,0xFF00FF;
+		viewpoint 2,263,94,3,0xFF00FF;
+		viewpoint 2,309,80,4,0xFF00FF;
+		viewpoint 2,145,174,5,0xFF00FF;
+		viewpoint 2,135,98,6,0xFF00FF;
+		viewpoint 2,280,167,7,0xFF00FF;
+		show "[Soldado]";
+		show "Pronto, apaguei as indicações no seu mini-mapa. Sinta-se à vontade pra me perguntar sobre qualquer construção quando você precisar.";
+		break;
+	case 3:
+		show "[Soldado]";
+		show "Eu acho divertido";
+		show "ás vezes, explorar os lugares";
+		show "por sí só. Cuide-se.";
+	}
+	close;
+}
+
+louyang,160,175,3	duplicate(LouGuide)	Soldado#BB	825
+
+louyang,224,104,3	script	Representante#lou	818,{
+	show "[Representante]";
+	show "Bem-vindo a Louyang,";
+	show "uma antiga terra com";
+	show "uma história cheia de contos";
+	show "de bravura.";
+	next;
+	show "[Representante]";
+	show "Agora nós temos uma ponte através do oceano que trazem viajantes interessantes á nós, proporcionando uma troca intercultural da qual todos tiramos benefícios.";
+	next;
+	show "[Representante]";
+	show "Louyang é famosa por";
+	show "sua história elaborada, bem como especialidades únicas daqui. Aproveite bem e divirta-se em sua estadia.";
+	next;
+	switch(select("Indicações","Remover Indicações","Cancelar")) {
+	case 1:
+		set .@compass_check,1;
+		show "[Representante]";
+		show "Onde você gostaria de ir?";
+		next;
+		switch(select("Castelo do Dragão","Consultório Médico","Prefeitura","Loja de Armas","Loja de Utilidades","Taverna","Cancelar")) {
+		case 1:
+			show "[Representante]";
+			show "O Castelo do Dragão é localizado no ^FF3355+^000000. É onde todos os nobres moram, incluindo nosso mestre.";
+			next;
+			show "[Representante]";
+			show "Como você é um forasteiro, seria apropriado você visitar nosso mestre primeiro.";
+			viewpoint 1,218,255,2,0xFF3355;
+			break;
+		case 2:
+			show "[Representante]";
+			show "Nós temos uma médica muito habilidosa.";
+			show "Você pode encontrar o consultório dela no ^CE6300+^000000.";
+			next;
+			show "[Representante]";
+			show "Dizem por aí que não há";
+			show "doença que ela não consiga curar. Bem, eu não posso garantir se é verdade ou não.";
+			viewpoint 1,263,94,3,0xCE6300;
+			break;
+		case 3:
+			show "[Representante]";
+			show "Nós temos uma Prefeitura onde o governo federal opera.";
+			show "Ela está localizada no ^A5BAAD+^000000.";
+			next;
+			show "[Representante]";
+			show "Se você tiver qualquer problema,";
+			show "você deve falar com os";
+			show "funcionários na Prefeitura.";
+			viewpoint 1,309,80,4,0xA5BAAD;
+			break;
+		case 4:
+			show "[Representante]";
+			show "A Loja de Armas é localizada no ^55FF33+^000000.";
+			next;
+			show "[Representante]";
+			show "Lá você vai ver";
+			show "maravilhosas armas forjadas";
+			show "pelos mais experientes";
+			show "ferreiros de Louyang.";
+			viewpoint 1,145,174,5,0x55FF33;
+			break;
+		case 5:
+			show "[Representante]";
+			show "A Loja de Utilidades é localizada no ^3355FF+^000000.";
+			next;
+			show "[Representante]";
+			show "Conhecer o inimigo";
+			show "já é meia batalha ganha!";
+			show "E também é mais seguro se preparar do que se lamentar depois. Porque você não vai lá fazer uma visita?";
+			viewpoint 1,135,98,6,0x3355FF;
+			break;
+		case 6:
+			show "[Representante]";
+			show "Quando se sentir cansado de sua jornada, eu sugiro que visite a Taverna. Ela é localizada no ^00FF00+^000000.";
+			next;
+			show "[Representante]";
+			show "A Taverna é um bom lugar para";
+			show "conhecer outros turistas, bem como ouvir informações que possam lhe ser úteis.";
+			viewpoint 1,280,167,7,0x00FF00;
+			break;
+		case 7:
+			show "[Representante]";
+			show "Se você quer remover as indicações no seu mini-mapa,";
+			show "por favor selecione 'Remover Indicações' no menu.";
+		}
+		break;
+	case 2:
+		viewpoint 2,218,255,2,0xFF00FF;
+		viewpoint 2,263,94,3,0xFF00FF;
+		viewpoint 2,309,80,4,0xFF00FF;
+		viewpoint 2,145,174,5,0xFF00FF;
+		viewpoint 2,135,98,6,0xFF00FF;
+		viewpoint 2,280,167,7,0xFF00FF;
+		show "[Representante]";
+		show "Pronto, apaguei as indicações no seu mini-mapa. Sinta-se à vontade pra me perguntar sobre qualquer construção quando você precisar.";
+		break;
+	case 3:
+		show "[Representante]";
+		show "Eu acho divertido";
+		show "ás vezes, explorar os lugares";
+		show "por sí só. Cuide-se.";
+	}
+	close;
+}

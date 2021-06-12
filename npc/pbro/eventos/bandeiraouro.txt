@@ -1,0 +1,723 @@
+//===== Cronus Script ========================================
+//= Evento 'Essa bandeira vale OURO!' (pbGO CUSTOM)
+//===== Por: ================================================= 
+//= Page
+//===== Versão Atual: ======================================== 
+//= 1.0
+//===== Comentários Adicionais: ============================== 
+//= 1.0  Primeiro relase do evento [Page]
+//=      Script feito as pressas, breve reestruturação do mesmo^^
+//============================================================ 
+
+//Premiador pbRO ------------------------------------------------
+prontera.gat,156,181,5	script	Premiador pbRO	833,{
+
+show "[Premiador pbRO]";
+show "Olá, jovem aventureiro.";
+show "Em que poderia ajudá-lo?";
+next;
+menu "Informações sobre o evento.",L_HOW,"Converter Bandeiras em Itens.",L_CONVERT; 
+
+L_HOW:
+show "[Premiador pbRO]";
+show "Hmm.. quais informações deseja, "+strcharinfo(0)+"?";
+L_PRINCIPAL:
+next;
+menu "Como consigo uma bandeira?",L_HOW1,"Onde se localizam os cristais?",L_HOW2,"Quais são os Itens de troca?",L_HOW3,"Até quando permanecerá esse evento?",L_HOW4,"Sair.",L_EXIT;
+
+L_HOW1:
+show "[Premiador pbRO]";
+show "Bem, você pode conseguir uma bandeira matando um monstro especial chamado 'Cristal pbRO'.";
+goto L_PRINCIPAL;
+
+L_HOW2:
+	show "[Premiador pbRO]";
+	show "Os cristais estão locaizados nos seguintes lugares:";
+	show "- ^FF0000Arredores de Prontera^000000";
+	show "- ^FF0000Arredores de Geffen^000000";
+	show "- ^FF0000Florestas de Payon^000000";
+	show "- ^FF0000Arena da Morte^000000";
+	goto L_PRINCIPAL;
+
+L_HOW3:
+show "[Premiador pbRO]";
+show "Os itens de troca, disponíveis no momento, são:";
+	show "- ^FF0000Boneca de Alice[1]^000000: 40 Bandeiras";
+//	show "- ^FF0000Boneca de Marionete[1]^000000: 20 Bandeiras";
+	show "- ^FF0000Chapéu de Gatinho^000000: 20 Bandeiras";
+	show "- ^FF0000Chapéu de Ovelha^000000: 7 Bandeiras";
+	show "- ^FF0000Coroa Chinesa^000000: 15 Bandeiras";
+	show "- ^FF0000Elmo Fechado^000000: 25 Bandeiras";
+	show "- ^FF0000Elmo de Samurai^000000: 20 Bandeiras";
+	show "- ^FF0000Hibiscus^000000: 7 Bandeiras";
+	show "- ^FF0000Lacinho Meigo^000000: 15 Bandeiras";
+	show "- ^FF0000Máscara de Kabuki[1]^000000: 15 Bandeiras";
+	show "- ^FF0000Máscara de Tigre^000000: 15 Bandeiras";
+	show "- ^FF0000Ninho Abandonado^000000: 12 Bandeiras";
+	show "- ^FF0000Olho Mágico^000000: 25 Bandeiras";
+	show "- ^FF0000Tiara de Prata^000000: 15 Bandeiras";
+	show "- ^FF0000Chapéu de Elefante^000000: 15 Bandeiras";
+
+// Novos Itens (Segunda Edição)
+	show "- ^FF0000Boné Vermelho^000000: 15 Bandeiras";
+	show "- ^FF0000Chapéu de Inverno^000000: 15 Bandeiras";
+	show "- ^FF0000Rosa Mística^000000: 10 Bandeiras";
+	show "- ^FF0000Máscara de Leão^000000: 20 Bandeiras";
+	show "- ^FF0000Chapéu de Angeling^000000: 30 Bandeiras";
+	show "- ^FF0000Cabeça de Abóbora^000000: 15 Bandeiras";
+	show "- ^FF0000Olho de Ciclope^000000: 15 Bandeiras";
+	show "- ^FF0000Barrete Frígio^000000: 15 Bandeiras";
+	show "- ^FF0000Fones Poringzor Ex71[1]^000000: 25 Bandeiras";
+	show "- ^FF0000Presilha de Angeling^000000: 15 Bandeiras";
+
+next;
+show "[Premiador pbRO]";
+show "Todos os itens abaixo do Chapéu de Elefante são itens que foram adicionados para essa Segunda Edição do evento.";
+goto L_PRINCIPAL;
+
+L_HOW4:
+show "[Premiador pbRO]";
+show "Querendo saber até quando o evento ficará ativado, eh?";
+show "Pois bem, este evento ficará ativado até o dia 03/03.";
+goto L_PRINCIPAL;
+
+L_EXIT:
+show "[Premiador pbRO]";
+show "Muito bem.";
+show "Caso deseja falar comigo novamente, não se esqueça de que pode voltar!";
+close;
+
+L_CONVERT:
+show "[Premiador pbRO]";
+show "Por favor, selecione o item que você deseja trocar por suas bandeiras.";
+next;
+menu "Boneca de Alice[1] - 40B",L_TRADE1,"Chapéu de Gatinho - 20B",L_TRADE3,"Chapéu de Ovelha - 7B",L_TRADE4,"Coroa Chinesa - 15B",L_TRADE5,"Elmo Fechado - 25B",L_TRADE6,"Elmo de Samurai - 20B",L_TRADE7,"Hibiscus - 7B",L_TRADE8,"Lacinho Meigo - 15B",L_TRADE9,"Máscara de Kabuki[1] - 15B",L_TRADE10,"Máscara de Tigre - 15B",L_TRADE11,"Ninho Abandonado - 12B",L_TRADE12,"Olho Mágico - 25B",L_TRADE13,"Tiara de Prata - 15B",L_TRADE14,"Chapéu de Elefante - 15B",L_TRADE15,"Boné Vermelho - 15B",L_TRADE16,"Chapéu de Inverno - 15B",L_TRADE17,"Rosa Mística - 10B",L_TRADE18,"Máscara de Leão - 20B",L_TRADE19,"Chapéu de Angeling - 30B",L_TRADE20,"Cabeça de Abóbora - 15B",L_TRADE21,"Olho de Ciclope - 15B",L_TRADE22,"Barrete Frígio - 15B",L_TRADE23,"Fones Poringzor Ex71[1] - 25B",L_TRADE24,"Presilha de Angeling - 15B",L_TRADE25,"Não desejo trocar agora, obrigado.",L_CANCELTRADE;
+
+L_CANCELTRADE:
+show "[Premiador pbRO]";
+show "Muito bem.";
+show "Sinta-se à vontade.";
+close;
+
+L_TRADE1:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000040 Bandeiras^000000 por uma ^FF0000Boneca de Alice[1]^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 40)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,40;
+additem 5137,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+//L_TRADE2:
+//show "[Premiador pbRO]";
+//show "Você tem certeza que deseja trocar ^FF000020 Bandeiras^000000 por uma ^FF0000Boneca de Marionete[1]^000000?";
+//next;
+//menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+//
+//show "[Premiador pbRO]";
+//if(countitem(7549) < 20)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+//show "Rip Rip Rip";
+//next;
+//show "Rip Rip Rip";
+//show "Tic Tac";
+//next;
+//show "Rip Rip Rip";
+//show "Tic Tac Tic Tac";
+//next;
+//show "[Premiador pbRO]";
+//delitem 7549,20;
+//additem 5141,1;
+//show "Aqui está. Obrigado por efetuar a troca.";
+//show "Tenha um bom dia!";
+//close;
+
+L_TRADE3:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000020 Bandeiras^000000 por um ^FF0000Chapéu de Gatinho^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 20)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,20;
+additem 5099,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE4:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF00007 Bandeiras^000000 por um ^FF0000Chapéu de Ovelha^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 7)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,7;
+additem 5133,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE5:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por uma ^FF0000Coroa Chinesa^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5152,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE6:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000025 Bandeiras^000000 por um ^FF0000Elmo Fechado^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 25)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,25;
+additem 5131,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE7:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000020 Bandeiras^000000 por um ^FF0000Elmo de Samurai^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 20)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,20;
+additem 5142,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE8:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF00007 Bandeiras^000000 por um ^FF0000Hibiscus^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 7)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,7;
+additem 5139,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE9:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Lacinho Meigo^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5140,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE10:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por uma ^FF0000Máscara de Kabuki[1]^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5143,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE11:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por uma ^FF0000Máscara de Tigre^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5098,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE12:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000012 Bandeiras^000000 por um ^FF0000Ninho Abandonado^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 12)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,12;
+additem 5129,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE13:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000025 Bandeiras^000000 por um ^FF0000Chapéu de Olho Mágico^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 25)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,25;
+additem 5138,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE14:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por uma ^FF0000Tiara de Prata^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5149,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE15:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Chapéu de Elefante^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5146,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE16:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Boné Vermelho^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5109,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE17:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Chapéu de Inverno^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5115,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE18:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000010 Bandeiras^000000 por um ^FF0000Rosa Mística^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 10)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,10;
+additem 5117,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE19:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000020 Bandeiras^000000 por um ^FF0000Máscara de Leão^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 20)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,20;
+additem 5130,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE20:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000030 Bandeiras^000000 por um ^FF0000Chapéu de Angeling^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 30)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,30;
+additem 5132,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE21:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Cabeça de Abóbora^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5134,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE22:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Olho de Ciclope^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5135,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE23:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Barrete Frígio^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5148,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE24:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000025 Bandeiras^000000 por um ^FF0000Fones Poringzor Ex71[1]^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 25)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,25;
+additem 5151,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_TRADE25:
+show "[Premiador pbRO]";
+show "Você tem certeza que deseja trocar ^FF000015 Bandeiras^000000 por um ^FF0000Presilha de Angeling^000000?";
+next;
+menu "Sim, quero efetuar a troca!",-,"Melhor pensando... não.",L_EXIT;
+
+show "[Premiador pbRO]";
+if(countitem(7549) < 15)goto L_DONTZENY;	//Verifica se possui bandeiras necessárias
+show "Rip Rip Rip";
+next;
+show "Rip Rip Rip";
+show "Tic Tac";
+next;
+show "Rip Rip Rip";
+show "Tic Tac Tic Tac";
+next;
+show "[Premiador pbRO]";
+delitem 7549,15;
+additem 5153,1;
+show "Aqui está. Obrigado por efetuar a troca.";
+show "Tenha um bom dia!";
+close;
+
+L_DONTZENY:
+show "Desculpe-me, mas você não possui bandeiras o suficientes para efetuar a troca.";
+close;
+
+}
+
+//-------------------------------------------------------------------------
+//MOBS DO EVENTO - TOTAL: 36 MAPAS - SPAWN: 30 MIN
+//-------------------------------------------------------------------------
+gef_fild01.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+gef_fild02.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+gef_fild03.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+gef_fild04.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+gef_fild05.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+gef_fild06.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+gef_fild07.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+gef_fild08.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+gef_fild09.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+gef_fild10.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+gef_fild11.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+gef_fild12.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+gef_fild13.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+gef_fild14.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+prt_fild01.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+prt_fild02.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+prt_fild03.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+prt_fild04.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+prt_fild05.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+prt_fild06.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+prt_fild07.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+prt_fild08.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+prt_fild09.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+prt_fild10.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+prt_fild11.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+pay_fild01.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+pay_fild02.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+pay_fild03.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+pay_fild04.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+pay_fild05.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+pay_fild06.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+pay_fild07.gat,0,0,0,0	monster	Cristal pbRO	1398,1,1800000,900000,0
+pay_fild08.gat,0,0,0,0	monster	Cristal pbRO	1395,1,1800000,900000,0
+pay_fild09.gat,0,0,0,0	monster	Cristal pbRO	1396,1,1800000,900000,0
+pay_fild10.gat,0,0,0,0	monster	Cristal pbRO	1397,1,1800000,900000,0
+guild_vs3.gat,0,0,0,0	monster	Cristal pbRO	1398,3,1800000,900000,0
+
+//-------------------------------------------------------------------------

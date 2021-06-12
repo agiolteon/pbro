@@ -1,0 +1,48 @@
+//===== Cronus Script ========================================
+//= Fabricante de Sorvete
+//===== Por: =================================================
+//= KOOK SWU
+//===== Versão Atual: ========================================
+//= 1.2c
+//===== Descrição: ===========================================
+//= Fabricante de Sorvete
+//===== Comentarios Adicionais: ==============================
+//= 1.1 Optimized, changed overlapping coords in Alberta [Lupus]
+//= 1.2 According to the patch, IceCream seller has been removed from Morocc [Lupus]
+//= 1.2a Traduzido [Mehah]
+//= 1.2b Revisado. [RoM]
+//============================================================
+
+alberta,120,45,2	script	Fabricante de Sorvete::IceCreamer	85,{
+	show "[Fabricante de Sorvete]";
+	show "Sorvete fresco feito com a neve de Lutie!";
+	show "Agora desfrute, não estará à venda durante muito tempo!";
+	show "E custará apenas ^0000FF100 Zenys^000000";
+	next;
+	if(select("Eu Gostaria!:Cancelar") == 1){
+		show "[Fabricante de Sorvete]";
+		show "Todo mundo quer nosso sorvete delicioso, mas nós limitamos a quantia,";
+		show "você so pode comprar ate 5 de cada !!";
+		next;
+		input .@input;
+		show "[Fabricante de Sorvete]";
+		if(.@input < 1)
+			show "A transação foi cancelada.";
+		else if(.@input > 5)
+			show "Desculpe, mas você só pode comprar 5 de cada vez.";
+		else if(Zeny < .@input*100)
+			show "Desculpe, mas você precisa de mais dinheiro.";
+		else {
+			set Zeny,Zeny-100*.@input;
+			additem 536,.@input;
+			show "Aqui está!";
+		}
+		close;
+	}
+	show "[Fabricante de Sorvete]";
+	show "Você tem certeza que não quer um sorvete?";
+	show "Já já estou indo em bora, e não voltarei em breve...";
+	close;
+}
+
+moc_fild16,88,304,4	duplicate(IceCreamer)	Fabricante de Sorvete#2	85

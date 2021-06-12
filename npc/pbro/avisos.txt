@@ -1,0 +1,200 @@
+function	script	Lockst	{
+return (getmapxy(.@mapname$,.@mapx,.@mapy,0,getarg(0))!=0) ? ""+getarg(0)+" [^FF0000OFF^000000]":""+getarg(0)+" [^0000FFON^000000] "+.@mapname$+"";
+}
+
+prt_church,24,177,4	script	 Gerenciador do  Mural 	952,{
+if(getgmlevel() > 20){
+show "[Gerenciador do Mural]";
+show "Selecione uma ação:";
+menu "Editar aviso",aviso,"Editar Notícia",pnot;
+aviso:
+next;
+show "[Gerenciador do Mural]";
+show "Digite o ^0000FFTítulo^000000 do Aviso"; 
+show "^FF0000Não esqueça de verificar erros gramaticais antes de confirmar^000000";
+next;
+input $nomeaviso$;
+next;
+show "[Gerenciador do Mural]";
+show "Digite ^0000FFo Aviso^000000"; 
+show "^FF0000Não esqueça de verificar erros gramaticais antes de confirmar^000000";
+next;
+input($aviso1$,1,600);
+next;
+show "[Gerenciador do Mural]";
+show "Digite a segunda linha do Aviso"; 
+show "Deixe em branco para não mostrar nada";
+next;
+input($aviso2$,1,600);
+next;
+show "[Gerenciador do Mural]";
+show "Aviso Editado";
+set $postador$, strcharinfo(0);
+close;
+end;
+
+pnot:
+next;
+show "[Gerenciador do Mural]";
+show "Digite o ^0000FFTítulo^000000 da notícia"; 
+show "^FF0000Não esqueça de verificar erros gramaticais antes de postar^000000";
+next;
+input $nomenoticia$;
+next;
+show "[Gerenciador do Mural]";
+show "Digite ^0000FFa Notícia^000000"; 
+show "^FF0000Não esqueça de verificar erros gramaticais antes de postar^000000";
+next;
+input($noticia1$,1,600);
+next;
+show "[Gerenciador do Mural]";
+show "Digite a segunda linha da notícia"; 
+show "Deixe em branco para não mostrar nada";
+next;
+input($noticia2$,1,600);
+next;
+show "[Gerenciador do Mural]";
+show "Notícia Editada.";
+close;
+end;
+}else{
+show "[Gerenciador do Mural]";
+show "Você não tem permissão para falar comigo...";
+close;
+}
+}
+
+prontera.gat,154,197,4	script	 Mural pbRO 	952,{
+set @nomenpc$, "[Mural pbRO]";
+show @nomenpc$;
+show "Oque deseja ver?";
+next;
+menu "Desejo ver as regras",regras,"Como me tornar vip",vip,"Desejo ver o aviso [^FF0000"+$nomeaviso$+"^000000]",avi,"Desejo ver a notícia [^FF0000"+$nomenoticia$+"^000000]",not;
+
+vip:
+next;
+show @nomenpc$;
+show "Doação? Porque isso?";
+show "O PBRO é um servidor brasileiro criado para que todos possam jogar este grande jogo gratuitamente, porém aceitamos doações para mantermos o servidor no AR pois tudo tem custo, lembrando que o pbRO NÃO tem FINS LUCRATIVOS. Os usuários que colaboram doando para o servidor tem o incentivo e agradecimento e se concede a possibilidade de se tornar um usuário VIP.";
+next;
+show @nomenpc$;
+show "Mais PBRO não é GRATIS?";
+show "Sim o PBRO é grátis! O VIP é um usuario como qualquer outro, só que tem direito a alguns beneficios e eventos no jogo o tornando ainda mais divertido!";
+next;
+show @nomenpc$;
+show "O que ganho doando?";
+show "Existem 3 tipos de VIP, o VIP 20, VIP 50 e VIP MAIS. Confira tudo sobre os vips no site www.pbgo.net na opção SEJA VIP";
+next;
+show @nomenpc$;
+show "Doando você ajuda o servidor e se diverte ainda mais!";
+close;
+end;
+
+eqp:
+next;
+show @nomenpc$;
+show callfunc("Lockst","[ADMIN] ThiagoOrtega");
+
+show "^0000FFLembrando que nenhum membro da Equipe pbRO NUNCA irá pedir seu loguin e senha^000000!";
+show "Qualquer dúvida mande um ^FF0000mail^000000 ou contate-os pelo ^FF0000fórum^000000";
+show "^0000FFwww.pbgo.net/forum^000000";
+close;
+end;
+
+regras:
+next;
+show "[^FF0000Sobre edição de client^000000]";
+show "É permanentemente proibida a edição do client, seja para alterar aparência ou qualquer outra opção, o mesmo vale para carregar GRFs que não as usadas pelo client do servidor.";
+show "A punição quando provada a ocorrência vai de suspensão da conta por 5 dias a 1 mês, aumentando gradativamente com o número de ocorrências";
+next;
+show "[^FF0000Sobre a Venda de Itens/Contas^000000]";
+show "É permanentemente proibida a venda de contas ou itens em dinheiro real ou qualquer tipo de troca se não por uma moeda de troca de dentro do servidor(de ambas partes).";
+show "As negociações de contas entre os servidores do pbRO não é proibida, mas é de completa responsabilidade do usuário, caso ocorra um caso de má fé por parte de algum usuário, a Equipe pbRO se reserva no direito de se isentar de qualquer responsabilidade perante ao ocorrido.";
+show "A punição varia de 1 semana a 1 mês de suspensão da conta, aumentando gradativamente com o número de ocorrências";
+next;
+show "[^FF0000Sobre a troca de itens falsos^000000]";
+show "Se entende sobre uma troca de itens falsos com intuítos de enganar o outro jogador colocando itens diferentes dos acordados pelos jogadores antes da negociação";
+show "Pedimos aos jogadores que tenham certeza de estarem negociando o item já acordado antes da negociação para evitar este tipo de ocorrência";
+show "Desconfie sempre de personagens babys, geralmente 1° classe ou aprendiz sem itens vendendo itens caros ou qualquer personagem que aparente ser feito rapidamente, sem estar bem upado e equipado, são contas apenas pra aplicar o golpe";
+show "Quando provado o ato, a punição vai de mute de 12 horas a suspensão da conta por 10 dias, aumentando gradativamente com o número de ocorrências";
+next;
+show "[^FF0000Sobre amigos falsos^000000]";
+show "Se entende um ato de amigo falso(ou fake) quando um jogador cria um novo personagem com o nick semelhante ao de amigo(s) de terceiros com o intuíto de se aproveitar da confiança entre os amigos para roubar itens";
+show "Quando provado o ato a punição varia de 2 semanas a 2 meses de suspensão da conta e perda dos itens roubados(se houver), aumentando gradativamente com o número de ocorrências";
+next;
+show "[^FF0000Sobre engano de itens^000000]";
+show "Se entende que ocorre este incidente quando um jogador sem a intenção de jogar um item no chão por erro do mesmo ou quando um jogador passa por engano algum item que iria ser entregue a outro jogador(errando o personagem na hora de solicitar negociação)";
+show "Esse tipo de ocorrência é de exclusiva e completa responsabilidade do usuário, manter a janela de equipamentos sempre aberta minimizada para evitar o item cair sem intenção e sempre se manter alerta na hora das negociações são obrigações do usuário";
+next;
+show "[^FF0000Kill Steal, KS(Roubo de Morte)/Mob Train(Arrastar monstros)^000000]";
+show "Kill Steal ocorre quando um jogador está batendo em um monstro e outro jogador o ataca sem o consentimento do jogador que atacou primeiro, a não ser que estejam acordados a atacar o monstro juntos";
+show "Mob Train é quando um jogador propositalmente atrai monstros até outro jogador com o intuíto de matá-lo ou prejudica-lo";
+show "A mesma regra se aplica quando um jogador cura ou buffa um monstro que outro jogador está atacando";
+show "Para monstros do tipo MvP e Mini-Boss não se aplica a regra de KS nem Mob Train, porém a de Curar/Buffar aplica-se, e consequentemente o infrator é passivo a punição";
+show "Quando provado o ato a punição varia de mute de 30 a suspensão da conta por 1 dia, aumentando gradativamente com o número de ocorrências";
+next;
+show "[^FF0000Uso de Programas Ilegais^000000]";
+show "É passivo de ban permanente qualquer jogador que tenha sido provado o uso de qualquer tipo de programa, meio, bug, ou técnica que automatize, edite ou de qualquer forma altere as ações do usuário que devem ser feitas apenas com o client do servidor de modo manual";
+show "O uso de AI para homunculos e assistentes não vale para esta regra";
+next;
+show "[^FF0000Bug Abuse^000000]";
+show "É dever de todo usuário quando encontrar um bug reportá-lo no fórum ou diretamente a algum membro da Equipe";
+show "Usar um bug em proveito próprio ou dependendo da gravidade pode acarretar até em suspensão permanente da conta";
+next;
+show "[^FF0000Skill Abuse^000000]";
+show "É considerado skill abuse quando um jogador com conciência do que está fazendo, usa continuamente uma habilidade desnecessariamente no meio da cidade ou em mapas com um fluxo maior de jogadores, a punição é de mute(tempo a critério da staff) no jogador infrator";
+next;
+show "[^FF0000Desrespeito^000000]";
+show "Qualquer tipo de desrespeito ou comentário com intuíto de humilhar, ridicularizar, desmoralizar, difamar ou discriminar qualquer membro da Equipe ou jogador por credo, cor, raça ou qualquer outra opção pessoal é proibido";
+show "A punição varia de mute de 30 minutos a 3 semanas de suspensão da conta, aumentando gradativamente com o número de ocorrências";
+next;
+show "[^FF0000Conduta^000000]";
+show "Assim como na vida real, aqui também existem regras de conduta a serem seguidas:";
+show " ";
+show "^0000FFNão tente enganar outro jogador de nenhum modo^000000";
+show "^0000FFNão tente roubar ou abusar da confiança de outro jogador de forma alguma^000000";
+show "^0000FFNão use habilidades para prejudicar os outros jogadores, usar portal em respawn de um jogador, proteger terreno em cima do portal, etc.^000000";
+show "^0000FFNão faça spamm difamando outros jogadores sem provas^000000";
+show " ";
+show "Todas regras de condutas estão sujeitas a punição, a critério da staff.";
+next;
+show "[^FF0000Como denunciar/Ver tabela de punidos^000000]";
+show "A Staff declara-se no direito (mas não no dever) de investigar e punir o responsável pelo roubo(caso seja provado), o mesmo vale para as contas relacionadas à conta banida; não haverá recuperação de itens ou contas, com exceção apenas quando a parte acusada confessar e querer devolver.";
+show "Declaramos também que estas presentes regras podem ser mudadas sem qualquer aviso prévio, ficando a dever do jogador manter-se sempre atualizado.";
+show "Qualquer denúncia desse tipo de ocorrência deve ser denunciada no fórum.";
+show "Em casos de urgência com alguma ajuda contate os CMs ou GMs por mail in game ou Mensagem Pessoal no fórum";
+show "^0000FFwww.pbgo.net/forum^000000";
+close;
+end;
+
+avi:
+next;
+show "[^FF0000"+$nomeaviso$+"^000000]";
+show "Postado por: ^0000FF"+$postador$+"^000000";
+show " ";
+show ""+$aviso1$+"";
+show ""+$aviso2$+"";
+close;
+end;
+
+not:
+next;
+show "[^FF0000"+$nomenoticia$+"^000000]";
+show ""+$noticia1$+"";
+show ""+$noticia2$+"";
+close;
+end;
+
+}
+
+
+
+//izlude,1,1,4	script	 Novend#451 	-1,{
+//OnInit:
+//setcell "izlude",1,1,350,350,cell_novending,1;
+//setcell "pay_arche",1,1,350,350,cell_novending,1;
+//}
+
+
+pay_dun00	mapflag	nobranch
+mosk_dun01	mapflag	nobranch

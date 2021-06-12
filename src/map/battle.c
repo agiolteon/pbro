@@ -298,7 +298,7 @@ int battle_calc_damage(struct block_list *src,struct block_list *bl,struct Damag
 	sc = status_get_sc(bl);
 
 	if( sc && sc->data[SC_INVINCIBLE] && !sc->data[SC_INVINCIBLEOFF] )
-		return 0;
+		return 1;
 
 	if (skill_num == PA_PRESSURE)
 		return damage; //This skill bypass everything else.
@@ -570,7 +570,7 @@ int battle_calc_bg_damage(struct block_list *src, struct block_list *bl, int dam
 				if( flag&BF_LONG )
 					damage = damage * battle_config.bg_long_damage_rate/100;
 			}
-			
+	
 			if( !damage ) damage = 1;
 	}
 
@@ -1674,6 +1674,9 @@ static struct Damage battle_calc_weapon_attack(struct block_list *src,struct blo
 				case HFLI_SBR44:	//[orn]
 					skillratio += 100 *(skill_lv-1);
 					break;
+				case NPC_VAMPIRE_GIFT:
+					skillratio += ((skill_lv-1)%5+1)*100;
+					break;
 			}
 
 			ATK_RATE(skillratio);
@@ -2429,7 +2432,7 @@ struct Damage battle_calc_magic_attack(struct block_list *src,struct block_list 
 			else
 				ad.damage = ad.damage * (100-mdef)/100 - mdef2;
 		}
-		
+	
 		if (skill_num == NPC_EARTHQUAKE)
 		{	//Adds atk2 to the damage, should be influenced by number of hits and skill-ratio, but not mdef reductions. [Skotlex]
 			//Also divide the extra bonuses from atk2 based on the number in range [Kevin]
@@ -2962,7 +2965,7 @@ enum damage_lv battle_weapon_attack(struct block_list* src, struct block_list* t
 		int duration = skill_get_time2(MO_BLADESTOP,skilllv);
 		status_change_end(target, SC_BLADESTOP_WAIT, -1);
 		if(sc_start4(src, SC_BLADESTOP, 100, sd?pc_checkskill(sd, MO_BLADESTOP):5, 0, 0, target->id, duration))
-	  	{	//Target locked.
+		{	//Target locked.
 			clif_damage(src, target, tick, sstatus->amotion, 1, 0, 1, 0, 0); //Display MISS.
 			clif_bladestop(target, src->id, 1);
 			sc_start4(target, SC_BLADESTOP, 100, skilllv, 0, 0, src->id, duration);
@@ -3342,7 +3345,7 @@ int battle_check_target( struct block_list *src, struct block_list *target,int f
 		else
 			return -1;
 	}
-	else if( flag == BCT_NOONE ) //Why would someone use this? no clue.
+	if( flag == BCT_NOONE ) //Why would someone use this? no clue.
 		return -1;
 	
 	if( t_bl == s_bl )
@@ -3727,7 +3730,7 @@ static const struct _battle_data {
 	{ "hack_info_GM_level",                 &battle_config.hack_info_GM_level,              60,     0,      100,            },
 	{ "any_warp_GM_min_level",              &battle_config.any_warp_GM_min_level,           20,     0,      100,            },
 	{ "who_display_aid",                    &battle_config.who_display_aid,                 40,     0,      100,            },
-	{ "packet_ver_flag",                    &battle_config.packet_ver_flag,                 0xFFFF, 0x0000, 0xFFFF,         },
+	{ "packet_ver_flag",                    &battle_config.packet_ver_flag,                 0xFFFFFF,0x0000,INT_MAX,        },
 	{ "min_hair_style",                     &battle_config.min_hair_style,                  0,      0,      INT_MAX,        },
 	{ "max_hair_style",                     &battle_config.max_hair_style,                  23,     0,      INT_MAX,        },
 	{ "min_hair_color",                     &battle_config.min_hair_color,                  0,      0,      INT_MAX,        },
@@ -3832,6 +3835,7 @@ static const struct _battle_data {
 	{ "skill_add_heal_rate",                &battle_config.skill_add_heal_rate,             7,      0,      INT_MAX,        },
 	{ "eq_single_target_reflectable",       &battle_config.eq_single_target_reflectable,    1,      0,      1,              },
 	{ "invincible.nodamage",                &battle_config.invincible_nodamage,             0,      0,      1,              },
+	{ "mob_slave_keep_target",              &battle_config.mob_slave_keep_target,           0,      0,      1,              },
 // BattleGround Settings
 	{ "bg_update_interval",                 &battle_config.bg_update_interval,              1000,   100,    INT_MAX,        },
 	{ "bg_short_attack_damage_rate",        &battle_config.bg_short_damage_rate,            80,     0,      INT_MAX,        },
@@ -3840,6 +3844,12 @@ static const struct _battle_data {
 	{ "bg_magic_attack_damage_rate",        &battle_config.bg_magic_damage_rate,            60,     0,      INT_MAX,        },
 	{ "bg_misc_attack_damage_rate",         &battle_config.bg_misc_damage_rate,             60,     0,      INT_MAX,        },
 	{ "bg_flee_penalty",                    &battle_config.bg_flee_penalty,                 20,     0,      INT_MAX,        },
+// Cronus Custom
+	{ "no_prt_vending",                     &battle_config.no_prt_vending,                  BL_NUL, BL_NUL, BL_ALL,         },
+	{ "no_prt_chating",                     &battle_config.no_prt_chating,                  BL_NUL, BL_NUL, BL_ALL,         },
+	{ "vending_overflow",                   &battle_config.vending_overflow,                BL_NUL, BL_NUL, BL_ALL,         },
+	{ "no_warp_ress",                       &battle_config.no_warp_ress,                    BL_NUL, BL_NUL, BL_ALL,         },
+
 };
 
 

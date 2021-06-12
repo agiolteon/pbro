@@ -530,6 +530,8 @@ static int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseF
 	CREATE(session[fd], struct socket_data, 1);
 	CREATE(session[fd]->rdata, unsigned char, RFIFO_SIZE);
 	CREATE(session[fd]->wdata, unsigned char, WFIFO_SIZE);
+	session[fd]->con        = 0;
+	session[fd]->packetver  = 0;
 	session[fd]->max_rdata  = RFIFO_SIZE;
 	session[fd]->max_wdata  = WFIFO_SIZE;
 	session[fd]->func_recv  = func_recv;

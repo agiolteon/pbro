@@ -1,0 +1,115 @@
+prontera,156,179,4	script	VIP Premiado	907,{
+
+if(getgmlevel()==0) goto AVISO;
+show "[VIP Premiado]";
+show "Leia com atenção! Caso não siga as instruções corretamente poderá perder o item!";
+next;
+show "^FF0000Preste atenção nas informações:^000000";
+show " ";
+show "Primeiro: Não relogue, não feche o jogo, não faça nada que perca conexão com o jogo, por que após pedir o item ROPS ao NPC você não podera fazer outra solicitação.";
+show " ";
+show "Segundo: Caso você cancele ou saia do jogo antes de receber o premio, iremos considerar como entregue, por isso tome cuidado para que isso nao acorra!";
+show " ";
+show "Terceiro: Boa sorte!";
+show " ";
+show "Aguarde um momento... Após liberar o botão próx, você pode continuar.";
+sleep2 10000;
+next;
+show "[VIP Premiado]";
+show "Após ter lido as regras gostaria de iniciar a conversa com o NPC de troca? Lembrando que ao aceitar você deve ir até o final da conversa seguindo todas as instruções como serão esclarecidas!";
+next;
+menu "Aceito",SIM,"Não",NAO;
+
+SIM:
+show "[VIP Premiado]";
+query_sql "SELECT bandeiras FROM login WHERE account_id ='"+getcharid(3)+"'", @sbands;
+if(@sbands>=1) {
+query_sql("UPDATE login SET bandeiras = '0' WHERE account_id ='"+getcharid(3)+"'");
+getitem 7549,50;
+getitem 12218,50;
+getitem 12210,5;
+getitem 12904,1;
+getitem 12908,1;
+getitem 12903,1;
+getitem 12905,1;
+getitem 12710,100;
+show "Seu premio esta entregue, obrigado por ajudar o pbRO! Agora você deve escolher seu ITEM.";
+}
+
+set @creditos,0;
+query_sql "SELECT promocao FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos;
+if(@creditos<1) goto SEMPONTO;
+set @creditos, @creditos - 1;
+query_sql("UPDATE login SET promocao = '"+@creditos+"' WHERE account_id = '"+getcharid(3)+"'");
+
+show "Me diga qual lhe agrada mais?";
+next;
+menu "Chapéu do Rei Sapo",Item1,"Tiara de Runas",Item2,"Chapéu Repelente",Item3,"Chapéu Repelente Descartável",Item4,"Turbante Real",Item5,"Tiara de Donzela",Item6,"Chapéu de Tartaruga",Item7,"Capacete de Pecocross",Item8,"Chapéu de Imp",Item9,"Chapéu de Grifo",Item10;
+
+Item1:
+set @premiacao, 5528;
+goto CONT_ENTRE;
+
+Item2:
+set @premiacao, 5585;
+goto CONT_ENTRE;
+
+Item3:
+set @premiacao, 5586;
+goto CONT_ENTRE;
+
+Item4:
+set @premiacao, 5587;
+goto CONT_ENTRE;
+
+Item5:
+set @premiacao, 5591;
+goto CONT_ENTRE;
+
+Item6:
+set @premiacao, 5609;
+goto CONT_ENTRE;
+
+Item7:
+set @premiacao, 5611;
+goto CONT_ENTRE;
+
+Item8:
+set @premiacao, 5656;
+goto CONT_ENTRE;
+
+Item9:
+set @premiacao, 5658;
+goto CONT_ENTRE;
+
+Item10:
+set @premiacao, 5660;
+goto CONT_ENTRE;
+
+
+CONT_ENTRE:
+show "[VIP Premiado]";
+show "Boa escolha, receba seu item.";
+getitem @premiacao,1;
+if(@creditos>=1) {
+show "Você ainda pode escolher mais um item!";
+next;
+goto SIM;
+}
+show "Até a proxima!";
+close;
+
+SEMPONTO:
+show "Você não pode fazer trocas comigo! Você ja recebeu ou não tem direito a receber o item!!";
+close;
+
+NAO:
+show "[VIP Premiado]";
+show "Até breve!";
+close;
+
+AVISO:
+show "[VIP Premiado]";
+show "Eu entrego Itens dos usuários que fizeram doações nos dias do VIP PREMIADO. Confira no site...";
+close;
+}

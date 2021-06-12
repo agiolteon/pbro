@@ -628,6 +628,7 @@ int status_charge(struct block_list* bl, int hp, int sp)
 //If flag&1, damage is passive and does not triggers cancelling status changes.
 //If flag&2, fail if target does not has enough to substract.
 //If flag&4, if killed, mob must not give exp/loot.
+//If flag&8, sp loss on dead target.
 int status_damage(struct block_list *src,struct block_list *target,int hp, int sp, int walkdelay, int flag)
 {
 	struct status_data *status;
@@ -654,8 +655,11 @@ int status_damage(struct block_list *src,struct block_list *target,int hp, int s
 
 	status = status_get_status_data(target);
 
-	if (status == &dummy_status || !status->hp)
-		return 0; //Invalid targets: no damage or dead
+	if( status == &dummy_status )
+		return 0;
+
+	if( !status->hp )
+		flag |= 8;
 
 // Let through. battle.c/skill.c have the whole logic of when it's possible or
 // not to hurt someone (and this check breaks pet catching) [Skotlex]
@@ -663,15 +667,10 @@ int status_damage(struct block_list *src,struct block_list *target,int hp, int s
 //		return 0; //Cannot damage a bl not on a map, except when "charging" hp/sp
 
 	sc = status_get_sc(target);
-
 	if( battle_config.invincible_nodamage && src && sc && sc->data[SC_INVINCIBLE] && !sc->data[SC_INVINCIBLEOFF] )
-	{
-		if( !sp )
-			return 0;
-		hp = 0;
-	}
+		hp = 1;
 
-	if( hp && !(flag&1) ) {
+	if( hp && !(flag&1|8) ) {
 		if( sc ) {
 			struct status_change_entry *sce;
 			if( (sce = sc->data[SC_DEVOTION]) && src && battle_getcurrentskill(src) != PA_PRESSURE )
@@ -751,8 +750,8 @@ int status_damage(struct block_list *src,struct block_list *target,int hp, int s
 		case BL_MER: mercenary_damage((TBL_MER*)target,src,hp,sp); break;
 	}
 
-	if (status->hp)
-  	{	//Still lives!
+	if( status->hp || flag&8 )
+  	{   //Still lives or has been dead before this damage.
 		if (walkdelay)
 			unit_set_walkdelay(target, gettick(), walkdelay, 0);
 		return hp+sp;
@@ -1779,7 +1778,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 		+ sizeof(sd->add_drop)
 		+ sizeof(sd->itemhealrate)
 	);
-	
+
 	// vars zeroing. ints, shorts, chars. in that order.
 	memset (&sd->arrow_atk, 0,sizeof(sd->arrow_atk)
 		+ sizeof(sd->arrow_ele)
@@ -1832,7 +1831,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 		+ sizeof(sd->unstripable_equip)
 		);
 
-	// Autobonus
+	// Autobonus 
 	pc_delautobonus(sd,sd->autobonus,ARRAYLENGTH(sd->autobonus),true);
 	pc_delautobonus(sd,sd->autobonus2,ARRAYLENGTH(sd->autobonus),true);
 	pc_delautobonus(sd,sd->autobonus3,ARRAYLENGTH(sd->autobonus),true);
@@ -1856,6 +1855,7 @@ int status_calc_pc_(struct map_session_data* sd, bool first)
 		if(first && sd->inventory_data[index]->equip_script)
 	  	{	//Execute equip-script on login
 			run_script(sd->inventory_data[index]->equip_script,0,sd->bl.id,0);
+			sd->state.script_parsed |= sd->status.inventory[index].equip;
 			if (!calculating)
 				return 1;
 		}
@@ -5670,7 +5670,7 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 						sd->state.combo = 2;
 						clif_skillinfoblock(sd);
 					}
-					break;		
+					break;
 			}
 			if (ud && !val3) 
 			{
@@ -5841,7 +5841,6 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 		case SC_SPIDERWEB:
 			if( bl->type == BL_PC )
 				tick /= 2;
-			val1 = val2 = 1;
 			break;
 		case SC_ARMOR:
 			//NPC_DEFENDER:
@@ -6199,6 +6198,9 @@ int status_change_start(struct block_list* bl,enum sc_type type,int rate,int val
 			status_percent_heal(bl, 0, 100); // Recover Full SP
 			break;
 	}
+
+	if( sd && sd->ontouch.npc_id )
+		npc_touchnext_areanpc(sd,false);
 
 	return 1;
 }
@@ -7551,7 +7553,7 @@ int status_readdb(void)
 			aspd_base[class_][j]=atoi(split[j+5]);
 	}
 	fclose(fp);
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n",path);
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n",path);
 
 	memset(job_bonus,0,sizeof(job_bonus)); // Job-specific stats bonus
 	sprintf(path, "%s/job_db2.txt", db_path);
@@ -7578,7 +7580,7 @@ int status_readdb(void)
 			job_bonus[class_][i-1]=atoi(split[i]);
 	}
 	fclose(fp);
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n",path);
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n",path);
 
 	// サイズ補正テ?ブル
 	for(i=0;i<3;i++)
@@ -7648,7 +7650,7 @@ int status_readdb(void)
 		i++;
 	}
 	fclose(fp); //Lupus. close this file!!!
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n",path);
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n",path);
 
 	return 0;
 }

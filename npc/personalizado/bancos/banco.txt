@@ -1,0 +1,163 @@
+//===== Cronus Script ======================================== 
+//= Banco
+//===== Por: ================================================= 
+//= Kamper
+//===== Versão Atual: ======================================== 
+//= 1.5c
+//===== Changelog: =========================================== 
+//= 1.0 Criado o Npc [Kamper]
+//= 1.1 Adicionado a opção de cancelar na transferência [Kamper]
+//= 1.2 Reestruturado o npc e adicionado encriptação à conta [Kamper]
+//= 1.3 NPC alterado para o uso de variável de conta (#) [Mooka]
+//= 1.4 Adicionado a case do Cancelar que estava faltando. [RoM]
+//= 1.5 Removido a variável do npc_athena.conf (ele não existe mais). [RoM]
+//= 1.5b Adicionado algumas variáveis, algumas opções para melhor entendimento e corrigido alguns BUGs [Heaven]
+//= 1.5c Adicionado mais algumas opções para melhorar o entendimento e feitas algumas otimizações [Heaven]
+//============================================================ 
+
+prontera,132,217,5	script	Banqueiro	109,{
+
+//========== Configuração: ==========
+// Custo para cada transação:
+set .@custo,0;
+set .@depmax,10000000;
+set .@saqmax,10000000;
+set .@trasfmax,10000000;
+//===================================
+
+	if(getd("$banco_"+getcharid(3)))
+	{
+		show "[Banqueiro]";
+		show "A sua conta recebeu uma transferência de "+getd("$banco_"+getcharid(3))+" Zenys.";
+		set #bancoZ,#bancoZ+getd("$banco_"+getcharid(3));
+		setd "$banco_"+getcharid(3),0;
+		show "Agora ela possui "+#bancoZ+" Zenys.";
+		next;
+	}
+	show "[Banqueiro]";
+	show "Bem-vindo ao Banco de Prontera, como posso ajudá-lo?";
+	next;
+	switch(select("Gostaria de fazer um depósito.:Gostaria de fazer um saque.:Gostaria de ver meu saldo.:Gostaria de fazer uma transferência.:Cancelar")){
+		case 1:
+			show "[Banqueiro]";
+			show "Bem... Quanto você gostaria de depositar? O valor máximo que você poderá depositar é de";			
+			if(Zeny > .@depmax){show .@depmax+" Zenys.";}else{show Zeny+" Zenys.";}
+			next;
+			digit @zeny;
+			show "[Banqueiro]";
+			if(@zeny < 1 || @zeny > .@depmax){
+				show "Desculpe, mas você precisa digitar um valor aceito.";
+				close;
+			}
+			if(@zeny > Zeny){
+				show "Desculpe, mas você não possui essa quantidade de Zenys.";
+				close;
+			}
+			set Zeny, Zeny - @zeny;
+			set #bancoZ, #bancoZ + @zeny;
+			show "[Banqueiro]";
+			show "Muito obrigado! Seus Zenys estão em boas mãos.";
+			close;
+
+		case 2:
+			show "[Banqueiro]";
+			show "Bem... Quanto você gostaria de sacar? O valor máximo que você poderá sacar neste momento é de";
+			if(#bancoZ > .@saqmax){show .@saqmax+" Zenys.";}else{show #bancoZ+" Zenys.";}
+						next;
+			digit @zeny;
+			show "[Banqueiro]";
+			if(@zeny < 1 || @zeny > .@saqmax){
+				show "Desculpe, mas você precisa digitar um valor aceito.";
+				close;
+			}
+			if(@zeny > #bancoZ){
+				show "Desculpe, mas você não possui essa quantidade de Zenys.";
+				close;
+			}
+			set #bancoZ, #bancoZ - @zeny;
+			set Zeny, Zeny + @zeny;	
+			show "Muito obrigado! Continue usando nossos serviços.";
+			close;
+	
+		case 3:
+			show "[Banqueiro]";
+			show "Bem... Um momento, deixe-me checar as papeladas.";
+			next;
+			show "[Banqueiro]";
+			show "Você possui atualmente em nossos serviços "+#bancoZ+" Zenys.";
+			show "O número de sua conta é "+(getcharid(3) - 2000000)+".";
+			close;
+
+		case 4:
+			show "[Banqueiro]";
+			show "Bem... Para que conta deseja fazer a transferência?";
+			if(.@custo){show "Lembrando que será descontado "+.@custo+" Zenys como taxa.";}
+			show "O número da conta é informado ao ver o saldo.";
+			show "Informe o número da conta:";
+			while(1){
+				next;
+				digit @account;
+				show "[Banqueiro]";
+				show "Para a conta "+@account+", está certo disso?";
+				next;
+				switch(select("Não, eu me enganei.:Sim.:Cancelar.")){
+					case 1:
+						show "[Banqueiro]";
+						show "Ok, tente mais uma vez.";
+						break;
+
+					case 2:
+						show "[Banqueiro]";
+						show "Tudo certo... Quanto gostaria de transferir? O valor máximo que você poderá transferir neste momento é de "+.@trasfmax+" Zenys.";
+						next;
+						digit @zeny;
+						show "[Banqueiro]";
+						if(@zeny < 1 || @zeny > .@trasfmax){
+						show "Desculpe, mas você precisa digitar um valor aceito.";
+						close;
+						}
+						show "Quer que seja transferido da conta do banco ou do seu próprio dinheiro?";
+						if(select("Conta do Banco.:Meu próprio dinheiro")==1){
+							show "[Banqueiro]";
+							if((@zeny + .@custo) > #bancoZ){
+							if(.@custo){show "Desculpe, mas você não possui "+(@zeny + .@custo)+"(Valor + Custo) Zenys em sua conta do banco.";
+							close;
+							}else{
+							show "Desculpe, mas você não possui "+@zeny+" em sua conta do banco.";
+							close;
+							}
+							set @acc_transf,@account+2000000;
+							set #bancoZ, #bancoZ - (@zeny + .@custo);
+							setd "$banco_"+@acc_transf,getd("$banco_"+@acc_transf)+@zeny;
+							show "Obrigado... Você transferiu "+@zeny+" Zenys para a conta "+@account+".";
+							show "Continue utilizando nossos serviços.";
+							close;
+						}else{
+							show "[Banqueiro]";
+							if((@zeny + .@custo) > Zeny){
+								if(.@custo){show "Desculpe, mas você não possui "+(@zeny + .@custo)+"(Valor + Custo) Zenys.";
+								close;
+								}else{
+								show "Desculpe, mas você não possui "+@zeny+" Zenys.";
+								close;
+							}
+							set @acc_transf,@account+2000000;
+							set Zeny, Zeny - (@zeny + .@custo);
+							setd "$banco_"+@acc_transf,getd("$banco_"+@acc_transf)+@zeny;
+							show "Obrigado... Você transferiu "+@zeny+" Zenys para a conta "+@account+".";
+							show "Continue utilizando nossos serviços.";
+							close;
+						}
+						}
+						}
+					case 3:
+						show "[Banqueiro]";
+						show "Tudo bem, obrigado por utilizar nossos serviços.";
+						close;
+				}
+				}
+		Case 5:
+			close;
+			
+	}
+}

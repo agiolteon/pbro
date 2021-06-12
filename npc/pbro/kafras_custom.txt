@@ -1,0 +1,47 @@
+//===== Descrição: ===========================================
+//= Kafras Customizadas
+//===== Comentários Adicionais: ==============================
+// Prontera Customizada ==================================
+prontera,163,192,3	script	Funcionária Kafra::kaf_pronterac1	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSetPront";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra~";
+	mes "Os Serviços Kafra estão";
+	mes "sempre aqui para ajudá-lo.";
+	mes "Então, como posso";
+	mes "ajudá-lo hoje?";
+	callfunc "F_Kafra",5,0,0,40,800;
+
+M_Save:
+	savepoint "prontera",156,187;
+	callfunc "F_KafEnd",0,1,"na cidade de Prontera";
+}
+
+// Rachel Customizada ==================================
+rachel,124,117,3	script	Funcionária Kafra::kaf_rachelc1	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSetPront";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra~";
+	mes "Os Serviços Kafra estão";
+	mes "sempre aqui para ajudá-lo.";
+	mes "Então, como posso";
+	mes "ajudá-lo hoje?";
+	callfunc "F_Kafra",5,0,0,40,800;
+
+M_Save:
+	savepoint "rachel",130,110;
+	callfunc "F_KafEnd",0,1,"na cidade de Rachel";
+}
+
+// Izlude WOT ----------------------------------------------------------------
+izlude,135,221,3	script	Funcionária Kafra::kaf_izuludewot	117,{
+	callfunc "F_Kafra",0,2,0,150,0;
+
+	M_Save:
+		savepoint "prontera",156,187;
+		callfunc "F_KafEnd",1,1,"na cidade de Prontera";
+}

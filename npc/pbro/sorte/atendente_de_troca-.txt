@@ -1,0 +1,78 @@
+pvp_c_room,29,85,6	script	Atendente de Troca#3	903,{
+
+set .@name$, "[^0000FFAtendente de Troca^000000]";
+
+show .@name$;;
+show "Olá, você já ganhou muitos pontos? Você está com sorte? Você já deu algum palpite hoje?";
+next;
+show .@name$;
+show "Oh desculpe, é que eu sou um pouco curioso... Mas diga o que você deseja?";
+next;
+menu "- Pegar premio!",PEGAR,"- Quantos já ganhei?",QUANT_GANHO,"- Nada, obrigado",SAIR;
+
+PEGAR:
+query_sql("SELECT creditos2 FROM login WHERE account_id = "+getcharid(3)+"", @pontos_perso);
+if(@pontos_perso==0) goto SEM_PONTO;
+show .@name$;
+show "^FF0000ATENÇÃO!^000000 não retire todo o seu prêmio, pois provavelmente seu personagem não irá suportar o peso! Caso aconteça, o item cairá no chão.";
+next;
+show .@name$;
+set @peso_p, @pontos_perso * 30;
+show "Você pode retirar comigo ^FF0000"+@pontos_perso+"^000000 YGGs, o peso do seu prêmio é ^FF0000"+@peso_p+"^000000.";
+show "Quanto deseja retirar?";
+next;
+input @quant_yggs;
+if(@quant_yggs==0 || @quant_yggs>@pontos_perso) goto NUM_VALI;
+set @peso_y, @quant_yggs * 30;
+next;
+show .@name$;
+show "Deseja pegar seu prêmio?";
+show "Quant. atual: ^EC7600"+@pontos_perso+"^000000";
+show "Peso total: ^EC7600"+@peso_p+"^000000";
+show "Quant. a retirar: ^EC7600"+@quant_yggs+"^000000";
+show "Peso da retirada: ^EC7600"+@peso_y+"^000000";
+set @retirada_y, @pontos_perso - @quant_yggs;
+next;
+menu "Sim",SIM_C,"Não",NAO_C;
+
+
+SIM_C:
+query_sql("UPDATE login SET creditos2 = "+@retirada_y+" WHERE account_id = "+getcharid(3)+"");
+additem 607,@quant_yggs;
+
+query_sql("INSERT INTO j_retirada(conta,premio) VALUES("+getcharid(3)+","+@quant_yggs+")");
+
+show .@name$;
+show "Faça bom proveito de seu prêmio, e precisando de mais me procure.";
+close;
+
+NAO_C:
+show .@name$;
+show "Você quem sabe, precisando estou aqui.";
+close;
+
+NUM_VALI:
+show .@name$;
+show "Lamento, mas esse valor não é possivel lhe entregar...";
+close;
+
+SEM_PONTO:
+show .@name$;
+show "Desculpe, mas você não tem direito a nenhuma YGG.";
+close;
+
+QUANT_GANHO:
+query_sql("SELECT creditos2 FROM login WHERE account_id = "+getcharid(3)+"", @pontos_perso);
+show .@name$;
+show "Você tem direito a ^FF0000"+@pontos_perso+"^000000 YGGs. Continue brincando nos jogos que você terá um valor bom.";
+close;
+
+SAIR:
+show .@name$;
+show "Ok, até breve, precisando estarei aqui!";
+close;
+
+show .@name$;
+show "E não se preocupe, caso não haja problemas e você tenha ganho, você podera retirar aqui comigo o seu premio.";
+close;
+}

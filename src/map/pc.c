@@ -921,14 +921,14 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 
 	//display login notice
 	if( sd->gmlevel >= battle_config.lowest_gm_level )
-		ShowInfo("GM '"CL_WHITE"%s"CL_RESET"' logged in."
+		ShowInfo("GM '"CL_WHITE"%s"CL_RESET"' logou."
 			" (AID/CID: '"CL_WHITE"%d/%d"CL_RESET"',"
 			" Packet Ver: '"CL_WHITE"%d"CL_RESET"', IP: '"CL_WHITE"%d.%d.%d.%d"CL_RESET"',"
-			" GM Level '"CL_WHITE"%d"CL_RESET"').\n",
+			" NÌvel de GM: '"CL_WHITE"%d"CL_RESET"').\n",
 			sd->status.name, sd->status.account_id, sd->status.char_id,
 			sd->packet_ver, CONVIP(ip), sd->gmlevel);
 	else
-		ShowInfo("'"CL_WHITE"%s"CL_RESET"' logged in."
+		ShowInfo("'"CL_WHITE"%s"CL_RESET"' logou."
 			" (AID/CID: '"CL_WHITE"%d/%d"CL_RESET"',"
 			" Packet Ver: '"CL_WHITE"%d"CL_RESET"', IP: '"CL_WHITE"%d.%d.%d.%d"CL_RESET"').\n",
 			sd->status.name, sd->status.account_id, sd->status.char_id,
@@ -939,7 +939,7 @@ bool pc_authok(struct map_session_data *sd, int login_id2, time_t expiration_tim
 
 	if (battle_config.display_version == 1){
 		char buf[256];
-		sprintf(buf, "eAthena SVN version: %s", get_svn_revision());
+		sprintf(buf, "pbRO [Private Brasil Ragnarok Online]", get_svn_revision());
 		clif_displaymessage(sd->fd, buf);
 	}
 
@@ -1086,7 +1086,7 @@ int pc_reg_received(struct map_session_data *sd)
 	intif_request_questlog(sd);
 #endif
 
-	if (!sd->state.connect_new && sd->fd)
+	if (sd->state.connect_new == 0 && sd->fd)
 	{	//Character already loaded map! Gotta trigger LoadEndAck manually.
 		sd->state.connect_new = 1;
 		clif_parse_LoadEndAck(sd->fd, sd);
@@ -1665,7 +1665,7 @@ int pc_delautobonus(struct map_session_data* sd, struct s_autobonus *autobonus,c
 
 	for( i = 0; i < max; i++ )
 	{
-		if( autobonus[i].active != INVALID_TIMER && ( !restore || (autobonus[i].pos && !(sd->state.autobonus&autobonus[i].pos)) ) )
+		if( autobonus[i].active != INVALID_TIMER && !(restore && sd->state.autobonus&autobonus[i].pos) )
 		{ // Logout / Unequipped an item with an activated bonus
 			delete_timer(autobonus[i].active,pc_endautobonus);
 			autobonus[i].active = INVALID_TIMER;
@@ -1679,6 +1679,9 @@ int pc_delautobonus(struct map_session_data* sd, struct s_autobonus *autobonus,c
 		}
 
 		if( sd->state.autocast )
+			continue;
+
+		if( autobonus[i].pos&sd->state.script_parsed && restore )
 			continue;
 
 		if( autobonus[i].bonus_script )
@@ -3155,7 +3158,7 @@ void pc_paycash(struct map_session_data *sd, int price, int points)
 
 	pc_setaccountreg(sd,"#CASHPOINTS",sd->cashPoints - cash);
 	pc_setaccountreg(sd,"#KAFRAPOINTS",sd->kafraPoints - points);
-	sprintf(output, "Used %d kafra points and %d cash points. %d kafra and %d cash points remaining.", points, cash, sd->kafraPoints, sd->cashPoints);
+	sprintf(output, "Usado %d pontos kafras e %d pontos de cash. %d kafra e %d cash pontos restando.", points, cash, sd->kafraPoints, sd->cashPoints);
 	clif_disp_onlyself(sd, output, strlen(output));
 }
 
@@ -3168,7 +3171,7 @@ void pc_getcash(struct map_session_data *sd, int cash, int points)
 	{
 		pc_setaccountreg(sd,"#CASHPOINTS",sd->cashPoints + cash);
 
-		sprintf(output, "Gained %d cash points. Total %d points", cash, sd->cashPoints);
+		sprintf(output, "Ganho %d pontos de cash. Total de pontos %d", cash, sd->cashPoints);
 		clif_disp_onlyself(sd, output, strlen(output));
 	}
 
@@ -3878,7 +3881,7 @@ int pc_steal_item(struct map_session_data *sd,struct block_list *bl, int lv)
 		i_data = itemdb_search(itemid);
 		sprintf (message, msg_txt(542), (sd->status.name != NULL)?sd->status.name :"GM", md->db->jname, i_data->jname, (float)md->db->dropitem[i].p/100);
 		//MSG: "'%s' stole %s's %s (chance: %0.02f%%)"
-		intif_GMmessage(message,strlen(message)+1,0);
+		intif_broadcast(message,strlen(message)+1,0);
 	}
 	return 1;
 }
@@ -3930,7 +3933,7 @@ int pc_setpos(struct map_session_data* sd, unsigned short mapindex, int x, int y
 		return 1;
 	}
 
-	if( pc_isdead(sd) )
+	if(battle_config.no_warp_ress && pc_isdead(sd)) // Controle para reviver apÛs uso do @warp ou @go [LEOzinn]
 	{ //Revive dead people before warping them
 		pc_setstand(sd);
 		pc_setrestartvalue(sd,1);
@@ -4798,7 +4801,7 @@ int pc_gainexp(struct map_session_data *sd, struct block_list *src, unsigned int
 
 	if(sd->state.showexp){
 		sprintf(output,
-			"Experience Gained Base:%u (%.2f%%) Job:%u (%.2f%%)",base_exp,nextbp*(float)100,job_exp,nextjp*(float)100);
+			"ExperiÍncia de Base Ganha:%u (%.2f%%) Classe:%u (%.2f%%)",base_exp,nextbp*(float)100,job_exp,nextjp*(float)100);
 		clif_disp_onlyself(sd,output,strlen(output));
 	}
 
@@ -4972,7 +4975,7 @@ int pc_statusup2(struct map_session_data* sd, int type, int val)
 	// set new value
 	max = pc_maxparameter(sd);
 	val = pc_setstat(sd, type, cap_value(pc_getstat(sd,type) + val, 1, max));
-	
+
 	status_calc_pc(sd,0);
 
 	// update increase cost indicator
@@ -5180,7 +5183,7 @@ int pc_resetstate(struct map_session_data* sd)
 				sd->status.account_id, sd->status.char_id, sd->status.base_level, MAX_LEVEL);
 			return 0;
 		}
-		
+
 		sd->status.status_point = statp[sd->status.base_level] + ( sd->class_&JOBL_UPPER ? 52 : 0 ); // extra 52+48=100 stat points
 	}
 	else
@@ -5236,6 +5239,8 @@ int pc_resetskill(struct map_session_data* sd, int flag)
 
 	if( !(flag&2) )
 	{ //Remove stuff lost when resetting skills.
+	    if( sd->sc.data[SC_SPIRIT] ) //Remover o Spirit antes de resetar [Minos]
+			status_change_end(&sd->bl, SC_SPIRIT, -1);
 		if( pc_checkskill(sd, SG_DEVIL) &&  !pc_nextjobexp(sd) )
 			clif_status_load(&sd->bl, SI_DEVIL, 0); //Remove perma blindness due to skill-reset. [Skotlex]
 		i = sd->sc.option;
@@ -5586,7 +5591,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src)
   	{
 		unsigned int next = pc_nextbaseexp(sd);
 		if( next == 0 ) next = pc_thisbaseexp(sd);
-		if( get_percentage(sd->status.base_exp,next) >= 99 && !map_flag_gvg(sd->bl.m) )
+		if( (get_percentage(sd->status.base_exp,next) >= 99 && !map_flag_gvg(sd->bl.m)) || sd->status.base_level == MAX_LEVEL )  // 99+% ou level m·ximo [Minos]
 		{
 			sd->state.snovice_dead_flag = 1;
 			pc_setstand(sd);
@@ -6999,6 +7004,7 @@ int pc_equipitem(struct map_session_data *sd,int n,int req_pos)
  * 0 - only unequip
  * 1 - calculate status after unequipping
  * 2 - force unequip
+ * 4 - ignore autobonus flags
  *------------------------------------------*/
 int pc_unequipitem(struct map_session_data *sd,int n,int flag)
 {
@@ -7071,8 +7077,13 @@ int pc_unequipitem(struct map_session_data *sd,int n,int flag)
 			status_change_end(&sd->bl, SC_ARMOR_RESIST, -1);
 	}
 
-	if( sd->state.autobonus&sd->status.inventory[n].equip )
-		sd->state.autobonus &= ~sd->status.inventory[n].equip; //Check for activated autobonus [Inkfish]
+	if( !(flag&4) )
+	{
+		if( sd->state.script_parsed&sd->status.inventory[n].equip )
+			sd->state.script_parsed &= ~sd->status.inventory[n].equip;
+		if( sd->state.autobonus&sd->status.inventory[n].equip )
+			sd->state.autobonus &= ~sd->status.inventory[n].equip; //Check for activated autobonus [Inkfish]
+	}
 
 	sd->status.inventory[n].equip=0;
 
@@ -7360,6 +7371,9 @@ void pc_bleeding (struct map_session_data *sd, unsigned int diff_tick)
 {
 	int hp = 0, sp = 0;
 
+	if( pc_isdead(sd) )
+		return;
+
 	if (sd->hp_loss.value) {
 		sd->hp_loss.tick += diff_tick;
 		while (sd->hp_loss.tick >= sd->hp_loss.rate) {
@@ -7458,6 +7472,7 @@ int pc_autosave(int tid, unsigned int tick, int id, intptr data)
 		save_flag = 2;
 
 		chrif_save(sd,0);
+		break;
 	}
 	mapit_free(iter);
 
@@ -7496,7 +7511,7 @@ int map_day_timer(int tid, unsigned int tick, int id, intptr data)
 	night_flag = 0; // 0=day, 1=night [Yor]
 	map_foreachpc(pc_daynight_timer_sub);
 	strcpy(tmp_soutput, (data == 0) ? msg_txt(502) : msg_txt(60)); // The day has arrived!
-	intif_GMmessage(tmp_soutput, strlen(tmp_soutput) + 1, 0);
+	intif_broadcast(tmp_soutput, strlen(tmp_soutput) + 1, 0);
 	return 0;
 }
 
@@ -7517,7 +7532,7 @@ int map_night_timer(int tid, unsigned int tick, int id, intptr data)
 	night_flag = 1; // 0=day, 1=night [Yor]
 	map_foreachpc(pc_daynight_timer_sub);
 	strcpy(tmp_soutput, (data == 0) ? msg_txt(503) : msg_txt(59)); // The night has fallen...
-	intif_GMmessage(tmp_soutput, strlen(tmp_soutput) + 1, 0);
+	intif_broadcast(tmp_soutput, strlen(tmp_soutput) + 1, 0);
 	return 0;
 }
 
@@ -7630,7 +7645,7 @@ int duel_invite(const unsigned int did, struct map_session_data* sd, struct map_
 	
 	// "Blue -- Player %s invites you to PVP duel (@accept/@reject) --"
 	sprintf(output, msg_txt(374), sd->status.name);
-	clif_GMmessage((struct block_list *)target_sd, output, strlen(output)+1, 3);
+	clif_broadcast((struct block_list *)target_sd, output, strlen(output)+1, 0x10, SELF);
 	return 0;
 }
 
@@ -7849,7 +7864,7 @@ int pc_readdb(void)
 		if (!max_level[j][1])
 			ShowWarning("Class %s (%d) does not has a job exp table.\n", job_name(i), i);
 	}
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n","exp.txt");
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n","exp.txt");
 
 	// ÉXÉLÉãÉcÉä?
 	memset(skill_tree,0,sizeof(skill_tree));
@@ -7899,7 +7914,7 @@ int pc_readdb(void)
 		}
 	}
 	fclose(fp);
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n","skill_tree.txt");
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n","skill_tree.txt");
 
 	// ?ê´èCê≥Ée?ÉuÉã
 	for(i=0;i<4;i++)
@@ -7950,7 +7965,7 @@ int pc_readdb(void)
 		}
 	}
 	fclose(fp);
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n","attr_fix.txt");
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n","attr_fix.txt");
 
 	// ÉXÉLÉãÉcÉä?
 	memset(statp,0,sizeof(statp));
@@ -7959,7 +7974,7 @@ int pc_readdb(void)
 	sprintf(line, "%s/statpoint.txt", db_path);
 	fp=fopen(line,"r");
 	if(fp == NULL){
-		ShowStatus("Can't read '"CL_WHITE"%s"CL_RESET"'... Generating DB.\n",line);
+		ShowStatus("N„o foi possivel ler '"CL_WHITE"%s"CL_RESET"'... Gerando a DB.\n",line);
 		//return 1;
 	} else {
 		while(fgets(line, sizeof(line), fp))
@@ -7974,7 +7989,7 @@ int pc_readdb(void)
 			i++;
 		}
 		fclose(fp);
-		ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n","statpoint.txt");
+		ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n","statpoint.txt");
 	}
 	// generate the remaining parts of the db if necessary
 	for (; i <= MAX_LEVEL; i++) {

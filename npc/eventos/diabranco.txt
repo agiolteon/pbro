@@ -1,0 +1,112 @@
+﻿//===== eAthena Script =======================================
+//= Script de Evento do Dia Branco
+//===== By: ==================================================
+//= Muad_Dib
+//===== VersÃ£o Atual: =====================================
+//= 1.0c
+//===== ComentÃ¡rios Adicionais: =================================
+//= 1.0a [Muad_Dib]
+//= 1.0b Traduzido. [Tiu TuTs]
+//= 1.0c Revisado e Reestruturado. [RoM]
+//============================================================
+
+alberta,188,64,4	script	AÃ§Ãºcar	91,{
+	show "[AÃ§Ãºcar]";
+	show "Bem-vindo!";
+	show "Como sÃ£o deliciosos os doces!";
+	show "Meu professor...";
+	show "o doceiro de ARUBERUTA.";
+	show "HÃ¡ doces difÃ­ceis de fazer.";
+	next;
+	show "[AÃ§Ãºcar]";
+	show "Isto foi dado por uma pessoa querida.";
+	show "Em troca do presente...";
+	show "sincero como a doÃ§ura";
+	show "de alguns presentes.";
+	next;
+	switch(select("Por favor dÃª-me!","Eu nÃ£o preciso disso.","O professor.")) {
+	case 1:
+		show "[AÃ§Ãºcar]";
+		show "Sim!";
+		show "Selecione no menu abaixo.";
+		show "Uma vez que existe um limitaÃ§Ã£o,";
+		show "nÃ£o escolha mais do que ^ff00005 unidades^000000.";
+		show "Qual vai querer?";
+		next;
+		switch(select("Bala","Bengala Doce","Biscoito de Gengibre")) {
+		case 1:
+			set .@maplePrice,3000;
+			set .@mapleItemID,529;
+			break;
+		case 2:
+			set .@maplePrice,4000;
+			set .@mapleItemID,530;
+			break;
+		case 3:
+			set .@maplePrice,2000;
+			set .@mapleItemID,538; 
+			break;
+		}
+		show "[AÃ§Ãºcar]";
+		show "O preÃ§o Ã© de";
+		show .@maplePrice + " Zeny cada.";
+		show "Quantos vocÃª deseja comprar?";
+		next;
+		input .@maplenum;
+		if (.@maplenum > 5) {
+			show "[AÃ§Ãºcar]";
+			show "???";
+			show "VocÃª parece ser surdo.";
+			show "Vou lhe dizer mais uma vez!";
+			show "VocÃª sÃ³ pode comprar";
+			show "^ff00005^000000 de cada vez.";
+			close;
+		}
+		if (.@maplenum <= 0) {
+			show "[AÃ§Ãºcar]";
+			show "Realmente... VocÃª pode recusar...";
+			show "Se vocÃª mudar de idÃ©ia,";
+			show "estarei aqui.";
+			show "Tenha um bom dia!";
+			close;
+		}
+		set .@maplePriceT,.@maplePrice*.@maplenum;
+		if (Zeny < .@maplePriceT) {
+			show "[AÃ§Ãºcar]";
+			show "???";
+			show "Hmm me parece que vocÃª nÃ£o tem dinheiro";
+			show "suficiente para fazer a compra.";
+			show "Vou lhe pedir para que verifique seu dinheiro.";
+			close;
+		}
+		set Zeny,Zeny-.@maplePriceT;
+		getitem .@mapleItemID,.@maplenum;
+		show "[AÃ§Ãºcar]";
+		show "Obrigado!!!";
+		show "Estes doces sÃ£o realmente deliciosos.";
+		show "Uma vez que meu professor de doces Ã© o NÂº 1 do mundo!";
+		show "Embora vocÃª possa comer sozinho,";
+		show "nÃ£o coma muito ou vai ficar gordo.";
+		show "Por favor, tome cuidado!!!";
+		close;
+	case 2:
+		show "[AÃ§Ãºcar]";
+		show "Realmente... VocÃª pode recusar...";
+		show "Se vocÃª mudar de idÃ©ia,";
+		show "estarei aqui.";
+		show "Tenha um bom dia!";
+		close;
+	case 3:
+		show "[AÃ§Ãºcar]";
+		show "Sim";
+		show "O meu professor Ã©";
+		show "o Sr. Kuberu, um doceiro.";
+		show "Ele cria doces com duas pessoas";
+		show "que estÃ£o lÃ¡ para aprender.";
+		next;
+		show "[AÃ§Ãºcar]";
+		show "Onde ele estÃ¡ agora?";
+		show "Eu nÃ£o sei.";
+		close;
+	}
+}

@@ -1,0 +1,167 @@
+//ALTER TABLE `login` ADD `aniversario` INT NOT NULL DEFAULT '0';
+
+prontera,0,0,0	script	AniversarioEvent::MonstroKill	-1,{
+
+OnKilled:
+query_sql("UPDATE login SET aniversario = aniversario + 1 WHERE account_id='"+getcharid(3)+"'");
+query_sql("SELECT aniversario FROM login WHERE account_id = "+getcharid(3)+"",@pt);
+dispbottom "Você matou um Baú do pbRO! Seus pontos atuais são "+@pt+".";
+end;
+
+Onclock0817:
+Onclock0837:
+Onclock0857:
+Onclock0917:
+Onclock0937:
+Onclock0957:
+Onclock1017:
+Onclock1037:
+Onclock1057:
+Onclock1117:
+Onclock1137:
+Onclock1157:
+Onclock1217:
+Onclock1237:
+Onclock1257:
+Onclock1317:
+Onclock1337:
+Onclock1357:
+Onclock1417:
+Onclock1437:
+Onclock1457:
+Onclock1517:
+Onclock1537:
+Onclock1557:
+Onclock1617:
+Onclock1637:
+Onclock1657:
+Onclock1717:
+Onclock1737:
+Onclock1757:
+Onclock1817:
+Onclock1837:
+Onclock1857:
+Onclock1917:
+Onclock1937:
+Onclock1957:
+Onclock2017:
+Onclock2037:
+Onclock2057:
+Onclock2117:
+Onclock2137:
+Onclock2157:
+Onclock2217:
+Onclock2237:
+Onclock2257:
+Onclock2317:
+Onclock2337:
+Onclock2357:
+Onclock0017:
+Onclock0037:
+Onclock0057:
+
+set $escolha0, rand(0,6);
+set $escolha1, rand(7,14);
+set $escolha2, rand(15,20);
+
+monster $mapas$[$escolha0],0,0,"Baú do pbRO",1955,$quantdade,"MonstroKill::OnKilled";
+monster $mapas$[$escolha1],0,0,"Baú do pbRO",1955,$quantdade,"MonstroKill::OnKilled";
+monster $mapas$[$escolha2],0,0,"Baú do pbRO",1955,$quantdade,"MonstroKill::OnKilled";
+
+announce "- Os Baús do pbRO apareceram! Você poderá encontra-los nos seguintes mapas:",0;
+announce "- "+$mapax$[$escolha0]+" ("+$mapas$[$escolha0]+") "+$quantdade+" Baús.",0;
+announce "- "+$mapax$[$escolha1]+" ("+$mapas$[$escolha1]+") "+$quantdade+" Baús.",0;
+announce "- "+$mapax$[$escolha2]+" ("+$mapas$[$escolha2]+") "+$quantdade+" Baús.",0;
+announce "*** Corra atrás do seu Baú e acumule os pontos ***",0;
+end;
+
+OnInit:
+
+set $quantdade, 30;
+set $mapas$[0], "tur_dun02";
+set $mapax$[0], "Calabouço da Ilha da Tartaruga";
+set $mapas$[1], "pay_dun00";
+set $mapax$[1], "Caverna de Payon";
+set $mapas$[2], "yuno_fild07";
+set $mapax$[2], "Desfiladeiro de El Mes";
+set $mapas$[3], "anthell01";
+set $mapax$[3], "Formigueiro Infernal";
+set $mapas$[4], "prt_sewb1";
+set $mapax$[4], "Esgoto de Prontera 01";
+set $mapas$[5], "prt_sewb2";
+set $mapax$[5], "Esgoto de Prontera 02";
+set $mapas$[6], "cmd_fild02";
+set $mapax$[6], "Praia de Kokomo";
+set $mapas$[7], "xmas_dun01";
+set $mapax$[7], "Fabrica de Brinquedos";
+set $mapas$[8], "mosk_dun01";
+set $mapax$[8], "Floresta Encantada";
+set $mapas$[9], "in_sphinx1";
+set $mapax$[9], "Esfinge 01";
+set $mapas$[10], "in_sphinx2";
+set $mapax$[10], "Esfinge 02";
+set $mapas$[11], "thor_v01";
+set $mapax$[11], "Vulcão de Thor";
+set $mapas$[12], "treasure01";
+set $mapax$[12], "Navio Fantasma";
+set $mapas$[13], "abbey01";
+set $mapax$[13], "Monastério";
+set $mapas$[14], "glast_01";
+set $mapax$[14], "Glast Heim";
+set $mapas$[15], "mjo_dun01";
+set $mapax$[15], "Mina Abandonada de Mjolnir";
+set $mapas$[16], "orcsdun01";
+set $mapax$[16], "Calabouço dos Orcs";
+set $mapas$[17], "ice_dun01";
+set $mapax$[17], "Caverna de Gelo";
+set $mapas$[18], "ein_dun01";
+set $mapax$[18], "Calabouço das Mina";
+set $mapas$[19], "mag_dun01";
+set $mapax$[19], "Calabouço de Magma";
+set $mapas$[20], "ama_dun01";
+set $mapax$[20], "Labirinto de Tatames";
+end;
+
+}
+
+prontera,156,180,4	script	Evento do Baú	406,{
+set .@name$, "[Senhor dos Baús]";
+
+show .@name$;
+show "Espero que tenha pego muitos baús! Diga o que quer de mim?";
+next;
+menu "- Ver TOP 10",TOP10,"- Trocar Pontos",TP10,"- Informações",INFO,"- Sair",SAIR;
+
+INFO:
+show .@name$;
+show "Para ter informações do evento entre no site www.pbgo.net. Em caso de dúvidas, coloque as em nosso forum!";
+close;
+
+TOP10:
+show .@name$;
+show "Os nomes não serão revelados por motivo de segurança dos usuários, pois os pontos ficam em SUA CONTA e não no personagem, sendo assim não podemos revelar o LOGIN dos TOP players...";
+next;
+show .@name$;
+show "Veja em sua tela de chat o TOP 10 do servidor.";
+query_sql("SELECT aniversario FROM login WHERE account_id = "+getcharid(3)+"",@ptx);
+show "Seus pontos atuais são "+@ptx;
+next;
+query_sql("SELECT aniversario FROM login ORDER BY aniversario DESC LIMIT 10",@ptge);
+dispbottom "Posição - Pontos (NÃO será informado o login por motivos de segurança dos usuários!)";
+dispbottom "";
+for(set @i,0; @i<9 ; set @i,@i+1) {
+dispbottom "["+(@i+1)+"] - "+@ptge[@i];
+}
+close;
+
+TP10:
+show .@name$;
+show "Estarei disponibilizando a troca apenas no dia ^FF000001 de Maio^000000, enquanto isso junte mais ponto!";
+close;
+
+SAIR:
+show .@name$;
+show "Ok, quando quiser estarei aqui!";
+close;
+
+}

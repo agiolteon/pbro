@@ -1,0 +1,145 @@
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/  _ \ /    \|  |  \/  ___/
+// \     \____|  | \(  <_> )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//-----------------------------------------------
+// Cronus - Configuração do InterServer
+//-----------------------------------------------
+
+// OPÇÕES PARA AMBAS VERSÕES
+
+// Crirar log de inter-conexões, etc?
+log_inter: 1
+
+// Nome do arquivo de log de inter-conexões
+inter_log_filename: log/inter.log
+
+// Diferença maxima entre leveis para compartilhar experiencia em uma party
+party_share_level: 10
+
+// OPÇÕES APENAS PARA A VERSÃO TXT
+
+// Arquivo do banco de dados de Storage da Kafra.
+storage_txt: save/storage.txt
+
+// Arquivo do banco de dados da Party, para party names, membros e outras informações relativas.
+party_txt: save/party.txt
+
+// Arquivo do banco de dados de hotkeys, onde os atalhos de habilidades dos personagems são armazenados.
+hotkeys_txt: save/hotkeys.txt
+
+//  Arquivo do banco de dados de Clãs, para nome dos clãs membros, e outras informações relativas.
+guild_txt: save/guild.txt
+
+//  Arquivo do banco de dados dos Pets, para nomes, e outras informações relativas.
+pet_txt: save/pet.txt
+
+// Arquivo do banco de dados de Homunculus, para informações dos homunculus.
+homun_txt: save/homun.txt
+
+//  Arquivo do banco de dados de Castelos, para woe e outros.
+castle_txt: save/castle.txt
+
+//  Arquivo do banco de dados de Status, para os status que são salvos entre as seções.
+scdata_txt: save/scdata.txt
+
+// Mapserver permanent script variables ($-type)
+mapreg_txt: save/mapreg.txt
+
+
+// OPÇÕES APENAS PARA A VERSÃO SQL
+
+// You can specify the codepage to use in your mySQL tables here.
+// (Note that this feature requires MySQL 4.1+)
+//default_codepage: 
+
+// Para IPs, no linux, queira usar o localhost como 127.0.0.1 
+// No windows, você pode usar 127.0.0.1. Se você ver uma mensagem como
+// "Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)"
+// e você possua um localhost, modifique para 127.0.0.1
+
+// Global SQL settings
+// overriden by local settings when the hostname is defined there
+// (currently only the login-server reads/obeys these settings)
+sql.db_hostname: 127.0.0.1
+sql.db_port: 3306
+sql.db_username: ragnarok
+sql.db_password: ragnarok
+sql.db_database: ragnarok
+sql.codepage:
+
+// Servidor MySQL Character SQL
+char_server_ip: 127.0.0.1
+char_server_port: 3306
+char_server_id: ragnarok
+char_server_pw: ragnarok
+char_server_db: ragnarok
+
+// Servidor MySQL Map SQL
+map_server_ip: 127.0.0.1
+map_server_port: 3306
+map_server_id: ragnarok
+map_server_pw: ragnarok
+map_server_db: ragnarok
+
+// Servidor MySQL Log SQL (banco de dados de log)
+log_db_ip: 127.0.0.1
+log_db_port: 3306
+log_db_id: ragnarok
+log_db_pw: ragnarok
+log_db_db: log
+log_codepage:
+
+// NÃO MUDE NADA DAQUI EM DIANTE, EXCETO SE VOCÊ SOUBER COM CERTEZA O QUE ESTÁ FAZENDO!
+// Isto é para aquelas pessoas que conhecem bem seu servidor, e por algum motivo quer mudar o
+// layout do seu banco de dados [CLOWNISIUS]
+
+// TODAS AS TABELAS DO BANCO DE DADOS MySQL.
+
+// tabelas do banco de dados do Login
+loginlog_db: loginlog
+
+// Tabelas do banco de dados de cada char 
+char_db: char
+hotkey_db: hotkey
+scdata_db: sc_data
+cart_db: cart_inventory
+inventory_db: inventory
+charlog_db: charlog
+storage_db: storage
+reg_db: global_reg_value
+skill_db: skill
+interlog_db: interlog
+memo_db: memo
+guild_db: guild
+guild_alliance_db: guild_alliance
+guild_castle_db: guild_castle
+guild_expulsion_db: guild_expulsion
+guild_member_db: guild_member
+guild_skill_db: guild_skill
+guild_position_db: guild_position
+guild_storage_db: guild_storage
+party_db: party
+pet_db: pet
+friend_db: friends
+mail_db: mail
+auction_db: auction
+quest_db: quest
+
+// tabelas do banco de dados dos Mapas
+item_db_db: item_db
+item_db2_db: item_db2
+mob_db_db: mob_db
+mob_db2_db: mob_db2
+mapreg_db: mapreg
+
+// Usar SQL item_db e mob_db para o map-server?(yes ou no)
+use_sql_db: no
+
+// Nome para enviar para o mainchat 
+// em mensagems com whisper
+main_chat_nick: Main
+
+import: conf/import/inter_conf.txt

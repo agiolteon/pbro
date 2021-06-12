@@ -1,22 +1,25 @@
-//===== eAthena Script =======================================
+//===== Cronus script ========================================
 //= Map flags that disable skills on a map
-//===== By: ==================================================
+//===== Por: =================================================
 //= eAthena Dev Team
+//===== Versão Atual: ========================================
+//= 1.1
+//===== Changelog: ===========================================
 //= 1.0 [L0ne_W0lf]
-//= 1.1 Added additional maps. [L0ne_W0lf]
-//===== Current Version: =====================================
+//= 1.1 Added additional maps. [L0ne_W0lf] 
+//============================================================
 
 //Prontera Arena ===============
-prt_are_in	mapflag	noskill
+//prt_are_in	mapflag	noskill
 
 //The Sign Quest ===============
 himinn	mapflag	noskill
 
 // Quiz Maps ===================
-quiz_00	mapflag	noskill
-quiz_01	mapflag	noskill
-quiz_02	mapflag	noskill
-quiz_test	mapflag	noskill
+quiz_00	mapflag	noskill
+quiz_01	mapflag	noskill
+quiz_02	mapflag	noskill
+quiz_test	mapflag	noskill
 
 //Hugel Minigames ==============
 que_bingo	mapflag	noskill

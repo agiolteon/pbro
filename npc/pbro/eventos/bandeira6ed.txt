@@ -1,0 +1,81 @@
+prontera.gat,156,181,4	script	Bandeiras 6° Edição	878,{
+set @bandrqq, 5; //Número de bandeiras para fazer 1 ponto de cash
+cutin "orleans_1",2;
+set @npcn$, "[Evento das Bandeiras]";
+
+
+
+
+show @npcn$;
+show "Olá ^FF0000"+strcharinfo(0)+"^000000.";
+if(countitem(7549) > 0){ show "Você tem: ^FF0000"+countitem(7549)+"^000000 bandeira(s).";
+}else{ show "Você não tem ^FF0000nenhuma^000000 bandeira."; }
+if(#CASHPOINTS > 1){ show "Você tem ^FF0000"+#CASHPOINTS+"^000000 ponto(s) de cash."; }else{ show "Você não tem ^FF0000nenhum^000000 ponto de cash."; }
+show "Oque deseja?";
+next;
+menu "Trocar bandeiras por cash",tband,"Ir para central de Lojas pbRO",lojp;
+
+lojp:
+warp "job3_war01",25,25;
+close;
+end;
+
+
+tband:
+cutin "orleans_2",2;
+show @npcn$;
+show "Quantas bandeiras quer trocar?";
+show "^2BAEB5Para cada "+@bandrqq+" bandeiras lhe darei 1 ponto de cash^000000.";
+show "^FF0000Usuários VIP TOTAL tem 20% de desconto nas trocas^000000.";
+if(getgmlevel() >= 20){ show "^0000FFVocê é um usuário VIP TOTAL, tem os 20% de desconto!^000000"; 
+}else{ show "^0000FFVocê não é um usuário VIP TOTAL^000000."; }
+next;
+input @nnband;
+next;
+F_TROCA:
+set @divi, @nnband % 5;
+set @band, @nnband-@divi;
+set @tbandt, @band / @bandrqq;
+if(@nnband < 5){ show @npcn$; show "Não posso trocar menos de 5 bandeiras."; cutin "",255; close; }
+if(countitem(7549) < @nnband){ show @npcn$; show "Você não tem "+@nnband+" bandeiras"; cutin "",255; close; }
+if(getgmlevel() >= 20){ set @bandvip, @band / 5; set @band, @band - @bandvip; }
+show @npcn$;
+if(getgmlevel() >= 20){ show "Humm... ^FF0000"+@band+"^000000  ^0000FF(20% de desconto)^000000 bandeiras...? Certo, isto vai dar... ^0000FF"+@tbandt+"^000000 pontos de cash..."; }else{ show "Humm... ^FF0000"+@band+"^000000 bandeiras...? Certo, isto vai dar... ^0000FF"+@tbandt+"^000000 pontos de cash..."; }
+show "Deseja continuar "+strsex("meu jovem","minha jovem")+"?";
+next;
+if(select("Confirmar:Cancelar")==2){ cutin "",255; close; }
+if(countitem(7549) < @band){ cutin "",255; close; }
+delitem 7549, @band;
+atcommand "@cash "+@tbandt+"";
+cutin "orleans_7",2;
+show @npcn$;
+show "Aqui estão!";
+emotion e_no1;
+emotion e_no1,1;
+next;
+show @npcn$;
+show "Volte a me procurar quando quiser trocar novamente.";
+cutin "",255;
+close;
+end;
+end;
+
+
+
+bond:
+cutin "orleans_2",2;
+show @npcn$;
+show "Você pode conseguir bandeiras:";
+show "^143E6BNas cavernas do castelos da WoE^000000";
+show "^143E6BNas invasões de cristais nas cidades^000000";
+show "^143E6BNo evento arena dos cristais^000000";
+next;
+show @npcn$;
+show "Fique atento também aos eventos dos ^0000FF[CM]'s^000000, que podem valer bandeiras!";
+show "Qualquer outra novidade também será avisado no fórum ou site.";
+show "^EF2947www.pbgo.net/forum^000000";
+cutin "",255;
+close;
+end;
+
+}

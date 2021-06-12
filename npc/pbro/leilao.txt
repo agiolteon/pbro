@@ -1,0 +1,186 @@
+prontera,154,176,4	script	Leilão pbGO	833,{
+set .npc$, "Leilão pbGO";
+set @pontos,"";
+set @lance,"";
+set @min,"";
+set @brinde[0],12250;
+set @brinde[1],12251;
+set @brinde[2],12252;
+set @brinde[3],12253;
+set @brinde[4],12254;
+set @brinde[5],12255;
+
+show .npc$;
+show "Bem vindo, em que posso ajudar?";
+next;
+if(getgmlevel()>79) { menu "Dar Lance!",LANCE,"Resgatar Item",ITEM,"Administrar",OPT,"Sair",NO; }
+else { menu "Dar Lance!",LANCE,"Resgatar Item",ITEM,"Sair",NO; }
+
+LANCE:
+show .npc$;
+if(!$@Leilao_ini) { show "Não existe nenhum leilão em andamento, aguarde pelo próximo!"; close; }
+
+if($@Leilao_conta==getcharid(3)) { show "O seu lance no momento é o maior, não é possivel dar um novo lance."; close; }
+
+query_sql("SELECT item FROM `leilao` WHERE conta = "+getcharid(3)+" AND status = 1 LIMIT 1", @item);
+if(@item) { set @item,""; show "Para dar lances é necessário pegar um item pedente, gostaria de retira-lo agora?"; next; menu "Sim",PEGAR,"Não",SAIR; }
+
+query_sql("SELECT pbgo FROM `login` WHERE account_id = "+getcharid(3), @pontos);
+if( (@pontos-1) <= $@Leilao_lance ) { show "Desculpe mas você não pode continuar, pois não possui pontos suficientes para dar lance."; close; }
+
+show "Vamos lá! Qual o valor do seu lance?";
+show "Atualmente você possui "+@pontos+" Pontos";
+set @min,$@Leilao_lance + 1;
+show "Lance minimo: "+@min+" Pontos";
+input @lance;
+next;
+show .npc$;
+show "Você confirma o lance de "+@lance+" Pontos?";
+next;
+menu "Sim",OK,"Desistir",NO;
+
+OK:
+set @pontos,"";
+show .npc$;
+show "Finalizando seu lance...";
+show "";
+show "Por favor aguarde!";
+sleep2 rand(3000,6000);
+if(!$@Leilao_ini) { next; show .npc$; show "Infelizmente você não foi rápido suficiente e alguém já levou o prêmio, mas sorte da próxima vez."; close; }
+query_sql("SELECT pbgo FROM `login` WHERE account_id = "+getcharid(3), @pontos);
+if( @pontos <= $@Leilao_lance || @lance <= $@Leilao_lance || @lance >= @pontos) { next; show .npc$; show "Você deve dar um lance entre os valores mínimos e máximos apresentados anteriormente. Seu Lance foi cancelado."; close; }
+query_sql("UPDATE `login` SET pbgo = (pbgo - 1) WHERE account_id = "+getcharid(3));
+getitem @brinde[rand(0,5)],1;
+set $@Leilao_lance, @lance;
+set $@Leilao_conta, getcharid(3);
+set $@Leilao_nome$, strcharinfo(0);
+next;
+show .npc$;
+show "Lance Realizado com Sucesso!!! Caso alguem cubra seu lance, nos iremos informar, fique atento!";
+announce "Leilão pbGO: Novo lance efetuado! No momento o jogador "+$@Leilao_nome$+" esta ganhando o item "+$@Leilao_item_nome$+" com o lance de "+$@Leilao_lance+" Pontos pbGO.",bc_all,0xBFFFFF;
+if($@falta5) { setnpctimer 900000, "Leilao_20m"; }
+close;
+
+NO:
+show .npc$;
+show "Tudo bem, mas você esta perdendo uma ótima oportunidade! Até breve.";
+close;
+
+OPT:
+show .npc$;
+if($@Leilao_ini==1) { show "Existe um leilão em andamento!"; close; }
+show "Escolha uma das opções.";
+next;
+menu "Iniciar Leilão",INILE,"Definir Item",DILE;
+
+INILE:
+show .npc$;
+if(!$@Leilao_item) { show "É obrigatório cadastrar um item antes de iniciar o leilão."; goto DILE; }
+show "Leilão iniciado!";
+set $@Leilao_ini,1;
+initnpctimer "Leilao_20m";
+announce "Leilão pbGO: Leilão Iniciado! Item Leiloado: "+$@Leilao_item_nome$+", Lance inicial: "+$@Leilao_lance+" Pontos pbGO. Aproveite! De agora mesmo seu lance!!!",bc_all,0xFFFFFF;
+close;
+
+DILE:
+show .npc$;
+show "Informe o ID do item do próximo leilão";
+input @id_item;
+next;
+show .npc$;
+show "Informe o valor inicial do item.";
+input @val;
+next;
+show .npc$;
+show "Próximo item do leilão será:";
+show "Nome: "+getitemname(@id_item);
+show "Id: "+@id_item;
+show "Valor: "+@val+" Pontos.";
+next;
+menu "Confirmar",ADM_OK,"Voltar",DILE;
+
+ADM_OK:
+set $@Leilao_item,@id_item;
+set $@Leilao_item_nome$,getitemname(@id_item);
+set $@Leilao_lance,@val;
+set $@Leilao_lance2,$@Leilao_lance;
+show .npc$;
+show "Item cadastrado. Deseja iniciar o leilão agora?.";
+next;
+menu "Sim",INILE,"Não",FECHA;
+
+FECHA:
+show .npc$;
+show "O leilão NAO foi ativado.";
+close;
+
+ITEM:
+set @item, "";
+show .npc$;
+show "Vamos ver se tenho algo mais para você.";
+query_sql("SELECT item FROM `leilao` WHERE conta = "+getcharid(3)+" AND status = 1 LIMIT 1", @item);
+if(!@item) { show "É... Não tenho mais nada aqui, obrigado pela visita!"; close; }
+show "Oh, veja, temos um item seu aqui, quer retira-lo agora?";
+set @item,"";
+next;
+menu "Sim, por favor",PEGAR,"Mais tarde",SAIR;
+
+PEGAR:
+show .npc$;
+show "Meus parabéns por vencer o leilão, aqui está seu item, até a próxima!";
+query_sql("SELECT item FROM `leilao` WHERE conta = "+getcharid(3)+" AND status = 1 LIMIT 1", @item);
+query_sql("UPDATE `leilao` SET status = 0 WHERE conta = "+getcharid(3)+" AND item = "+@item);
+getitem @item,1;
+set @item,"";
+close;
+
+SAIR:
+show .npc$;
+show "Ok, volte quando quiser.";
+close;
+
+FAQ:
+show .npc$;
+show "Sem instruções.";
+close;
+}
+
+prontera,1,1,1	script	Leilao_20m	-1,{
+
+OnTimer875400:
+set $@falta5,1;
+end;
+
+OnTimer1110000:
+announce "Leilão pbGO: Se não houver mais lances o leilão irá finalizar em um pouco mais de 1 minuto! Item leiloado: "+$@Leilao_item_nome$+", Lance Atual: "+$@Leilao_lance+" Pontos pbGO, feito por "+$@Leilao_nome$,bc_all,0x00FFFF;
+end;
+
+OnTimer1200000:
+set $@Leilao_ini,0;
+stopnpctimer;
+if($@Leilao_lance > $@Leilao_lance2) {
+query_sql("INSERT INTO `leilao`(conta,item,pontos,status) VALUES ("+$@Leilao_conta+","+$@Leilao_item+","+$@Leilao_lance+",1)");
+query_sql("UPDATE `login` SET pbgo = (pbgo - "+$@Leilao_lance+") WHERE account_id = "+$@Leilao_conta);
+announce "Leilão pbGO: Leilão do item "+$@Leilao_item_nome$+" foi Finalizado! Vencedor: "+$@Leilao_nome$+" com o lance de "+$@Leilao_lance+" Pontos pbGO.",bc_all,0xCFFFBF;
+}else{
+announce "Leilão pbGO: Leilão do item "+$@Leilao_item_nome$+" foi Finalizado! Não houve vencedor.",bc_all,0xCFFFBF;
+}
+set $@Leilao_item,"";
+set $@Leilao_item_nome$,"";
+set $@Leilao_lance,"";
+set $@Leilao_lance2,"";
+set $@Leilao_nome$,"";
+set $@Leilao_conta,"";
+set $@falta5,"";
+end;
+}
+
+// Tabela
+//
+//CREATE TABLE `leilao` (
+//`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+//`conta` INT NOT NULL ,
+//`item` INT NOT NULL ,
+//`pontos` INT NOT NULL ,
+//`status` INT NOT NULL
+//) ENGINE = MYISAM ;

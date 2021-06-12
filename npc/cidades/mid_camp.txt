@@ -1,0 +1,23 @@
+mid_camp,207,234,5	script	Funcionária Kafra#mid-1	112,{
+	cutin "kafra_06",2;
+	callfunc "F_KafSetPront";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra";
+	mes "Os Serviços Kafra estão";
+	mes "sempre aqui para ajudá-lo.";
+	mes "Então, como posso";
+	mes "ajudá-lo hoje?";
+	callfunc "F_Kafra",5,0,0,40,800;
+
+M_Save:
+	savepoint "mid_camp",197,232;
+	callfunc "F_KafEnd",0,1,"no Centro de Expedições";
+}
+
+mid_camp	mapflag	nobranch
+mid_camp	mapflag	noicewall
+
+mid_campin	mapflag	nomemo
+mid_campin	mapflag	nobranch
+mid_campin	mapflag	noteleport

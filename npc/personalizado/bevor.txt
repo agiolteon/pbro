@@ -1,0 +1,37 @@
+//===== Cronus Script ======================================== 
+//= Bevor Quest
+//===== Por: =================================================
+//= eA Dev Team
+//===== Versão Atual: ======================================== 
+//= 1.2
+//===== Descrição: =========================================== 
+//= Bevor (parte mais inferior de grande capacete)
+//===== Changelog: ===========================================
+//= 1.0 Script inicial.
+//= 1.1 Traduzido. [Mehah]
+//= 1.2 Otimizado e algumas correções. [RoM]
+//============================================================
+
+payon,109,118,5	script	Quest de Bevor	76,{
+	show "[Quest de Bevor]";
+	show "Eis as exigências:";
+	show "- 200 Amuleto dos Orcs";
+	show "- 1 Insígnia do Herói";
+	show "Se você for bastante bravo para coletá-los, terá uma boa recompensa.";
+	next;
+	show "[Quest de Bevor]";
+	show "Você está pronto para fazer este item especial?";
+	next;
+	if(select("Certamente!","Cancelar") == 2) close;
+		show "[Quest de Bevor]";
+		if(countitem(931) < 200 || countitem(968) < 1){
+			show "...Eu sinto muito. Você não tem todos os itens necessários.";
+			close;
+			}
+		delitem 931,200;
+		delitem 968,1;
+		additem 2266,1;
+		show "Wow! Você é realmente valente!";
+		show "Desfrute deste item!";
+		close;
+}

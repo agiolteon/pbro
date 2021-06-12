@@ -75,6 +75,9 @@ struct socket_data
 		unsigned char server : 1;
 	} flag;
 
+	int con;
+	int packetver;
+
 	uint32 client_addr; // remote client address
 
 	uint8 *rdata, *wdata;

@@ -1,0 +1,54 @@
+//===== Cronus Script ======================================== 
+//= Estilista
+//===== Por: =================================================
+//= Mehah
+//===== Versão Atual: ======================================== 
+//= 1.5.1
+//===== Descrição: =========================================== 
+//= Tingi Cabelo, Trocar Estilo de Cabelo e Mudar a cor da Roupa
+//===== Changelog: =========================================== 
+//= 1.5 Script Simplificado [Mehah]
+//=	- Retirado configurações para custom paleta, agora detecta automaticamente
+//=	- Otimizado e resumido
+//= 1.5.1 Script reestruturado [Mehah] 
+//=	  - Adicionado checagem para ignora valores de cores(roupa) a cima de 1 para a classe Taekwon
+//=	  - Adicionado suporte para muda o limite de estilo de cabelo
+//= 1.6 - Corrigidos erros, e as variáveis agora estão no NPC.[MaxDragon]
+//============================================================
+
+function	script	VIP_EST	{
+function setColor;
+set @ES_corroupa,500;	// (Limite de cores para roupa) [Oficial: 4]
+set @ES_corcabelo,220;	// (Limite de cores para cabelo) [Oficial: 8]
+set @ES_estilocabelo,37;	// (Limite de estilo para cabelo) [Oficial: 23]
+//==================================================================================	
+// [Script]
+//==================================================================================	
+	show "[^FF0000Estilista^000000]";
+	show "Bem vindo, meu caro ^853D85Aventureiro^000000.";
+	show "Eu posso tingir, trocar seu estilo de cabelo e mudar a cor da sua roupa.";
+	show "O que você deseja?";
+	next;
+	if(select("Trocar Estilo de Cabelo","Tingir o Cabelo","Mudar a Cor da Roupa","Sair") == 4) {
+	show "Volte quando quiser meus serviços.";
+	close;
+	}
+        if(@menu == 1) setarray .@cor[0],1,0,28;
+        if(@menu == 2) setarray .@cor[0],6,0,220;
+        if(@menu == 3) setarray .@cor[0],7,0,500;
+	while(1) {
+		if(select("Próximo","Anterior","Digitar","Cancelar") == 4) close;
+		if(@menu == 1)
+			if(getlook(.@cor[0]) >= .@cor[2]) setlook .@cor[0],.@cor[1];
+			else setlook .@cor[0],getlook(.@cor[0])+1;
+		if(@menu == 2)
+			if(getlook(.@cor[0]) <= .@cor[1]) setlook .@cor[0],.@cor[2];
+			else setlook .@cor[0],getlook(.@cor[0])-1;
+		if(@menu == 3) {
+			input .@num,.@cor[1],.@cor[2];
+			setlook .@cor[0],.@num;
+		}
+		show "Número ^FF0000"+getlook(.@cor[0])+"^000000/"+.@cor[2];
+		specialeffect2 339;		
+	}
+}

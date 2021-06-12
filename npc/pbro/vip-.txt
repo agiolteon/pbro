@@ -1,0 +1,669 @@
+//Atendente VIP
+//Npc criado por Kamper
+
+prontera.gat,170,190,3	script	Atendente VIP#hG1-1::VIP	91,{
+
+		if(getgmlevel() < 10) goto SemPasse;
+		cutin "katsua02",2;
+		show "[Atendente]";
+		show "Olá ^FF0000"+ strcharinfo(0) + "^000000!";
+		show "Seu passe esta confirmado";
+		show "Diga-me o que deseja.";
+		next;
+		menu "Curar-me",L_CUR,"Arenas MVP",L_MVP,"Encantamentos",L_BUF,"Teleportadora",L_teleporta,"Mudar meu Estilo",L_EST,"Reparar Itens",L_REP,"Retirar Cartas Equipadas",L_RET,"Resetar Pontos",L_RES,"Castelos da WOE 1.0",L_TELE_CAS,"Castelos da WOE 2.0",L_TELE_CAS2,"Sair",L_SAI;
+
+L_MVP:
+show "[Atendente]";
+show "Em qual Arena deseja entrar?";
+next;
+menu "Desafio Adiante",L_DA,"Tetra",L_TT,"Encruzilhada",L_EC,"Bússola",L_BS,"Sair",L_SAI;
+	
+// Desafio Adiante
+
+L_DA:
+show "[Atendente VIP]";
+show "Qual dos andares você deseja entrar?";
+next;
+	menu "Andar 1 [" + getmapusers("pvp_n_1-2") + " / 50]",Larena1,
+	"Andar 2 [" + getmapusers("pvp_n_2-2") + " / 50]",Larena2,
+	"Andar 3 [" + getmapusers("pvp_n_3-2") + " / 15]",Larena3,
+	"Andar 4 [" + getmapusers("pvp_n_4-2") + " / 15]",Larena4,
+	"Andar 5 [" + getmapusers("pvp_n_5-2") + " / 15]",Larena5,
+	"Andar 6 [" + getmapusers("pvp_n_6-2") + " / 15]",Larena6,
+	"Andar 7 [" + getmapusers("pvp_n_7-2") + " / 15]",Larena7,
+	"Andar 8 [" + getmapusers("pvp_n_8-2") + " / 15]",Larena8,
+	"Ah... Quero sair.",Lcancel;
+
+Larena1:
+if (getmapusers("pvp_n_1-2") > 49) goto Lsorry;
+warp "pvp_n_1-2",102,102;
+close;
+
+Larena2:
+if (getmapusers("pvp_n_2-2") > 49) goto Lsorry;
+warp "pvp_n_2-2",102,102;
+close;
+
+Larena3:
+if (getmapusers("pvp_n_3-2") > 14) goto Lsorry;
+warp "pvp_n_3-2",102,102;
+close;
+
+Larena4:
+if (getmapusers("pvp_n_4-2") > 14) goto Lsorry;
+warp "pvp_n_4-2",102,102;
+close;
+
+Larena5:
+if (getmapusers("pvp_n_5-2") > 14) goto Lsorry;
+warp "pvp_n_5-2",102,102;
+close;
+
+Larena6:
+if (getmapusers("pvp_n_6-2") > 14) goto Lsorry;
+warp "pvp_n_6-2",102,102;
+close;
+
+Larena7:
+if (getmapusers("pvp_n_7-2") > 14) goto Lsorry;
+warp "pvp_n_7-2",102,102;
+close;
+
+Larena8:
+if (getmapusers("pvp_n_8-2") > 14) goto Lsorry;
+warp "pvp_n_8-2",102,102;
+close;
+
+//********************************************************************************************************
+// Tetra
+
+L_TT:
+show "[Atendente VIP]";
+show "Qual dos andares você quer ir?";
+next;
+	menu "Andar 1 [" + getmapusers("pvp_n_1-3") + " / 50]",Larena12,
+	"Andar 2 [" + getmapusers("pvp_n_2-3") + " / 15]",Larena22,
+	"Andar 3 [" + getmapusers("pvp_n_3-3") + " / 15]",Larena32,
+	"Andar 4 [" + getmapusers("pvp_n_4-3") + " / 15]",Larena42,
+	"Andar 5 [" + getmapusers("pvp_n_5-3") + " / 15]",Larena52,
+	"Andar 6 [" + getmapusers("pvp_n_6-3") + " / 15]",Larena62,
+	"Andar 7 [" + getmapusers("pvp_n_7-3") + " / 15]",Larena72,
+	"Andar 8 [" + getmapusers("pvp_n_8-3") + " / 15]",Larena82,
+	"Quero sair.",Lcancel;
+
+Larena12:
+if (getmapusers("pvp_n_1-3") > 49) goto Lsorry;
+warp "pvp_n_1-3",102,102;
+close;
+
+Larena22:
+if (getmapusers("pvp_n_2-3") > 14) goto Lsorry;
+warp "pvp_n_2-3",102,102;
+close;
+
+Larena32:
+if (getmapusers("pvp_n_3-3") > 14) goto Lsorry;
+warp "pvp_n_3-3",102,102;
+close;
+
+Larena42:
+if (getmapusers("pvp_n_4-3") > 14) goto Lsorry;
+warp "pvp_n_4-3",102,102;
+close;
+
+Larena52:
+if (getmapusers("pvp_n_5-3") > 14) goto Lsorry;
+warp "pvp_n_5-3",102,102;
+close;
+
+Larena62:
+if (getmapusers("pvp_n_6-3") > 14) goto Lsorry;
+warp "pvp_n_6-3",102,102;
+close;
+
+Larena72:
+if (getmapusers("pvp_n_7-3") > 14) goto Lsorry;
+warp "pvp_n_7-3",102,102;
+close;
+
+Larena82:
+if (getmapusers("pvp_n_8-3") > 14) goto Lsorry;
+warp "pvp_n_8-3",102,102;
+close;
+
+//********************************************************************************************************
+// Encruzilhada
+
+L_EC:
+show "[Atendente VIP]";
+show "Qual dos andares você quer ir?";
+next;
+	menu "Andar 1 [" + getmapusers("pvp_n_1-4") + " / 50]",Larena13,
+	"Andar 2 [" + getmapusers("pvp_n_2-4") + " / 15]",Larena23,
+	"Andar 3 [" + getmapusers("pvp_n_3-4") + " / 15]",Larena33,
+	"Andar 4 [" + getmapusers("pvp_n_4-4") + " / 15]",Larena43,
+	"Andar 5 [" + getmapusers("pvp_n_5-4") + " / 15]",Larena53,
+	"Andar 6 [" + getmapusers("pvp_n_6-4") + " / 15]",Larena63,
+	"Andar 7 [" + getmapusers("pvp_n_7-4") + " / 15]",Larena73,
+	"Andar 8 [" + getmapusers("pvp_n_8-4") + " / 15]",Larena83,
+	"Sair",Lcancel;
+
+Larena13:
+if (getmapusers("pvp_n_1-4") > 49) goto Lsorry;
+warp "pvp_n_1-4",110,120;
+close;
+
+Larena23:
+if (getmapusers("pvp_n_2-4") > 14) goto Lsorry;
+warp "pvp_n_2-4",110,120;
+close;
+
+Larena33:
+if (getmapusers("pvp_n_3-4") > 14) goto Lsorry;
+warp "pvp_n_3-4",110,120;
+close;
+
+Larena43:
+if (getmapusers("pvp_n_4-4") > 14) goto Lsorry;
+warp "pvp_n_4-4",110,120;
+close;
+
+Larena53:
+if (getmapusers("pvp_n_5-4") > 14) goto Lsorry;
+warp "pvp_n_5-4",110,120;
+close;
+
+Larena63:
+if (getmapusers("pvp_n_6-4") > 14) goto Lsorry;
+warp "pvp_n_6-4",110,120;
+close;
+
+Larena73:
+if (getmapusers("pvp_n_7-4") > 14) goto Lsorry;
+warp "pvp_n_7-4",110,120;
+close;
+
+Larena83:
+if (getmapusers("pvp_n_8-4") > 14) goto Lsorry;
+warp "pvp_n_8-4",110,120;
+close;
+
+//********************************************************************************************************
+// Bussola
+
+L_BS:
+show "[Atendente VIP]";
+show "Qual dos andares você quer ir?";
+next;
+	menu "Andar 1 [" + getmapusers("pvp_n_1-5") + " / 50]",Larena14,
+	"Andar 2 [" + getmapusers("pvp_n_2-5") + " / 15]",Larena24,
+	"Andar 3 [" + getmapusers("pvp_n_3-5") + " / 15]",Larena34,
+	"Andar 4 [" + getmapusers("pvp_n_4-5") + " / 15]",Larena44,
+	"Andar 5 [" + getmapusers("pvp_n_5-5") + " / 15]",Larena54,
+	"Andar 6 [" + getmapusers("pvp_n_6-5") + " / 15]",Larena64,
+	"Andar 7 [" + getmapusers("pvp_n_7-5") + " / 15]",Larena74,
+	"Andar 8 [" + getmapusers("pvp_n_8-5") + " / 15]",Larena84,
+	"Sair",Lcancel;
+
+
+
+Larena14:
+if (getmapusers("pvp_n_1-5") > 49) goto Lsorry;
+warp "pvp_n_1-5",102,102;
+close;
+
+Larena24:
+if (getmapusers("pvp_n_2-5") > 14) goto Lsorry;
+warp "pvp_n_2-5",102,102;
+close;
+
+Larena34:
+if (getmapusers("pvp_n_3-5") > 14) goto Lsorry;
+warp "pvp_n_3-5",102,102;
+close;
+
+Larena44:
+if (getmapusers("pvp_n_4-5") > 14) goto Lsorry;
+warp "pvp_n_4-5",102,102;
+close;
+
+Larena54:
+if (getmapusers("pvp_n_5-5") > 14) goto Lsorry;
+warp "pvp_n_5-5",102,102;
+close;
+
+Larena64:
+if (getmapusers("pvp_n_6-5") > 14) goto Lsorry;
+warp "pvp_n_6-5",102,102;
+close;
+
+Larena74:
+if (getmapusers("pvp_n_7-5") > 14) goto Lsorry;
+warp "pvp_n_7-5",102,102;
+close;
+
+Larena84:
+if (getmapusers("pvp_n_8-5") > 14) goto Lsorry;
+warp "pvp_n_8-5",102,102;
+close;
+
+//********************************************************************************************************
+Lsorry:
+cutin "",255;
+show "[Atendente VIP]";
+show "Desculpe mas está arena está atualmente cheia, Escolha outra.";
+close;
+
+Lcancel:
+cutin "",255;
+show "Até a próxima!";
+close;
+
+
+// Buffes
+
+L_BUF:
+	show "[Atendente]";
+	show "Deseja se encantar?";
+	menu "Sim, Eu quero!",encantar,"Não, Obrigado!",cancel;
+
+encantar:
+	cutin "",255;
+	sc_start 32,600000,10;  // Increase Agi
+	sc_start 30,600000,10; // Blessing
+	sc_start 35,600000,5; // Impositio Manus
+	sc_start 40,600000,5; // Magnificat
+	sc_start 41,600000,5; // Gloria
+	sc_start 46,600000,5; // Maximize Power 
+
+cancel:
+	cutin "",255;
+	close;
+
+
+L_EST:
+	cutin "",255;
+	callfunc "VIP_EST";
+
+L_CUR:
+	cutin "",255;
+	show "[Atendente]";
+	show "Ok, eu já recuperei todo o seu HP e SP...";
+	show "Continue jogando, e boa sorte!";
+	percentheal 100,100;
+	close;
+
+L_RET:
+	cutin "",255;
+	callfunc "VIP_RET";
+
+L_RES:
+	cutin "",255;
+	callfunc "VIP_RES";
+
+L_teleporta:
+	cutin "",255;
+	callfunc "Tele_total";
+
+L_REP:
+	cutin "",255;
+	callfunc "repairmain","Reparador de Itens";
+
+
+// CASTELOS TELEPORTE
+
+L_TELE_CAS:
+show "[Atendente VIP]";
+show "Escolha qual castelo gostaria de ser teleportado.";
+next;
+menu "Lago Sagrado",C1,"Palacio da Sombra",C2,"Palacio da Colina",C3,"Palacio do Sol",C4,"Palacio Escarlate",C5,"Sair",L_SAI;
+
+C1:
+warp "pay_gld",296,107;
+close;
+
+C2:
+warp "pay_gld",315,292;
+close;
+
+C3:
+warp "pay_gld",190,269;
+close;
+
+C4:
+warp "pay_gld",123,231;
+close;
+
+C5:
+warp "pay_gld",144,168;
+close;
+
+L_SAI:
+cutin "",255;
+close;
+
+// CASTELOS TELEPORTE2
+
+L_TELE_CAS2:
+show "[Atendente VIP]";
+show "Escolha qual castelo gostaria de ser teleportado.";
+next;
+menu "Himinn",D1,"Hljod",D2,"Vidblainn",D3,"Skatyrnir",D4,"Andlangr",D5,"Sair",L_SAI2;
+
+D1:
+warp "sch_gld",293,100;
+close;
+
+D2:
+warp "sch_gld",137,93;
+close;
+
+D3:
+warp "sch_gld",97,196;
+close;
+
+D4:
+warp "sch_gld",71,315;
+close;
+
+D5:
+warp "sch_gld",288,252;
+close;
+
+L_SAI2:
+cutin "",255;
+close;
+
+SemPasse:
+show "[Atendente]";
+show "Me desculpe, mas atendo somente a usuários VIP.";
+show "Se você deseja ser usuário VIP, visite www.pbgo.net e descubra como se tornar um.";
+close;
+
+}
+
+morocc.gat,159,96,5	duplicate(VIP)	Atendente VIP#hG2-2	91
+ayothaya.gat,155,111,5	duplicate(VIP)	Atendente VIP#hG2-3	91
+geffen.gat,121,61,5	duplicate(VIP)	Atendente VIP#hG2-4	91
+umbala.gat,94,162,5	duplicate(VIP)	Atendente VIP#hG2-5	91
+payon.gat,180,105,5	duplicate(VIP)	Atendente VIP#hG2-6	91
+alberta.gat,185,144,5	duplicate(VIP)	Atendente VIP#hG2-7	91
+aldebaran.gat,134,123,5	duplicate(VIP)	Atendente VIP#hG2-8	91
+izlude.gat,125,118,5	duplicate(VIP)	Atendente VIP#hG2-9	91
+xmas.gat,149,136,5	duplicate(VIP)	Atendente VIP#hG2-10	91
+comodo.gat,188,162,5	duplicate(VIP)	Atendente VIP#hG2-11	91
+amatsu.gat,200,80,5	duplicate(VIP)	Atendente VIP#hG2-12	91
+gonryun.gat,164,130,5	duplicate(VIP)	Atendente VIP#hG2-13	91
+yuno.gat,152,186,5	duplicate(VIP)	Atendente VIP#hG2-14	91
+niflheim.gat,29,160,5	duplicate(VIP)	Atendente VIP#hG2-15	91
+louyang.gat,225,103,5	duplicate(VIP)	Atendente VIP#hG2-16	91
+einbech.gat,84,101,5	duplicate(VIP)	Atendente VIP#hG2-17	91
+gef_fild10.gat,78,337,5	duplicate(VIP)	Atendente VIP#hG2-18	91
+einbroch.gat,56,203,5	duplicate(VIP)	Atendente VIP#hG2-19	91
+pay_arche.gat,44,138,5	duplicate(VIP)	Atendente VIP#hG2-20	91
+mjolnir_02.gat,86,359,5	duplicate(VIP)	Atendente VIP#hG2-21	91
+hugel.gat,93,151,5	duplicate(VIP)	Atendente VIP#hG2-22	91
+rachel.gat,130,117,5	duplicate(VIP)	Atendente VIP#hG2-23	91
+veins.gat,211,125,5	duplicate(VIP)	Atendente VIP#hG2-24	91
+lighthalzen,166,100,5	duplicate(VIP)	Atendente VIP#hG2-57	91
+nameless_i,172,250,5	duplicate(VIP)	Atendente VIP#hG2-58	91
+moscovia.gat,219,192,5	duplicate(VIP)	Atendente VIP#hG2-59	91
+brasilis,184,220,5	duplicate(VIP)	Atendente VIP#hG2-60	91
+splendide,212,185,5	duplicate(VIP)	Atendente VIP#hG2-61	91
+manuk,293,194,5	duplicate(VIP)	Atendente VIP#hG2-62	91
+mid_camp,204,235,5	duplicate(VIP)	Atendente VIP#hG2-63	91
+//quiz_00,50,7,5	duplicate(VIP)	Atendente VIP#hG2-64	91
+bat_room,161,154,5	duplicate(VIP)	Atendente VIP#hG2-65	91
+pvp_n_1-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-25	91
+pvp_n_2-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-26	91
+pvp_n_3-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-27	91
+pvp_n_4-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-28	91
+pvp_n_5-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-29	91
+pvp_n_6-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-30	91
+pvp_n_7-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-31	91
+pvp_n_8-2.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-32	91
+pvp_n_1-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-33	91
+pvp_n_2-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-40	91
+pvp_n_3-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-34	91
+pvp_n_4-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-35	91
+pvp_n_5-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-36	91
+pvp_n_6-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-37	91
+pvp_n_7-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-38	91
+pvp_n_8-3.gat,95,95,5	duplicate(VIP)	Atendente VIP#hG2-39	91
+pvp_n_1-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-41	91
+pvp_n_2-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-42	91
+pvp_n_3-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-43	91
+pvp_n_4-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-44	91
+pvp_n_5-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-45	91
+pvp_n_6-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-46	91
+pvp_n_7-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-47	91
+pvp_n_8-4.gat,100,124,5	duplicate(VIP)	Atendente VIP#hG2-48	91
+pvp_n_1-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-49	91
+pvp_n_2-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-50	91
+pvp_n_3-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-51	91
+pvp_n_4-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-52	91
+pvp_n_5-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-53	91
+pvp_n_6-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-54	91
+pvp_n_7-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-55	91
+pvp_n_8-5.gat,100,100,5	duplicate(VIP)	Atendente VIP#hG2-56	91
+
+//Mapflags MVP ROOM
+pvp_n_1-2	mapflag	nobranch
+pvp_n_2-2	mapflag	nobranch
+pvp_n_3-2	mapflag	nobranch
+pvp_n_4-2	mapflag	nobranch
+pvp_n_5-2	mapflag	nobranch
+pvp_n_6-2	mapflag	nobranch
+pvp_n_7-2	mapflag	nobranch
+pvp_n_8-2	mapflag	nobranch
+pvp_n_1-3	mapflag	nobranch
+pvp_n_2-3	mapflag	nobranch
+pvp_n_3-3	mapflag	nobranch
+pvp_n_4-3	mapflag	nobranch
+pvp_n_5-3	mapflag	nobranch
+pvp_n_6-3	mapflag	nobranch
+pvp_n_7-3	mapflag	nobranch
+pvp_n_8-3	mapflag	nobranch
+pvp_n_1-4	mapflag	nobranch
+pvp_n_2-4	mapflag	nobranch
+pvp_n_3-4	mapflag	nobranch
+pvp_n_4-4	mapflag	nobranch
+pvp_n_5-4	mapflag	nobranch
+pvp_n_6-4	mapflag	nobranch
+pvp_n_7-4	mapflag	nobranch
+pvp_n_8-4	mapflag	nobranch
+pvp_n_1-5	mapflag	nobranch
+pvp_n_2-5	mapflag	nobranch
+pvp_n_3-5	mapflag	nobranch
+pvp_n_4-5	mapflag	nobranch
+pvp_n_5-5	mapflag	nobranch
+pvp_n_6-5	mapflag	nobranch
+pvp_n_7-5	mapflag	nobranch
+pvp_n_8-5	mapflag	nobranch
+
+
+//Spaws MVP ROOM
+//********************************************************************************************************
+// --- Primeiro Desafio Adiante
+pvp_n_1-2.gat,0,0,0,0	monster	Atroce	1785,1,60000,66000
+pvp_n_1-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,1,60000,66000
+pvp_n_1-2.gat,0,0,0,0	monster	Sapo-Cururu	1089,1,60000,66000
+// --- Segundo Desafio Adiante
+pvp_n_2-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,2,60000,66000
+pvp_n_2-2.gat,0,0,0,0	monster	Flor do Luar	1150,1,60000,66000
+pvp_n_2-2.gat,0,0,0,0	monster	Sapo-Cururu	1089,2,60000,66000
+// --- Terceiro Desafio Adiante
+pvp_n_3-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,1,60000,66000
+pvp_n_3-2.gat,0,0,0,0	monster	Flor do Luar	1150,2,60000,66000
+pvp_n_3-2.gat,0,0,0,0	monster	Maya	1147,1,60000,66000
+pvp_n_3-2.gat,0,0,0,0	monster	Quimera	1283,1,60000,66000
+// --- Quarto Desafio Adiante
+pvp_n_4-2.gat,0,0,0,0	monster	Atroce	1785,1,60000,66000
+pvp_n_4-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,1,60000,66000
+pvp_n_4-2.gat,0,0,0,0	monster	Flor do Luar	1150,1,60000,66000
+pvp_n_4-2.gat,0,0,0,0	monster	Maya	1147,1,60000,66000
+pvp_n_4-2.gat,0,0,0,0	monster	Líder Cobold	1296,1,60000,66000
+// --- Quinto Desafio Adiante
+pvp_n_5-2.gat,0,0,0,0	monster	Atroce	1785,1,60000,66000
+pvp_n_5-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,2,60000,66000
+pvp_n_5-2.gat,0,0,0,0	monster	Flor do Luar	1150,1,60000,66000
+pvp_n_5-2.gat,0,0,0,0	monster	Maya	1147,2,60000,66000
+pvp_n_5-2.gat,0,0,0,0	monster	Líder Cobold	1296,1,60000,66000
+// --- Sexto Desafio Adiante
+pvp_n_6-2.gat,0,0,0,0	monster	Atroce	1785,2,60000,66000
+pvp_n_6-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,3,60000,66000
+pvp_n_6-2.gat,0,0,0,0	monster	Flor do Luar	1150,1,60000,66000
+pvp_n_6-2.gat,0,0,0,0	monster	Maya	1147,2,60000,66000
+pvp_n_6-2.gat,0,0,0,0	monster	Senhor da Morte	1373,1,60000,66000
+// --- Sétimo Desafio Adiante
+pvp_n_7-2.gat,0,0,0,0	monster	Atroce	1785,2,60000,66000
+pvp_n_7-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,3,60000,66000
+pvp_n_7-2.gat,0,0,0,0	monster	Flor do Luar	1150,2,60000,66000
+pvp_n_7-2.gat,0,0,0,0	monster	Maya	1147,2,60000,66000
+pvp_n_7-2.gat,0,0,0,0	monster	Senhor da Morte	1373,1,60000,66000
+// --- Oitavo Desafio Adiante
+pvp_n_8-2.gat,0,0,0,0	monster	Atroce	1785,3,60000,66000
+pvp_n_8-2.gat,0,0,0,0	monster	Abelha-Rainha	1059,3,60000,66000
+pvp_n_8-2.gat,0,0,0,0	monster	Flor do Luar	1150,3,60000,66000
+pvp_n_8-2.gat,0,0,0,0	monster	Maya	1147,1,60000,66000
+pvp_n_8-2.gat,0,0,0,0	monster	Senhor da Morte	1373,1,60000,66000
+
+//********************************************************************************************************
+// --- Tetra
+// --- Primeiro Tetra
+pvp_n_1-3.gat,0,0,0,0	monster	Freeoni	1159,2,60000,66000
+pvp_n_1-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_1-3.gat,0,0,0,0	monster	Líder Goblin	1299,1,60000,66000
+// --- Segundo Tetra
+pvp_n_2-3.gat,0,0,0,0	monster	Freeoni	1159,2,60000,66000
+pvp_n_3-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_2-3.gat,0,0,0,0	monster	Orc Herói	1087,1,60000,66000
+pvp_n_2-3.gat,0,0,0,0	monster	Líder Goblin	1299,1,60000,66000
+// --- Terceiro Tetra
+pvp_n_3-3.gat,0,0,0,0	monster	Freeoni	1159,1,60000,66000
+pvp_n_3-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_3-3.gat,0,0,0,0	monster	Orc Herói	1087,1,60000,66000
+pvp_n_3-3.gat,0,0,0,0	monster	Gorynych	1885,1,60000,66000
+pvp_n_3-3.gat,0,0,0,0	monster	Barão Coruja	1295,1,60000,66000
+// --- Quarto Tetra
+pvp_n_4-3.gat,0,0,0,0	monster	Freeoni	1159,2,60000,66000
+pvp_n_4-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_4-3.gat,0,0,0,0	monster	Orc Herói	1087,1,60000,66000
+pvp_n_4-3.gat,0,0,0,0	monster	Gorynych	1885,1,60000,66000
+pvp_n_4-3.gat,0,0,0,0	monster	Barão Coruja	1295,1,60000,66000
+// --- Quinto Tetra
+pvp_n_5-3.gat,0,0,0,0	monster	Freeoni	1159,1,60000,66000
+pvp_n_5-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,2,60000,66000
+pvp_n_5-3.gat,0,0,0,0	monster	Orc Herói	1087,2,60000,66000
+pvp_n_5-3.gat,0,0,0,0	monster	Gorynych	1885,1,60000,66000
+pvp_n_5-3.gat,0,0,0,0	monster	Barão Coruja	1295,1,60000,66000
+// --- Sexto Tetra
+pvp_n_6-3.gat,0,0,0,0	monster	Freeoni	1159,2,60000,66000
+pvp_n_6-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_6-3.gat,0,0,0,0	monster	Orc Herói	1087,1,60000,66000
+pvp_n_6-3.gat,0,0,0,0	monster	Gorynych	1885,1,60000,66000
+pvp_n_6-3.gat,0,0,0,0	monster	Serpente Suprema	1418,2,60000,66000
+// --- Sétimo Tetra
+pvp_n_7-3.gat,0,0,0,0	monster	Freeoni	1159,3,60000,66000
+pvp_n_7-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_7-3.gat,0,0,0,0	monster	Orc Herói	1087,2,60000,66000
+pvp_n_7-3.gat,0,0,0,0	monster	Gorynych	1885,3,60000,66000
+// --- Oitavo Tetra
+pvp_n_8-3.gat,0,0,0,0	monster	Freeoni	1159,3,60000,66000
+pvp_n_8-3.gat,0,0,0,0	monster	Senhor das Trevas	1272,2,60000,66000
+pvp_n_8-3.gat,0,0,0,0	monster	Orc Herói	1087,3,60000,66000
+pvp_n_8-3.gat,0,0,0,0	monster	Gorynych	1885,3,60000,66000
+pvp_n_8-3.gat,0,0,0,0	monster	Líder Goblin	1299,1,60000,66000
+
+//********************************************************************************************************
+// --- Encruzilhada
+// --- Primeiro Encruzilhada
+pvp_n_1-4.gat,0,0,0,0	monster	Drake	1112,1,60000,66000
+pvp_n_1-4.gat,0,0,0,0	monster	Ygnizem	1658,1,60000,66000
+pvp_n_1-4.gat,0,0,0,0	monster	Angeling	1096,1,60000,66000
+// --- Segundo Encruzilhada
+pvp_n_2-4.gat,0,0,0,0	monster	Drake	1112,2,60000,66000
+pvp_n_2-4.gat,0,0,0,0	monster	Ygnizem	1658,1,60000,66000
+pvp_n_2-4.gat,0,0,0,0	monster	Doppelganger	1046,1,60000,66000
+pvp_n_2-4.gat,0,0,0,0	monster	Angeling	1096,1,60000,66000
+// --- Terceiro Encruzilhada
+pvp_n_3-4.gat,0,0,0,0	monster	Drake	1112,1,60000,66000
+pvp_n_3-4.gat,0,0,0,0	monster	Ygnizem	1658,1,60000,66000
+pvp_n_3-4.gat,0,0,0,0	monster	Doppelganger	1046,1,60000,66000
+pvp_n_3-4.gat,0,0,0,0	monster	Senhor dos Mortos	1373,1,60000,66000
+pvp_n_3-4.gat,0,0,0,0	monster	Cavaleiro do Abismo	1219,2,60000,66000
+// --- Quarto Encruzilhada
+pvp_n_4-4.gat,0,0,0,0	monster	Drake	1112,2,60000,66000
+pvp_n_4-4.gat,0,0,0,0	monster	Ygnizem	1658,1,60000,66000
+pvp_n_4-4.gat,0,0,0,0	monster	Doppelganger	1046,2,60000,66000
+pvp_n_4-4.gat,0,0,0,0	monster	Senhor dos Mortos	1373,1,60000,66000
+pvp_n_4-4.gat,0,0,0,0	monster	Kiel-D-01	1734,2,60000,66000
+// --- Quinto Encruzilhada
+pvp_n_5-4.gat,0,0,0,0	monster	Drake	1112,3,60000,66000
+pvp_n_5-4.gat,0,0,0,0	monster	Ygnizem	1658,2,60000,66000
+pvp_n_5-4.gat,0,0,0,0	monster	Doppelganger	1046,2,60000,66000
+pvp_n_5-4.gat,0,0,0,0	monster	Senhor dos Mortos	1373,1,60000,66000
+pvp_n_5-4.gat,0,0,0,0	monster	Kiel-D-01	1734,1,60000,66000
+// --- Sexto Encruzilhada
+pvp_n_6-4.gat,0,0,0,0	monster	Drake	1112,3,60000,66000
+pvp_n_6-4.gat,0,0,0,0	monster	Ygnizem	1658,2,60000,66000
+pvp_n_6-4.gat,0,0,0,0	monster	Doppelganger	1046,2,60000,66000
+pvp_n_6-4.gat,0,0,0,0	monster	Vesper	1685,1,60000,66000
+pvp_n_6-4.gat,0,0,0,0	monster	Senhor dos Mortos	1373,2,60000,66000
+// --- Sétimo Encruzilhada
+pvp_n_7-4.gat,0,0,0,0	monster	Drake	1112,3,60000,66000
+pvp_n_7-4.gat,0,0,0,0	monster	Ygnizem	1658,2,60000,66000
+pvp_n_7-4.gat,0,0,0,0	monster	Doppelganger	1046,3,60000,66000
+pvp_n_7-4.gat,0,0,0,0	monster	Senhor dos Mortos	1373,2,60000,66000
+pvp_n_7-4.gat,0,0,0,0	monster	Vesper	1685,1,60000,66000
+// --- Oitavo Encruzilhada
+pvp_n_8-4.gat,0,0,0,0	monster	Drake	1112,3,60000,66000
+pvp_n_8-4.gat,0,0,0,0	monster	Ygnizem	1658,3,60000,66000
+pvp_n_8-4.gat,0,0,0,0	monster	Doppelganger	1046,3,60000,66000
+pvp_n_8-4.gat,0,0,0,0	monster	Senhor dos Mortos	1373,3,60000,66000
+
+//********************************************************************************************************
+// --- Bússola Maps
+// --- First Bússola
+pvp_n_1-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,2,60000,66000
+pvp_n_1-5.gat,0,0,0,0	monster	Faraó	1157,1,60000,66000
+pvp_n_1-5.gat,0,0,0,0	monster	Libélula	1091,1,60000,66000
+// --- First Bússola
+pvp_n_2-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,1,60000,66000
+pvp_n_2-5.gat,0,0,0,0	monster	Faraó	1157,1,60000,66000
+pvp_n_2-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_2-5.gat,0,0,0,0	monster	Ungoliant	1618,1,60000,66000
+// --- First Bússola
+pvp_n_3-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,1,60000,66000
+pvp_n_3-5.gat,0,0,0,0	monster	Faraó	1157,1,60000,66000
+pvp_n_3-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_3-5.gat,0,0,0,0	monster	Bafomé	1039,1,60000,66000
+pvp_n_3-5.gat,0,0,0,0	monster	RSX 0806	1623,1,60000,66000
+// --- First Bússola
+pvp_n_4-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,3,60000,66000
+pvp_n_4-5.gat,0,0,0,0	monster	Faraó	1157,1,60000,66000
+pvp_n_4-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_4-5.gat,0,0,0,0	monster	Bafomé	1039,1,60000,66000
+// --- First Bússola
+pvp_n_5-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,2,60000,66000
+pvp_n_5-5.gat,0,0,0,0	monster	Faraó	1157,2,60000,66000
+pvp_n_5-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_5-5.gat,0,0,0,0	monster	Bafomé	1039,1,60000,66000
+pvp_n_5-5.gat,0,0,0,0	monster	RSX 0806	1623,1,60000,66000
+// --- First Bússola
+pvp_n_6-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,2,60000,66000
+pvp_n_6-5.gat,0,0,0,0	monster	Faraó	1157,2,60000,66000
+pvp_n_6-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,1,60000,66000
+pvp_n_6-5.gat,0,0,0,0	monster	Bafomé	1039,1,60000,66000
+pvp_n_6-5.gat,0,0,0,0	monster	RSX 0806	1623,1,60000,66000
+// --- First Bússola
+pvp_n_7-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,2,60000,66000
+pvp_n_7-5.gat,0,0,0,0	monster	Faraó	1157,2,60000,66000
+pvp_n_7-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,2,60000,66000
+pvp_n_7-5.gat,0,0,0,0	monster	Bafomé	1039,2,60000,66000
+// --- First Bússola
+pvp_n_8-5.gat,0,0,0,0	monster	Samurai Encarnado	1492,3,60000,66000
+pvp_n_8-5.gat,0,0,0,0	monster	Faraó	1157,1,60000,66000
+pvp_n_8-5.gat,0,0,0,0	monster	Senhor das Trevas	1272,2,60000,66000
+pvp_n_8-5.gat,0,0,0,0	monster	Bafomé	1039,1,60000,66000
+pvp_n_8-5.gat,0,0,0,0	monster	RSX 0806	1623,1,60000,66000

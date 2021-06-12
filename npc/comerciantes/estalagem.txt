@@ -1,0 +1,186 @@
+//===== Cronus Script =====================================
+//= Hospedagem
+//===== Por: ==============================================
+//= SoulBlaker
+//===== Versão Atual: =====================================
+//= 1.5/2.6
+//===== Descrição: ========================================
+//= Hospedagem, Salvar e Curar.
+//===== Cometários adicionais: ============================
+//= 1.4 Reestruturado o script. [SoulBlaker]
+//= 1.5 Adicionado Moscóvia e reestruturado Veins. [RoM]
+//= 1.6 Removido a Hospedaria de Morroc. [RoM]
+//=========================================================
+
+//======================== Prontera ===================================
+// Hospedaria do Oeste -------------------
+prt_in,244,135,2	script	Estalajadeira#Sammy	53,{
+
+	callfunc "F_InnMaid","[Sammy]","Hospedaria do Oeste","prt_in",238,130;
+	warp "prt_in",247,104; end;
+}
+// Hospedaria do Leste ------------------
+prt_in,61,141,2	script	Estalajadeira#Ahlma	53,{
+
+	callfunc "F_InnMaid","[Ahlma]","Hospedaria do Leste","prt_in",64,136;
+	warp "prt_in",60,166; end;
+}
+
+//======================== Alberta ====================================
+// Hospedaria do Norte --------------------------
+alberta_in,32,142,5	script	Estalajadeira#Moira	53,{
+
+	callfunc "F_InnMaid","[Moira]","Hospedaria do Norte","alberta_in",26,138;
+	warp "alberta_in",18,188; end;
+}
+// Hospedaria do Sul -----------------------------
+alberta_in,55,142,8	script	Estalajadeira#Tina	53,{
+
+	callfunc "F_InnMaid","[Tina]","Hospedaria do Sul","alberta_in",60,140;
+	warp "alberta_in",68,188; end;
+}
+
+//====================== Geffen ======================================
+geffen_in,70,64,5	script	Estalajadeira#Cena	53,{
+
+	callfunc "F_InnMaid","[Cena]","Hospedaria","geffen_in",70,59;
+	warp "geffen_in",31,31; end;
+}
+
+//======================= Payon ======================================
+payon_in01,132,62,5	script	Estalajadeira#Ahee	53,{
+
+	callfunc "F_InnMaid","[Ahee]","Hospedaria de Payon","payon_in01",136,61;
+	warp "payon_in01",132,11; end;
+}
+
+//======================== Morocc ====================================
+// Hospedaria do Norte --------------------------
+//morocc_in,147,141,3	script	Estalajadeira#Hasna	53,{
+//
+//	callfunc "F_InnMaid","[Hasna]","Hospedaria de Morroc","morocc_in",142,140;
+//	warp "morocc_in",173,135; end;
+//}
+// Hospedaria do Sul ----------------------------
+//morocc_in,80,100,5	script	Estalajadeira#Manar	53,{
+//
+//	callfunc "F_InnMaid","[Manar]","Hospedaria de Morroc","morocc_in",78,95;
+//	warp "morocc_in",79,123; end;
+//}
+
+//====================== Aldebaran ===================================
+aldeba_in,92,58,5	script	Estalajadeira#Rilim	53,{
+
+	callfunc "F_InnMaid","[Rilim]","Hospedaria de Al De Baran","aldeba_in",92,50;
+	warp "aldeba_in",92,112; end;
+}
+
+//======================== Rachel ====================================
+ra_in01,376,69,4	script	Estalajadeira#Annie	931,{
+
+	callfunc "F_InnMaid","[Annie]","Hospedaria de Rachel","ra_in01",375,58;
+	warp "ra_in01",384,128; end;
+}
+
+//====================== Lighthalzen =================================
+lhz_in02,230,284,4	script	Funcionário do Hotel#01	86,{
+
+	show "[Funcionário do Hotel]";
+	show "Bem vindo ao";
+	show "Royal Dragon,";
+	show "onde você vai encontrar";
+	show "as melhores acomodações";
+	show "e os melhores serviços.";
+	next;
+	switch(select("Salvar","Descansar - 5,000 zeny","Cancelar")) {
+		case 1:
+			savepoint "lhz_in02",209,275;
+			show "[Funcionário do Hotel]";
+			show "Muito obrigado, seu";
+			show "Ponto de Retorno foi";
+			show "salvo aqui, no";
+			show "Royal Dragon.";
+			close;
+		case 2:
+			if(Zeny < 5000) {
+				show "[Funcionário do Hotel]";
+				show "Desculpe-me, mas você parece";
+				show "não ter zeny o suficiente. Por favor";
+				show "volte quando tiver!";
+				close;
+			}
+			set Zeny,Zeny - 5000;
+			show "[Funcionário do Hotel]";
+			show "Muito obrigado~";
+			show "Espero que você aproveite";
+			show "sua estadia aqui";
+			show "no Royal Dragon.";
+			close2;
+			warp "lhz_in02",219,150;
+			percentheal 100,100;
+			sc_start SC_BLESSING,240000,10;
+			skilleffect AL_BLESSING,0;
+			end;
+		case 3:
+			show "[Funcionário do Hotel]";
+			show "Muito obrigado e";
+			show "tenha um ótimo dia.";
+			close;
+	}
+}
+
+//======================== Hugel ====================================
+hu_in01,246,107,3	script	Estalajadeira#Rep	53,{
+
+	callfunc "F_InnMaid","[Recepcionista]","Hospedaria de Hugel","hu_in01",263,95;
+	warp "hu_in01",267,5; end;
+}
+
+//======================== Veins ====================================
+ve_in,157,219,5	script	Chefe da Hospedaria#Rep	709,{
+
+	callfunc "F_InnMaid","[Chefe da Hospedaria]","Hospedaria de Veins","ve_in",157,209;
+	warp "ve_in",184,228; end;
+}
+
+//======================== Moscóvia ====================================
+mosk_in,135,191,5	script	Estalajadeira#mosk	961,{
+
+	callfunc "F_InnMaid","[Recepcionista]","Hospedaria de Moscóvia","mosk_in",142,189;
+	warp "mosk_in",215,181; end;
+}
+
+//----------------------- Funções da Hospedagem ---------------------
+function	script	F_InnMaid	{
+	show getarg(0);
+	show "Olá, você chegou ao hotel "+getarg(1)+".";
+	show "Em que posso ajudar?";
+	next;
+	switch(select("Salvar:Descansar - 5.000 zenys:Cancelar")){
+		case 1:
+			show getarg(0);
+			show "Tudo bem, o ponto de retorno está";
+			show "salvo aqui! Obrigado por sua";
+			show "visita~ Vejo você mais tarde!~";
+			savepoint getarg(2),getarg(3),getarg(4);
+			close;
+		case 2:
+			show getarg(0);
+			if(Zeny < 5000){
+				show "A taxa de serviço é 5.000 zenys";
+				show "Por favor, tenha certeza de que tem";
+				show "dinheiro suficiente para o serviço.";
+				close;
+			}
+			show "Obrigado";
+			show "Eu ajudo você";
+			show "Aproveite o resto~";
+			close2;
+			set Zeny,Zeny - 5000;
+			percentheal 100,100;
+			return;
+
+		case 3:
+			close;
+	}
+}

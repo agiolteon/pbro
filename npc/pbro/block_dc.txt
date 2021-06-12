@@ -1,0 +1,46 @@
+function	script	checkmap	{
+
+  // configure
+  setarray .@maps$[0],"guild_vs3","guild_vs2-2","bat_room","prt_are_in","arena_room";
+
+  set .@map$, getarg(0);
+  set .@count, getarraysize(.@maps$);
+  for (set .@i,0; .@i < .@count; set .@i,.@i+1) {
+    if (.@map$ == .@maps$[.@i]) { return true; }
+  }
+  return false;
+}
+
+-	script	blockdc	-1,{
+OnPCLoadMapEvent:
+  getmapxy .@map$, .@x, .@y, 0;
+  set .@result, callfunc("checkmap", .@map$);
+  if (.@result == false) { end; }
+  set .@account_id, getcharid(3);
+  set .@query$, "SELECT `mac_address` FROM `login` WHERE `account_id` =" + .@account_id;
+  set .@result, query_sql(.@query$, .@mac_address$);
+  set .@query$, "SELECT DISTINCT `login`.`account_id` FROM `char`,`login` WHERE `login`.`mac_address` = '" + .@mac_address$ + "' AND `char`.`online` = 1";
+  set .@result, query_sql(.@query$, .@account_id2);
+  set .@count, .@result;
+  if (.@result > 1) {
+    for (set .@i,0; .@i < .@count; set .@i,.@i+1)
+    {
+      if (.@account_id != .@account_id2[.@i]) {
+        if (attachrid(.@account_id2[.@i])) {
+          getmapxy .@map$, .@x, .@y, 0;
+          set .@result, callfunc("checkmap", .@map$);
+          if (.@result == true) { atcommand "@kick "+strcharinfo(0); }
+          detachrid;
+        }
+      }
+    }
+  }  
+
+}
+
+// maps to block dc
+guild_vs3	mapflag	loadevent
+guild_vs2-2	mapflag	loadevent
+bat_room	mapflag	loadevent
+prt_are_in	mapflag	loadevent
+arena_room	mapflag	loadevent

@@ -1,0 +1,4 @@
+pvp_c_room	mapflag	noskill
+pvp_c_room	mapflag	nowarp
+izlude	mapflag	noicewall
+aldebaran	mapflag	noicewall

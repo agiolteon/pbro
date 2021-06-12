@@ -1,0 +1,93 @@
+60,5526,1 //5526,Boneca de Lady Tanee
+60,18507,1 //Orelha de Elfo [1]
+60,5501,1 //5501,Orgulho_de_Pirata
+60,5409,1 //5409,Chapéu_do_Cowboy_Errante
+60,5433,1 //5433,Coroa_de_Louros_Dourada
+60,5846,1 //5846,Chapéu Goma de Mascar
+60,5384,1 //5384,Gorro_de_Natal_2.0
+60,2202,1 //2202,Óculos Escuros[1]
+60,5555,1 //5555,Chapéu de Gato de Folha
+60,5572,1 //5572,Chapéu_de_Bebê_Selvagem
+60,5478,1 //5478,Chapéu_de_Veneza
+60,5504,1 //5504,Véu_de_Noiva_Chinês
+
+60,5500,3 //5500,Chapéu_de_Sundae
+60,5431,3 //5431,Chapéu_de_Galinha
+60,5548,3 //5548,Rosa Escarlate
+60,2204,3 //2204,Óculos[1]
+60,5352,3 //5352,Chapéu_de_Poporing
+60,5574,3 //5574,Lápis_Mordido
+60,5503,3 //5503,Cartola_Mágica
+60,5519,3 //5519,Chapéu_de_Pavão
+60,5800,3 //5800,Rubor de Batalha
+60,5468,3 //5468,Boina Charmosa
+60,5377,3 //5377,Antique_Pipe
+
+60,5506,5 //5506,Touca de Pijama Azul
+60,5507,5 //5507,Touca de Pijama Rosa
+60,5415,5 //5415,Chapéu de Bolo Poring
+60,5444,5 //5444,Pente_Vermelho
+60,5205,5 //5205,Coroa_de_Louros
+60,5209,5 //5209,Boné_Amarelo_de_Beisebol
+60,5137,5 //5137,Boneca de Alice
+60,5395,5 //5395,Chapéu_do_Gato
+60,5212,5 //5212,Chapéu_de_Satélite
+60,5316,5 //5316,Chapéu_de_Frevo
+60,5374,5 //5374,Chifres_Majestosos_Gigantes
+
+60,5462,6 //5462,Máscara do Exterminador
+60,5463,6 //5463,Máscara Colorida
+60,5306,6 //5306,Coroa_de_Freya
+60,5238,6 //5238,Mestre_Arcano_Vermelho
+60,5239,6 //5239,Mestre_Arcano_Branco
+60,5240,6 //5240,Mestre_Arcano_Cinza
+60,5241,6 //5241,Mestre_Arcano_Azul
+60,5242,6 //5242,Mestre_Arcano_Amarelo
+60,5259,6 //5259,Chapéu_de_Elefante 2.0
+60,5189,6 //5189,Espírito de Outono
+
+60,5270,8 //5270,Folhas_de_Outono
+60,5381,8 //5381,Chapéu_de_Poring_Noel
+60,5382,8 //5382,Lacinho_Natalino
+60,5389,8 //5389,Espírito_Olímpico
+60,5314,8 //5314,Máscara_do_Mason
+60,5376,8 //5376,Lendárias_Asas_de_Demônio
+60,5469,8 //5469,Chapéu de Mosqueteiro
+60,5511,8 //5511,Tiara_de_Samambaia
+60,5481,8 //5481,Chapéu_Formoso
+60,5564,8 //5564,Máscara_da_Morte
+60,5568,8 //5568,Boina de Coelho
+60,5056,8 //5056,Fruto do Amor
+60,5101,8 //5101,Venda da Takius
+60,5130,8 //5130,Máscara de Leão
+60,5138,8 //5138,Chapéu_do_Olho Mágico
+60,5151,8 //5151,Fones_Poringzor_Ex71
+60,5152,8 //5152,Coroa_Chinesa,
+60,5184,8 //5184,Quepe_de_Oficial
+60,5200,8 //5200,Boina_Rosa
+60,5210,8 //5210,Lendárias_Asas_de_Anjo
+60,5214,8 //5214,Chapéu_da_Flor_do_Luar
+60,5215,8 //5215,Asas_de_Anjo_Evoluídas
+60,5226,8 //5226,Hélices_2.0
+60,5271,8 //5271,Coroa_Chique
+60,5272,8 //5272,Máscara_Juvenil
+60,5335,8 //5335,Chapéu_de_Poring_Saltitante
+60,5359,8 //5359,Chapéu_do_Capitão
+60,5371,8 //5371,Chapéu_do_Milênio
+60,5373,8 //5373,Elmo_Sombrio
+60,5378,8 //5378,Cartola_de_Coelho
+60,5401,8 //5401,Óculos_Pretos
+60,5512,8 //5512,Diadema_de_Aquário
+60,5513,8 //5513,Coroa_de_Aquário
+60,5514,8 //5514,Diadema_de_Peixes
+60,5515,8 //5515,Coroa_de_Peixes
+60,5545,8 //5545,Diadema_de_Áries
+60,5546,8 //5546,Coroa_de_Áries
+60,5549,8 //5549,Diadema_de_Touro
+60,5550,8 //5550,Coroa_do_Touro
+60,5569,8 //5569,Diadema_de_Gêmeos
+60,5570,8 //5570,Coroa_de_Gêmeos
+60,5581,8 //5581,Diadema_de_Câncer
+60,5582,8 //5582,Coroa_de_Câncer
+60,5476,8 //5476,Chapéu de Grand Peco
+60,5567,8 //5567,Fúria Brilhante

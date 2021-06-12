@@ -1,0 +1,5 @@
+prontera.gat,0,0,0,0	monster	Coelho de Prontera	1863,3,600000,600000
+morocc.gat,0,0,0,0	monster	Coelho de Morroc	1863,3,600000,600000
+geffen.gat,0,0,0,0	monster	Coelho de Geffen	1863,3,600000,600000
+payon.gat,0,0,0,0	monster	Coelho de Payon	1863,3,600000,600000
+brasilis.gat,0,0,0,0	monster	Coelho de Brasilis	1863,3,600000,600000

@@ -1,0 +1,8 @@
+arena_room.gat	mapflag	gvg
+prt_are_in.gat	mapflag	gvg
+arena_room.gat	mapflag	nosave
+prt_are_in.gat	mapflag	nosave
+arena_room.gat	mapflag	nowarp
+prt_are_in.gat	mapflag	nowarp
+arena_room.gat	mapflag	nomemo
+prt_are_in.gat	mapflag	nomemo

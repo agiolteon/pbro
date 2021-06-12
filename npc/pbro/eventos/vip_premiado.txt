@@ -1,0 +1,170 @@
+prontera,156,179,4	script	VIP Premiado	907,{
+
+if(getgmlevel()==0) goto AVISO;
+show "[VIP Premiado]";
+show "Leia com atenção! Caso não siga as instruções corretamente poderá perder o item!";
+next;
+show "^FF0000Preste atenção nas informações:^000000";
+show " ";
+show "Primeiro: Não relogue, não feche o jogo, não faça nada que perca conexão com o jogo, por que após pedir o item ROPS ao NPC você não podera fazer outra solicitação.";
+show " ";
+show "Segundo: O premio será aleatorio dentro dos que estavam no site da pbGO.";
+show " ";
+show "Terceiro: O premio dependem de você e de sua sorte.";
+show " ";
+show "Quarto: Caso você cancele ou saia do jogo antes de receber o premio, iremos considerar como entregue, por isso tome cuidado para que isso nao acorra!";
+show " ";
+show "Quinto: Boa sorte!";
+show " ";
+show "Aguarde um momento... Após liberar o botão próx, você pode continuar.";
+sleep2 5000;
+next;
+show "[VIP Premiado]";
+show "Após ter lido as regras gostaria de iniciar a conversa com o NPC de troca? Lembrando que ao aceitar você deve ir até o final da conversa seguindo todas as instruções como serão esclarecidas!";
+next;
+menu "Aceito",SIM,"Não",NAO;
+
+SIM:
+set @creditos,0;
+query_sql "SELECT promocao FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos;
+if(@creditos<1) goto SEMPONTO;
+set @creditos, @creditos - 1;
+query_sql("UPDATE login SET promocao = '"+@creditos+"' WHERE account_id = '"+getcharid(3)+"'");
+
+show "[VIP Premiado]";
+show "Olá, vamos ao que importa? Você quer seu premio não é? Bom apartir daqui você não poderá mais cancelar nossa conversa, caso isso aconteça eu entenderei que o seu premio foi entregue.";
+next;
+show "[VIP Premiado]";
+show "Você deve estar se perguntando, por que perco saindo da conversa antes de terminar? Simples, o seu premio vai depender de sua sorte e de suas escolhas daqui para frente, e para isso será dado apenas uma chance, faça bem as suas escolhas daqui para frente.";
+next;
+show "[VIP Premiado]";
+show "Chega de papo, vamos ver qual premio será o seu. Me diga 5 numeros de 0 até 9. ATENÇÃO, caso você escolha alguma coisa diferende do que lhe peço, eu estarei escolhendo aleatoriamente um numero para você.";
+next;
+show "[VIP Premiado]";
+show "Digite os 5 numeros de 0 a 9.";
+input @nume1;
+input @nume2;
+input @nume3;
+input @nume4;
+input @nume5;
+show " ";
+show "Um momento por favor... Após liberar o botão próx, você pode continuar.";
+sleep2 3000;
+next;
+show "[VIP Premiado]";
+show "O resultado de suas escolhas foram:";
+set @premiacao, rand(1,15);
+
+if(@premiacao==1) {
+getitem 5376,1;
+show "-> Lendarias Asas de Demonio [1]";
+next;
+}
+
+if(@premiacao==2) {
+getitem 5567,1;
+show "-> Fúria Brilhante [1]";
+next;
+}
+
+if(@premiacao==3) {
+getitem 18507,1;
+show "-> Orelha de Elfo [1]";
+next;
+}
+
+if(@premiacao==4) {
+getitem 5432,1;
+show "-> Boné de Aniversário do bRO";
+next;
+}
+
+if(@premiacao==5) {
+getitem 5846,1;
+show "-> Chapéu de Goma de Mascar";
+next;
+}
+
+if(@premiacao==6) {
+getitem 5548,1;
+show "-> Rosa Escarlate";
+next;
+}
+
+if(@premiacao==7) {
+getitem 5592,1;
+show "-> Asas de Sigrún";
+next;
+}
+
+if(@premiacao==8) {
+getitem 5532,1;
+show "-> Adaga de Pirata";
+next;
+}
+
+if(@premiacao==9) {
+getitem 5293,1;
+show "-> Chapéu de Lamen";
+next;
+}
+
+if(@premiacao==10) {
+getitem 5306,1;
+show "-> Coroa de Freya";
+next;
+}
+
+if(@premiacao==11) {
+getitem 5568,1;
+show "-> Boina de Coelho [1]";
+next;
+}
+
+if(@premiacao==12) {
+getitem 5137,1;
+show "-> Boneca de Alice [1]";
+next;
+}
+
+if(@premiacao==13) {
+getitem 5314,1;
+show "-> Máscara do Mason";
+next;
+}
+
+if(@premiacao==14) {
+getitem 5377,1;
+show "-> Antique Pipe";
+next;
+}
+
+if(@premiacao==15) {
+getitem 5547,1;
+show "-> Tiara da Primavera [1]";
+next;
+}
+
+query_sql "SELECT bandeiras FROM login WHERE account_id ='"+getcharid(3)+"'", @sbands;
+getitem 7549,@sbands;
+query_sql("UPDATE login SET bandeiras = '0' WHERE account_id ='"+getcharid(3)+"'");
+show "[VIP Premiado]";
+show "Seu premio esta entregue, obrigado por ajudar o pbRO!";
+close;
+
+SEMPONTO:
+show "[VIP Premiado]";
+show "Você não pode fazer trocas comigo! Você ja recebeu ou não tem direito a receber o item!!";
+close;
+
+NAO:
+show "[VIP Premiado]";
+show "Até breve!";
+close;
+
+AVISO:
+show "[VIP Premiado]";
+show "Eu entrego o ITENS dos usuários que fizeram doações nos dias do VIP Premiado.";
+close;
+}
+

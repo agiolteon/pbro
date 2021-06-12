@@ -1,0 +1,89 @@
+//===== Cronus Script ================================================= 
+//= Removedora de Cartas
+//===== Por: ==========================================================
+//= TyrNemesis^
+//===== Versão Atual: ================================================= 
+//= 2.0
+//===== Descrição: ==================================================== 
+//= Retira cartas equipadas em um item
+//===== Changelog: ==================================================== 
+//= 1.1 Iniciado o Npc [TyrNemesis^]
+//= 1.2 Traduzido [Ramon]
+//= 1.3 Organizado [Kamper]
+//= 2.0 Otimizado e algumas correções. [RoM]
+//=====================================================================
+
+prt_in,28,73,4	script	Velha Sábia	78,{
+
+	show "[Velha Sábia]";
+	show "Eu tenho o poder de remover cartas que já foram usadas nos seus equipamentos. Essa idéia pode ajudá-lo?";
+	next;
+	switch(select("Sim, ajudaria muito.","O que você quer em troca?","Não, obrigad"+strsex("o","a")+".")){
+
+		Case 2:
+		show "[Velha Sábia]";
+		show "Eu preciso de 200000 zeny, mais 25000 zeny para cada carta removida de seus ítens. E adicionalmente, preciso de um Fragmento Estelar e uma Gema Amarela para trabalhar com a minha mágica.";
+		next;
+		if(select("Tudo bem, vamos começar.","Não obrigado.") == 2) close;
+
+		Case 1:
+		show "[Velha Sábia]";
+		show "Tudo bem. Qual ítem quer que eu examine para você?";
+		next;
+		if(select("Deixe-me pensar.",getequipname(1,""),getequipname(2,""),getequipname(3,""),getequipname(4,""),getequipname(5,""),getequipname(6,""),getequipname(7,""),getequipname(8,""),getequipname(9,""),getequipname(10,"")) == 1) close;
+		set @item,@menu-1;
+		show "[Velha Sábia]";
+		if(getequipcardcnt(@item) == 0){
+			show "Meu jovem, não há cartas equipadas neste ítem. Não posso trabalhar assim.";
+			close;
+			}
+		set @cardcount,getequipcardcnt(@item);
+		if(@cardcount > 1) show "Esse ítem tem "+@cardcount+" cartas equipadas em sí. Para melhorar minha magia, são necessários "+(200000+(@cardcount*25000))+" zeny, um ^0000FFFragmento Estelar^000000, e uma ^0000FFGema Amarela^000000.";
+		else show "Esse ítem tem uma carta equipada em sí. Para melhorar minha magia, são necessários 225000 zeny, um ^0000FFFragmento Estelar^000000, e uma ^0000FFGema Amarela^000000.";
+		next;
+		if(select("Ok, estou pronto.","Não, não faça isso.") == 2) close;
+		show "[Velha Sábia]";
+		show "Dependendo da sua sorte, você pode falhar. Se isso acontecer, as cartas serão destruídas, o ítem, tudo. Eu não aceito devolução do seu dinheiro. Tenho uma pergunta, o que é mais importante para você: As cartas, ou os itens?";
+		next;
+		if(select("Quero pensar mais sobre isso.","O ítem.","As cartas.") == 1) close;
+		set @failtype,@menu-1;
+		show "[Velha Sábia]";
+		show "Muito bem. Vamos nessa!";
+		next;
+		show "[Velha Sábia]";
+		if((zeny < (200000+(@cardcount*25000))) || (countitem(1000) < 1) || (countitem(715) < 1)){
+			show "Você não tem todos os ítens necessários para a minha mágica, garot"+strsex("o","a")+". Volte quando conseguí-los.";
+			close;
+			}
+		set zeny,zeny - (200000+(@cardcount*25000));
+		delitem 1000,1;
+		delitem 715,1;
+		set @failchance,rand(100);
+//		if(@failchance < 2){
+//			failedremovecards @item,0;
+//			show "O processo foi uma falha total. Estou com muita pena, suas cartas e seus ítens foram destruídos.";
+//			close;
+//			}
+//		if((@failchance < 8) && (@failtype == 1)){
+//			failedremovecards @item,1;
+//			show "Eu falhei tentando remover as cartas do seu ítem, suas cartas foram destruídas durante o processo. O ítem, está em perfeito estado.";
+//			close;
+//			}
+//		if((@failchance < 8) && (@failtype == 2)){
+//			failedremovecards @item,2;
+//			show "Menos mal. Eu tive sucesso em remover as cartas, só que o ítem foi destruído no processo.";
+//			close;
+//			}
+		if(@failchance < 10){
+			failedremovecards @item,3;
+			show "Eu falhei tentando remover as cartas. Sorte sua, os ítens e as cartas estão perfeitos.";
+			close;
+			}
+		successremovecards @item;
+		show "O processo foi um grande sucesso. Tome suas cartas e seus ítens.";
+		close;
+
+		Case 3:
+		close;
+		}
+}

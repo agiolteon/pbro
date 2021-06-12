@@ -1,0 +1,395 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svnroot/cronusemulator/!svn/ver/2810/Server/trunk/src/map
+END
+chrif.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2760/Server/trunk/src/map/chrif.h
+END
+quest.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/quest.c
+END
+path.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/path.h
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/Makefile.in
+END
+atcommand.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/cronusemulator/!svn/ver/2810/Server/trunk/src/map/atcommand.c
+END
+script.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2808/Server/trunk/src/map/script.c
+END
+quest.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/quest.h
+END
+atcommand.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/cronusemulator/!svn/ver/2600/Server/trunk/src/map/atcommand.h
+END
+script.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/script.h
+END
+battle.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2805/Server/trunk/src/map/battle.c
+END
+skill.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2803/Server/trunk/src/map/skill.c
+END
+unit.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/unit.c
+END
+battle.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2781/Server/trunk/src/map/battle.h
+END
+mapreg.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/mapreg.h
+END
+skill.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2749/Server/trunk/src/map/skill.h
+END
+unit.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/unit.h
+END
+mercenary.c
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/cronusemulator/!svn/ver/2781/Server/trunk/src/map/mercenary.c
+END
+vending.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/cronusemulator/!svn/ver/2775/Server/trunk/src/map/vending.c
+END
+mercenary.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/mercenary.h
+END
+vending.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/vending.h
+END
+storage.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/cronusemulator/!svn/ver/2807/Server/trunk/src/map/storage.c
+END
+storage.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/cronusemulator/!svn/ver/2805/Server/trunk/src/map/storage.h
+END
+mapreg_txt.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/mapreg_txt.c
+END
+mob.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/mob.c
+END
+date.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/date.c
+END
+clif.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2807/Server/trunk/src/map/clif.c
+END
+chat.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2751/Server/trunk/src/map/chat.c
+END
+mob.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2749/Server/trunk/src/map/mob.h
+END
+date.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/date.h
+END
+clif.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2806/Server/trunk/src/map/clif.h
+END
+chat.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/chat.h
+END
+homunculus.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/homunculus.c
+END
+guild.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2781/Server/trunk/src/map/guild.c
+END
+itemdb.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2781/Server/trunk/src/map/itemdb.c
+END
+homunculus.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/homunculus.h
+END
+guild.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/guild.h
+END
+intif.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2794/Server/trunk/src/map/intif.c
+END
+itemdb.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/itemdb.h
+END
+intif.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2775/Server/trunk/src/map/intif.h
+END
+npc.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/npc.c
+END
+status.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2805/Server/trunk/src/map/status.c
+END
+npc.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2810/Server/trunk/src/map/npc.h
+END
+status.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/cronusemulator/!svn/ver/2756/Server/trunk/src/map/status.h
+END
+battleground.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/cronusemulator/!svn/ver/2634/Server/trunk/src/map/battleground.c
+END
+trade.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2740/Server/trunk/src/map/trade.c
+END
+party.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/party.c
+END
+battleground.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/cronusemulator/!svn/ver/2634/Server/trunk/src/map/battleground.h
+END
+pc.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/cronusemulator/!svn/ver/2807/Server/trunk/src/map/pc.c
+END
+trade.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/trade.h
+END
+party.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2749/Server/trunk/src/map/party.h
+END
+instance.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/cronusemulator/!svn/ver/2785/Server/trunk/src/map/instance.c
+END
+pc.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svnroot/cronusemulator/!svn/ver/2794/Server/trunk/src/map/pc.h
+END
+instance.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/src/map/instance.h
+END
+map.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2788/Server/trunk/src/map/map.c
+END
+npc_chat.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svnroot/cronusemulator/!svn/ver/2687/Server/trunk/src/map/npc_chat.c
+END
+log.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/log.c
+END
+mail.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2807/Server/trunk/src/map/mail.c
+END
+map.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/map.h
+END
+log.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/log.h
+END
+mail.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2760/Server/trunk/src/map/mail.h
+END
+pet.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/pet.c
+END
+mapreg_sql.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/mapreg_sql.c
+END
+chrif.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/cronusemulator/!svn/ver/2800/Server/trunk/src/map/chrif.c
+END
+path.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/src/map/path.c
+END
+pet.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/cronusemulator/!svn/ver/2565/Server/trunk/src/map/pet.h
+END

@@ -1,0 +1,310 @@
+//callfunc "PShuffle","payg_cas01","Palácio do Sol#pFeudo",0,3;
+//payg_cas01 = Nome do castelo
+//"Sirius#pFeudo" = Nome do npc para desabilitar após pegar o item
+//0,3 = dias de WOE em que npc não trabalha, formato: 0 é domingo, 6 é sábado.
+
+aldeg_cas01,219,170,4	script	Sirius#pFeudo	56,{
+callfunc "PShuffle","aldeg_cas01","Sirius#pFeudo",0,3;
+}
+
+aldeg_cas02,87,74,4	script	Astrum#pFeudo	56,{
+callfunc "PShuffle","aldeg_cas02","Astrum#pFeudo",0,3;
+}
+
+aldeg_cas03,106,118,4	script	Canopus#pFeudo	56,{
+callfunc "PShuffle","aldeg_cas03","Canopus#pFeudo",0,3;
+}
+
+aldeg_cas04,49,92,4	script	Rigel#pFeudo	56,{
+callfunc "PShuffle","aldeg_cas04","Rigel#pFeudo",0,3;
+}
+
+aldeg_cas05,32,186,4	script	Acrux#pFeudo	56,{
+callfunc "PShuffle","aldeg_cas05","Acrux#pFeudo",0,3;
+}
+
+//<!-----------------------------------WOE 2.0------------------------------------>
+
+schg_cas01,244,305,4	script	Himmin#pFeudo	56,{
+callfunc "PShuffle","schg_cas01","Himmin#pFeudo",6,6;
+}
+
+schg_cas02,100,378,4	script	Andlangr#pFeudo	56,{
+callfunc "PShuffle","schg_cas02","Andlangr#pFeudo",6,6;
+}
+
+schg_cas03,90,89,4	script	Vidblainn#pFeudo	56,{
+callfunc "PShuffle","schg_cas03","Vidblainn#pFeudo",6,6;
+}
+
+schg_cas04,244,305,4	script	Hljod#pFeudo	56,{
+callfunc "PShuffle","schg_cas04","Hljod#pFeudo",6,6;
+}
+
+schg_cas05,244,305,4	script	Skatynir#pFeudo	56,{
+callfunc "PShuffle","schg_cas05","Skatynir#pFeudo",6,6;
+}
+
+alde_gld,1,1,4	script	WOEReset#pFeudo	-1,{
+
+OnAgitend:
+enablenpc "Sirius#pFeudo";
+enablenpc "Astrum#pFeudo";
+enablenpc "Canopus#pFeudo";
+enablenpc "Rigel#pFeudo";
+enablenpc "Acrux#pFeudo";
+
+}
+
+sch_gld,1,1,4	script	WOEReset2#pFeudo	-1,{
+
+OnAgitend2:
+enablenpc "Himmin#pFeudo";
+enablenpc "Andlangr#pFeudo";
+enablenpc "Vidblainn#pFeudo";
+enablenpc "Hljod#pFeudo";
+enablenpc "Skatynir#pFeudo";
+
+}
+
+function	script	PShuffle	{
+
+set @orenr, 12921; //10 Oridecons enriquecidos
+set @quantori, 2; //Quantidade
+set @elenr, 12920; //10 Eluniuns enriquecidos
+set @quantelu, 2; //Quantidade 
+
+//Pacotes de seed
+
+set @seed, 677; //ID da seed(em moeda, cada moeda é 250 seed) Quantidades abaixo válidas para pacote de seed
+set @quantmin, 4; //Quantia mínima a receber (1=250)
+set @quantmax, 7; //Quantia máxima a receber (1=250)
+
+//Pacote de comidas +10
+
+set @food1, 12903;
+set @food2, 12904;
+set @food3, 12905;
+set @food4, 12906;
+set @food5, 12907;
+set @food6, 12908;
+
+//ROPs sortidos
+
+set @rop1, 12909; //10 Cartão Kafra, abre o armazém
+set @rop2, 12911; //10 Neuralizador, reseta árvore de habilidades
+set @rop3, 12922; //10 Amuleto de ziegfrield(auto-ress quando morrer), favor não dar muitos...
+set @rop4, 12900; //10 Manuais de Combate 1.5% mais EXP, não aconselho dar alta quantidade também
+set @rop5, 12356; //Caixa de fantasia da Louise(coloca com roupa de natal ou de praia)
+set @rop6, 12214; //Espelho Convexo, mostra respawn do mvp, se ele tiver na tela mostra localização
+set @rop7, 12109; //Caixa poring, summona um monstro da familia poring, não dar em alta quantidade
+set @rop8, 12212; //Asa de mosca gigante, teleporta o grupo pra lugar random no mapa do líder
+set @rop9, 12105; //Kit de domesticação, dá item aleatório pra capturar pet
+set @rop10, 14527; //Teleporta para ALGUMAS cavernas
+
+
+set @gcastle1, getcastledata(getarg(0),1);
+set @GID, getcharid(2);
+set @guildlead$, getguildmaster(@GID);
+set @master$, getguildmaster(@gcastle1);
+if(@GID == 0) goto L_NGUILD;
+if(strcharinfo(0) == @master$) goto L_GO;
+if(strcharinfo(0) == @guildlead$){
+show "[Premiador do Feudo]";
+show "Seu clã não conquistou este castelo";
+show "Lute mais bravamente de agora em diante!";
+close;
+}
+show "[Premiador do Feudo]";
+show "Só falo com o líder do clã ^FF0000"+getguildname(@gcastle1)+"^000000";
+show "^0000FF"+getguildmaster(@gcastle1)+"^000000";
+close;
+
+L_NGUILD:
+
+show "[Premiador do Feudo]";
+show "Ora, você não tem um clã!?";
+close;
+end;
+
+L_GO:
+
+if((gettime(4) == getarg(2) || gettime(4) == getarg(3)) && gettime(3) >= 22 ){
+show "[Premiador do Feudo]";
+show "Parabéns ^FF0000"+strcharinfo(0)+"^000000!";
+show "Seu clã ^FF0000"+getguildname(@GID)+"^000000, demonstrou uma grande bravura durante os períodos de guerra...";
+next;
+show "[Premiador do Feudo]";
+show "Como prêmio tenho algumas premiações para seu clã";
+show "Gostaria de dar uma olhada?";
+show "^FF0000Antes de tudo, por favor verifique a capacidade do inventário, que não pode receber mais de 90 itens^000000";
+next;
+//menu "Pacote de Guerra para Clãs",guerr,"Pacote de Seeds",ygg,"Pacote itens ROPs sortidos",rops,"Pacote Minérios Enriquecidos",miner,"Trocar líder da guilda",changegm;
+menu "Pacote de Guerra para Clãs",guerr,"Pacote de Seeds",ygg,"Pacote Minérios Enriquecidos",miner,"Trocar líder da guilda",changegm;
+}else{
+goto L_WOE;
+}
+
+miner:
+next;
+show "[Premiador do Feudo]";
+show "Você quer minérios enriquecidos, é?";
+show "Vamos ver...";
+next;
+if(@master$ !=strcharinfo(0)){
+show "[Premiador do Feudo]";
+show "...";
+show "Você foi reportado!";
+close;
+}
+show "[Premiador do Feudo]";
+show "Pronto, estão aqui";
+additem @elenr,@quantelu;
+additem @orenr,@quantori;
+goto FIM;
+end;
+
+guerr:
+next;
+show "[Premiador do Feudo]";
+show "O pacote contém";
+show "70 ^FF0000Caixas do Trovão^000000";
+show "2 ^FF0000Moedas de Platina(250 seeds cada)^000000";
+show "100 ^FF0000Aloes Vera^000000";
+show "70 ^FF0000Caixas do Ressentimento^000000";
+show "250 ^FF0000Pergaminhos de Assumptio^000000";
+show "20 ^FF0000Comidas de todos status^000000";
+show "^0000FFVocê tem que ter certeza que tem pontos de peso livre, caso você não os tenha, os itens irão cair no chão^000000";
+show "Deseja prosseguir...?";
+sleep2 4200;
+next;
+if(select("Não:Sim, eu tenho o peso de carga livre!")==1){
+close;
+}
+if(@master$ !=strcharinfo(0)){
+show "[Premiador do Feudo]";
+show "...";
+show "Você foi reportado!";
+close;
+}
+show "[Premiador do Feudo]";
+show "Aqui está o pacote!";
+additem @food1,2;
+additem @food2,2;
+additem @food3,2;
+additem @food4,2;
+additem @food5,2;
+additem @food6,2;
+additem 12028,70;
+additem 677,2;
+additem 12218,250;
+additem 606,100;
+additem 12030,70;
+goto FIM;
+end;
+
+ygg:
+next;
+show "[Premiador do Feudo]";
+show "Pacote de seeds, humm?";
+next;
+show "[Premiador do Feudo]";
+show "Bom, vamos lá....";
+next;
+if(@master$ !=strcharinfo(0)){
+show "[Premiador do Feudo]";
+show "...";
+show "Você foi reportado!";
+close;
+}
+set @quant, rand(@quantmin,@quantmax);
+show "[Premiador do Feudo]";
+show "Aqui está o pacote";
+additem @seed,@quant;
+goto FIM;
+end;
+
+rops:
+next;
+show "[Premiador do Feudo]";
+show "ROPs sortidos? ok, ok...";
+next;
+if(@master$ !=strcharinfo(0)){
+show "[Premiador do Feudo]";
+show "...";
+show "Você foi reportado!";
+close;
+}
+show "[Premiador do Feudo]";
+show "Vejamos quais tenho aqui...";
+show "Humm...";
+set @packet, rand(4);
+if(@packet == 0)
+additem @rop1, 3;
+additem @rop2, 2;
+additem @rop3, 1;
+additem @rop4, 1;
+additem @rop10, 5;
+if(@packet == 1)
+additem @rop2, 2;
+additem @rop5, 2;
+additem @rop6, 15;
+additem @rop7, 5;
+if(@packet == 2)
+additem @rop7, 4;
+additem @rop8, 20;
+additem @rop9, 5;
+additem @rop10, 5;
+if(@packet == 3){
+additem @rop1, 5;
+additem @rop4, 2;
+additem @rop10, 7;
+additem @rop3, 3;
+}
+show "Aqui estão";
+goto FIM;
+end;
+
+changegm:
+next;
+show "[Premiador do Feudo]";
+show "É necessário que o outro membro do clã esteja ^FF0000ONLINE^000000 para executar esta opção";
+show "Deseja continuar?";
+next;
+if(select("Não...:Sim!")==1) close;
+show "[Premiador do Feudo]";
+show "Digite o nick do membro, corretamente";
+next;
+if(@master$ !=strcharinfo(0)){
+show "[Premiador do Feudo]";
+show "...";
+show "Você foi reportado!";
+close;
+}
+input @member$;
+atcommand "@changegm "+@member$+"";
+show "[Premiador do Feudo]";
+show "Pronto...";
+show "Se quiser mais algo para seu clã, peça para o novo líder falar comigo!";
+close;
+end;
+
+FIM:
+disablenpc getarg(1);
+next;
+show "[Premiador do Feudo]";
+show "Mais uma pequena ajuda para o seu clã...";
+show "Espero que seja útil!";
+additem 14591,20;
+close;
+end;
+
+end;
+
+L_WOE:
+show "[Premiador do Feudo]";
+show "Não trabalho hoje, apenas nos dias da WOE após 22:00 horas.";
+show "Volte a mim no dia da WOE após as 22 horas.!";
+close;
+end;
+}

@@ -1,0 +1,42 @@
+// GroupID,ItemID,Rate
+
+//Hats Normais
+
+60,5272,10 //Máscara Juvenil
+60,5378,10 //Cartola de Coelho
+60,5564,10 //Máscara da Morte
+60,5463,10 //Máscara Colorida
+60,5572,10 //Chapéu de Bebê Selvagem
+60,5462,10 //Máscara do Exterminador
+60,5314,10 //Máscara do Mason
+60,5574,10 //Lápis Mordido
+60,5567,10 //Fúria Brilhante
+60,5374,10 //Chifres Majestosos Gigantes
+60,5101,10 //Venda da Takius
+60,5212,10 //Chapéu de Satélite
+60,5335,10 //Chapéu de Poring Saltitante
+60,5352,10 //Chapéu de Poporing
+60,5359,10 //Chapéu do Capitão
+60,5371,10 //Chapéu do Milênio
+60,5409,10 //Chapéu do Cowboy Errante
+60,5501,10 //Orgulho de Pirata
+60,5568,10 //Boina de Coelho
+60,5481,10 //Chapéu Formoso
+60,5507,10 //Touca de Pijama Rosa
+
+//Hats Incomum
+
+60,5137,5 //Boneca de Alice
+60,5377,5 //Antique Pipe
+60,5800,5 //Rubor de Batalha
+60,5306,5 //Coroa de Freya
+60,2204,5 //Óculos [1]
+60,2202,5 //Óculos Escuros [1]
+60,5056,5 //Fruto do Amor
+60,5468,5 //Boina Charmosa
+
+//Hats Raros
+
+60,18507,1 //Orelhas de Elfo [1]
+60,5846,1 //Chapéu Goma de Mascar
+60,5453,1 //Espírito do Dragão de Bronze

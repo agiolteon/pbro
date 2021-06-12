@@ -1,0 +1,23 @@
+60,18507,1 //Orelhas de Elfo [1]
+60,5846,1 //Chapéu Goma de Mascar
+60,2202,5 //2202,Óculos Escuros[1]
+60,2204,6 //2204,Óculos[1]
+60,5433,6 //5433,Coroa de Louros Dourada
+60,5436,6 //5433,Coroa de Noiva
+60,5548,6 //5548,Rosa Escarlate
+60,5555,6 //5555,Chapéu de Gato de Folha
+60,5526,6 //5526,Boneca de Lady Tanee
+60,5501,6 //5501,Orgulho_de_Pirata
+60,5137,6 //5137,Boneca de Alice
+60,5503,6 //5503,Cartola_Mágica
+60,5800,6 //5800,Rubor de Batalha
+60,5478,6 //5478,Chapéu_de_Veneza
+60,5468,6 //5468,Boina Charmosa
+60,5395,6 //5395,Chapéu_do_Gato
+60,5504,6 //5504,Véu_de_Noiva_Chinês
+60,5506,6 //5506,Touca de Pijama Azul
+60,5507,6 //5507,Touca de Pijama Rosa
+60,5377,6 //5377,Antique_Pipe
+60,5314,6 //5314,Máscara_do_Mason
+60,5374,6 //5374,Chifres_Majestosos_Gigantes
+60,5306,6 //5306,Coroa_de_Freya

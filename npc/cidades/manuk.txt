@@ -1,0 +1,27 @@
+manuk,291,192,3	script	Funcionária Kafra#man-1	112,{
+	cutin "kafra_06",2;
+	callfunc "F_KafSetPront";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra";
+	mes "Os Serviços Kafra estão";
+	mes "sempre aqui para ajudá-lo.";
+	mes "Então, como posso";
+	mes "ajudá-lo hoje?";
+	callfunc "F_Kafra",5,0,0,40,800;
+
+M_Save:
+	savepoint "manuk",303,176;
+	callfunc "F_KafEnd",0,1,"na cidade de Manuk";
+}
+
+
+manuk	mapflag	nobranch
+manuk	mapflag	noicewall
+
+man_fild01	mapflag	nobranch
+man_fild01	mapflag	nomemo
+man_fild02	mapflag	nobranch
+man_fild02	mapflag	nomemo
+man_fild03	mapflag	nobranch
+man_fild03	mapflag	nomemo

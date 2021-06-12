@@ -1,0 +1,152 @@
+//===== Cronus Script ========================================
+//= Guias da Cidade de Izlude
+//===== Por: =================================================
+//= kobra_k88; L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.5c
+//===== Compatível Com: ======================================
+//= Cronus SVN
+//===== Changelog: ===========================================
+//= Fully working
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks [MasterOfMuppets]
+//=     to Muad_Dib
+//= 1.4 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.5 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.5a Fixed some errors with the loop[Samuray22]
+//	-Thanks to $ephiroth.
+//= 1.5b Traduzido. [SoulBlaker]
+//= 1.5c Revisado. [RoM]
+//============================================================
+
+izlude,121,87,6	script	Guia#iz	105,{
+	cutin "prt_soldier",2;
+	show "[Guia de Izlude]";
+	show "Bem-vindo a Izlude, a";
+	show "cidade-satélite de Prontera.";
+	show "Nós estamos aqui para ajudar os";
+	show "visitantes da cidade. Se você tem";
+	show "alguma dúvida, consulte-nos.";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("Indicações:Limpar Indicações:Tutorial:Cancelar")){
+		case 1:
+			show "[Guia de Izlude]";
+			show "Por favor selecione";
+			show "uma localização no";
+			show "menu a seguir.";
+			if (.@compass_check == 0) {
+				show "Quer que eu marque";
+				show "as localizações";
+				show "no seu Mini-Mapa?";
+				next;
+				if (select("Sim:Não") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("^FF0000Associação dos Espadachins^000000:Sede dos Espadachins:Arena:Marina de Izlude:Loja de Armas:Loja de Utilidades:Cancelar")){
+				case 1:
+					show "[Guia de Izlude]";
+					show "A Associação de Espadachins";
+					show "é localizada em uma ilha";
+					show "no oeste de Izlude. Se você está pensando em se tornar um Espadachim,";
+					show "você deveria ir lá.";
+					if (.@compass_check)
+						viewpoint 1,52,140,0,0xFF0000;
+					break;
+				case 2:
+					show "[Guia de Izlude]";
+					show "A Sede dos Espadachins";
+					show "é localizada na ilha ao leste";
+					show "que está conenctada à Izlude.";
+					if (.@compass_check)
+						viewpoint 1,214,130,1,0x00FF00;
+					break;
+				case 3:
+					show "[Guia de Izlude]";
+					show "A famosa Arena de Izlude";
+					show "é localizada ao extremo";
+					show "norte de Izlude.";
+					if (.@compass_check)
+						viewpoint 1,128,225,2,0x00FF00;
+					break;
+				case 4:
+					show "[Guia de Izlude]";
+					show "Você pode encontrar";
+					show "a Marina na parte";
+					show "nordeste de Izlude. Lá, você";
+					show "pode pegar um barco para";
+					show "Alberta ou à Ilha Byalan.";
+					if (.@compass_check)
+						viewpoint 1,200,180,3,0xFF0000;
+					break;
+				case 5:
+					show "[Guia de Izlude]";
+					show "Você pode facilmente";
+					show "encontrar a Loja de Armas";
+					show "ao noroeste de Izlude.";
+					if (.@compass_check)
+						viewpoint 1,111,149,4,0xFF00FF;
+					break;
+				case 6:
+					show "[Guia de Izlude]";
+					show "A Loja de Ferramentas não deve";
+					show "ser muito difícil de se encontrar";
+					show "ao nordeste de Izlude.";
+					if (.@compass_check)
+						viewpoint 1,148,148,5,0xFF00FF;
+					break;
+				case 7:
+					show "[Guia de Izlude]";
+					show "Se você deseja apagar as indicações";
+					show "do seu mini-mapa, por favor";
+					show "selecione 'Limpar indicações'.";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,0,0x00FF00;
+			viewpoint 2,237,41,1,0x0000FF;
+			viewpoint 2,46,345,2,0x00FF00;
+			viewpoint 2,175,220,3,0xFF0000;
+			viewpoint 2,134,221,4,0xFF0000;
+			viewpoint 2,204,214,5,0xFF0000;
+			set .@compass_check,0;
+			break;
+		case 3:
+			show "[Guia de Izlude]";
+			show "Nós fomos exaustivamente treinados";
+			show "para servi-lo da melhor maneira";
+			show "possível e sem falhas.";
+			show "Assim você tem a garantia das";
+			show "melhores indicações possíveis.";
+			next;
+			show "[Guia de Izlude]";
+			show "As indicações que lhe daremos podem";
+			show "ser marcadas no seu mini-mapa.";
+			show "Para visualizar o seu mini-mapa,";
+			show "aperte 'Ctrl + Tab', ou clique no";
+			show "botão 'Mapa' no menu principal.";
+			show "Controle o seu 'zoom' no mini-mapa";
+			show "por meio dos símbolos '+' e '-'.";
+			break;
+		case 4:
+			show "[Guia de Izlude]";
+			show "Sinta-se à vontade";
+			show "para me consultar";
+			show "se você estiver perdido";
+			show "em Izlude, certo?";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	cutin "prt_soldier",255;
+	end;
+}

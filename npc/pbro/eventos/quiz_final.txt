@@ -1,0 +1,26 @@
+prontera,153,176,4	script	Quiz da Copa#cp1aa	913,{
+set .@nome$, "[Quiz da Copa]";
+set @troca, 5;
+
+show .@nome$;
+show "Nosso Quiz da Copa acabou! Mas em troca, chegou a hora de pegar sua recompensa!";
+next;
+show .@nome$;
+set @pt, 0;
+set @recebe, 0;
+query_sql("SELECT quiz FROM login WHERE account_id="+getcharid(3), @pt);
+if(@pt==0) {goto SEM_PT;}
+if(@pt<@troca) {set @recebe, 1;}
+else{set @recebe, @pt/@troca; set @recebe, @recebe +1;}
+show "Você possui "+@pt+" pontos de QUIZ";
+show "E com isso você acaba de receber "+@recebe+" ponto(s) de CASH!";
+show " ";
+show "Obs: Se você possuir menos de "+@troca+" pontos de Quiz, você receberá 1 ponto de CASH.";
+set #CASHPOINTS, #CASHPOINTS + @recebe;
+query_sql("UPDATE login SET quiz=0 WHERE account_id="+getcharid(3));
+close;
+
+SEM_PT:
+show "Desculpe mas você não possui pontos para trocar...";
+close;
+}

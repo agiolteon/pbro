@@ -1,0 +1,374 @@
+//$liberado_gol==0 - Proximas paridas esta TRANCADA
+//$liberado_gol==1 - Proximas paridas esta LIBERADA
+
+pvp_c_room,37,85,6	script	pbGol	913,{
+set .@nome$, "[^0000FFpbGOL^000000]";
+show .@nome$;
+show "Goooooooool!!!!";
+show "Ops, eu estava comemorando os gols do ultimo jogo, você assistiu?";
+show "O que você quer de mim?";
+next;
+menu "- Proximas partidas",FUTE_PRO,"- Ultimas partidas",FUTE_ULT,"- Estou atras de premios",SOBRE,"- Estou de passagem",SAIR;
+
+FUTE_PRO:
+if($liberado_gol==0) goto SEM_PROX;
+show .@nome$;
+show "As proximas partidas prometem!! Você tem algum palpite para elas?";
+next;
+menu "- Sim",SIM_PRO,"- Não",NAO_PRO;
+
+SIM_PRO:
+show .@nome$;
+show "O que você acha que vai acontecer nos jogos?";
+next;
+set @time0101$, 0;
+set @time0202$, 0;
+set @partida_t, 0;
+set @partida_consul, 0;
+set @apostador_consul, 0;
+set @resul01_consul, 0;
+set @resul02_consul, 0;
+query_sql("SELECT time01,time02,partida FROM j_pbgol_jogos_prox ORDER BY partida ASC LIMIT 7", @time0101$,@time0202$,@partida_t);
+
+menu "^666666"+@time0101$[0]+"^000000 [ ] x [ ] ^666666"+@time0202$[0]+"^000000",PRO_OP00,
+"^666666"+@time0101$[1]+"^000000 [ ] x [ ] ^666666"+@time0202$[1]+"^000000",PRO_OP01,
+"^666666"+@time0101$[2]+"^000000 [ ] x [ ] ^666666"+@time0202$[2]+"^000000",PRO_OP02,
+"^666666"+@time0101$[3]+"^000000 [ ] x [ ] ^666666"+@time0202$[3]+"^000000",PRO_OP03,
+"^666666"+@time0101$[4]+"^000000 [ ] x [ ] ^666666"+@time0202$[4]+"^000000",PRO_OP04,
+"^666666"+@time0101$[5]+"^000000 [ ] x [ ] ^666666"+@time0202$[5]+"^000000",PRO_OP05,
+"^666666"+@time0101$[6]+"^000000 [ ] x [ ] ^666666"+@time0202$[6]+"^000000",PRO_OP06;
+
+PRO_OP00:
+set @esco, 0;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul!=0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+PRO_OP01:
+set @esco, 1;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul>0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+PRO_OP02:
+set @esco, 2;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul>0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+PRO_OP03:
+set @esco, 3;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul>0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+PRO_OP04:
+set @esco, 4;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul>0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+PRO_OP05:
+set @esco, 5;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul>0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+PRO_OP06:
+set @esco, 6;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@esco+" AND apostador = "+getcharid(3)+"",@partida_consul, @apostador_consul, @resul01_consul, @resul02_consul);
+if(@apostador_consul>0) goto JA_POSSUI;
+show .@nome$;
+show "Qual o seu palpite para o jogo "+@time0101$[@esco]+" x "+@time0202$[@esco]+" ?";
+next;
+goto CONT_PRO;
+
+JA_POSSUI:
+show .@nome$;
+show "Eu ja tenho o seu palpite, se não se lembra vou te dar uma ajudinha!";
+show " ";
+show "^0000FF"+@time0101$[@esco]+"^000000 [^FF0000"+@resul01_consul+"^000000] x [^FF0000"+@resul02_consul+"^000000] ^0000FF"+@time0202$[@esco]+"^000000";
+close;
+
+CONT_PRO:
+show .@nome$;
+show "Quantos gols você acha que o "+@time0101$[@esco]+" fará?";
+input @quant_gol_pro01;
+next;
+show .@nome$;
+show "E o "+@time0202$[@esco]+" quantos gols?";
+input @quant_gol_pro02;
+next;
+show .@nome$;
+show "Então seu palpite para o jogo é esse?";
+show "^0000FF"+@time0101$[@esco]+"^000000 [^FF0000"+@quant_gol_pro01+"^000000] x [^FF0000"+@quant_gol_pro02+"^000000] ^0000FF"+@time0202$[@esco]+"^000000";
+next;
+menu "Sim é esse!",SIM_PRO02,"Quero mudar!",TROCAR_PRO02,"Depois escolho...",SAIR_PRO;
+
+SIM_PRO02:
+if($liberado_gol==0) goto SEM_PROX;
+query_sql("INSERT INTO j_pbgol_apostas(resul01,resul02,partida,apostador) VALUES ("+@quant_gol_pro01+","+@quant_gol_pro02+","+@esco+","+getcharid(3)+")");
+show .@nome$;
+show "CONFIRMADO!!! Agora vamos esperar esse jogão !!!";
+close;
+
+TROCAR_PRO02:
+show .@nome$;
+show "Eu também fico na duvida as vezes... mas então?";
+next;
+goto CONT_PRO;
+
+SAIR_PRO:
+show .@nome$;
+show "Você quem sabe, mas escolha antes do dia do jogo!";
+close;
+
+NAO_PRO:
+show .@nome$;
+show "Uma pena... mas só assistindo para saber.";
+close;
+
+PRO_FECHADO:
+show .@nome$;
+show "Parece que os palpites para os proximos não estão liberados, aguarde mais um pouco.";
+close;
+
+FUTE_ULT:
+if($liberado_gol==1) goto SEM_PROX2;
+set @controle_pbgol,0;
+query_sql("SELECT lotogol FROM j_premios",@controle_pbgol);
+if(@controle_pbgol==0) goto NAO_TEM_RES;
+show .@nome$;
+show "Você deu palpite em algum jogo?";
+next;
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 0", @time0101$,@time0201$,@resul0101,@resul0201);
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 1", @time0102$,@time0202$,@resul0102,@resul0202);
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 2", @time0103$,@time0203$,@resul0103,@resul0203);
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 3", @time0104$,@time0204$,@resul0104,@resul0204);
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 4", @time0105$,@time0205$,@resul0105,@resul0205);
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 5", @time0106$,@time0206$,@resul0106,@resul0206);
+query_sql("SELECT time01,time02,resul01,resul02 FROM j_pbgol_jogos WHERE partida = 6", @time0107$,@time0207$,@resul0107,@resul0207);
+
+
+menu "^666666"+@time0101$+"^000000 ["+@resul0101+"] x ["+@resul0201+"] ^666666"+@time0201$+"^000000",PRO_OP10,
+"^666666"+@time0102$+"^000000 ["+@resul0102+"] x ["+@resul0202+"] ^666666"+@time0202$+"^000000",PRO_OP11,
+"^666666"+@time0103$+"^000000 ["+@resul0103+"] x ["+@resul0203+"] ^666666"+@time0203$+"^000000",PRO_OP12,
+"^666666"+@time0104$+"^000000 ["+@resul0104+"] x ["+@resul0204+"] ^666666"+@time0204$+"^000000",PRO_OP13,
+"^666666"+@time0105$+"^000000 ["+@resul0105+"] x ["+@resul0205+"] ^666666"+@time0205$+"^000000",PRO_OP14,
+"^666666"+@time0106$+"^000000 ["+@resul0106+"] x ["+@resul0206+"] ^666666"+@time0206$+"^000000",PRO_OP15,
+"^666666"+@time0107$+"^000000 ["+@resul0107+"] x ["+@resul0207+"] ^666666"+@time0207$+"^000000",PRO_OP16;
+
+PRO_OP10:
+set @time_resul, 0;
+set @time_fim1$, @time0101$;
+set @time_fim2$, @time0201$;
+set @resul_fim1, @resul0101;
+set @resul_fim2, @resul0201;
+goto CONT_ULT;
+
+PRO_OP11:
+set @time_resul, 1;
+set @time_fim1$, @time0102$;
+set @time_fim2$, @time0202$;
+set @resul_fim1, @resul0102;
+set @resul_fim2, @resul0202;
+goto CONT_ULT;
+
+PRO_OP12:
+set @time_resul, 2;
+set @time_fim1$, @time0103$;
+set @time_fim2$, @time0203$;
+set @resul_fim1, @resul0103;
+set @resul_fim2, @resul0203;
+goto CONT_ULT;
+
+PRO_OP13:
+set @time_resul, 3;
+set @time_fim1$, @time0104$;
+set @time_fim2$, @time0204$;
+set @resul_fim1, @resul0104;
+set @resul_fim2, @resul0204;
+goto CONT_ULT;
+
+PRO_OP14:
+set @time_resul, 4;
+set @time_fim1$, @time0105$;
+set @time_fim2$, @time0205$;
+set @resul_fim1, @resul0105;
+set @resul_fim2, @resul0205;
+goto CONT_ULT;
+
+PRO_OP15:
+set @time_resul, 5;
+set @time_fim1$, @time0106$;
+set @time_fim2$, @time0206$;
+set @resul_fim1, @resul0106;
+set @resul_fim2, @resul0206;
+goto CONT_ULT;
+
+PRO_OP16:
+set @time_resul, 6;
+set @time_fim1$, @time0107$;
+set @time_fim2$, @time0207$;
+set @resul_fim1, @resul0107;
+set @resul_fim2, @resul0207;
+goto CONT_ULT;
+
+CONT_ULT:
+set @partida_consul2, 0;
+set @apostador_consul2, 0;
+set @resul01_consul2, 0;
+set @resul02_consul2, 0;
+set @acertou, 0;
+set @acertou_1, 0;
+set @acertou_2, 0;
+query_sql("SELECT partida,apostador,resul01,resul02 FROM j_pbgol_apostas WHERE partida = "+@time_resul+" and apostador = "+getcharid(3)+"",@partida_consul2, @apostador_consul2, @resul01_consul2, @resul02_consul2);
+if(@apostador_consul2==0) goto SEM_APOSTA;
+
+if(@resul01_consul2==@resul_fim1 && @resul02_consul2==@resul_fim2) {
+set @acertou, 1;
+goto FIM_ULT;
+}else if(@resul01_consul2==@resul_fim1) {
+set @acertou_1, 1;
+goto FIM_ULT;
+}else if(@resul02_consul2==@resul_fim2) {
+set @acertou_2, 1;
+goto FIM_ULT;
+}else{
+goto FIM_ULT;
+}
+close;
+
+NAO_TEM_RES:
+show .@nome$;
+show "Eu ainda não sei os resultados, fale comigo mais tarde!";
+close;
+
+FIM_ULT:
+if($liberado_gol==1) goto SEM_PROX2;
+set @ganho, 0;
+if(@acertou==1) set @ganho, 120;
+if(@acertou_1==1) set @ganho, 40;
+if(@acertou_2==1) set @ganho, 40;
+
+if(@ganho==0) goto GANHO_NADA;
+if (getgmlevel() >= 20) {
+set @ganho, @ganho * 2;
+}
+
+show .@nome$;
+show "O resultado do jogo foi:";
+show "^666666"+@time_fim1$+"^000000 [^FF0000"+@resul_fim1+"^000000] x [^FF0000"+@resul_fim2+"^000000] ^666666"+@time_fim2$+"^000000";
+show " ";
+show "Seu palpite para esse jogo é";
+show "^666666"+@time_fim1$+"^000000 [^FF0000"+@resul01_consul2+"^000000] x [^FF0000"+@resul02_consul2+"^000000] ^666666"+@time_fim2$+"^000000";
+query_sql("DELETE FROM j_pbgol_apostas WHERE partida = "+@time_resul+" AND apostador = "+getcharid(3)+"");
+show " ";
+set @id_vence, 0;
+set @ganhou_ve, 0;
+show "Você recebeu ^FF0000"+@ganho+"^000000 YGGs pelo palpite!";
+query_sql("SELECT creditos2 FROM login WHERE account_id = "+getcharid(3)+"", @ganhou_ve);
+set @ganho, @ganho + @ganhou_ve;
+query_sql("UPDATE login SET creditos2 = "+@ganho+" WHERE account_id = "+getcharid(3)+"");
+next;
+show .@nome$;
+show "E continue torcendo e dando seu palpite!";
+close;
+
+GANHO_NADA:
+query_sql("DELETE FROM j_pbgol_apostas WHERE partida = "+@time_resul+" AND apostador = "+getcharid(3)+"");
+show .@nome$;
+show "O resultado do jogo foi:";
+show "^666666"+@time_fim1$+"^000000 [^FF0000"+@resul_fim1+"^000000] x [^FF0000"+@resul_fim2+"^000000] ^666666"+@time_fim2$+"^000000";
+show " ";
+show "Seu palpite para esse jogo é";
+show "^666666"+@time_fim1$+"^000000 [^FF0000"+@resul01_consul2+"^000000] x [^FF0000"+@resul02_consul2+"^000000] ^666666"+@time_fim2$+"^000000";
+show " ";
+show "Que pena, você não acertou nada...";
+close;
+
+SEM_APOSTA:
+show .@nome$;
+show "Foi um belo jogo esse não foi?";
+close;
+
+SOBRE:
+show .@nome$;
+show "Futebol... é conhecido pelo mundo como a paixão do brasileiro e no fundo isso é verdade não é?";
+next;
+show .@nome$;
+show "Você também é apaixonado por futebol como eu? Nesse campeonato brasileiro vamos torcer e ganhar premios juntos!";
+next;
+show .@nome$;
+show "Mas você deve estar se perguntando, eu ganhar? Sim você pode ganhar comigo, dando palpites para os jogos do campeonato brasileiro.";
+next;
+show .@nome$;
+show "Me pergunte sobre as ^FF0000Proximas partidas^000000 e de seu palpite para os proximos jogos.";
+next;
+show .@nome$;
+show "Se você quer saber o resultado ou pegar seu prêmio, me pergunte sobre ^FF0000Ultimas partidas^000000.";
+close;
+
+SAIR:
+show .@nome$;
+show "Qualquer coisa venha assistir uma partida de futebol comigo, eu estarei aqui!";
+close;
+
+SEM_PROX:
+show .@nome$;
+show "Ops, o tempo para dar palpites para as próximas partidas já se esgotou, volte na próxima.";
+close;
+
+SEM_PROX2:
+show .@nome$;
+show "Ainda não é possivel verificar os resultados das partidas, aguarde mais um pouco!";
+close;
+
+OnClock2359:
+if(gettime(4)==3) {
+set $liberado_gol, 1;
+query_sql("TRUNCATE TABLE j_pbgol_apostas");
+query_sql("UPDATE j_premios SET lotogol = 0");
+announce "pbGol: Os palpites para as próximas partidas do Campeonato Brasileiro já estão liberadas!! Qual é o seu?",0;
+end;
+}
+end;
+
+OnClock1200:
+if(gettime(4)==6) {
+set $liberado_gol, 0;
+announce "pbGol: Os palpites para as próximas partidas do Campeonato Brasileiro encerram-se agora!! Torça para que o seu resultado seja o vencedo!!",0;
+end;
+}
+end;
+
+OnInit:
+if(gettime(4)==3 || gettime(4)==4 || gettime(4)==5) {
+set $liberado_gol, 1;
+query_sql("UPDATE j_premios SET lotogol = 0");
+end;
+}
+if(gettime(4)==6 || gettime(4)==0 || gettime(4)==1 || gettime(4)==2) {
+set $liberado_gol, 0;
+end;
+}
+end;
+}

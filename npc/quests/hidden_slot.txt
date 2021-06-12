@@ -1,0 +1,203 @@
+//================================================================================
+//= Hidden Slot Enchant
+//==== Creditos ==================================================================
+//= ZeroZapiens (Whole Script)
+//= Rokimoki (Probabilities, Arrays, Optimizaion and Translated)
+//==== Version ====================================================================
+//= 1.0
+//===== Compatible con =============================================================
+//= eAthena SVN Trunk +14000rev
+//= Ragnarok RE and Ragnarok Sakray 2009+ clients
+//==== Descripcion =================================================================
+//= NPC Added in kRO at 25th February 2009, enchant armours +1 to +3 randomnly with percent.
+//= Copyright of distribution, you can implement but to redistribute ask us, just for free.
+//===================================================================================
+prontera,165,60,5	script	Shiriublem	84,{
+	mes "[Encantamento Oculto]";
+	mes "Bem vindo, eu posso encantar a sua";
+	mes "armadura, e dar status de +1 à +3";
+	mes "dependendo de sua sorte. Pode acontecer,";
+	mes "que sua armadura quebre. Tens que saber";
+	mes "que se a sua armadura tiver cartas, elas serão";
+	mes "perdidas no refinamento";
+	mes "Lembre-se que este processo custará 400,000z";
+	next;
+	mes "Se em seu inventário tiver a mesma armadura";
+	mes "que forem equipadas, ambas perderão o refinamento";
+	mes "as cartas e os status. é melhor que, assegure-se";
+	mes "de levar as armaduras uma por uma.";
+	next;
+	menu
+		"Armadura sem Slot",Lsin,
+		"Armadura com Slot",Lcon,
+		"Armadura de Alta Qualidade",Lhigh;
+
+Lsin:
+	if( zeny < 400000 )	{
+		mes "[Encantamento Oculto]";
+		mes "Me perdoe, você não tem Zeny suficente.";
+		close;
+	}
+	for (set .@c, 0; .@c < getarraysize(.ids); set .@c, .@c + 1) {
+		if (isequipped(.ids[.@c]) == 1) {
+			mes "[Encantamento Oculto]";
+			mes "Vejo que tem um ^FF0000[" +getitemname(.ids[.@c]) +"]^000000 equipado.";
+			next;
+			mes "[Encantamento Oculto]";
+			mes "Bem, aqui vamos nós ...";
+			mes "Boa Sorte!";
+			next;
+			callfunc "enchant";
+			close; // Cerrar, no hay mas loop si se detecta armadura
+		} // Terminar if
+	} // Terminar loop
+	mes "[Encantamento Oculto]";
+	mes "Deves equipar a armadura primeiro.";
+	close;
+
+Lcon:
+	if( zeny < 400000 )	{
+		mes "[Encantamento Oculto]";
+		mes "Me descupe, mas você não tem zeny suficiente.";
+		close;
+	}
+	for (set .@c, 0; .@c < getarraysize(.ids2); set .@c, .@c + 1) {
+		if (isequipped(.ids2[.@c]) == 1) {
+			mes "[Encantamento Oculto]";
+			mes "Vejo que tem um ^FF0000[" +getitemname(.ids2[.@c]) +"]^000000 equipado.";
+			next;
+			mes "[Encantamento Oculto]";
+			mes "Bem, aqui vamos nós...";
+			mes "Boa Sorte!";
+			next;
+			callfunc "enchant";
+			close; // Cerrar, no hay mas loop si se detecta armadura
+		} // Termina if
+	} // Termina loop
+	mes "[Encantamento Oculto]";
+	mes "Deves equipar a armadura primeiro.";
+	close;
+
+Lhigh:
+	if( zeny < 400000 )	{
+	mes "[Encantamento Oculto]";
+	mes "Me perdoe, mas, você não tem zeny suficiente.";
+	close;
+	}
+	for (set .@c, 0; .@c < getarraysize(.ids3); set .@c, .@c + 1) {
+		if (isequipped(.ids3[.@c]) == 1) {
+			mes "[Encantamento Oculto]";
+			mes "Vejo que tem um ^FF0000[" +getitemname(.ids3[.@c]) +"]^000000 equipado.";
+			next;
+			mes "[Encantamento Oculto]";
+			mes "Bem, aqui vamos nós ...";
+			mes "Boa Sorte !";
+			next;
+			callfunc "enchant";
+			close; // Cerrar, no hay mas loop si se detecta armadura
+		} // Termina if
+	} // Termina loop
+	mes "[Encantamento Oculto]";
+	mes "Deves equipar a armadura primero.";
+	close;
+
+OnInit:
+// En esta parte se indica que ID's de armadura pertenece a cada tipo de categoria, para hacerte mas sencillo la comprensión y customizacion si se lo desea.
+
+	setarray .ids[0],2307, // Mantle
+					2309, // Coat
+					2314, // Chain Mail
+					2316, // Plate Armor
+					2321, // Silk Robe
+					2325, // Saint Robe
+					2327, // Holy Robe
+					2330, // Tights
+					2332, // Silver Robe
+					2334, // Magic Coat
+					2335, // Thief Clothes
+					2341, // Legion Full Plate
+					2344, // Pierce Armor of Volcano
+					2348, // Saphien's armor of ocean
+					2346, // Aebeecee's Raging Typhoon Armor
+					2350, // Claytos Cracking Earth Armor
+					2395, // Glorious Suit type 2
+					2396, // Glorious Suit type 3
+					2394, // Glorious Suit type 1
+					2337, // Ninja Suit
+					2386; // Chameleon Armor
+
+	setarray .ids2[0],2311, // Mink Coat[1]
+					2318, // Lord Clothes[1]
+					2319, // Glitering Jacket[1]
+					2320, // Formal Suit[1]
+					2308, // Mantle[1]
+					2310, // Coat [1]
+ 					2315, // Chain Mail[1]
+					2317, // Plate Armor[1]
+					2322, // Silk Robe[1]
+					2323, // Scapulare[1]
+					2326, // Saint Robe[1]
+					2331, // Tights[1]
+					2333, // Silver Robe[1]
+					2336, // Thief Clothes[1]
+					2342, // Legion's Full Plate[1]
+					2345, // Pierce Armor of Volcano[1]
+					2347, // Saphien's Armor of ocean[1]
+					2349, // Aebecee's Raging Typhoon Armor[1]
+					2351; // Claytos Cracking Earth Armor[1]
+
+	setarray .ids3[0],2364, // Meteor Plate[1]
+					2365, // Orlean's Uniform[1]
+					2375, // Diabolus Robe[1]
+					2374, // Diabolus Armor[1]
+					2387, // Sprint Mail[1]
+					2389, // Kandra[1] || Gandora[1]
+					2388, // Naga Scale Armor[1]
+					2391, // Life Link[1]
+					2390, // Refined Tights[1]
+					2376, // Assaulter Plate[1]
+					2377, // Elite Engineer Armor[1]
+					2378, // Assassin Robe[1]
+					2379, // Warlock Battle Robe[1]
+					2380, // Robe of Order[1]
+					2381, // Elite Archer Suit[1]
+					2382; // Elite Shooter Suit[1]
+end;
+} // Termina Script
+
+function	script	enchant	{
+set @itemid,getequipid(EQI_ARMOR);
+set zeny, zeny - 400000;
+set @porcentaje, rand(1,100);
+if (@porcentaje > 18 && @porcentaje <= 98) { // 80% break
+	specialeffect2 155;
+	delitem @itemid, 1;
+	mes "[Encantamento Oculto]";
+	mes "Sinto muito o processo falhou, como eu falei que poderia...";
+} else if (@porcentaje >= 1 && @porcentaje < 8) { // 8% + 2 stat X
+	delitem @itemid,1;
+	setarray .@level[0],4701,4711,4721,4731,4741,4751;
+	set @enchant_id, .@level[rand(0,5)];
+	getitem2 @itemid, 1, 1, 0, 0, 0, 0, 0, @enchant_id;
+	specialeffect2 154;
+	mes "[Encantamento Oculto]";
+	mes "Aqui está sua armadura refinada";
+} else if (@porcentaje > 8 && @porcentaje <= 18) { // 10% + 1 stat X
+	delitem @itemid,1;
+	setarray .@level[0],4700,4710,4720,4730,4740,4750;
+	set @enchant_id, .@level[rand(0,5)];
+	getitem2 @itemid, 1, 1, 0, 0, 0, 0, 0, @enchant_id;
+	specialeffect2 154;
+	mes "[Encantamento Oculto]";
+	mes "Aqui está sua armadura refinada";
+} else if (@porcentaje >= 99) { // 2% + 3 stat X
+	delitem @itemid,1;
+	setarray .@level[0],4702,4712,4722,4732,4742,4752;
+	set @enchant_id, .@level[rand(0,5)];
+	getitem2 @itemid, 1, 1, 0, 0, 0, 0, 0, @enchant_id;
+	specialeffect2 154;
+	mes "[Encantamento Oculto]";
+	mes "Aqui está sua armadura refinada";
+} // End if
+return;
+} // End function

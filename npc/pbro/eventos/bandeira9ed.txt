@@ -1,0 +1,357 @@
+prontera.gat,156,181,5	script	Bandeira 9ª Edição	833,{
+
+set @namep1$, "Chapéu de Galinha[1]";
+set @premio1, 5431;
+set @preco1, 310;
+
+set @namep2$, "Estatueta de Arqueiro";
+set @premio2, 2769;
+set @preco2, 460;
+
+set @namep3$, "Estatueta de Espadachin";
+set @premio3, 2766;
+set @preco3, 460;
+
+set @namep4$, "Estatueta de Gatuno";
+set @premio4, 2770;
+set @preco4, 460;
+
+set @namep5$, "Estatueta de Mago";
+set @premio5, 2768;
+set @preco5, 460;
+
+set @namep6$, "Estatueta de Mercador";
+set @premio6, 2771;
+set @preco6, 460;
+
+set @namep7$, "Estatueta de Noviço";
+set @premio7, 2767;
+set @preco7, 460;
+
+set @namep8$, "Tiara de Kafra";
+set @premio8, 5020;
+set @preco8, 360;
+
+set @namep9$, "Tiara de Orquídea";
+set @premio9, 5370;
+set @preco9, 430;
+
+set @namep10$, "Chapéu de Rideword";
+set @premio10, 5208;
+set @preco10, 420;
+
+set @namep11$, "Adaga de Pirata";
+set @premio11, 5532;
+set @preco11, 280;
+
+set @namep12$, "Chapéu de Sundae";
+set @premio12, 5500;
+set @preco12, 410;
+
+set @namep13$, "Chapéu de Sting";
+set @premio13, 5509;
+set @preco13, 350;
+
+set @namep14$, "Boneca de Tatiana";
+set @premio14, 5343;
+set @preco14, 250;
+
+set @namep15$, "Boceca de Sofia";
+set @premio15, 5341;
+set @preco15, 250;
+
+set @namep16$, "Boneca de Deborah";
+set @premio16, 5345;
+set @preco16, 250;
+
+set @namep17$, "Boneca de Denise";
+set @premio17, 5340;
+set @preco17, 250;
+
+set @namep18$, "Boneca de Marianne";
+set @premio18, 5342;
+set @preco18, 250;
+
+set @namep19$, "Boneca de Bianca";
+set @premio19, 5344;
+set @preco19, 250;
+
+set @namep20$, "Nariz de Rudolph";
+set @premio20, 5204;
+set @preco20, 410;
+
+set @namep21$, "Lencinho";
+set @premio21, 5322;
+set @preco21, 360;
+
+set @namep22$, "Chapéu de Graduação em Magia";
+set @premio22, 5407;
+set @preco22, 450;
+
+set @namep23$, "Chapéu de Graduação Habilidosa";
+set @premio23, 5406;
+set @preco23, 450;
+
+set @namep24$, "Pirulito";
+set @premio24, 5412;
+set @preco24, 290;
+
+set @namep25$, "Ninho Abandonado";
+set @premio25, 5129;
+set @preco25, 280;
+
+// FIM dos itens da 9º Edição!
+
+set @nameg$, 0;
+set @precog, 0;
+set @premiog, 0;
+set @comprado,0;
+
+//Inicio NPC
+NPC_BANDEIRA:
+show "[Bandeira 9ª Edição]";
+show "Em que posso ajudar?";
+next;
+menu "Trocar Bandeiras",VIP_BAND,"Onde conseguir bandeiras?",ONDE_B,"Sair",SAIR;
+
+ONDE_B:
+show "[Bandeira 9ª Edição]";
+show "Você pode conseguir bandeiras:";
+show "^143E6BNos spaws de cristais nas cidades^000000";
+show "^143E6BNas invasões de cristais nas cidades^000000";
+show "^143E6BNo evento arena dos cristais^000000";
+show "^143E6BEm mini-eventos no jogo^000000";
+close;
+
+VIP_BAND:
+show "[Bandeira 9ª Edição]";
+show "Confira a lista! Se você estiver como VIP receberá um desconto de ^FF000020^000000 porcento em TODOS os itens.";
+show "^FF0000Obs^000000: O que esta entre colchetes é o valor do item em bandeiras.";
+show "Ex: [0]";
+next;
+
+menu "- "+@namep1$+" [^FF0000"+@preco1+"^000000]",TROCA1,
+"- "+@namep2$+" [^FF0000"+@preco2+"^000000]",TROCA2,
+"- "+@namep3$+" [^FF0000"+@preco3+"^000000]",TROCA3,
+"- "+@namep4$+" [^FF0000"+@preco4+"^000000]",TROCA4,
+"- "+@namep5$+" [^FF0000"+@preco5+"^000000]",TROCA5,
+"- "+@namep6$+" [^FF0000"+@preco6+"^000000]",TROCA6,
+"- "+@namep7$+" [^FF0000"+@preco7+"^000000]",TROCA7,
+"- "+@namep8$+" [^FF0000"+@preco8+"^000000]",TROCA8,
+"- Proximo ->", PRO_VIP;
+
+PRO_VIP:
+menu "- "+@namep9$+" [^FF0000"+@preco9+"^000000]",TROCA9,
+"- "+@namep10$+" [^FF0000"+@preco10+"^000000]",TROCA10,
+"- "+@namep11$+" [^FF0000"+@preco11+"^000000]",TROCA11,
+"- "+@namep12$+" [^FF0000"+@preco12+"^000000]",TROCA12,
+"- "+@namep13$+" [^FF0000"+@preco13+"^000000]",TROCA13,
+"- "+@namep14$+" [^FF0000"+@preco14+"^000000]",TROCA14,
+"- "+@namep15$+" [^FF0000"+@preco15+"^000000]",TROCA15,
+"- "+@namep16$+" [^FF0000"+@preco16+"^000000]",TROCA16,
+"- Proximo ->", PRO_VIP2;
+
+PRO_VIP2:
+menu "- "+@namep17$+" [^FF0000"+@preco17+"^000000]",TROCA17,
+"- "+@namep18$+" [^FF0000"+@preco18+"^000000]",TROCA18,
+"- "+@namep19$+" [^FF0000"+@preco19+"^000000]",TROCA19,
+"- "+@namep20$+" [^FF0000"+@preco20+"^000000]",TROCA20,
+"- "+@namep21$+" [^FF0000"+@preco21+"^000000]",TROCA21,
+"- "+@namep22$+" [^FF0000"+@preco22+"^000000]",TROCA22,
+"- "+@namep23$+" [^FF0000"+@preco23+"^000000]",TROCA23,
+"- "+@namep24$+" [^FF0000"+@preco24+"^000000]",TROCA24,
+"- "+@namep25$+" [^FF0000"+@preco25+"^000000]",TROCA25,
+"Sair",SAIR;
+
+TROCA1:
+set @nameg$, @namep1$;
+set @precog, @preco1;
+set @premiog, @premio1;
+goto TROCAG;
+
+TROCA2:
+set @nameg$, @namep2$;
+set @precog, @preco2;
+set @premiog, @premio2;
+goto TROCAG;
+
+TROCA3:
+set @nameg$, @namep3$;
+set @precog, @preco3;
+set @premiog, @premio3;
+goto TROCAG;
+
+TROCA4:
+set @nameg$, @namep4$;
+set @precog, @preco4;
+set @premiog, @premio4;
+goto TROCAG;
+
+TROCA5:
+set @nameg$, @namep5$;
+set @precog, @preco5;
+set @premiog, @premio5;
+goto TROCAG;
+
+TROCA6:
+set @nameg$, @namep6$;
+set @precog, @preco6;
+set @premiog, @premio6;
+goto TROCAG;
+
+TROCA7:
+set @nameg$, @namep7$;
+set @precog, @preco7;
+set @premiog, @premio7;
+goto TROCAG;
+
+TROCA8:
+set @nameg$, @namep8$;
+set @precog, @preco8;
+set @premiog, @premio8;
+goto TROCAG;
+
+TROCA9:
+set @nameg$, @namep9$;
+set @precog, @preco9;
+set @premiog, @premio9;
+goto TROCAG;
+
+TROCA10:
+set @nameg$, @namep10$;
+set @precog, @preco10;
+set @premiog, @premio10;
+goto TROCAG;
+
+TROCA11:
+set @nameg$, @namep11$;
+set @precog, @preco11;
+set @premiog, @premio11;
+goto TROCAG;
+
+TROCA12:
+set @nameg$, @namep12$;
+set @precog, @preco12;
+set @premiog, @premio12;
+goto TROCAG;
+
+TROCA13:
+set @nameg$, @namep13$;
+set @precog, @preco13;
+set @premiog, @premio13;
+goto TROCAG;
+
+TROCA14:
+set @nameg$, @namep14$;
+set @precog, @preco14;
+set @premiog, @premio14;
+goto TROCAG;
+
+TROCA15:
+set @nameg$, @namep15$;
+set @precog, @preco15;
+set @premiog, @premio15;
+goto TROCAG;
+
+TROCA16:
+set @nameg$, @namep16$;
+set @precog, @preco16;
+set @premiog, @premio16;
+goto TROCAG;
+
+TROCA17:
+set @nameg$, @namep17$;
+set @precog, @preco17;
+set @premiog, @premio17;
+goto TROCAG;
+
+TROCA18:
+set @nameg$, @namep18$;
+set @precog, @preco18;
+set @premiog, @premio18;
+goto TROCAG;
+
+TROCA19:
+set @nameg$, @namep19$;
+set @precog, @preco19;
+set @premiog, @premio19;
+goto TROCAG;
+
+TROCA20:
+set @nameg$, @namep20$;
+set @precog, @preco20;
+set @premiog, @premio20;
+goto TROCAG;
+
+TROCA21:
+set @nameg$, @namep21$;
+set @precog, @preco21;
+set @premiog, @premio21;
+goto TROCAG;
+
+TROCA22:
+set @nameg$, @namep22$;
+set @precog, @preco22;
+set @premiog, @premio22;
+goto TROCAG;
+
+TROCA23:
+set @nameg$, @namep23$;
+set @precog, @preco23;
+set @premiog, @premio23;
+goto TROCAG;
+
+TROCA24:
+set @nameg$, @namep24$;
+set @precog, @preco24;
+set @premiog, @premio24;
+goto TROCAG;
+
+TROCA25:
+set @nameg$, @namep25$;
+set @precog, @preco25;
+set @premiog, @premio25;
+goto TROCAG;
+
+TROCAG:
+show "[Bandeira 9ª Edição]";
+show "Você realmente deseja levar um(a) ^FF0000"+@nameg$+"^000000 ?";
+if(getgmlevel() > 19) {
+set @precog16, @precog / 5;
+set @precog, @precog - @precog16;
+}
+show "Isso vai lhe custar ^FF0000"+@precog+"^000000 Bandeiras.";
+next;
+menu "Sim, é isso mesmo",SIMS,"Não. Quero outro",NAON;
+
+SIMS:
+show "[Bandeira 9ª Edição]";
+show "Ok. Vejamos, você esta com todas as bandeiras necessarias?!";
+next;
+if(countitem(7549) < @precog) goto NO_BAN;
+show "[Bandeira 9ª Edição]";
+show "É... estar tudo certo, vamos aos negocios rápido. Tem mais gente querendo ser atendido!!";
+next;
+if(countitem(7549) < @precog) goto NO_BAN;
+delitem 7549,@precog;
+additem @premiog,1;
+show "[Bandeira 9ª Edição]";
+show "Ai esta seu item, faça bom proveito. E lembre-se precisando estou aqui para realizarmos mais trocas!";
+close;
+
+NO_BAN:
+show "[Bandeira 9ª Edição]";
+show "Você não tem bandeiras suficientes!";
+close;
+
+NAON:
+show "[Bandeira 9ª Edição]";
+show "Vamos lá, escolha outro que seja de seu agrado.";
+close;
+
+SAIR:
+show "[Bandeira 9ª Edição]";
+show "Esta certo, volte quando puder!";
+close;
+
+}

@@ -1,0 +1,11 @@
+//===== eAthena Script =======================================
+//= Manuk Field Warp Script
+//============================================================
+
+man_fild01,35,232,0	warp	man_fild01-2	1,1,mid_camp,341,176
+man_fild01,103,55,0	warp	man_fild01-3	1,1,man_fild03,84,366
+man_fild03,84,369,0	warp	man_fild03-1	1,1,man_fild01,103,58
+man_fild02,32,263,0	warp	man_fild02-1	1,1,man_fild01,370,222
+man_fild01,373,222,0	warp	man_fild02-2	1,1,man_fild02,35,263
+man_fild02,134,39,0	warp	manuk-1	1,1,manuk,112,354
+manuk,112,357,0	warp	manuk-2	1,1,man_fild02,134,42

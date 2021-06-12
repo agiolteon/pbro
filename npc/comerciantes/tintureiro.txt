@@ -1,0 +1,308 @@
+
+prt_in,284,170,2	script	Tintureiro Ginedin#1-2	55,{
+switch(Class){
+	case Job_Knight:
+	case Job_Knight2:
+	case Job_Lord_Knight:
+	case Job_Lord_Knight2:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Crusader:
+	case Job_Crusader2:
+	case Job_Paladin:
+	case Job_Paladin2:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Priest:
+	case Job_High_Priest:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Wizard:
+	case Job_High_Wizard:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Blacksmith:
+	case Job_Whitesmith:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Hunter:
+	case Job_Sniper:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Assassin:
+	case Job_Assassin_Cross:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Monk:
+	case Job_Champion:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Sage:
+	case Job_Professor:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Rogue:
+	case Job_Stalker:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Alchemist:
+	case Job_Creator:
+		set @cor1, 11; 
+		set @cor2, 12; 
+		set @cor3, 13; 
+		set @cor4, 14; 
+		set @cor5, 15; 
+		set @cor6, 16; 
+		set @cor7, 17;
+		set @cor8, 18;
+		set @cor9, 19;
+		break;
+	case Job_Bard:
+	case Job_Clown:
+	case Job_Dancer:
+	case Job_Gypsy:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_SuperNovice:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Taekwon:
+	case Job_Star_Gladiator:
+	case Job_Star_Gladiator2:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Soul_Linker:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+	case Job_Ninja:
+		set @cor1, 5; 
+		set @cor2, 6; 
+		set @cor3, 7; 
+		set @cor4, 8; 
+		set @cor5, 9; 
+		set @cor6, 10; 
+		set @cor7, 11;
+		set @cor8, 13;
+		set @cor9, 14;
+		break;
+	case Job_Gunslinger:
+		set @cor1, 7; 
+		set @cor2, 8; 
+		set @cor3, 9; 
+		set @cor4, 10; 
+		set @cor5, 11; 
+		set @cor6, 12; 
+		set @cor7, 13;
+		set @cor8, 14;
+		set @cor9, 15;
+		break;
+	default:
+		set @cor1, 1; 
+		set @cor2, 2; 
+		set @cor3, 3; 
+		set @cor4, 4; 
+		set @cor5, 5; 
+		set @cor6, 6; 
+		set @cor7, 7;
+		set @cor8, 8;
+		set @cor9, 9;
+		break;
+}
+show "[Tintureiro Ginedin]";
+show "E então... ^FF0000"+strcharinfo(0)+"^000000";
+show "Veio até mim para trocar a cor da sua roupa, não é...?";
+next;
+if(select("Sim!:Retornar a cor normal")==2){
+show "[Tintureiro Ginedin]";
+show "Pronto.";
+setlook 7,0;
+close;
+}
+show "[Tintureiro Ginedin]";
+show "Vejamos...";
+setlook 7,@cor1;
+next;
+show "[Tintureiro Ginedin]";
+show "Que tal?";
+next;
+if(select("Quero trocar de novo:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor2;
+show "E este, então?";
+next;
+if(select("Ainda não gostei...:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor3;
+show "Este...?";
+next;
+if(select("Ainda não gostei...:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor4;
+show "Este, com certeza!?";
+next;
+if(select("Não...:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+show "Ora, ora, um cliente difícil, hein?";
+next;
+setlook 7,@cor5;
+show "[Tintureiro Ginedin]";
+show "Oque achou?";
+next;
+if(select("Ainda não...!:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor6;
+show "E este, então?";
+next;
+if(select("Ainda não...!:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor7;
+show "Vamos, vamos... este?";
+next;
+if(select("Não!:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor8;
+show "Este então...?";
+next;
+if(select("Não!:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+setlook 7,@cor9;
+show "Esta é minha última opção...!";
+next;
+if(select("Ainda não gostei:Perfeito!")==2){
+close;
+}
+show "[Tintureiro Ginedin]";
+show "Ora, ora, eu sempre acabo decepcionando meus clientes...!";
+show "Procure a ^0000FFAtendente VIP^000000 para ter mais opções de cores";
+emotion e_pif;
+close;	
+
+}

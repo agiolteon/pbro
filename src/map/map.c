@@ -42,6 +42,7 @@
 #include "mercenary.h"
 #include "atcommand.h"
 #include "log.h"
+#include "../common/gf.h"
 #ifndef TXT_ONLY
 #include "mail.h"
 #endif
@@ -702,6 +703,68 @@ int map_foreachinarea(int (*func)(struct block_list*,va_list), int m, int x0, in
 			va_start(ap, type);
 			returnCount += func(bl_list[i], ap);
 			va_end(ap);
+		}
+
+	map_freeblock_unlock();	// 解放を許可する
+
+	bl_list_count = blockcount;
+	return returnCount;	//[Skotlex]
+}
+
+int map_forcountinarea(int (*func)(struct block_list*,va_list), int m, int x0, int y0, int x1, int y1, int count, int type, ...)
+{
+	int bx,by;
+	int returnCount =0;	//total sum of returned values of func() [Skotlex]
+	struct block_list *bl;
+	int blockcount=bl_list_count,i;
+
+	if (m < 0)
+		return 0;
+	if (x1 < x0)
+	{	//Swap range
+		bx = x0;
+		x0 = x1;
+		x1 = bx;
+	}
+	if (y1 < y0)
+	{
+		bx = y0;
+		y0 = y1;
+		y1 = bx;
+	}
+	if (x0 < 0) x0 = 0;
+	if (y0 < 0) y0 = 0;
+	if (x1 >= map[m].xs) x1 = map[m].xs-1;
+	if (y1 >= map[m].ys) y1 = map[m].ys-1;
+	
+	if (type&~BL_MOB)
+		for(by = y0 / BLOCK_SIZE; by <= y1 / BLOCK_SIZE; by++)
+			for(bx = x0 / BLOCK_SIZE; bx <= x1 / BLOCK_SIZE; bx++)
+				for( bl = map[m].block[bx+by*map[m].bxs] ; bl != NULL ; bl = bl->next )
+					if(bl->type&type && bl->x>=x0 && bl->x<=x1 && bl->y>=y0 && bl->y<=y1 && bl_list_count<BL_LIST_MAX)
+						bl_list[bl_list_count++]=bl;
+
+	if(type&BL_MOB)
+		for(by=y0/BLOCK_SIZE;by<=y1/BLOCK_SIZE;by++)
+			for(bx=x0/BLOCK_SIZE;bx<=x1/BLOCK_SIZE;bx++)
+				for( bl = map[m].block_mob[bx+by*map[m].bxs] ; bl != NULL ; bl = bl->next )
+					if(bl->x>=x0 && bl->x<=x1 && bl->y>=y0 && bl->y<=y1 && bl_list_count<BL_LIST_MAX)
+						bl_list[bl_list_count++]=bl;
+
+	if(bl_list_count>=BL_LIST_MAX)
+		ShowWarning("map_foreachinarea: block count too many!\n");
+
+	map_freeblock_lock();	// メモリからの解放を禁止する
+
+	for(i=blockcount;i<bl_list_count;i++)
+		if(bl_list[i]->prev)	// 有?かどうかチェック
+		{
+			va_list ap;
+			va_start(ap, type);
+			returnCount += func(bl_list[i], ap);
+			va_end(ap);
+			if( count && returnCount >= count )
+				break;
 		}
 
 	map_freeblock_unlock();	// 解放を許可する
@@ -1538,6 +1601,10 @@ int map_quit(struct map_session_data *sd)
 			status_change_end(&sd->bl,SC_GUILDAURA,-1);
 		if(sd->sc.data[SC_ENDURE] && sd->sc.data[SC_ENDURE]->val4)
 			status_change_end(&sd->bl,SC_ENDURE,-1); //No need to save infinite endure.
+		if(sd->sc.data[SC_WEIGHT50])
+			status_change_end(&sd->bl,SC_WEIGHT50,-1);
+		if(sd->sc.data[SC_WEIGHT90])
+			status_change_end(&sd->bl,SC_WEIGHT90,-1);
 		if (battle_config.debuff_on_logout&1) {
 			if(sd->sc.data[SC_ORCISH])
 				status_change_end(&sd->bl,SC_ORCISH,-1);
@@ -1576,6 +1643,8 @@ int map_quit(struct map_session_data *sd)
 				status_change_end(&sd->bl,SC_PRESERVE,-1);
 			if(sd->sc.data[SC_KAAHI])
 				status_change_end(&sd->bl,SC_KAAHI,-1);
+			if(sd->sc.data[SC_SPIRIT])
+				status_change_end(&sd->bl,SC_SPIRIT,-1);
 		}
 	}
 	
@@ -1584,7 +1653,7 @@ int map_quit(struct map_session_data *sd)
 	if( sd->state.storage_flag == 1 ) sd->state.storage_flag = 0; // No need to Double Save Storage on Quit.
 
 	unit_remove_map_pc(sd,3);
-	
+
 	if( map[sd->bl.m].instance_id )
 	{ // Avoid map conflicts and warnings on next login
 		int m;
@@ -1601,7 +1670,7 @@ int map_quit(struct map_session_data *sd)
 			sd->bl.y = pt->y;
 			sd->mapindex = pt->map;
 		}
-	}	
+	}
 
 	pc_makesavestatus(sd);
 	pc_clean_skilltree(sd);
@@ -1729,7 +1798,7 @@ struct mob_data * map_getmob_boss(int m)
 	{
 		if( md->bl.m == m )
 		{
-			found = true;		
+			found = true;
 			break;
 		}
 	}
@@ -2086,7 +2155,7 @@ int map_removemobs_sub(struct block_list *bl, va_list ap)
 	// is a mvp
 	if( md->db->mexp > 0 )
 		return 0;
-	
+
 	unit_free(&md->bl,0);
 
 	return 1;
@@ -3301,7 +3370,7 @@ void do_final(void)
 	for( sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); sd = (TBL_PC*)mapit_next(iter) )
 		map_quit(sd);
 	mapit_free(iter);
-	
+
 	for( i = 0; i < MAX_INSTANCE; i++ )
 		if( instance[i].state != INSTANCE_FREE ) instance_destroy(i);
 
@@ -3560,6 +3629,7 @@ int do_init(int argc, char *argv[])
 	do_init_quest();
 	do_init_npc();
 	do_init_unit();
+	do_init_gamefort();
 	do_init_battleground();
 #ifndef TXT_ONLY /* mail system [Valaris] */
 	if (log_config.sql_logs)

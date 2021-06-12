@@ -1,0 +1,823 @@
+-	script	 Timmer#AC 	-1,{
+	OnInit: 
+	//set $arenac_gate, 1;
+	setcell "job_thief1",174,18,185,18,cell_walkable,0;
+	setcell "izlude",112,112,97,125,cell_nochat,1;
+	setcell "izlude",112,112,97,125,cell_novending,1;
+	//Armadilhas
+	set $SC_ARMCRIS,17;		//Chance de ir para arena com cristais premiados e PvP.
+	set $SC_ARMBLIND,15;	//Chance de congelar por 15 segundos.
+	set $SC_ARMDEG,15;		//Chance de diminuir agi.
+	set $SC_ARMEXIT,43;        //Chance de ser retirado da sala.
+	set $SC_ARMBON1,7;        //Chance de ganhar 2 bandeiras. 
+	set $SC_ARMBON2,12;        //Chance de ganhar 1 bandeira. 
+	set $SC_ARMAGIL,17;        //Chance de aumentar sua agilidade. 
+	set $SC_ARMDISPELL,15;		//Chance de perder todos buffs e de-buffs
+	set $SC_ARMIMUN,23;			//Chance de ficar imune a todas armadilhas por 15 segundos
+	set $SC_ARMSTRIP,7;		//Chance de divestar algum equip
+	end;
+	
+//=== Não mexer aqui por favor ==//
+
+OnClock1031: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock1231: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock1431: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock1631: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock1831: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock2031: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock2231: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+OnClock0031: mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; end;
+
+	
+//<!----------------------Desabilitando Skills.---------------------------------->
+	OnClock1002: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock1202: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock1402: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock1602: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock1802: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock2002: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock2202: setmapflag "izlude",mf_noskill; end;
+	
+	OnClock0002: setmapflag "izlude",mf_noskill; end;
+	
+//<!-----------------------------Abrindo a Arena------------------------------------>
+	OnClock1010: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock1210: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock1410: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock1610: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock1810: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock2010: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock2210: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+	OnClock0010: set $arenac_gate, 1; announce "A Arena dos Cristais está aberta!",0; end;
+	
+//<!-----------------------------Fechando a Arena------------------------------------>
+	OnClock1030: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104; mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock1230: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;  mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock1430: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;  mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock1630: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;  mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock1830: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;  mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock2030: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;  mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock2230: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;   mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+	OnClock0030: set $arenac_gate, 0; announce "A Arena dos Cristais está fechada!",0; mapwarp "job_thief1","izlude",96,104; mapwarp "que_qaru01","izlude",96,104; mapwarp "job_monk","izlude",96,104;   mapwarp "spl_fild01","izlude",96,104; removemapflag "izlude",mf_noskill; end;
+	
+}
+
+izlude.gat,104,117,5	script	 Arena dos Cristais 	470,{
+set @limite1, 55; //Limite de usuários arena 1
+set @limite2, 50; //Limite de usuários arena 2
+set @limite3, 40; //Limite de usuários arena 3
+
+L_Init:
+if($arenac_gate == 1) goto M_start;
+show "[Arena dos Cristais]";
+show "Olá ^FF0000"+strcharinfo(0)+"^000000, hoje é um ótimo dia para dropar bandeiras, não acha?";
+next;
+if($arenac_gate == 1) goto M_start;
+show "[Arena dos Cristais]";
+show "Uma pena que a arena está fechada no momento!";
+emotion e_wah,1;
+next;
+show "[Arena dos Cristais]";
+show "A arena fica aberta nestes horários:";
+show "^FF0000 10:10 até 10:30 ^000000";
+show "^0000FF 12:10 até 12:30 ^000000";
+show "^FF0000 14:10 até 14:30 ^000000";
+show "^0000FF 16:10 até 16:30 ^000000";
+show "^FF0000 18:10 até 18:30 ^000000";
+show "^0000FF 20:10 até 20:30 ^000000";
+show "^FF0000 22:10 até 22:30 ^000000";
+show "^0000FF 00:10 até 00:30 ^000000";
+close;
+end;
+
+M_start:
+show "[Arena dos Cristais]";
+show "Qual arena deseja entrar?";
+show "^309A98Usuários VIP TOTAL podem entrar na arena mesmo estando lotada^000000.";
+if(getgmlevel() >= 20){ show "^306C2FVocê é um usuário VIP TOTAL^000000."; }else{ show "^306C2FVocê não é um usuário VIP TOTAL^000000."; }
+next;
+menu "Arena 1 ^0000FF[" + getmapusers("job_thief1") + "/" + @limite1 + "]^000000",arena1,"Arena 2 ^0000FF[" + getmapusers("que_qaru01") + "/" + @limite2 + "]^000000",arena2,"Arena 3 ^0000FF[" + getmapusers("spl_fild01") + "/" + @limite3 + "]^000000",arena3;
+
+arena1:
+if($arenac_gate == 1 && getgmlevel () >= 20) { warp "job_thief1",0,0; close; }
+if($arenac_gate == 1 && getmapusers("job_thief1") < @limite1){ warp "job_thief1",0,0; close; }
+if($arenac_gate == 1){ show "[Arena dos Cristais]"; show "A arena está lotada."; emotion e_wah,1; next; goto L_Init; }
+show "[Arena dos Cristais]";
+show "Você está meio atrasado, não é?!";
+next;
+show "[Arena dos Cristais]";
+show "A arena já fechou!";
+emotion e_hmm;
+close;
+end;
+
+arena2:
+if($arenac_gate == 1 && getgmlevel () >= 20) { warp "que_qaru01",0,0; close; }
+if($arenac_gate == 1 && getmapusers("que_qaru01") < @limite2){ warp "que_qaru01",0,0; close; }
+if($arenac_gate == 1){ show "[Arena dos Cristais]"; show "A arena está lotada."; emotion e_wah,1; next; goto L_Init; }
+show "[Arena dos Cristais]";
+show "Você está meio atrasado, não é?!";
+next;
+show "[Arena dos Cristais]";
+show "A arena já fechou!";
+emotion e_hmm;
+close;
+end;
+
+arena3:
+if($arenac_gate == 1 && getgmlevel () >= 20) { warp "spl_fild01",0,0; close; }
+if($arenac_gate == 1 && getmapusers("spl_fild01") < @limite3){ warp "spl_fild01",0,0; close; }
+if($arenac_gate == 1){ show "[Arena dos Cristais]"; show "A arena está lotada."; emotion e_wah,1; next; goto L_Init; }
+show "[Arena dos Cristais]";
+show "Você está meio atrasado, não é?!";
+next;
+show "[Arena dos Cristais]";
+show "A arena já fechou!";
+emotion e_hmm;
+close;
+end;
+
+
+
+}
+
+-	script	OnDie#2	-1,{
+OnPCDieEvent:
+    getmapxy(@mapn$,@x,@y,0);
+    if(@mapn$ == "que_qaru01" || @mapn$ == "job_monk" || @map$ == "job_thief1" || @map$ == "spl_fild01"){
+    specialeffect2 555;
+    sleep2 750;
+    warp "izlude",96,104;
+    end;
+    }
+
+}
+
+
+-	script	OnDie#1	-1,{
+OnPCDieEvent:
+    getmapxy(@mapn$,@x,@y,0,strcharinfo(0));
+	if(@mapn$ == "job_monk"){
+    set @charid, getcharid(3);
+    set @killer$,rid2name(killerrid);
+    set @killed$,rid2name($crist_death);
+    if(strcharinfo(0) == @killed$){
+    if(attachrid(killerrid)){
+    announce ""+strcharinfo(0)+" matou "+rid2name($crist_death)+" e ganhou 3 bandeiras!",bc_map; 
+    additem 7549,3;
+	specialeffect2 586;
+	}
+   set $crist_death,0;
+   }
+ }
+end;
+}
+
+
+job_monk,0,0,5	script	Setter#551	-1,{
+OnInit:
+monster "job_monk",0,0,"Cristal Premiado",1395,60,"Setter#551::OnDie";
+end;
+
+OnDie:
+	set @crist_death, @cristdeath+1;
+	set @SC_RANDOM,rand(1,100);
+	if(@crist_death > 120){ announce "A cabeça de "+strcharinfo(0)+" está ao preço de 3 bandeiras!",bc_map; set $crist_death,getcharid(3); set @crist_death, 0; specialeffect2 744; specialeffect2 233; end; }
+	if(@SC_RANDOM >= 97){ announce ""+strcharinfo(0)+" matou o Cristal premiado e ganhou bônus de 2 bandeiras!",bc_map; additem 7549,2; }
+	if(@SC_RANDOM > 79 && @SC_RANDOM < 85){ dispbottom "Armadilha! você será jogado para fora"; warp "izlude",96,104; }
+	if(@SC_RANDOM > 4 && @SC_RANDOM < 25){ specialeffect2 744; }
+	if(@SC_RANDOM < 4){ announce "A cabeça de "+strcharinfo(0)+" está ao preço de 3 bandeiras!",bc_map; set $crist_death,getcharid(3); specialeffect2 744; specialeffect2 233; }
+	monster "job_monk",0,0,"Cristal Premiado",1395,1,"Setter#551::OnDie";
+	end;
+}
+
+
+
+function	script	SC_DISPARM	{
+if(@imun > 0){ emotion e_gg,1; dispbottom "Armadilha falhou! Você está imune."; return; }
+
+ARMEXIT:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMEXIT) {
+        specialeffect2 69;
+		specialeffect2 304;
+        dispbottom "Armadilha! Você será jogado para fora";
+        warp "izlude",96,104;
+		emotion e_sob,1;
+        return;
+        } else { 
+        goto ARMDEG;
+        }
+ARMDEG:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMDEG) {
+        specialeffect2 38;
+		specialeffect2 234;
+		specialeffect2 372;
+		emotion e_an,1;
+        dispbottom "Armadilha! Velocidade Diminuida!";
+		sc_start SC_DECREASEAGI,80000,50;
+        sc_start SC_CHANGEUNDEAD,50000,0;
+        return;
+        } else { 
+        goto ARMDISPELL;
+        }
+
+ARMDISPELL:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMDISPELL) {
+        specialeffect2 235;
+		emotion e_omg,1;
+        dispbottom "Armadilha! Todos efeitos foram retirados!";
+        sc_end SC_ALL;
+        return;
+        } else {
+        goto ARMIMUN;
+        }
+		
+ARMIMUN:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMIMUN) {
+        specialeffect2 675;
+		specialeffect2 749;
+		emotion e_heh,1;
+        dispbottom "Bônus! Você está imune as armadilhas por 15 segundos!";
+        set @imun,1;
+		sleep2 15000;
+		set @imun,0;
+        return;
+        } else {
+        goto ARMSTRIP;
+        }		
+		
+ARMSTRIP:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMSTRIP) {
+		switch(rand(1,4)){
+		case 1: specialeffect2 269; dispbottom "Armadilha! Arma retirada!"; unequip 4; break;
+		case 2: specialeffect2 270; dispbottom "Armadilha! Escudo retirado!"; unequip 3; break;
+		case 3: specialeffect2 271; dispbottom "Armadilha! Armadura retirada!"; unequip 2; break;
+		case 4: specialeffect2 272; dispbottom "Armadilha! Capacete retirado!"; unequip 1; break;
+		}
+		emotion e_omg,1;
+        return;
+        } else {
+        goto ARMBON1;
+        }		
+		
+ARMBON1:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMBON1) {
+        specialeffect2 100;
+		specialeffect2 847;
+		emotion e_gg,1;
+        dispbottom "Bônus! Você recebeu 2 Bandeiras Nacionais!";
+        additem 7549,2;
+        return;
+        } else {
+        goto ARMBON2;
+        }
+
+ARMBON2:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMBON2) {
+        specialeffect2 100;
+		emotion e_heh,1;
+        dispbottom "Bônus! Você recebeu 1 Bandeira Nacional!";
+        additem 7549,1;
+        return;
+        } else {
+        goto ARMBLIND;
+        }
+
+ARMBLIND:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMBLIND) {
+		if (checkoption(0x10)){ set @falcon, 1; }
+		if (checkoption(0x20)){ set @peco, 1; }
+        specialeffect2 108;
+		emotion e_wah,1;
+        dispbottom "Armadilha! Congelado!";
+		atcommand "@option 2";
+		if (@falcon > 0){ setoption 0x10; }
+		if (@peco > 0){ setoption 0x20; }
+		sleep2 6000;
+		atcommand "@option 0";
+		if (@falcon > 0){ setoption 0x10; set @falcon, 0; }
+		if (@peco > 0){ setoption 0x20; set @peco, 0; }
+        return;
+        } else { 
+        goto ARMAGIL;
+        }
+
+ARMAGIL:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMAGIL) {
+        dispbottom "Bônus! Você recebeu Aumentar Agilidade Nv. 10!";
+		emotion e_rice,1;
+        sc_start 32,240000,10;
+        skilleffect 29,0;
+		specialeffect2 507;
+		specialeffect2 519;
+        return;
+        } else {
+        goto ARMCRIS;
+        }
+
+ARMCRIS:
+
+set @SC_RANDOM,rand(1,100);
+
+        if(@SC_RANDOM <= $SC_ARMCRIS) {
+		emotion e_cash,1;
+		pcblockmove getcharid(3),1;
+		specialeffect2 60;
+		specialeffect2 501;
+		sleep2 2400;
+		pcblockmove getcharid(3),0;
+        dispbottom "Bônus! Teleporte para a Arena Premiada!";
+		specialeffect2 227;
+		warp "job_monk",0,0;
+        return;
+        } else {
+        goto ARMBONN;
+        }
+
+
+ARMBONN:
+
+set @SC_RANDOM,rand(1,20);
+	if(@SC_RANDOM <= 1){
+                if(countitem(7549) > 2) {
+                specialeffect2 722;
+				specialeffect2 380;
+				emotion e_sob,1;
+                dispbottom "Armadilha! Você perdeu 3 Bandeiras Nacionais!";
+                delitem 7549,3;
+				return;
+                }
+		    goto ARMFIM;
+		  }else{ goto ARMFIM; }
+		  
+ARMFIM:
+
+set @SC_RANDOM,rand(1,10);
+if(@SC_RANDOM <= 5){
+    if(countitem(7549) > 0) {
+		specialeffect2 18;
+		emotion e_wah,1;
+		dispbottom "Armadilha! Você perdeu 1 Bandeira Nacional!";
+		delitem 7549,1;
+		return;
+    }
+	return;
+	}
+	return;
+}
+
+
+function	script	SC_MOVEARM	{
+movenpc getarg(0),rand(2,390),rand(2,390);
+getmapxy(.@map$,.@x,.@y,1,getarg(0));
+if( !checkcell(.@map$,.@x,.@y,cell_chkreach) ){ return 0; }
+if( !checkcell(.@map$,.@x,.@y,cell_chkpass) ){ return 0; }
+return 1;
+}
+
+-	script	Warper#AC	-1,{
+end;
+
+OnTimer90000:
+areawarp "spl_fild01",rand(13,384),rand(18,387),rand(13,384),rand(18,387),"job_monk",0,0;
+initnpctimer;
+end;
+
+OnTimer60000:
+areawarp "job_thief1",rand(18,341),rand(18,341),rand(18,341),rand(18,341),"job_monk",0,0;
+end;
+
+OnInit:
+initnpctimer;
+end;
+}
+
+//<!----------------------------ARMADILHAS ARENA 3------------------------------->
+
+spl_fild01,0,0,5	script	SC_ARMS3#1::ARM2	-1,7,7,{
+OnInit: callsub SC_MOVEARM; initnpctimer; end; 
+
+OnTouch: 
+callfunc "SC_DISPARM"; 
+
+OnTimer60000:
+SC_MOVEARM: 
+movenpc strnpcinfo(0),rand(13,384),rand(18,387);
+initnpctimer;
+end;
+}
+
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#2	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#3	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#4	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#5	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#6	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#7	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#8	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#9	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#10	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#11	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#12	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#13	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#14	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#15	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#16	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#17	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#18	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#19	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#20	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#21	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#22	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#23	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#24	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#25	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#26	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#27	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#28	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#29	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#30	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#31	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#32	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#33	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#34	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#35	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#36	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#37	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#38	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#39	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#40	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#41	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#42	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#43	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#44	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#45	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#46	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#47	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#48	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#49	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#50	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#51	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#52	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#53	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#54	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#55	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#56	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#57	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#58	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#59	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#60	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#61	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#62	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#63	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#64	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#65	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#66	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#67	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#68	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#69	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#70	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#71	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#72	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#73	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#74	-1,7,7
+spl_fild01,0,0,5	duplicate(ARM2)	SC_ARMS3#75	-1,7,7
+
+//<!----------------------------ARMADILHAS ARENA 1------------------------------->
+
+
+job_thief1,0,0,5	script	SC_ARMS#1::ARM1	-1,7,7,{
+OnInit: callsub SC_MOVEARM; initnpctimer; end; 
+
+OnTouch: 
+callfunc "SC_DISPARM"; 
+
+OnTimer60000:
+SC_MOVEARM: 
+movenpc strnpcinfo(0),rand(19,340),rand(27,340);
+initnpctimer;
+end;
+}
+
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#2	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#3	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#4	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#5	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#6	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#7	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#8	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#9	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#10	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#11	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#12	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#13	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#14	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#15	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#16	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#17	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#18	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#19	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#20	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#21	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#22	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#23	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#24	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#25	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#26	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#27	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#28	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#29	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#30	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#31	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#32	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#33	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#34	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#35	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#36	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#37	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#38	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#39	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#40	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#41	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#42	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#43	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#44	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#45	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#46	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#47	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#48	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#49	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#50	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#51	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#52	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#53	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#54	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#55	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#56	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#57	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#58	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#59	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#60	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#61	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#62	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#63	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#64	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#65	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#66	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#67	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#68	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#69	-1,7,7
+job_thief1,0,0,5	duplicate(ARM1)	SC_ARMS#70	-1,7,7
+
+//<!----------------------------------ARMADILHAS ARENA 2------------------------>
+
+que_qaru01,0,0,5	script	SC_ARMS2#1	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#2	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#3	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#4	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#5	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#6	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#7	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#8	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#9	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#10	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#11	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#12	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#13	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#14	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#15	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#16	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#17	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#18	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#19	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#20	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#21	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#22	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#23	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#24	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#25	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#26	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#27	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#28	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#29	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#30	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#31	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#32	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#33	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#34	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+que_qaru01,0,0,5	script	SC_ARMS2#35	-1,4,4,{ OnInit: callsub SC_MOVEARM; initnpctimer; end; OnTouch: callfunc "SC_DISPARM"; OnTimer60000:SC_MOVEARM: if( !callfunc("SC_MOVEARM",strnpcinfo(0)) ){ callsub SC_MOVEARM; } initnpctimer; end; }
+
+
+
+
+
+
+//Spawns do cristal.
+que_qaru01,0,0,0,0	monster	Cristal pbRO	1395,95,30000,0,0
+job_thief1,0,0,0,0	monster	Cristal pbRO	1395,120,35000,0,0
+spl_fild01,0,0,0,0	monster	Cristal pbRO	1395,100,30000,0,0
+
+gld_dun02,0,0,0,0	monster	Cristal pbRO	1395,25,1800000,0,0
+schg_dun01,0,0,0,0	monster	Cristal pbRO	1395,25,1800000,0,0
+
+
+
+
+//Warps D:
+que_qaru01,346,81,0	script	WBQ#1-1	45,1,1,{
+OnTouch: 
+	warp "que_qaru01",0,0; 
+	end; 
+}
+
+que_qaru01,132,171,0	script	WBQ#1-2	45,1,1,{
+OnTouch:
+	warp "que_qaru01",114,158;
+	end;
+}
+
+que_qaru01,149,105,0	script	WBQ#1-3	45,1,1,{
+OnTouch:
+	warp "que_qaru01",119,103;
+	end;
+}
+
+que_qaru01,129,102,0	script	WBQ#1-4	45,1,1,{
+OnTouch:
+	warp "que_qaru01",146,109;
+	end;
+}
+
+que_qaru01,252,339,0	script	WBQ#1-5	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,73,272,0	script	WBQ#1-6	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,275,298,0	script	WBQ#1-7	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,259,375,0	script	WBQ#1-8	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,244,375,0	script	WBQ#1-9	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,228,297,0	script	WBQ#2-1	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,345,22,0	script	WBQ#2-2	45,1,1,{
+OnTouch:
+	warp "que_qaru01",0,0;
+	end;
+}
+
+que_qaru01,114,163,0	script	WBQ#2-3	45,1,1,{
+OnTouch:
+	warp "que_qaru01",135,172;
+	end;
+}
+
+
+
+
+//Mapflags.
+que_qaru01	mapflag	nowarpto
+que_qaru01	mapflag	nosave	SavePoint
+que_qaru01	mapflag	nomemo
+que_qaru01	mapflag	nobranch
+que_qaru01	mapflag	noreturn
+que_qaru01	mapflag	noicewall
+que_qaru01	mapflag	noteleport
+
+spl_fild01	mapflag	nowarpto
+spl_fild01	mapflag	nosave	SavePoint
+spl_fild01	mapflag	nomemo
+spl_fild01	mapflag	nobranch
+spl_fild01	mapflag	noreturn
+spl_fild01	mapflag	noicewall
+spl_fild01	mapflag	noteleport
+
+job_monk	mapflag	nowarp
+job_monk	mapflag	nosave	SavePoint
+job_monk	mapflag	nomemo
+job_monk	mapflag	nobranch
+job_monk	mapflag	pvp
+job_monk	mapflag	noreturn
+job_monk	mapflag	noteleport
+
+job_thief1	mapflag	noreturn
+job_thief1	mapflag	nowarpto
+job_thief1	mapflag	nosave	SavePoint
+job_thief1	mapflag	nomemo
+job_thief1	mapflag	nobranch
+job_thief1	mapflag	noicewall
+job_thief1	mapflag	noteleport
+
+gld_dun02	mapflag	pvp
+schg_dun01	mapflag	pvp

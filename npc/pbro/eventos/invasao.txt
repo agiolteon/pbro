@@ -1,0 +1,178 @@
+-	script	Invasão#Cristais	-1,{
+
+OnInit:
+sleep 5460600;
+		L_Summon:
+		initnpctimer;
+		switch(rand(1,18)){
+			case 1: 
+				set .@mobq, rand(100,150);
+				monster "brasilis",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Brasilis acaba de ser invadida por cristais!",0;
+				set .inv$, "brasilis";
+				break;
+			case 2:
+				set .@mobq, rand(100,150);
+				monster "alberta",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Alberta acaba de ser invadida por cristais!",0;
+				set .inv$, "alberta";
+				break;
+			case 3:
+				set .@mobq, rand(100,150);
+				monster "aldebaran",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Aldebaran acaba de ser invadida por cristais!",0;
+				set .inv$, "aldebaran";
+				break;
+			case 4:
+				set .@mobq, rand(100,150);
+				monster "splendide",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Splendide acaba de ser invadida por cristais!",0;
+				set .inv$, "splendide";
+				break;
+			case 5:
+				set .@mobq, rand(100,150);
+				monster "payon",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Payon acaba de ser invadida por cristais!",0;
+				set .inv$, "payon";
+				break;
+			case 6:
+				set .@mobq, rand(100,150);
+				monster "comodo",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Comodo acaba de ser invadida por cristais!",0;
+				set .inv$, "comodo";
+				break;
+			case 7:
+				set .@mobq, rand(100,150);
+				monster "gonryun",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Kunlun acaba de ser invadida por cristais!",0;
+				set .inv$, "gonryun";
+				break;
+			case 8:
+				set .@mobq, rand(100,150);
+				monster "yuno",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Juno acaba de ser invadida por cristais!",0;
+				set .inv$, "yuno";
+				break;
+			case 9:
+				set .@mobq, rand(100,150);
+				monster "rachel",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Rachel acaba de ser invadida por cristais!",0;
+				set .inv$, "rachel";
+				break;
+			case 10:
+				set .@mobq, rand(100,150);
+				monster "niflheim",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Niflheim acaba de ser invadida por cristais!",0;
+				set .inv$, "niflheim";
+				break;
+			case 11:
+				set .@mobq, rand(100,150);
+				monster "amatsu",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Amatsu acaba de ser invadida por cristais!",0;
+				set .inv$, "amatsu";
+				break;
+			case 12:
+				set .@mobq, rand(100,150);
+				monster "louyang",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Louyang acaba de ser invadida por cristais!",0;
+				set .inv$, "louyang";
+				break;
+			case 13:
+				set .@mobq, rand(100,150);
+				monster "umbala",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Umbala acaba de ser invadida por cristais!",0;
+				set .inv$, "umbala";
+				break;
+			case 14:
+				set .@mobq, rand(100,150);
+				monster "lighthalzen",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Lighthalzen acaba de ser invadida por cristais!",0;
+				set .inv$, "lighthalzen";
+				break;
+			case 15:
+				set .@mobq, rand(100,150);
+				monster "hugel",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Hugel acaba de ser invadida por cristais!",0;
+				set .inv$, "hugel";
+				break;
+			case 16:
+				set .@mobq, rand(100,150);
+				monster "veins",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Veins acaba de ser invadida por cristais!",0;
+				set .inv$, "veins";
+				break;
+			case 17:
+				set .@mobq, rand(100,150);
+				monster "nameless_i",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "A Ilha Esquecida acaba de ser invadida por cristais!",0;
+				set .inv$, "nameless_i";
+				break;
+			case 18:
+				set .@mobq, rand(100,150);
+				monster "manuk",0,0,"Cristal pbRO",1395,.@mobq;
+				announce "Manuk acaba de ser invadida por cristais!",0;
+				set .inv$, "manuk";
+				break;
+		}
+		end;
+		
+		OnTimer25000:
+			set .mark, 0;
+			set .mobs, rand(50,100);
+			monster .inv$,0,0,"Cristal pbRO",1395,.mobs,"Invasão#Cristais::OnMyCristaisDead";
+			mapannounce .inv$,"Mais cristais acabaram de invadir a cidade!",bc_yellow;
+		end;
+		
+		OnTimer45000:
+			set .mobs, rand(30,60);
+			monster .inv$,0,0,"Cristal pbRO",1395,.mobs,"Invasão#Cristais::OnMyCristaisDead";
+			mapannounce .inv$,"Mais cristais acabaram de invadir a cidade!",bc_yellow;
+			set .mark, 1;
+			stopnpctimer;
+		end;
+		
+		
+		OnTimer360000000:
+		killmonster .inv$,"All";
+		callsub OnSleep;
+		end;
+		
+		OnMyCristaisDead:
+			if(mobcount(.inv$,"Invasão#Cristais::OnMyCristaisDead") > 0 || .mark !=1){ end; }
+			switch(rand(1,5)){
+			case 1: monster .inv$,0,0,"Cristal pbRO",1395,rand(10,20); mapannounce .inv$,"Restam apenas alguns cristais!",bc_yellow; break;
+			case 2: monster .inv$,0,0,"Cristal pbRO",1395,rand(20,30); mapannounce .inv$,"Restam apenas alguns cristais!",bc_yellow; break;
+			case 3: monster .inv$,0,0,"Cristal pbRO",1395,rand(30,40); mapannounce .inv$,"Restam apenas alguns cristais!",bc_yellow; break;
+			case 4: monster .inv$,0,0,"Cristal pbRO",1395,rand(40,50); mapannounce .inv$,"Restam apenas alguns cristais!",bc_yellow; break;
+			case 5: monster .inv$,0,0,"Cristal pbRO",1395,rand(50,60); mapannounce .inv$,"Restam apenas alguns cristais!",bc_yellow; break;
+			}
+			callsub OnSleep;
+		end;
+		
+		
+		OnSleep:
+			switch(rand(1,20)){
+			case 1: sleep 7964000; break;
+			case 2: sleep 5406390; break;
+			case 3: sleep 3267020; break;
+			case 4: sleep 6429000; break;
+			case 5: sleep 3911400; break;
+			case 6: sleep 4301100; break;
+			case 7: sleep 8460100; break;
+			case 8: sleep 4209600; break;
+			case 9: sleep 9066666; break;
+			case 10: sleep 6666666; break;
+			case 11: sleep 2979990; break;
+			case 12: sleep 6009300; break;
+			case 13: sleep 5006900; break;
+			case 14: sleep 7903330; break;
+			case 15: sleep 7161100; break;
+			case 16: sleep 7040900; break;
+			case 17: sleep 5670902; break;
+			case 18: sleep 6204209; break;
+			case 19: sleep 7300600; break;
+			case 20: sleep 7206830; break;
+			}
+			callsub L_Summon;
+		end;
+}

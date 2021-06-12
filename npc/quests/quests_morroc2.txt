@@ -1,0 +1,5510 @@
+//   _           ___  _   _                      
+//  | |         / _ \| | | |                     
+//  | |__  _ __/ /_\ \ |_| |__   ___ _ __   __ _ 
+//  | '_ \| '__|  _  | __| '_ \ / _ \ '_ \ / _` |
+//  | |_) | |  | | | | |_| | | |  __/ | | | (_| |
+//  |_.__/|_|  \_| |_/\__|_| |_|\___|_| |_|\__,_| 
+//
+//		www.brathena.org
+//
+//===== brAthena Script ==============================================
+//= Quest: O Corvo do Destino (EP12.1 - Ruína de Morroc)              
+//===== Por: =========================================================
+//= Mobius                                                                     
+//===== Versão Atual: ================================================
+//= 1.3
+//===== Descrição: ===================================================
+//= Nova quest referente ao episódio 12.1 - Ruína de Morroc
+//= [ Baseado na quest oficial do bRO ]
+//===== Changelog: ===================================================
+//= 1.0 Primeira versão, ainda em fase beta.	[Mobius]
+//= 1.1 Diversos bugs corrigidos	[Mobius]
+//= 1.2 Primeira versão funcional (sem efeitos visuais)	[Mobius]
+//= 1.3 Adicionado efeitos visuais (specialeffect) e cutins	[Mobius]
+//====================================================================
+
+//Homem com Livro (moc_ruins)
+//==========================
+moc_ruins,137,70,3	script	Homem com Livro::mque1_pt1	48,{
+
+if(BaseLevel < 60) {
+	mes "Com olhos de sonhador, o homem está olhando para";
+	mes "um livro em suas mãos.";
+	close;
+} else if(ep12_moc_que1 == 1) {
+	mes "[Benjamin]";
+	mes "Não se esqueça do título: 'O Corvo do Destino', de 'Oliver Hilpert'.";
+	mes "Você deve encontrá-lo na Biblioteca de Prontera.";
+	close;
+} else if((ep12_moc_que1 > 1) && (ep12_moc_que1 < 13) || (ep12_moc_que1 == 22)) {
+	mes "[Benjamin]";
+	mes "Oh... Mammi... Oh...";
+	close;
+} else if(ep12_moc_que1 == 13) {
+	mes "[Benjamin]";
+	mes "Oh... Mammi... Minha Mammi...";
+	next;
+	mes "^A0522DAssim como da última vez que você o viu.";
+	mes "Benjamin está sonhando acordado, acariciando um livro com o rosto.^000000";
+	next;
+	mes "^A0522DVocê se aproxima cuidadosamente dele, e toca seu ombro.^000000";
+	next;
+	mes "[Benjamin]";
+	mes "Grrrr! Quem ousa tocar em mim?!";
+	emotion e_omg;
+	next;
+	mes "^A0522D...Hum... Parece que você não foi cuidadoso o bastante...^000000";
+	next;
+	mes "[Benjamin]";
+	mes "Quem ousa me interromper quando estou pensando em Mammi?";
+	mes "Eu te mostro... Hein?";
+	mes "Oh, é você. Por que demorou tanto?";
+	mes "A Biblioteca de Prontera não fica a cinco minutos daqui?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Atchim! Não consegui encontrá-lo na biblioteca.";
+	mes "Tive que ir até Schwartzwald... Atchim!";
+	specialeffect2 124;
+	next;
+	mes "^A0522DCom raiva dele, você exagera a crise de espirros que tem tido ultimamente.^000000";
+	next;
+	mes "[Benjamin]";
+	mes "Oh... você fez isso?";
+	mes "Hehehe, você é mais confiável do que pensei.";
+	mes "Obrigado pelo livro...";
+	mes "Espere, isso quer dizer que tenho que ir até Schwartzwlad para devolvê-lo? Puxa!";
+	next;
+	mes "[Benjamin]";
+	mes "...Tudo bem, posso fazer qualquer coisa, pela Mammi.";
+	mes "Hehe, você é um bom aventureiro. Obrigado.";
+	mes "Passou frio por lá? Deve ter passado, Schwartzwald fica bem ao norte.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...................";
+	next;
+	mes "[Benjamin]";
+	mes "Deixe-me pensar. Se este livro ainda não está disponível na";
+	mes "Biblioteca de Prontera, pode ser que não haja muitas pessoas";
+	mes "em Rune-Midgard que o tenham lido.";
+	next;
+	mes "[Benjamin]";
+	mes "Grrrr... Mammi! Aqui estou, seguindo seus nobres";
+	mes "gostos e lendo um livro tão raro! Mammi...!";
+	next;
+	mes "[Benjamin]";
+	mes "Fico tão empolgado quando penso em ter uma conversa";
+	mes "profunda com Mammi sobre literatura! Êêê!";
+	mes "Preciso ler este livro agora mesmo.";
+	mes "Hehehe!";
+	emotion e_ho;
+	next;
+	mes "[Benjamin]";
+	mes "Ops, não posso esquecer de pagar você.";
+	mes "Sou um homem educado, sabe?";
+	next;
+	mes "[Benjamin]";
+	mes "Olhe, este é o álbum de fotos de Mammi do qual lhe falei.";
+	next;
+	cutin "mami01",4;
+	mes "[Benjamin]";
+	mes "Ah... Olhe essa foto, usando as orelhas de cachorrinho!";
+	mes "Ela não parece um cãozinho triste, andando sozinha por Comodo,";
+	mes "a Cidade dos Amantes? Como é possível não chorar depois de ver";
+	mes "uma foto tão triste?! Ah, Maami! Vou fazer de você a mulher mais feliz do mundo!";
+	next;
+	cutin "",255;
+	cutin "mami02",4;
+	mes "["+strcharinfo(0)+"]";
+	mes "'Ela é diferente do que eu pensava, de óculos e rabo-de-cavalo... Ela";
+	mes "parece que gosta mesmo de de literatura.";
+	mes "Espera, desde quando Comodo é a Cidade dos Amantes? Hum... esse";
+	mes "cara diz coisas muito estranhas!'";
+	next;
+	cutin "",255;
+	mes "[Benjamin]";
+	mes "Em agradecimento ao seu favor, decidi lhe dar este 'Álbum de Fotos Especial de Angel Mammi: Comodo',";
+	mes "cheio de belíssimas fotos dela. Aham... O que me diz?";
+	next;
+	mes "^A0522DEle está olhando para você com arrogância.";
+	mes "Obviamente, ele não está nem aí se você gosta do livro ou não.^000000";
+	next;
+	switch(select("Fico com isso.:Não, obrigado.")) {
+		case 1:
+			mes "^A0522DBem, se é de graça, não faz nenhum de eu ficar com isto.^000000";
+			next;
+			goto L_aceita_livro;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Não, obrigado. Não tenho tanto interesse nela quanto você.";
+			next;
+			mes "^A0522D...Era isso o que você ia dizer,";
+			mes "mas você não pôde recusar sua";
+			mes "oferta. Vendo seus olhos de";
+			mes "fanático, ardendo de amor por ela,";
+			mes "nem mesmo Odin recusaria...^000000";
+			next;
+			L_aceita_livro:
+			mes "^A0522DPiscando os olhos, ele fez você";
+			mes "pegar o álbum de fotos de Mammi,";
+			mes "exigindo que você o encape para não estragar.^000000";
+			next;
+			mes "[Benjamin]";
+			mes "Ah, sim... Se estiver interessado";
+			mes "no autor, Oliver Hilpert, sugiro";
+			mes "que você leia o livro anterior da";
+			mes "série, ^0000FF'O Rastro do Destino'^000000.";
+			next;
+			mes "[Benjamin]";
+			mes "Esse também foi um campeão de vendas.";
+			next;
+			mes "[Benjamin]";
+			mes "Agora preciso começar a ler este";
+			mes "livro para quando eu me encontrar";
+			mes "com minha Mammi, então me deixe";
+			mes "sozinho.";
+			next;
+			mes "^A0522DEle voltar a fugir da realidade,";
+			mes "sonhando acordado com Mammi.^000000";
+			next;
+			mes "^A0522D'O Rastro do Destino', hein?";
+			mes "Bem, não tenho nada para fazer.";
+			mes "Posso muito bem ler esse livro...^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Espere, isso quer dizer que terei";
+			mes "de voltar à Biblioteca de Juno?";
+			next;
+			mes "^A0522DPensar em voltar até Juno faz você";
+			mes "suspirar de frustação.^000000";
+			getitem 7795, 1;	//Álbum de Fotos de Mammi
+			set ep12_moc_que1, 14;
+			close;
+	}
+} else if((ep12_moc_que1 > 13) && (ep12_moc_que1 < 21)) {
+	mes "^A0522DVocê embarcou em uma jornada para";
+	mes "ler o livro anterior a 'O Corvo do";
+	mes "Destino': 'O Rastro do Destino'.^000000";
+	close;
+} else if(ep12_moc_que1 == 21) {
+	mes "["+strcharinfo(0)+"]";
+	mes "Ei, Benjamin!";
+	mes "Tenho algo perfeito para você se";
+	mes "aproximar de Mammi. Quer ver?";
+	next;
+	mes "[Benjamin]";
+	mes "Q... O QUÊ?!?";
+	mes "O que é? Mostre-me!";
+	next;
+	mes "^A0522DVocê mostra a ele um autógrafo e um bilhete escrito por Oliver Hilpert.^000000";
+	next;
+	mes "[Benjamin]";
+	mes "Oh, minha nossa!";
+	mes "Isso vai mesmo me ajudar a me";
+	mes "aproximar de Mammi!";
+	mes "Dê isso para mim!";
+	next;
+	switch(select("Dar:Não Dar")) {
+		case 1:
+			mes "[Benjamin]";
+			mes "Ah, "+strcharinfo(0)+"!";
+			mes "Você é demais! Obrigado!";
+			next;
+			mes "[Benjamin]";
+			mes "Maaaammmiii!";
+			mes "Vou vê-la amanhã, assim que o sol";
+			mes "sair! Mammi, estou indo!";
+			getexp 900000,900000;
+			delitem 7796, 1;	//Autógrafo do Autor
+			delitem 7797, 1;	//Bilhete do Autor
+			set ep12_moc_que1, 22;
+			close;
+		case 2:
+			mes "[Benjamin]";
+			mes "Hã? O quê, está me gozando?";
+			close;
+		}
+}
+mes "^A0522DMorroc, a Cidade do Deserto, foi";
+mes "completamente devastada pelo";
+mes "Imperador Morroc.^000000";
+next;
+mes "^A0522DO povo de Morroc sempre foi resistente o bastante para";
+mes "suportar o clima inclemente da região, mas isso não os preparou para";
+mes "testemunhar a destruição causada à cidade pelo Demônio Morroc.^000000";
+next;
+mes "^A0522DEste homem, que parece tão seco e";
+mes "magro quanto um peixe seco ao sol,";
+mes "ainda guarda um sorriso que lembra";
+mes "o de um deus benevolente, e está";
+mes "segurando um livro nas mãos.^000000";
+next;
+mes "^A0522DVê-lo faz você rir: ele não parece estar muito melhor do que os cadáveres secos na pirâmide,";
+mes "mas é óbvio que ele está vivo e que não é um monstro.";
+mes "De certa forma, você se sente forçado a se aproximar deste homem peculiar.^000000";
+next;
+mes "[Homem com Livro]";
+mes "Ah... Mammi...";
+emotion e_lv;
+next;
+mes "[Homem com Livro]";
+mes "Sua pele dourada brilha sob o sol";
+mes "abençoado de Morroc.";
+next;
+mes "[Homem com Livro]";
+mes "Seu sorriso brilha mais do que a aura dos deuses de Valhalla. Você é um evangelho vivo.";
+mes "Seu sorriso faz até a deusa Freya se esconder de vergonha!";
+mes "Ah... Mammi, minha Mammi!";
+emotion e_sob;
+next;
+mes "^A0522DVocê acena diante do rosto dele para ver se ele nota você. No";
+mes "entanto, ele parece estar sonhando";
+mes "acordado, sem notar sua presença.^000000";
+next;
+switch(select("Falar:Passar reto")) {
+	case 1:
+		mes "["+strcharinfo(0)+"]";
+		mes "Está falando sozinho?";
+		next;
+		mes "[Homem com Livro]";
+		mes "Uáá! Oh, minha nossa, você deve ser um mensageiro do diabo, querendo me impedir de sentir Mammi!";
+		mes "Não tenho medo de você, pode vir!";
+		emotion e_omg;
+		next;
+		mes "^A0522DSurpreendido com sua voz, ele";
+		mes "gritou de forma bizarra com você.";
+		mes "Você se pergunta o que ele quer";
+		mes "dizer, já que ele estava";
+		mes "simplesmente segurando um livro.^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Quem é Mammi?";
+		next;
+		mes "[Homem com Livro]";
+		mes "O quê? Não conhece Mammi, um dos três maiores ídolos de Rune-Midgard?";
+		emotion e_omg;
+		next;
+		mes "[Homem com Livro]";
+		mes "Puxa, você não sabe de nada, não é?!";
+		mes "Bem, só de ver esse olhar estúpido, dá para ver que você é um aventureiro";
+		mes "que corre por aí para cumprir tarefas sem sentido para os outros.";
+		mes "Hehehehe!";
+		emotion e_sigh;
+		next;
+		mes "^A0522DHum... Você já se arrependeu de ter puxado conversa.^000000";
+		next;
+		mes "[Homem com Livro]";
+		mes "Minha Mammi é diferente de todas essas celebridades que só confiam";
+		mes "em sua beleza e não têm substância nenhuma.";
+		mes "Ela sempre está com livros nas mãos, apesar da agenda apertada.";
+		mes "Só isso basta para provar que ela é mais inteligente do que todas as outras!";
+		mes "Ah... Mammi...";
+		next;
+		mes "[Homem com Livro]";
+		mes "Ela até mencionou em uma entrevista ao 'Diário de Morroc' que quer";
+		mes "conhecer um homem que adore livros.";
+		next;
+		mes "[Homem com Livro]";
+		mes "Isso significa que... Ela está esperando por alguém como eu.";
+		mes "Hehehe!";
+		mes "Veja, cada livro da Biblioteca de de Rune-Midgard tem o nome de Benjamin escrito na ficha...";
+		mes "Esse sou eu!";
+		emotion e_awsm;
+		next;
+		mes "^A0522DEsse tal de Benjamin parece ser um";
+		mes "grande fã de uma celebridade";
+		mes "chamada Mammi. Ele ficou";
+		mes "tagarelando e adorando sua beleza,";
+		mes "até parar de repente e ficar";
+		mes "deprimido.^000000";
+		next;
+		mes "[Benjamin]";
+		mes "Estou com um problema...";
+		next;
+		mes "[Benjamin]";
+		mes "Minha Mammi disse que se apaixonou por um livro escrito por ^FF0000'Oliver Hilpert'^000000";
+		mes "de Schwartzwald: ^FF0000'O Corvo do Destino'^000000, mas nem tive a chance de lê-lo!";
+		next;
+		mes "^A0522DO Corvo do Destino?^000000";
+		next;
+		mes "[Benjamin]";
+		mes "A menos que seja cego, você sabe como tudo está terrível em Morroc.";
+		next;
+		mes "[Benjamin]";
+		mes "Preciso muito ler esse livro e dizer que estou aqui por ela, mas nem";
+		mes "tenho tempo de recuperar meu fôlego com esta tragédia aqui!";
+		next;
+		mes "[Benjamin]";
+		mes "Minha Mammi pode estar soterrada nos destroços... Aagh!";
+		mes "Mammi, estou indo! Não morra ainda!";
+		emotion e_sob;
+		next;
+		mes "^A0522DEle parecia ver uma imagem de";
+		mes "Mammi, e gritou seu nome, quase";
+		mes "perdendo o fôlego de tanta";
+		mes "ansiedade. Você se sente mal com";
+		mes "sua agonia.^000000";
+		next;
+		mes "^A0522DEle respirou fundo, e de repente se voltou para você.^000000";
+		next;
+		mes "[Benjamin]";
+		mes "...Sim... Sim, você!";
+		emotion e_ic;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Hã?";
+		emotion e_swt2, 1;
+		next;
+		mes "[Benjamin]";
+		mes "Você parece entendiado. Você deve";
+		mes "estar esperando que alguém lhe dê";
+		mes "algo para fazer!";
+		mes "Ajude-me a me aproximar de Mammi.";
+		mes "Quem sabe? Talvez eu deixe você";
+		mes "conversar com Mammi, que é adorada";
+		mes "por todos em Rune-Midgard.";
+		next;
+		mes "^A0522DNão foi ele quem chamou você de";
+		mes "aventureiro que corre por aí para";
+		mes "cumprir tarefas sem sentido...?^000000";
+		next;
+		mes "[Benjamin]";
+		mes "Só peço que você retire um livro na Biblioteca de Prontera para mim.";
+		mes "Fácil, não é? Bem, você não parece ser alguém que adore ler,";
+		mes "mas espero que você ao menos saiba retirar um livro de uma biblioteca.";
+		next;
+		mes "[Benjamin]";
+		mes "Se me ajudar, vou deixar você ver";
+		mes "uma edição limitada de um álbum de";
+		mes "fotos de Mammi... Uma só vez,";
+		mes "Hehehehe.";
+		mes "O que me diz? Vai me ajudar, certo?";
+		next;
+		mes "^A0522DO que você quer fazer?^000000";
+		next;
+		switch(select("Ajudá-lo:Não ajudá-lo")) {
+			case 1:
+				mes "[Benjamin]";
+				mes "Uau, você vai mesmo me ajudar?";
+				next;
+				mes "[Benjamin]";
+				mes "Muito obrigado! Então, não se esqueça do título: 'O Corvo do Destino', de 'Oliver Hilpert'.";
+				mes "Você deve encontrá-lo na Biblioteca de Prontera.";
+				mes "Hehehe, Mammi! Estou quase lá!";
+				set ep12_moc_que1, 1;
+				close;
+			case 2:
+				mes "[Benjamin]";
+				mes "O que, não sabe como retirar um";
+				mes "livro de uma biblioteca? Oh, não...";
+				close;
+		}
+	case 2:
+		mes "[Benjamin]";
+		mes "Oh... Mammi... Minha Mammi...";
+		close;
+}
+}
+
+//Bibliotecário (prt_in)
+//===================
+prt_in,178,90,5	script	Bibliotecário::mque1_pt2	57,{
+
+if(ep12_moc_que1 == 2) {
+	mes "[Bibliotecário]";
+	mes "^0000FFO Corvo do Destino^000000 ficou esgotado antes que pudéssemos providenciar um exemplar.";
+	mes "Você não vai encontrar esse livro em lugar nenhum do Reino de Rune-Midgard.";
+	mes "Se quiser mesmo ler o livro, tente na Biblioteca de Juno.";
+	close;
+}
+L_menu_convencional:
+mes "[Bibliotecário]";
+mes "A Enciclopédia de Monstros de nossa biblioteca em todos os monstros do Reino de Rune-Midgard,";
+mes "categorizados por calabouço, para ajudar nossos leitores a encontrá-los rapidamente.";
+mes "Também tem muitos livros essenciais para aventureiros.";
+mes "Por que não dá uma olhada?";
+if(ep12_moc_que1 != 1) close;
+next;
+switch(select("Pesquisar livros.:Olhar pela biblioteca.")) {
+	case 1:
+		mes "[Bibliotecário]";
+		mes "Procura por algum livro específico?";
+		mes "Sem prolema, estou aqui para ajudar você.";
+		mes "Que tipo de livro você está procurando?";
+		next;
+		switch(select("Diga o título.:Diga o autor.:Pesquisa por palavra-chave.")) {
+			case 1:
+				mes "[Bibliotecário]";
+				mes "Ah, você sabe o título?";
+				mes "Bem, qual é?";
+				input .@livro_titulo$;
+				next;
+				if(.@livro_titulo$ == "O Corvo do Destino") {
+					mes "[Bibliotecário]";
+					mes "O Corvo do Destino...?";
+					mes "Certo, deixe-me ver...";
+					next;
+					L_achou_livro:
+					mes "[Bibliotecário]";
+					mes "Ah, sim! Acho que sei qual livro é:";
+					next;
+					mes "[Bibliotecário]";
+					mes "De ^0000FFOliver Hilpert...";
+					mes "'O Corvo do Destino'^000000!";
+					next;
+					mes "["+strcharinfo(0)+"]";
+					mes "Isso mesmo! É esse que estou";
+					mes "procurando!";
+					next;
+					mes "[Bibliotecário]";
+					mes "Haha... Mas tenho más notícias para você.";
+					mes "O livro se tornou tão popular que nem mesmo em Schwartzwald,";
+					mes "a terra natal do autor, é possível encontrá-lo.";
+					mes "Tentamos comprar alguns exemplares, mas erda tarde demais.";
+					mes "Vai levar algum tempo para publicarem outra edição,";
+					mes "então por que não lê outro livro enquanto isso?";
+					next;
+					mes "[Bibliotecário]";
+					mes "Se não estiver ocupado e quiser mesmo ler o livro,";
+					mes "tenho uma sugestão: experimente na Biblioteca de Juno.";
+					mes "Ela tem um exemplar de cada livro publicado em Schwartzwald.";
+					mes "Você deve encontrar esse livro lá.";
+					next;
+					mes "[Bibliotecário]";
+					mes "Bem, Juno é bem longe daqui, mas se quiser tanto ler esse livro tão popular,";
+					mes "vale a pena.";
+					next;
+					mes "^A0522DO livro não é para você, mas você não gosta de deixar ninguém na mão.";
+					mes "Hora de ir à Biblioteca de Juno.^000000";
+					set ep12_moc_que1, 2;
+					close;
+				}
+				mes "[Bibliotecário]";
+				mes "Hum... Desculpe. Trabalho neste";
+				mes "lugar há décadas, e nunca vi esse";
+				mes "livro por aqui.";
+				close;
+			case 2:
+				mes "[Bibliotecário]";
+				mes "Ah, você sabe o autor?";
+				mes "Bem, qual é?";
+				input .@livro_autor$;
+				next;
+				if(.@livro_autor$ == "Oliver Hilpert") {
+					mes "[Bibliotecário]";
+					mes "Oliver Hilpert...?";
+					mes "Certo, deixe-me ver...";
+					next;
+					goto L_achou_livro;
+				}
+				mes "[Bibliotecário]";
+				mes "Hum... Desculpe. Trabalho neste";
+				mes "lugar há décadas, e nunca ouvi";
+				mes "falar desse autor.";
+				close;
+			case 3:
+				mes "[Bibliotecário]";
+				mes "Você deve estar com dificuldade";
+				mes "para se lembrar do título ou do";
+				mes "autor do livro.";
+				mes "Sem problema: por que você não me diz um";
+				mes "pouco do que você lembra?";
+				input .@palavra_chave$;
+				next;
+				mes "[Bibliotecário]";
+				mes "Hum... Desculpe. Trabalho neste";
+				mes "lugar há décadas, e nunca vi por";
+				mes "aqui nenhum livro que tenha essas";
+				mes "palavras.";
+				close;
+		}
+	case 2:
+		mes "[Bibliotecário]";
+		mes "Cada livro conta uma história de vida, sabedoria, felicidade e sensações.";
+		mes "Olhe em volta! São testemunhos da humanidade.";
+		mes "E a cada dia, temos novos deles chegando.";
+		close;
+}
+}
+
+//Bibliotecário e Cão (juno)
+//======================
+yuno,333,210,5	script	Bibliotecário::mque1_pt3	57,{
+
+if(ep12_moc_que1 < 2) end;
+if(ep12_moc_que1 > 2) {
+	mes "[Bibliotecário]";
+	mes "Cuidado para não pegar resfriado!";
+	close;
+}
+mes "[Cão]";
+mes "Au-au!";
+mes "Grrr... Au-au!";
+next;
+mes "^A0522DUm cão está latindo alto na frente";
+mes "da biblioteca.^000000";
+next;
+mes "[Bibliotecário]";
+mes "Maldito pássaro! Xô, vai embora!";
+next;
+mes "^A0522DUm homem está gritando na frente da biblioteca.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "O que está acontecendo aqui?";
+next;
+mes "[Bibliotecário]";
+mes "Nada demais, é que... tem um corvo";
+mes "enorme sentado no telhado desta";
+mes "biblioteca, já faz algumas horas.";
+mes "Eu estava tentando enxotá-lo";
+mes "porque... Ele parece dar azar.";
+next;
+mes "[Bibliotecário]";
+mes "Vá! Voe daqui, maldito pássaro!";
+mes "Saia!!";
+next;
+mes "^A0522DVocê olhou para cima, e viu um corvo enorme,";
+mes "empoleirado no telhado da biblioteca como se fosse o dono do lugar.^000000";
+next;
+mes "[Bibliotecário]";
+mes "Saia! Caramba, ele não vai embora!";
+mes "Esse pássaro vai afugentar os fregueses!";
+next;
+mes "[Bibliotecário]";
+mes "Humm... Ah, bem.";
+mes "(Pegando uma pedra)";
+mes "Disse para ir embora, ave estúpida!";
+next;
+mes "(VUUSH-)";
+next;
+mes "(BAQUE!)";
+next;
+mes "(Sopro)";
+next;
+mes "^A0522DAtingido pela pedra que o homem atirou,";
+mes "o corvo saiu voando pelo ar.";
+mes "Mas então, ele começou a voar em círculos sobre o telhado,";
+mes "parecendo ainda mais assustador.^000000";
+//specialeffect [Efeito de um pássaro voando em círculos sobre a Biblioteca - ???]
+next;
+mes "[Bibliotecário]";
+mes "Grrr... Por que não dá o fora?!";
+next;
+mes "^A0522DEle começou a gritar com o corvo,";
+mes "que nem se importava. Ele";
+mes "simplesmente voou mais alto.";
+mes "O homem acabou dando as costas ao";
+mes "corvo, desistindo de enxotá-lo.";
+mes "Depois, o cão também parou de latir.^000000";
+next;
+mes "^A0522DVocê olhou para o chão e encontrou";
+mes "algumas penas que caíram do corvo";
+mes "quando ele foi atingido pela pedra.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Uau, olhe só o tamanho destas penas.";
+mes "Acho que um corvo tão grande precisa de penas grandes para voar.";
+next;
+mes "[Bibliotecário]";
+mes "Quando eu era moço, ouvi dizer que";
+mes "penas de pássaros trazem os servos";
+mes "de Odin para abençoar seu dono, e";
+mes "muitos poetas as usam como";
+mes "mercadores de livro.";
+next;
+mes "[Bibliotecário]";
+mes "Eu tinha uma pena pequena. Acho que foi natural eu me tornar bibliotecário.";
+mes "Hahaha!";
+next;
+mes "[Bibliotecário]";
+mes "É como diz o ditado: 'você pode";
+mes "decorar a Eddga nórdica depois";
+mes "três anos trabalhando em uma";
+mes "biblioteca'.";
+mes "Por que não fica com uma das penas?";
+mes "Quem sabe ela não lhe dá boa";
+mes "sorte?";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Acho que sim.";
+next;
+mes "^A0522DVocê pegou uma das penas grandes e";
+mes "escuras do chão.";
+mes "Ver a pena lustrosa fez você se";
+mes "sentir um pouco feliz, como se";
+mes "tivesse achado um tesouro.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "...Atchim!";
+specialeffect2 124;
+next;
+mes "[Bibliotecário]";
+mes "Deus te crie. Será que você pegou um resfriado?";
+mes "Você precisa se cuidar, ainda mais sendo aventureiro.";
+next;
+mes "^A0522DVocê sentiu um frio tão grande que";
+mes "começou a tremer.^000000";
+next;
+mes "[Bibliotecário]";
+mes "Experimente caldo de Jellopy";
+mes "quente, misturado com mel. Minha";
+mes "mãe preparava isso para mim quando";
+mes "eu me resfriava.";
+mes "Garanto que vai deixar você melhor";
+mes "rapidamente.";
+next;
+mes "^A0522DEle parece falar sério, mas não dá";
+mes "para imaginar que um caldo desses";
+mes "funcionaria...^000000";
+emotion e_dots, 1;
+set ep12_moc_que1, 3;
+close;
+}
+
+//Bibliotecário e Cão (juno)
+//======================
+yuno,335,208,5	script	Cão::mque1_pt3a	81,5,5,{
+
+mes "[Cão]";
+mes "Au-au!";
+close;
+
+OnTouch:
+	if(ep12_moc_que1 != 2) end;
+	mes "[Cão]";
+	mes "Au-au!";
+	mes "Grrr... Au-au!";
+	next;
+	mes "^A0522DUm cão está latindo alto na frente";
+	mes "da biblioteca.^000000";
+	next;
+	mes "[Bibliotecário]";
+	mes "Maldito pássaro! Xô, vai embora!";
+	next;
+	mes "^A0522DUm homem está gritando na frente da biblioteca.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "O que está acontecendo aqui?";
+	next;
+	mes "[Bibliotecário]";
+	mes "Nada demais, é que... tem um corvo";
+	mes "enorme sentado no telhado desta";
+	mes "biblioteca, já faz algumas horas.";
+	mes "Eu estava tentando enxotá-lo";
+	mes "porque... Ele parece dar azar.";
+	next;
+	mes "[Bibliotecário]";
+	mes "Vá! Voe daqui, maldito pássaro!";
+	mes "Saia!!";
+	next;
+	mes "^A0522DVocê olhou para cima, e viu um corvo enorme,";
+	mes "empoleirado no telhado da biblioteca como se fosse o dono do lugar.^000000";
+	next;
+	mes "[Bibliotecário]";
+	mes "Saia! Caramba, ele não vai embora!";
+	mes "Esse pássaro vai afugentar os fregueses!";
+	next;
+	mes "[Bibliotecário]";
+	mes "Humm... Ah, bem.";
+	mes "(Pegando uma pedra)";
+	mes "Disse para ir embora, ave estúpida!";
+	next;
+	mes "(VUUSH-)";
+	next;
+	mes "(BAQUE!)";
+	next;
+	mes "(Sopro)";
+	next;
+	mes "^A0522DAtingido pela pedra que o homem atirou,";
+	mes "o corvo saiu voando pelo ar.";
+	mes "Mas então, ele começou a voar em círculos sobre o telhado,";
+	mes "parecendo ainda mais assustador.^000000";
+	//specialeffect [Efeito de um pássaro voando em círculos sobre a Biblioteca - ???]
+	next;
+	mes "[Bibliotecário]";
+	mes "Grrr... Por que não dá o fora?!";
+	next;
+	mes "^A0522DEle começou a gritar com o corvo,";
+	mes "que nem se importava. Ele";
+	mes "simplesmente voou mais alto.";
+	mes "O homem acabou dando as costas ao";
+	mes "corvo, desistindo de enxotá-lo.";
+	mes "Depois, o cão também parou de latir.^000000";
+	next;
+	mes "^A0522DVocê olhou para o chão e encontrou";
+	mes "algumas penas que caíram do corvo";
+	mes "quando ele foi atingido pela pedra.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Uau, olhe só o tamanho destas penas.";
+	mes "Acho que um corvo tão grande precisa de penas grandes para voar.";
+	next;
+	mes "[Bibliotecário]";
+	mes "Quando eu era moço, ouvi dizer que";
+	mes "penas de pássaros trazem os servos";
+	mes "de Odin para abençoar seu dono, e";
+	mes "muitos poetas as usam como";
+	mes "mercadores de livro.";
+	next;
+	mes "[Bibliotecário]";
+	mes "Eu tinha uma pena pequena. Acho que foi natural eu me tornar bibliotecário.";
+	mes "Hahaha!";
+	next;
+	mes "[Bibliotecário]";
+	mes "É como diz o ditado: 'você pode";
+	mes "decorar a Eddga nórdica depois";
+	mes "três anos trabalhando em uma";
+	mes "biblioteca'.";
+	mes "Por que não fica com uma das penas?";
+	mes "Quem sabe ela não lhe dá boa";
+	mes "sorte?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Acho que sim.";
+	next;
+	mes "^A0522DVocê pegou uma das penas grandes e";
+	mes "escuras do chão.";
+	mes "Ver a pena lustrosa fez você se";
+	mes "sentir um pouco feliz, como se";
+	mes "tivesse achado um tesouro.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...Atchim!";
+	specialeffect2 124;
+	next;
+	mes "[Bibliotecário]";
+	mes "Deus te crie. Será que você pegou um resfriado?";
+	mes "Você precisa se cuidar, ainda mais sendo aventureiro.";
+	next;
+	mes "^A0522DVocê sentiu um frio tão grande que";
+	mes "começou a tremer.^000000";
+	next;
+	mes "[Bibliotecário]";
+	mes "Experimente caldo de Jellopy";
+	mes "quente, misturado com mel. Minha";
+	mes "mãe preparava isso para mim quando";
+	mes "eu me resfriava.";
+	mes "Garanto que vai deixar você melhor";
+	mes "rapidamente.";
+	next;
+	mes "^A0522DEle parece falar sério, mas não dá";
+	mes "para imaginar que um caldo desses";
+	mes "funcionaria...^000000";
+	emotion e_dots, 1;
+	set ep12_moc_que1, 3;
+	close;
+}
+
+//Bibliotecária temporária (yuno_in04)
+//================================
+yuno_in04,111,57,2	script	Temporária::mque1_pt4	862,{
+
+if((ep12_moc_que1 < 3) || (ep12_moc_que1 > 3) && (ep12_moc_que1 < 8) || (ep12_moc_que1 > 10) && (ep12_moc_que1 < 14) || (ep12_moc_que1 > 17)) end;
+if(ep12_moc_que1 == 8) {
+	mes "[Temporária]";
+	mes "Em que posso ajudar?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Sim, hum... Atchim! Onde encontro";
+	mes "artigos de jornal antigos...?";
+	mes "Atchim!";
+	specialeffect2 124;
+	next;
+	mes "[Temporária]";
+	mes "Ah, você vai encontrá-los em um";
+	mes "canto da sala à direita.";
+	mes "Por favor, tome cuidado ao";
+	mes "manuseá-los, pois a maioria deles é";
+	mes "bem antiga.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Obrigado... Atchim!";
+	specialeffect2 124;
+	set ep12_moc_que1, 9;
+	close;
+} else if((ep12_moc_que1 == 9) || (ep12_moc_que1 == 10)) {
+	mes "[Temporária]";
+	mes "Em que posso ajudar?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Sim, hum... Atchim! Onde encontro";
+	mes "artigos de jornal antigos...?";
+	mes "Atchim!";
+	specialeffect2 124;
+	next;
+	mes "[Temporária]";
+	mes "Ah, você vai encontrá-los em um canto da sala à direita.";
+	mes "Por favor, tome cuidado ao manuséa-los,";
+	mes "pois a maioria deles é bem antiga.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Obrigado... Atchim!";
+	specialeffect2 124;
+	set ep12_moc_que1, 10;
+	close;
+} else if((ep12_moc_que1 == 14) || (ep12_moc_que1 == 15)) {
+	mes "[Temporária]";
+	mes "As pessoas deveriam aprender a";
+	mes "guardar os livros depois de consultá-los.";
+	mes "Tantos livros empilhados no carrinho me frustam, sabe?";
+	mes "Aff...";
+	next;
+	mes "[Temporária]";
+	mes "...Em que posso ajudar?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Coff... Estou procurando por um livro chamada";
+	mes "'O Rastro do Destino', de Oliver Hilpert.";
+	specialeffect2 124;
+	next;
+	mes "[Temporária]";
+	mes "Ah, sei qual é... É o que mais";
+	mes "aparece no carrinho de livros.";
+	mes "^0000FFSuba as escadas^000000, e procure na";
+	mes "estante à esquerda.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Obrigado.";
+	next;
+	mes "[Temporária]";
+	mes "Oliver Hilpert conseguiu grande fama, apesar de ser jovem.";
+	mes "Devo ter lido 'O Rastro do Destino' várias vezes. É que ele";
+	mes "é tão cativante que nunca me canso de ler.";
+	next;
+	mes "[Temporária]";
+	mes "Humm... A parte mais impressionante foi... Err...";
+	next;
+	mes "[Temporária]";
+	mes "Isso! Quando o herói estava";
+	mes "enfrentando a morte na mansão em";
+	mes "chamas... ^FF0000-- BIIP --^000000";
+	close2;
+	set ep12_moc_que1, 15;
+	warp "que_ba",264,186;
+	end;
+} else if((ep12_moc_que1 == 16) || (ep12_moc_que1 == 17)) {
+	mes "[Temporária]";
+	mes "Desculpe, você está bem? Digo, você meio que apagou de repente.";
+	mes "Está um pouco pálido.";
+	next;
+	mes "[Temporária]";
+	mes "Por que não entra e descansa um";
+	mes "pouco? Leia 'O Rastro do Destino',";
+	mes "ou algo assim.";
+	mes "Você pode encontrar o livro na";
+	mes "estante da esquerda, no andar de";
+	mes "cima.";
+	set ep12_moc_que1, 17;
+	close;
+}
+mes "[Temporária]";
+mes "As pessoas deveriam aprender a";
+mes "guardar os livros depois de consultá-los.";
+mes "Tantos livros empilhados no carrinho me frustam, sabe?";
+mes "Aff...";
+next;
+mes "[Temporária]";
+mes "...Enfim, em que posso ajudar?";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Estou procurando por um livro chamado 'O Corvo do Destino',";
+mes "de Oliver Hilpert... Atchim!";
+specialeffect2 124;
+next;
+mes "[Temporária]";
+mes "Ah, sei qual é... É o que mais aparece no carrinho de livros.";
+mes "Por favor, entre na sala à ^0000FFdireita.^000000";
+mes "Você vai encontrá-lo na seção de Campeões de Vendas.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Obrigado.";
+set ep12_moc_que1, 4;
+close;
+}
+
+//Campeões de Venda (yuno_in04)
+//====================================
+yuno_in04,100,5,5	script	Campeões de Vendas::mque1_pt5	111,{
+
+if((ep12_moc_que1 < 4) || (ep12_moc_que1 > 5)) end;
+mes "^A0522DA infinidade de livros que preenche esta sala prova o porquê deste";
+mes "lugar ser conhecido como A Maior Biblioteca de Juno, a Cidade dos Sábios.^000000";
+next;
+mes "^A0522DOs livros marcados como 'Campeões";
+mes "de Vendas do Mês' estão guardados";
+mes "no meio da prateleira à frente.^000000";
+next;
+mes "^A0522DNão foi difícil encontrar 'O Corvo do Destino',";
+mes "pois era o único livro em uma prateleira vazia.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Ah, que sorte, sobrou um...";
+mes "Atchim!";
+specialeffect2 124;
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Sniff... Então tudo o que tenho a fazer é retirar";
+mes "este livro e entregá-lo àquele fã da Mammi.";
+next;
+mes "^FF0000-- BIIP --^000000";
+next;
+mes "^A0522DVocê conseguiu pegar o livro, mesmo reclamando e resmungando,";
+mes "até sentir, de repente, como se seu cérebro tivesse explodido.";
+mes "Você desmaiou...^000000";
+close2;
+specialeffect2 262;
+sleep2 100;
+set ep12_moc_que1, 5;
+warp "que_ba",247,33;
+end;
+}
+
+//Script de controle de área (que_ba)
+//==============================
+que_ba,247,33,5	script	Controle#control-a1	-1,1,1,{
+end;
+
+OnTouch:
+	if(ep12_moc_que1 != 5) end;
+	mes "[???]";
+	mes "Uaaaaah!";
+	next;
+	mes "^A0522DAssustado por um grito terrível,";
+	mes "você recuperou a consciência.";
+	mes "Parece que você ficou desacordado";
+	mes "por algum tempo.^000000";
+	next;
+	mes "^A0522DVocê se levanta desajeitadamente, e então segue o som do grito até";
+	mes "um prédio velho e abandonado.^000000";
+	next;
+	mes "^A0522DEsse prédio velho, enorme e intimidante está expelindo fumaça";
+	mes "vermelha-escura por janelas";
+	mes "quebradas e abertas.^000000";
+	close;
+}
+
+//Pesquisadora (que_ba)
+//===================
+que_ba,257,39,5	script	Pesquisadora::mque1_pt6	744,{
+
+mes "^A0522DAo tentar se lembrar do que aconteceu,";
+mes "você encontra uma mulher que passa por você.";
+mes "Instintivamente, você leva a mão ao ombro dela para chamar sua atenção.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Atchim! Atchim! Puxa...";
+mes "Ei, onde estou...?";
+specialeffect2 124;
+next;
+mes " - Pzzz -";
+specialeffect 120;
+next;
+mes "^A0522DSurpreendentemente, seu braço";
+mes "atravessa o corpo dela.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "...Onde diabos eu estou?";
+close;
+}
+
+//Pesquisador (que_ba)
+//==================
+que_ba,176,43,7	script	Pesquisador::mque1_pt7	982,{
+
+mes "[Pesquisador]";
+mes "Fogo!";
+mes "Todo mundo, saia, saia!";
+specialeffect 120;
+close;
+}
+
+//Pesquisador (que_ba)
+//==================
+que_ba,181,14,6	script	Pesquisador::mque1_pt8	865,{
+
+mes "[Pesquisador]";
+mes "Coff, coff!";
+mes "Argh... Não consigo respirar...";
+mes "Preciso sair...";
+specialeffect 120;
+close;
+}
+
+//Homem Grotesco (que_ba)
+//======================
+que_ba,99,51,1	script	Homem Grotesco::mque1_pt9	999,2,2,{
+
+specialeffect 120;
+end;
+
+OnTouch:
+	mes "^A0522DVocê anda pelo corredor envolto em chamas e chega a uma sala";
+	mes "prestes a desmoronar, assim como todo o resto do lugar.^000000";
+	next;
+	mes "^A0522DVocê não consegue ver claramente o";
+	mes "que há dentro da salava devido à";
+	mes "fumaça, mas sabe que há alguma";
+	mes "coisa ali.^000000";
+	next;
+	mes "^A0522DVocê aperta os olhos e tenta ouvir.";
+	mes "Você escuta vozes humanas, mas as";
+	mes "silhuetas de quem quer que esteja";
+	mes "falando não são humanas.^000000";
+	next;
+	mes "[Mulher]";
+	mes "Coff! Fogo... Coff!";
+	mes "Malditos humanos... Coff, coff!";
+	next;
+	mes "^A0522DSua tosse piora à medida que as";
+	mes "chamas se erguem mais e mais.^000000";
+	next;
+	mes "[Homem]";
+	mes "Eles fugiram, e nos deixaram para";
+	mes "morrer!";
+	next;
+	mes "[Mulher]";
+	mes "...Vamos morrer?";
+	next;
+	mes "[Homem]";
+	mes "Morrer? ...Haha.";
+	mes "^0000FF'Eva'^000000, não vamos morrer... Nunca";
+	mes "estivemos exatamente vivos, para";
+	mes "começar.";
+	next;
+	mes "- Desmoronamento -";
+	next;
+	mes "[Homem]";
+	mes "Argh!";
+	next;
+	mes "^A0522DA única saída está bloqueada por";
+	mes "barras de ferro; ninguém pode sair";
+	mes "da sala envolta em chamas. Então,";
+	mes "um canto de uma parede ruiu com o";
+	mes "calor do fogo.^000000";
+	next;
+	mes "^A0522DA silhueta masculina se aproximou";
+	mes "rapidamente da parede, e começou a";
+	mes "cavar no canto ruído.^000000";
+	next;
+	mes "[Homem]";
+	mes "...Pronto!";
+	next;
+	mes "[Homem]";
+	mes "Vamos, Eva!";
+	next;
+	mes "[Eva]";
+	mes "Espere, temos que levar as crianças conosco.";
+	next;
+	mes "^A0522DA silhueta feminina chamada Eva se";
+	mes "aproximou dos grandes tubos de";
+	mes "ensaio enfileirados em uma parede.^000000";
+	next;
+	mes "[Homem]";
+	mes "Eva!! Não temos tempo para salvar";
+	mes "todos! Venha aqui!";
+	sc_start SC_BLIND,5000,0;
+	close2;
+	sleep2 500;
+	warp "que_ba",53,232;
+	set ep12_moc_que1, 6;
+	end;
+}
+
+//Mulher Grotesca (que_ba)
+//======================
+que_ba,104,55,5	script	Mulher Grotesca::mque1_pt10	980,2,2,{
+
+specialeffect 120;
+end;
+
+OnTouch:
+	mes "^A0522DVocê anda pelo corredor envolto em chamas e chega a uma sala";
+	mes "prestes a desmoronar, assim como todo o resto do lugar.^000000";
+	next;
+	mes "^A0522DVocê não consegue ver claramente o";
+	mes "que há dentro da salava devido à";
+	mes "fumaça, mas sabe que há alguma";
+	mes "coisa ali.^000000";
+	next;
+	mes "^A0522DVocê aperta os olhos e tenta ouvir.";
+	mes "Você escuta vozes humanas, mas as";
+	mes "silhuetas de quem quer que esteja";
+	mes "falando não são humanas.^000000";
+	next;
+	mes "[Mulher]";
+	mes "Coff! Fogo... Coff!";
+	mes "Malditos humanos... Coff, coff!";
+	next;
+	mes "^A0522DSua tosse piora à medida que as";
+	mes "chamas se erguem mais e mais.^000000";
+	next;
+	mes "[Homem]";
+	mes "Eles fugiram, e nos deixaram para";
+	mes "morrer!";
+	next;
+	mes "[Mulher]";
+	mes "...Vamos morrer?";
+	next;
+	mes "[Homem]";
+	mes "Morrer? ...Haha.";
+	mes "^0000FF'Eva'^000000, não vamos morrer... Nunca";
+	mes "estivemos exatamente vivos, para";
+	mes "começar.";
+	next;
+	mes "- Desmoronamento -";
+	next;
+	mes "[Homem]";
+	mes "Argh!";
+	next;
+	mes "^A0522DA única saída está bloqueada por";
+	mes "barras de ferro; ninguém pode sair";
+	mes "da sala envolta em chamas. Então,";
+	mes "um canto de uma parede ruiu com o";
+	mes "calor do fogo.^000000";
+	next;
+	mes "^A0522DA silhueta masculina se aproximou";
+	mes "rapidamente da parede, e começou a";
+	mes "cavar no canto ruído.^000000";
+	next;
+	mes "[Homem]";
+	mes "...Pronto!";
+	next;
+	mes "[Homem]";
+	mes "Vamos, Eva!";
+	next;
+	mes "[Eva]";
+	mes "Espere, temos que levar as crianças conosco.";
+	next;
+	mes "^A0522DA silhueta feminina chamada Eva se";
+	mes "aproximou dos grandes tubos de";
+	mes "ensaio enfileirados em uma parede.^000000";
+	next;
+	mes "[Homem]";
+	mes "Eva!! Não temos tempo para salvar";
+	mes "todos! Venha aqui!";
+	sc_start SC_BLIND,5000,0;
+	close2;
+	sleep2 500;
+	warp "que_ba",53,232;
+	set ep12_moc_que1, 6;
+	end;
+}
+
+//Controle de Área (que_ba)
+//=======================
+que_ba,53,232,5	script	Controle#control-a2	-1,1,1,{
+end;
+
+OnTouch:
+	if(ep12_moc_que1 != 6) end;
+	specialeffect2 99;
+	mes "^A0522DDe repente, um facho de luz cega";
+	mes "você. Alguns segundos depois, você";
+	mes "abre os olhos e nota que está em";
+	mes "algum lugar de Schwartzwald.^000000";
+	next;
+	mes "^A0522DE não está sozinho: agora você vê";
+	mes "claramente o homem a mulher que";
+	mes "fugiram do laboratório.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Hum...";
+	next;
+	mes "[Homem Grotesco]";
+	mes "Aonde devemos ir?";
+	mes "Ninguém vai nos acolher...";
+	mes "Parecemos monstros!";
+	next;
+	mes "[Eva]";
+	mes "...";
+	mes "Sei de uma caverna escondida ao norte.";
+	mes "Podemos ficar lá por algum tempo.";
+	next;
+	mes "^A0522DEles parecem não notar sua";
+	mes "presença, e seguem ao norte.^000000";
+	next;
+	mes "^A0522DVocê vê suas costas enquanto eles";
+	mes "partem, e então nota que está";
+	mes "segurando nas mãos o livro que";
+	mes "estava lendo. Então...^000000";
+	close2;
+	set ep12_moc_que1, 7;
+	warp "yuno_in04",100,3;
+	end;
+}
+
+//Controle de Área (yuno_in04)
+//==========================
+yuno_in04,100,3,5	script	Controle#control-a3	-1,1,1,{
+end;
+
+OnTouch:
+	if(ep12_moc_que1 != 7) end;
+	mes "..........................";
+	next;
+	mes "..........................";
+	mes "..........................";
+	next;
+	mes "..........................";
+	mes "..........................";
+	mes "..........................";
+	next;
+	mes "^A0522DVocê ainda está dentro da biblioteca,";
+	mes "mas não sabe se está sonhando ou acordado.^000000";
+	next;
+	mes "^A0522DVocê se volta para a estante, e vê";
+	mes "a prateleira vazia de antes.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Ufa... Acho que tive um sonho, ou";
+	mes "algo assim... Atchim!";
+	specialeffect2 124;
+	next;
+	mes "^A0522DEra um sonho indescritível: um";
+	mes "laboratório em chamas, em algum";
+	mes "lugar desconhecido de";
+	mes "Schwartzwald.";
+	mes "Você se esforça ao pensar, mas não";
+	mes "entende o que o sonho significa.^000000";
+	next;
+	mes "^A0522DVocê abriu o livro de novo, mas";
+	mes "nada aconteceu.";
+	next;
+	mes "...em meio à neblina de cinzas e";
+	mes "aos gritos caóticos, havia uma";
+	mes "criatura que parecia horrível";
+	mes "demais para ser humana...";
+	next;
+	mes "..........................";
+	next;
+	mes "\"Eva, o que você está fazendo?";
+	mes "Venha aqui! Depressa\"";
+	mes "\"Não posso deixá-lo aqui!\"";
+	mes "Ignorando o teto do laboratório que caía,";
+	mes "Eva se aproximou de um tubo de ensaio,";
+	mes "tirou algo cuidadosamente dele, e clocou dentro da blusa.";
+	next;
+	mes "..........................";
+	next;
+	mes "^A0522DO livro está contando exatamente a";
+	mes "cena que você viu em seu sonho.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Déjà vu? Estou tendo um déjà vu?";
+	next;
+	mes "^A0522DClaro, foi apenas um sonho, mas";
+	mes "mesmo assim, foi uma experiência";
+	mes "muito vívida e estranha.^000000";
+	next;
+	mes "..........................";
+	next;
+	mes "..........................";
+	next;
+	mes "^A0522D'Será que essa cena descreve um";
+	mes "acidente real do passado? Se houve";
+	mes "um incêndio tão grande, deve ter";
+	mes "saído em um jornal.";
+	mes "...Só por curiosidade, gostaria de";
+	mes "saber...'^000000";
+	set ep12_moc_que1, 8;
+	close;
+}
+
+//Popup (yuno_in04)
+//================
+yuno_in04,99,3,5	script	Popup#pop-a1	-1,1,1,{
+end;
+
+OnTouch:
+	if((ep12_moc_que1 < 8) || (ep12_moc_que1 > 9)) end;
+	mes "["+strcharinfo(0)+"]";
+	mes "Se eu quiser ler notícias sobre";
+	mes "incêndios, em qual seção posso";
+	mes "encontrar?";
+	set ep12_moc_que1, 9;
+	close;
+}
+
+//Homem Grotesco (que_ba)
+//======================
+que_ba,48,227,5	script	Homem Grotesco::mque1_pt11	999,{
+
+specialeffect 120;
+end;
+}
+
+//Mulher Grotesca (que_ba)
+//======================
+que_ba,50,238,5	script	Mulher Grotesca::mque1_pt12	980,{
+
+specialeffect 120;
+end;
+}
+
+//Livro de Recortes (yuno_in04)
+//==========================
+yuno_in04,117,102,5	script	Livro de Recortes::mque1_pt13	111,{
+
+mes "^A0522DÉ uma pasta com uma moldura de";
+mes "madeira, guardando uma pilha grossa de jornais velhos.^000000";
+if(ep12_moc_que1 != 10) close;
+next;
+mes "^A0522DVocê examina os jornais com cuidado para ver se";
+mes "encontra alguma notícia sobre incêndios.^000000";
+set .@paginas, rand(5,20);
+set .@pagina, rand(1,4);
+set .@i, 0;
+next;
+
+L_livro_loop:
+	while(.@i < .@paginas) {
+		goto L_livro_continua;
+	}
+	goto L_materia_final;
+	
+L_livro_continua:
+	mes "..........................";
+	next;
+	mes "..........................";
+	next;
+	set .@pagina, rand(1,4);
+	switch(.@pagina) {
+		case 1:	goto L_materia1;
+		case 2:	goto L_materia2;
+		case 3:	goto L_materia3;
+		case 4:	goto L_materia4;
+	}
+
+L_materia1:
+mes "Mina de Einbech Desmorona (2)";
+mes " ";
+mes "De acordo com um funcionário da";
+mes "Corporação Rekenber,";
+mes "que comandava as operações da mina";
+mes "em Einbech,";
+mes "três mortos foram encontrados,";
+mes "mas um sobrevivente foi levado ao";
+mes "hospital.";
+mes "Seu estado é grave.";
+mes "O funcionário também informou que";
+mes "ainda estão procurando";
+mes "sobreviventes,";
+mes "e especialistas foram contratados";
+mes "para investigar";
+mes "a causa do acidente.";
+next;
+set .@i, .@i + 1;
+goto L_livro_loop;
+
+L_materia2:
+mes "- Página de Cultura -";
+mes "\"Salve minha Água\"";
+mes " ";
+mes "\"A nova série aclamada e jovem";
+mes "autora Jean Cadoc,";
+mes "'Salve minha Água', chegou ao";
+mes "primeiro lugar";
+mes "em vendas e retiradas em";
+mes "bibliotecas.";
+mes "'Salve Minha Água' conta a história";
+mes "de Ujer,";
+mes "uma garota abençoada pela Mãe";
+mes "Natureza";
+mes "Seu pai, ao morrer, a encarregou";
+mes "de 'proteger a água' contra o mal,";
+mes "e ela luta contra um grupo de";
+mes "vilões que";
+mes "contaminam a natureza, para que ela";
+mes "possa purificar a água.";
+mes "Este livro deve ser selecionado";
+mes "como um livro acadêmico essencial";
+mes "pela República de Schwartzwald,";
+mes "por";
+mes "promover a moralidade e";
+mes "a proteção ambiental.";
+next;
+set .@i, .@i + 1;
+goto L_livro_loop;
+
+L_materia3:
+mes "- Página 1 -";
+mes "Renomado Mercenário Sieglinde:";
+mes "'Servirei somente a você.'";
+mes " ";
+mes " Sieglinde conseguiu o título de";
+mes "Maior dos Mercenários";
+mes "por seu profissionalismo;";
+mes "e sua fama entre as mulheres,";
+mes "por sua imagem de 'bad-boy',";
+mes "caracterizada por sua katar";
+mes "afiada:";
+mes "um belo homem que vive uma vida de";
+mes "solidão romântica.";
+mes "Recentemente, este Mercenário,";
+mes "convertido em celebridade,";
+mes "fez uma confissão com um sorriso no";
+mes "rosto:";
+mes "ele tem saído em segredo com uma";
+mes "moça,";
+mes "e marcou casamento para o ano que";
+mes "vem.";
+mes "A moça em questão é conhecida como";
+mes "Sacerdotisa M.,";
+mes "e trabalha na Igreja de Prontera,";
+mes "mas ele se recusou a dar mais";
+mes "informações";
+mes "sobre sua noiva, para a segurança";
+mes "dela.";
+mes "Assim que a notícia se espalhou,";
+mes "seus fãs reagiram negativamente,";
+mes "dizendo: 'Isso é ridículo.";
+mes "Mercenários devem viver sozinhos,";
+mes "envoltos em sombras.'";
+mes "Esperamos que a reação das fãs não";
+mes "cause problemas";
+mes "para Sieglinde e sua futura";
+mes "esposa.";
+next;
+set .@i, .@i + 1;
+goto L_livro_loop;
+
+L_materia4:
+mes "- Página 4 -";
+mes "Briga em Juno";
+mes " ";
+mes "Ontem à noite, dois jovem foram";
+mes "vistos";
+mes "brigando violentamente um com o";
+mes "outro na Praça de Juno.";
+mes "De acordo com o soldado que prendeu";
+mes "os dois,";
+mes "o Sr. B. não estava muito";
+mes "satisfeito com o";
+mes "comportamento descuidado do Sr. A.,";
+mes "e";
+mes "sua paciência finalmente se esgotou";
+mes "ontem.";
+mes "Parece que a briga começou quando o";
+mes "Sr. A. colocou os pés nus e suados";
+mes "no colo do Sr. B.,";
+mes "dizendo que estavam suados demais.";
+mes "é, gente, a culpa deve ser do";
+mes "calor!"; 
+next;
+set .@i, .@i + 1;
+goto L_livro_loop;;
+
+L_materia_final:
+mes "Alerta de Deus: Laboratório Secreto";
+mes "Reduzido a Cinzas";
+mes " ";
+mes " A fumaça que encobriu o céu de";
+mes "Juno ontem à noite";
+mes "veio, na verdade,";
+mes "de um laboratório secreto em";
+mes "chamas.";
+mes "Informações precisas sobre o";
+mes "laboratório";
+mes "ainda não foram liberadas, mas de";
+mes "acordo com as testemunhas,";
+mes "o laboratório foi encontrado";
+mes "vazio,";
+mes "nem nada nem ninguém dentro,";
+mes "a não ser cacos de tubos de";
+mes "ensaio,";
+mes "que provam que o lugar era usado";
+mes "como laboratório.";
+mes "O Cientista Sion, perito da";
+mes "investigação,";
+mes "tendo examinado os restos das";
+mes "máquinas, suspeita";
+mes "que o laboratório tenha sido usado";
+mes "para testar projetos de";
+mes "biotecnologia,";
+mes "e expressou sua crença de que o";
+mes "fogo tenha sido a fúria de Deus,";
+mes "a punição justa para quem brincou";
+mes "com sua criação.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes ".................";
+mes ".................";
+mes "Esse é o lugar que vi no meu sonho!";
+next;
+mes "Espere, e quanto ao lugar para o";
+mes "qual eles fugiram...?";
+next;
+mes "Você verificou a data da notícia.";
+mes "Foi há muito tempo para você conseguir qualquer";
+mes "outra informação nos jornais antigos.";
+next;
+mes "E se eles tiverem algum descendente ou sucessor?";
+next;
+mes "Você sente seu coração bater rápido de tanta excitação.";
+mes "Agora você está convencido de que";
+mes "tudo isso não foi apenas um sonho";
+mes "ou ilusão. Você teve uma visão do";
+mes "que realmente aconteceu no";
+mes "passado.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Não acredito que isso está acontecendo!";
+mes "Pense, pense... Era ^FF0000uma área ligada a uma caverna ao norte^000000.";
+set ep12_moc_que1, 11;
+close;
+}
+
+//Hermitã (cave)
+//=============
+cave,108,34,3	script	Hermitã#hermit-1::mque1_pt14	979,{
+
+mes "[Hermitã]";
+mes "Hoho, ele disse isso mesmo";
+mes "ontem...?";
+mes "Eei!";
+next;
+mes "[Hermitã]";
+mes "É um humano...";
+next;
+mes "(cochicho)";
+mes "(cochicho)";
+close;
+}
+
+//Hermitã (cave) - Duplicata
+//=======================
+cave,105,32,7	duplicate(mque1_pt14)	Hermitã#hermit-2	979
+
+//Hermitão (cave)
+//==============
+cave,91,43,5	script	Hermitão::mque1_pt15	870,{
+
+mes "[Hermitão]";
+mes "(Assustado)";
+next;
+mes "[Hermitão]";
+mes "*resmungos*";
+close;
+}
+
+//Garota (cave)
+//============
+cave,76,39,5	shop	Garota::mque1_pt16	62,712:2
+
+//Hermitão (cave)
+//==============
+cave,72,71,5	script	Hermitão::mque1_pt17	981,{
+
+mes "[Hermitão]";
+mes "Heh...";
+mes "Vocêr quer... Isto?";
+next;
+mes "- Ela lhe mostra Ração para Monstros. -";
+close;
+}
+
+//Hermitão (cave)
+//==============
+cave,134,63,0	script	Hermitão::mque1_pt18	981,{
+
+mes "[Hermitão]";
+mes "Acessório!";
+mes "Meu belo acessório!";
+mes "Uááá!";
+mes "Meu acessório se foi!";
+close;
+}
+
+//Hermitão (cave)
+//==============
+cave,113,74,5	script	Hermitão::mque1_pt19	401,{
+
+mes "[Hermitão]";
+mes "Ninguém nesta vila quer você por aqui. Volte.";
+next;
+mes "[Hermitão]";
+mes "Seus olhos são tão tentadores...";
+mes "Quero comê-los! Hehehehe!";
+close;
+}
+
+//Hermitão (cave)
+//==============
+cave,82,97,4	script	Hermitão::mque1_pt20	996,2,2,{
+
+if(ep12_moc_que1 > 11) {
+	mes "[Hermitão]";
+	mes "Você ainda tem algo a falar com Zid?";
+	mes "É melhor resolver isso logo, não gostamos";
+	mes "de forasteiros andando por nossa vila.";
+	close;
+}
+L_hermitao_inicio:
+mes "[Hermitão]";
+mes "Nenhum forasteiro pode passar daqui.";
+if(ep12_moc_que1 < 11) {
+	close2;
+	warp "cave",81,92;
+	end;
+}
+next;
+switch(select("Recuar.:Não, me ouça!")) {
+	case 1:
+		mes "[Hermitão]";
+		mes "Ha, eu sabia que você ia ficar com medo de mim!";
+		close2;
+		warp "cave",81,92;
+		end;
+	case 2:
+		mes "["+strcharinfo(0)+"]";
+		mes "Ah... Atchim!";
+		mes "Não sou como os outros forasteiros... Atchim!";
+		mes "Tenho um objetivo a cumprir aqui...";
+		mes "Atchim!";
+		specialeffect2 124;
+		next;
+		mes "^A0522DEmbora esse guarda intimide você,";
+		mes "e seus espirros não ajudem de forma alguma, você continua.^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Estou aqui para encontrar alguém!";
+		input .@encontrar$;
+		mes "Seu nome é ^FF0000"+.@encontrar$+"^000000!";
+		next;
+		if(.@encontrar$ == "Eva") {
+			mes "[Hermitão]";
+			mes ".............!!!!";
+			next;
+			mes "[Hermitão]";
+			mes "Você disse Eva?";
+			mes "Hum...";
+			mes "Espere aqui.";
+			next;
+			mes "[Hermitão]";
+			mes "Ei, Jaeda!";
+			hideoffnpc "jaeda-cave";
+			emotion e_com;
+			next;
+			mes "[Hermitão]";
+			mes "Suba e diga a Eva que ela tem";
+			mes "visitas.";
+			hideonnpc "jaeda-cave";
+			next;
+			mes "^A0522DSurpreendentemente, ele parece saber quem é Eva.";
+			mes "Você mal consegue acreditar que ela existia de verdade!";
+			mes "É tudo tão estranho.^000000";
+			next;
+			mes "^A0522DVocê sente a excitação e a";
+			mes "ansiedade. Talvez você esteja";
+			mes "prestes a descobrir o que seus";
+			mes "sonhos significam.^000000";
+			hideoffnpc "jaeda-cave";
+			next;
+			mes "[Hermitão]";
+			mes "Hum... É? Entendi.";
+			next;
+			mes "[Hermitão]";
+			mes "Ei, você pode passar. Suba as";
+			mes "escadas, mas é melhor pensar duas";
+			mes "vezes antes de tentar alguma";
+			mes "gracinha. Você entendeu?";
+			hideonnpc "jaeda-cave";
+			next;
+			mes "^A0522DO homem severo examinou você, e deu um passo ao lado, permitindo que você passe.";
+			mes "Você apertou os punhos com o nervosismo, e começou a subir as escadas escuras.^000000";
+			close2;
+			set ep12_moc_que1, 12;
+			warp "cave",82,105;
+			end;
+		}
+		mes "[Hermitão]";
+		mes "Está me gozando? Se está procurando uma criançada perdida,";
+		mes "vá até a delegacia em Juno!";
+		close2;
+		warp "cave",81,92;
+		end;
+}
+
+OnTouch:
+	if(ep12_moc_que1 > 11) end;
+	goto L_hermitao_inicio;
+}
+
+//Jaeda (Cave)
+//===========
+cave,85,101,5	script	Jaeda::jaeda-cave	401,{
+end;
+
+OnInit:
+hideonnpc "jaeda-cave";
+end;
+}
+
+//Homem Monstruoso (cave)
+//======================
+cave,22,186,5	script	Homem Monstruoso::mque1_pt21	999,{
+
+if(ep12_moc_que1 < 12) end;
+if(ep12_moc_que1 == 13) {
+	mes "Zid parece ter perdido o interesse pelo livro.";
+	mes "Você resolve entregar o livro a Benjamin em Morroc.";
+	close;
+}
+mes "^A0522DVocê vê um homem tão feio quanto um monstro.";
+mes "Ele é o homem que estava com Eva em seu sonho.";
+mes "É claro que ele está mais velho agora, como mostra seu";
+mes "rosto e sua pele.^000000";
+next;
+mes "(VUUSH)";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Argh...";
+next;
+mes "^A0522DA dor no seu peito ataca de repente...";
+mes "E seus pulmões parece muito mais";
+mes "fracos com toda a tosse e os";
+mes "espirros que você tem tido";
+mes "ultimamente.^000000";
+next;
+mes "^A0522DPassando a mão no peito para";
+mes "aliviar a dor, você continua olhando";
+mes "para o homem, com surpresa.^000000";
+next;
+mes "^A0522DFelizmente, ele fala com você";
+mes "primeiro.^000000";
+next;
+mes "[Homem Monstruoso]";
+mes "Minha aparência incomoda você?";
+next;
+mes "[Homem Monstruoso]";
+mes "Então você sabe de Eva... Hã?";
+next;
+mes "^A0522DEle parece fraco, como se não";
+mes "tivesse energia suficiente para";
+mes "falar.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Hum... Atchim!";
+specialeffect2 124;
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Você conhece um homem chamado";
+mes "Oliver Hilpert?";
+next;
+mes "[Homem Monstruoso]";
+mes "Oliver? Bem, acho que não.";
+mes "O que ele tem a ver com isso?";
+next;
+mes "^A0522DVocê entrega a ele o romance de Oliver,";
+mes "'O Corvo do Destino', explicando os estranhos eventos";
+mes "que têm acontecido com você.^000000";
+next;
+mes "..............";
+next;
+mes "..............";
+mes "..............";
+next;
+mes "..............";
+mes "..............";
+mes "..............";
+next;
+mes "^A0522DEle aperta os olhos de curiosidade";
+mes "e examina algumas páginas do livro, em silêncio.";
+mes "Então, ele abre a boca para falar enquanto lhe devolve o livro.^000000";
+next;
+mes "[Homem Monstruoso]";
+mes "Estou surpreso pela história deste";
+mes "livro ser... tão similar à história da minha vida.";
+mes "Muito similar.";
+next;
+L_zid_menu:
+mes "[Zid]";
+mes "Meu nome é Zid. Diga o que quer";
+mes "comigo. Quero saber mais sobre este livro.";
+next;
+switch(select("Sobre a Vila na Caverna:Sobre Ele Mesmo:Sobre Eva:Terminar Conversa")) {
+	case 1:
+		mes "[Zid]";
+		mes "Notou que os aldeões daqui são diferentes?";
+		next;
+		mes "[Zid]";
+		mes "A curiosidade humana levou a";
+		mes "grandes conquistas e contribuições,";
+		mes "mas há um ponto além do qual o";
+		mes "conhecimento pode ser algo grande";
+		mes "demais com que se lidar.";
+		mes "Todos nesta vila são fugitivos...";
+		mes "Somos vítimas do que acontece";
+		mes "quando as pessoas brincam de Deus,";
+		mes "buscam o conhecimento proibido e";
+		mes "jogam com a vida.";
+		next;
+		mes "[Zid]";
+		mes "Não temos escolha além de nos";
+		mes "esconder aqui, porque eles são";
+		mes "poderosos demais para serem";
+		mes "denunciados... E sabemos que isso";
+		mes "não é o certo.";
+		next;
+		set .@falou_cave, 1;
+		goto L_zid_menu;
+	case 2:
+		mes "[Zid]";
+		mes "Eu já fui um homem normal, mas a";
+		mes "pobreza me fez perder o orgulho, a";
+		mes "auto-estima e a identidade.";
+		mes "Estava doente e cansado de me";
+		mes "preocupar em arranjar comida todos";
+		mes "os dias, e aceitei ser cobaia de um experimento.";
+		mes "Não tive mais que me preocupar com";
+		mes "a fome, mas minha vida como";
+		mes "'humano' terminou naquele dia.";
+		next;
+		mes "[Zid]";
+		mes "A princípio, Eva e eu éramos os únicos aqui,";
+		mes "mas outros se juntaram a nós, e formamos uma pequena vila.";
+		mes "Agora sou o ancião entre eles, e sinto a pesada";
+		mes "responsabilidade de proteger os outros.";
+		next;
+		set .@falou_zid, 1;
+		goto L_zid_menu;
+	case 3:
+		mes "[Zid]";
+		mes "O laboratório no qual Eva e eu";
+		mes "fomos testados não era um qualquer.";
+		mes "Ele foi construído para testar e";
+		mes "reproduzir o poder de criação de";
+		mes "Deus.";
+		next;
+		mes "[Zid]";
+		mes "Eles não conseguiram atingir seu";
+		mes "objetivo, e causaram uma série de";
+		mes "eventos infelizes";
+		mes "ao tentar manipular materiais que";
+		mes "eram difíceis até de examinar.";
+		mes "Eles acreditavam que sua pesquisa";
+		mes "criaria um novo mundo para a";
+		mes "humanidade...";
+		next;
+		mes "[Zid]";
+		mes "Eva era um deles... Embora não";
+		mes "fosse gentil, ao menos ela";
+		mes "simpatizou comigo por eu ter me";
+		mes "vendido por causa da pobreza.";
+		next;
+		mes "[Zid]";
+		mes "Ela tinha um homem ao qual amava";
+		mes "muito...";
+		mes "Seu nome era Sekafiest, e ele";
+		mes "sempre apoiou a pesquisa dela.";
+		next;
+		mes "[Zid]";
+		mes "Ele... se matou de desespero depois que Eva se transformou em mutante,";
+		mes "assim como eu... Ela queria que ele a usasse como cobaia.";
+		mes "Ninguém esperava que ele tirasse a própria vida tão facilmente,";
+		mes "já que ele era o pesquisador mais entusiasmado de todos.";
+		next;
+		mes "[Zid]";
+		mes "Então, alguém pôs fogo no laboratório.";
+		mes "Suponho que você tenha visto isso em seu sonho.";
+		mes "O fogo destruiu completamente o prédio.";
+		next;
+		mes "[Zid]";
+		mes "Eva e eu conseguimos escapar antes";
+		mes "que nos encontrassem, e nos";
+		mes "estabelecemos aqui. Afinal, não";
+		mes "podemos nos misturar com humanos";
+		mes "comuns.";
+		next;
+		mes "[Zid]";
+		mes "Eva conseguiu salvar uma das";
+		mes "cobaias que acabou crescendo como";
+		mes "um ser humano normal; no entanto,";
+		mes "ele era um ser aperfeiçoado.";
+		next;
+		mes "[Zid]";
+		mes "Esse menino fugiu quando tinha uns";
+		mes "10 anos. Acho que foi a puberdade...";
+		mes "Você sabe como as pessoas são nessa idade.";
+		next;
+		mes "[Zid]";
+		mes "Eva não pôde esquecê-lo. Ela esperou ele voltar a esta caverna escura.";
+		mes "Por algum tempo, ele enviou cartas sem endereço, mas então elas pararam de chegar.";
+		mes "Foi aí que Eva desapareceu.";
+		mes "Encontrei uma ^0000FFuma pena preta e enorme^000000";
+		mes "no quarto dela depois que ela se foi.";
+		next;
+		mes "[Zid]";
+		mes "Não sei por que, mas... Acho que";
+		mes "Eva não existe mais...";
+		next;
+		set .@falou_eva, 1;
+		goto L_zid_menu;
+	case 4:
+		mes "[Zid]";
+		mes "Hum...";
+		mes "Talvez Oliver seja o filho de Eva...";
+		next;
+		mes "[Zid]";
+		mes "Não, ele é jovem demais para ser,";
+		mes "tudo aconteceu há muito tempo ...";
+		next;
+		mes "[Zid]";
+		mes "...............";
+		next;
+		mes "[Zid]";
+		mes "Acho que é apenas uma lembrança antiga...";
+		mes "Por que eu me importaria?";
+		mes "Por que qualquer um se importaria?";
+		next;
+		mes "^A0522DZid pára de falar, e abaixa a";
+		mes "cabeça. Depois dessa pausa, ele";
+		mes "volta a abrir a boca para falar.^000000";
+		next;
+		mes "[Zid]";
+		mes "Agora estou velho demais para me lembrar até mesmo de Eva ou do menino.";
+		mes "Meu propósito de vida é proteger os outros aldeões.";
+		mes "Eles têm vidas para seguir, nesta caverna escura.";
+		next;
+		mes "[Zid]";
+		mes "O livro é interessante, mas tenho";
+		mes "certeza que esse rapaz, Oliver,";
+		mes "experimentou a mesma coisa que";
+		mes "aconteceu com você.";
+		next;
+		mes "[Zid]";
+		mes "Mesmo que ele tenha algo a ver com";
+		mes "Eva, é tarde demais para fazer";
+		mes "alguma coisa por ela.";
+		next;
+		mes "[Zid]";
+		mes "Pense nisso: quem pode nos salvar desta caverna escura,";
+		mes "mesmo que Eva ou o menino ainda estejam vivos?";
+		mes "A resposta é: ninguém.";
+		next;
+		mes "[Zid]";
+		mes "........................";
+		next;
+		mes "[Zid]";
+		mes "Sinto tanto por não poder ajudar.";
+		mes "É melhor você acordar desse sonho,";
+		mes "e seguir com sua vida.";
+		mes "...Infelizmente, tudo isso não é";
+		mes "nada além de um sonho...";
+		next;
+		mes "[Zid]";
+		mes "Se você sente mesmo pena de nós,";
+		mes "não deixe outras pessoas saberem";
+		mes "onde estamos.";
+		next;
+		mes "^A0522DZid desviou o olhar de você,";
+		mes "virando a cabeça para o outro lado.";
+		mes "Você ainda não tem certeza de que tudo isso está acontecendo de verdade.";
+		mes "É tudo tão surreal...^000000";
+		next;
+		mes "^A0522DFrustado com sua conversa com Zid,";
+		mes "você decide voltar a Morroc e";
+		mes "esquecer tudo.";
+		if((.@falou_cave) && (.@falou_zid) && (.@falou_eva)) set ep12_moc_que1, 13;
+		close;
+}
+}
+
+//Controle de Area (que_ba)
+//=================
+que_ba,264,186,5	script	Controle#controle-a4	-1,1,1,{
+end;
+
+OnTouch:
+	if(ep12_moc_que1 != 15) end;
+	mes "^A0522DVocê acorda, e olha ao redor. De alguma forma,";
+	mes "você veio parar em uma enorme mansão.^000000";
+	next;
+	mes "^A0522DDe repente, você sente uma dor";
+	mes "aguda no peito, como se alguém";
+	mes "estivesse apertando seu coração.^000000";
+	next;
+	mes "^A0522DEsta mansão parece muito elegante e cara,";
+	mes "mas está em chamas, assim como o laboratório do primeiro sonho.^000000";
+	next;
+	mes "^A0522DVocê não consegue pensar direito";
+	mes "por causa da dor no peito e do";
+	mes "fogo, mas sabe que esta mansão não";
+	mes "vai durar muito. Você procura uma";
+	mes "saída, e vê um homem parado no";
+	mes "andar de baixo, no centro das";
+	mes "chamas.^000000";
+	next;
+	mes "^A0522DEle não parece se importar em";
+	mes "perecer junto com a mansão, e fala";
+	mes "com uma voz baixa e triste.^000000";
+	next;
+	mes "[Homem Misterioso]";
+	mes "................";
+	mes "Afinal, Deus brincou comigo...";
+	mes "Era o plano dele o tempo todo...";
+	mes "Até meus melhores amigos eram";
+	mes "marionetes dele...";
+	next;
+	mes "[Homem Misterioso]";
+	mes "Tenho rancor do meu destino...";
+	mes "Mas estou pronto para aceitar o";
+	mes "fim... De tudo...";
+	next;
+	mes "^A0522DEle não consegue terminar de falar";
+	mes "antes que as chamas o engulam. Ao";
+	mes "mesmo tempo, você...^000000";
+	specialeffect 92;
+	close2;
+	set ep12_moc_que1, 16;
+	warp "yuno_in04",108,57;
+	end;
+}
+
+//Livro Desgastado (yuno_in04)
+//==========================
+yuno_in04,167,120,6	script	Livro Desgastado::mque1_pt22	111,{
+
+if(ep12_moc_que1 < 17) end;
+mes "^A0522DA capa do livro está bem danificada,";
+mes "considerando que o livro foi publicado recentemente.";
+mes "Muitas pessoas o devem ter folheado.^000000";
+if(ep12_moc_que1 > 17) close;
+next;
+mes "^A0522DVocê virou a primeira página";
+mes "cuidadosamente, com medo de ter";
+mes "outro sonho maluco.^000000";
+next;
+mes "..............";
+mes "..............";
+mes "..............";
+next;
+mes "<<Desde que ele era jovem - antes";
+mes "que ele pudesse se lembrar do quão";
+mes "jovem era - seus sonhos preencheram";
+mes "seu cérebro com um imenso";
+mes "conhecimento que nunca havia visto";
+mes "ou aprendido em nenhum outro";
+mes "lugar.";
+mes "Por fora ele era um garotinho, mas";
+mes "era mais sábio do que qualquer";
+mes "sábio crescido. Ele falava muitos";
+mes "idiomas, de forma tão fluente, que";
+mes "soava como a Edda nórida entoada";
+mes "pelo próprio Odin.";
+mes "Para ele, a pequena e escura vila";
+mes "subterrânea era uma prisão que lhe";
+mes "impedia de satisfazer sua";
+mes "curiosidade e desejo de liberdade.";
+mes "Ele expressava seu desejo de";
+mes "aprender mais sobre o mundo";
+mes "exterior para a madastra Eva, mas";
+mes "ela sempre ignorava seu desejo, com";
+mes "um olhar severo.";
+mes "Enfim, sua recusa sem motivo não";
+mes "podia mais impedi-lo de fugir de";
+mes "sua realidade.";
+mes " ";
+mes "\"Uff! Uff!\"";
+mes "Ele correu pela escuridão que";
+mes "parecia não ter fim. Ele estava";
+mes "fugindo de tudo o que tentava";
+mes "confiná-lo.";
+next;
+mes "..............";
+mes "..............";
+mes "..............";
+next;
+mes "\"Hum...\"";
+mes "\"...Ele acordou.\"";
+mes "\"Olá, está me ouvindo? Como se";
+mes "sente?\"";
+mes "Um homem velho entrou lentamente no";
+mes "quarto. Com um sorriso no rosto,";
+mes "ele se sentou em uma cadeira. O";
+mes "menino sentiu medo ao ver gente de";
+mes "fora de sua vila pela primeira";
+mes "vez,";
+mes "mas se forçou a se levantar da";
+mes "cama, e olhou em volta.";
+mes " ";
+mes "\"Onde estou? Por que estou";
+mes "aqui?\"";
+mes "\"Estava andando de carruagem ontem";
+mes "à noite, e encontrei você deitado";
+mes "na rua. Meu nome é Haeji. Pode me";
+mes "chamar de Sr. Haeji, filho.\"";
+mes "\".......\"";
+mes "\"Qual é seu nome?\"";
+mes "\"......Al.\"";
+mes "\"Sabe por que estava na rua? Onde";
+mes "você mora? Seus pais devem estar";
+mes "aflitos para ver você.\"";
+mes "O Comentário de Haeji trouxe a";
+mes "imagem monstruosa de Eva para a";
+mes "mente de Al. Por dentro, ele gritou";
+mes "de medo.";
+mes "\"Não tenho onde morar, e não tenho";
+mes "pais.\"";
+mes "Terei de mentir, pelo tempo que";
+mes "for, Al pensou. O velho pareceu";
+mes "compreender: seus olhos";
+mes "demonstraram simpatia pelo menino.";
+mes "Haeji disse que Al podia ficar em";
+mes "sua mansão o quanto quisesse.";
+mes "Mais tarde, ao saber que Haeji era";
+mes "professor na Universidade de Juno,";
+mes "Al se convenceu que o destino";
+mes "estava ao seu lado.>>";
+next;
+mes "..............";
+mes "..............";
+mes "..............";
+next;
+mes "^A0522DEnquanto lia, você sentiu alguém olhando para você.";
+mes "Você se virou, e encontrou um jovem elegante, mas de aparência suspeita.^000000";
+next;
+cutin "oliver_smile",2;
+mes "^A0522DO jovem se aproximou e apertou sua";
+mes "mão com um sorriso no rosto.^000000";
+next;
+mes "[Homem Suspeito]";
+mes "Ei, você está lendo 'O Rastro do";
+mes "Destino'!";
+mes "Hahaha, prazer em conhecer você.";
+mes "Sou o autor desse livro. Vim ver";
+mes "como meu novo livro, 'O Corvo do";
+mes "Destino', está se saindo, e é uma";
+mes "grande honra encontrar um fã! Fico";
+mes "envergonhado, mas obrigado! Hehe.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "*cof* Não, não sou fã...";
+next;
+mes "[Oliver Hilpert]";
+mes "Ah, sim! Quer meu autógrafo?";
+next;
+mes "(rabisca)";
+next;
+mes "^A0522DEle tirou um enorme pedaço de papel da mala,";
+mes "escreveu algo bem rápido e o entregou a você.^000000";
+next;
+mes "[Oliver Hilpert]";
+mes "Haha, veja. Escrevi bem grande para você poder se gabar dele com seus amigos!";
+next;
+mes "[Oliver Hilpert]";
+mes "Sabe, eu só escrevo o que vi em";
+mes "meus sonhos; nunca imaginei que o";
+mes "povo fosse gostar tanto das minhas";
+mes "histórias! É surpreendente para";
+mes "mim.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Sonhos?";
+next;
+mes "[Oliver Hilpert]";
+mes "Sim, tenho tido sonhos tão vívidos";
+mes "que parecem reais.";
+mes "Alguém me disse que grandes escritores encontram";
+mes "sua inspiração nesses sonhos. Acho que nasci para ser um deles.";
+mes "Hahaha!";
+next;
+mes "^A0522DVocê se sentiu incomodado com essa história de sonhos.";
+mes "Você quer entender o significado do que você tem visto ao ler o livro.";
+mes "Se Oliver está sonhando exatamente o mesmo que você,";
+mes "então você e ele estão compartilhando sonhos.";
+mes "Entretanto, você já descobriu que a vila subterrânea do livro existe de verdade.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Al, o herói, estava tendo sonhos...";
+next;
+mes "[Oliver Hilpert]";
+mes "Eei!";
+mes "O que é aquilo ali?!";
+emotion e_omg;
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Hã?";
+next;
+mes "^A0522DVocê se virou, acompanhando o olhar dele.";
+mes "Não havia nada além da sua mochila.^000000";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Ah... Atchim! Sr. Hilpert, está";
+mes "interessado na minha mochila? É só";
+mes "uma simples mochila que ganhei no";
+mes "Campo de Treinamento de";
+mes "Aprendizes...";
+specialeffect2 124;
+next;
+mes "[Oliver Hilpert]";
+mes "Não, não!";
+next;
+mes "[Oliver Hilpert]";
+mes "Eu estava olhando para isso que";
+mes "está brilhando sob o fecho da";
+mes "mochila!";
+next;
+mes "^A0522DVocê foi ver o que estava em sua";
+mes "mochila, e era...^000000";
+next;
+mes "[Oliver Hilpert]";
+mes "Srta. Mammi!";
+emotion e_lv2;
+next;
+mes "^A0522DSim, era o álbum de fotos de Mammi, considerada por Benjamin de Morroc";
+mes "uma das três maiores celebridades do reino de Rune-Midgard.";
+mes "Deve ser por isso que Oliver está quase guinchando de alegria.";
+emotion e_dots, 1;
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Atchim! Você também é fã da Mammi?";
+specialeffect2 124;
+next;
+mes "[Oliver Hilpert]";
+mes "Está brincando? É claro!";
+mes "Diga, onde se pode encontrar uma";
+mes "mulher tão bela e inteligente como ela?";
+mes "Acho que ela é a reencarnação da";
+mes "Deusa da Sabedoria, que foi expulsa de Midgard pelas outras deusas enciumadas.";
+next;
+mes "^A0522DMammi parece ter um nível absurdo";
+mes "de popularidade que você não";
+mes "consegue entender.^000000";
+next;
+mes "[Oliver Hilpert]";
+mes "Posso ver?";
+next;
+mes "^A0522DVocê deu a ele o álbum de fotos de";
+mes "Mammi.^000000";
+next;
+mes "[Oliver Hilpert]";
+mes "................";
+next;
+mes "[Oliver Hilpert]";
+mes "...Oh!";
+cutin "mami01",4;
+emotion e_lv2;
+next;
+mes "[Oliver Hilpert]";
+mes "...Ooooh!";
+cutin "",255;
+cutin "mami02",4;
+emotion e_lv2;
+next;
+cutin "",255;
+mes "[Oliver Hilpert]";
+mes "Ah... é por isso que adoro a Srta. Mammi.";
+mes "Aventureiro, você também deve ser";
+mes "um grande fã dela. Onde encontrou";
+mes "este álbum de fotos raro?";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Não, eu ganhei de presente...";
+mes "Atchim!";
+specialeffect2 124;
+next;
+cutin "oliver_think",2;
+mes "[Oliver Hilpert]";
+mes "O quê? Estou chocado!";
+mes "Já é chocante você não se impressionar com a beleza da Srta. Mammi,";
+mes "ainda é mais mais chocante alguém dar um raro álbum de fotos";
+mes "dela a alguém que não aprecia seu valor!";
+mes "Voei no primeiro avião até o Reino de Rune-Midgard";
+mes "para conseguir esse livro no dia do lançamento, mas ele esgotou.";
+mes "A pessoa bem à minha frente na fila pegou o último exemplar!";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "............";
+mes "Eu... Entendo...";
+emotion e_swt, 1;
+next;
+mes "[Oliver Hilpert]";
+mes "Humm...";
+mes "Se não gosta de verdade desse";
+mes "livro, por que não o vende para";
+mes "mim?";
+next;
+mes "[Oliver Hilpert]";
+mes "Como lhe disse antes, é algo pelo";
+mes "qual estou disposto a atravessar";
+mes "continentes. Por favor?";
+mes "Quero muito comprar seu livro!";
+next;
+switch(select("Vender:Não Vender")) {
+	case 1:
+		cutin "",255;
+		cutin "oliver_smile",2;
+		mes "[Oliver Hilpert]";
+		mes "Uau, obrigado!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Humm... Ainda não recebi meus";
+		mes "direitos autorais, mas se importa";
+		mes "em ficar com isto como pagamento?";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Não tive chance de abrir ainda,";
+		mes "mas meu editor disse que tem algo bem raro dentro.";
+		mes "Espero que baste para pagar pelo seu livro.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Haha, obrigado.";
+		mes "Sabe, em Morroc... Atchim! ...Tem";
+		mes "alguém que é tão fã da Mammi quanto você...";
+		mes "Atchim! Por que não vai falar com ele?";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Ganhei este livro dele como";
+		mes "presente. Ele pode ter mais livros";
+		mes "raros dela... Atchim!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Ah, muito obrigado por uma";
+		mes "informação tão valiosa!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Uau! Preciso escrever a história";
+		mes "que vi no meu sonho de ontem à";
+		mes "noite, antes que esqueça!";
+		next;
+		mes "[Oliver Hilpert]";
+		mes "Espero que você também goste do meu próximo livro.";
+		mes "Bem, preciso ir... Obrigado pelo álbum de fotos!";
+		cutin "",255;
+		next;
+		mes "^A0522DEle começou a correr de lá para cá,";
+		mes "como uma galinha com a cabeça cortada.";
+		mes "Ele abriu a mala, tirou seu caderno correu até uma mesa,";
+		mes "e então começou a escrever alguma coisa, muito rapidamente.";
+		mes "Ele parece um pouco tolo a princípio, mas agora você nota que";
+		mes "ele leva a sério sua escrita.^000000";
+		next;
+		mes "^A0522DVocê estava prestes a sair quando";
+		mes "encontrou um pedaço de papel no";
+		mes "chão.^000000";
+		next;
+		mes "^A0522DEsse pedaço de papel tem vários";
+		mes "rabiscos, e o título 'O Corvo do";
+		mes "Destino' encima. Oliver deve ter";
+		mes "deixado esse bilhete com";
+		mes "informações sobre seu romance.^000000";
+		next;
+		mes "^0000FFArma antiga = motivo desconhecido";
+		mes "Reclusão - A carta da discípula";
+		mes "Madrasta = Karma de uma vida";
+		mes "anterior?^000000";
+		close2;
+		delitem 7795, 1;	//Álbum de Fotos de Mammi
+		getitem 7796, 1;	//Autógrafo do Autor
+		getitem 7797, 1;	//Bilhete do Autor
+		getitem 617, 1;		//Velha Caixa Roxa
+		set ep12_moc_que1, 19;
+		specialeffect2 9;
+		warp "que_ba",270,270;
+		end;
+	case 2:
+		mes "[Oliver Hilpert]";
+		mes "Certo... Entendo...";
+		cutin "",255;
+		emotion e_sob;
+		set ep12_moc_que1, 18;
+		close;
+}
+}
+
+//Homem suspeito (yuno_in04)
+//=========================
+yuno_in04,169,123,4	script	Homem Suspeito::mque1_pt23	407,{
+
+if(ep12_moc_que1 == 18) {
+	mes "[Oliver Hilpert]";
+	mes "Mudou de idéia sobre me vender o";
+	mes "álbum de fotos da Srta. Mammi ?";
+	next;
+	switch(select("Sim:Não")) {
+		case 1:
+			cutin "oliver_smile",2;
+			mes "[Oliver Hilpert]";
+			mes "Uau, obrigado!";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Humm... Ainda não recebi meus";
+			mes "direitos autorais, mas se importa";
+			mes "em ficar com isto como pagamento?";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Não tive chance de abrir ainda, mas";
+			mes "meu editor disse que tem algo bem";
+			mes "raro dentro. Espero que baste para";
+			mes "pegar pelo seu livro.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Haha, obrigado.";
+			mes "Sabe, em Morroc... Atchim! ...Tem";
+			mes "alguém que é tão fã da Mammi quanto";
+			mes "você... Atchim! Por que não vai";
+			mes "falar com ele?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Ganhei este livro dele como";
+			mes "presente. Ele pode ter mais livros";
+			mes "raros dela... Atchim!";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Ah, muito obrigado por uma";
+			mes "informação tão valiosa!";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Uau! Preciso escrever a história";
+			mes "que vi no meu sonho de ontem à";
+			mes "noite, antes que esqueça!";
+			next;
+			mes "[Oliver Hilpert]";
+			mes "Espero que você também goste do meu";
+			mes "próximo livro. Bem, preciso ir...";
+			mes "Obrigado pelo álbum de fotos!";
+			next;
+			mes "^A0522DEle começou a correr de lá para cá,";
+			mes "como uma galinha com a cabeça";
+			mes "cortada. Ele abriu a mala, tirou";
+			mes "seu caderno correu até uma mesa, e";
+			mes "então começou a escrever alguma";
+			mes "coisa, muito rapidamente.";
+			mes "Ele parece um pouco tolo a";
+			mes "princípio, mas agora você nota que";
+			mes "ele leva a sério sua escrita.^000000";
+			cutin "",255;
+			next;
+			mes "^A0522DVocê estava prestes a sair quando";
+			mes "encontrou um pedaço de papel no";
+			mes "chão.^000000";
+			next;
+			mes "^A0522DEsse pedaço de papel tem vários";
+			mes "rabiscos, e o título 'O Corvo do";
+			mes "Destino' encima. Oliver deve ter";
+			mes "deixado esse bilhete com";
+			mes "informações sobre seu romance.^000000";
+			next;
+			mes "^0000FFArma antiga = motivo desconhecido";
+			mes "Reclusão - A carta da discípula";
+			mes "Madrasta = Karma de uma vida";
+			mes "anterior?^000000";
+			close2;
+			delitem 7795, 1;	//Álbum de Fotos de Mammi
+			getitem 7796, 1;	//Autógrafo do Autor
+			getitem 7797, 1;	//Bilhete do Autor
+			getitem 617, 1;		//Velha Caixa Roxa
+			set ep12_moc_que1, 19;
+			specialeffect2 9;
+			warp "que_ba",270,270;
+			end;
+		case 2:
+			mes "[Oliver Hilpert]";
+			mes "Certo... Entendo...";
+			emotion e_sob;
+			close;
+	}
+} else if((ep12_moc_que1 == 19) || (ep12_moc_que1 == 20)) {
+	mes "["+strcharinfo(0)+"]";
+	mes "Esse sonho parece ter algum significado.";
+	mes "É melhor eu devolver o bilhete.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Com licença, Sr. Hilpert.";
+	next;
+	cutin "oliver_think",2;
+	mes "[Oliver Hilpert]";
+	mes "............";
+	mes "............";
+	mes ".........Hã?";
+	next;
+	cutin "",255;
+	mes "^A0522DVocê se sentiu mal por interrompê-lo.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Acho que você deixou isto cair.";
+	next;
+	mes "^A0522DVocê vasculhou o bolso para";
+	mes "encontrar o bilhete, e acabou";
+	mes "deixando cair a pena de corvo que";
+	mes "havia pegado no lado de fora da";
+	mes "biblioteca. Então, de repente...^000000";
+	next;
+	mes "(PAF!)";
+	specialeffect2 14;
+	specialeffect 124;
+	next;
+	mes "^A0522DOliver pegou a pena antes de você,";
+	mes "e a rasgou em pedaços antes que";
+	mes "você pudesse dizer qualquer coisa.^000000";
+	next;
+	mes "^A0522DVocê se voltou para ele com raiva,";
+	mes "e descobriu que ele se tornou uma";
+	mes "pessoa completamente diferente;";
+	mes "ele não parecia mais estúpido ou sério,";
+	mes "e sim extremamente frio.^000000";
+	next;
+	cutin "oliver_hum",2;
+	mes "[Oliver Hilpert]";
+	mes "Hein?!";
+	mes "O que aconteceu com esta pena?";
+	next;
+	mes "[Oliver Hilpert]";
+	mes "Ai! Eu fiz isso?";
+	mes "Minha nossa, me desculpe! Ai, me";
+	mes "desculpe!";
+	emotion e_swt;
+	next;
+	mes "^A0522DEle voltou a si, e começou a se";
+	mes "desculpar pelo acesso súbito de";
+	mes "raiva.^000000";
+	next;
+	mes "[Oliver Hilpert]";
+	mes "Eu... Não sei como me desculpar...";
+	mes "É só que... Fiquei tão furioso";
+	mes "que--! Argh, me desculpe!";
+	emotion e_sob;
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Não, tudo bem. Eu tinha achado isso na rua.";
+	mes "Não tem que se desculpar.";
+	next;
+	mes "[Oliver Hilpert]";
+	mes "Se você diz, obrigado pela compreensão.";
+	mes "Ufa, me senti tão culpado...";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Aqui está, seu bilhete.";
+	next;
+	mes "[Oliver Hilpert]";
+	mes "Ah, pode jogá-lo fora. Não preciso mais dele.";
+	mes "Ufa...";
+	next;
+	mes "[Oliver Hilpert]";
+	mes "Estou tendo grandes idéias agora.";
+	mes "Desculpe, mas preciso ir.";
+	next;
+	cutin "",255;
+	mes "^A0522DAssim que terminou de falar com";
+	mes "você, ele voltou à sua escrita e";
+	mes "ficou completamente absorto em seu";
+	mes "trabalho.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Ele tem uma concentração incrível.";
+	mes "Acho que não é todo mundo que pode";
+	mes "escrever livros campeões de vendas, né?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...Espere, não estou espirrando";
+	mes "mais...";
+	mes "A dor de cabeça e o peso no meu";
+	mes "peito também sumiram!";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "E se tudo isso tiver sido causado";
+	mes "por aquela pena de corvo? E se...?";
+	next;
+	switch(select("Ela estava amaldiçoada pela pedra.:O corvo tem algo a ver com Oliver.")) {
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "Ah, entendo.";
+			mes "Acho que, quando acertaram a pedra no corvo,";
+			mes "a boa sorte da pena se transformou em má.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Argh, foi tudo culpa do bibliotecário!";
+			mes "Felizmente a pena se foi, assim não vou sofrer mais nada.";
+			next;
+			goto L_oliver_final;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Lembro que o Sr. Zid disse que Eva";
+			mes "havia deixado para trás uma pena escura.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Além disso, a assistente se transformou em corvo para fugir,";
+			mes "e então a pena de corvo me fez espirrar e tossir.";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "...............";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Sim, a alma do Sr. Hilpert está amaldiçoada pelo Corvo!";
+			mes "Será que ele jogava pedras em corvos, como o bibliotecário?...";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "...............";
+			mes "Acho que essa idéia é estúpida.";
+			next;
+			L_oliver_final:
+			mes "["+strcharinfo(0)+"]";
+			mes "Ah, que seja.";
+			mes "O que importa é que me curei!";
+			mes "Se eu tiver outro sonho, cuidarei dele...";
+			next;
+			mes "^A0522DAo sair da biblioteca, você pensou";
+			mes "que seria melhor considerar que o";
+			mes "Sr. Oliver é uma pessoa igual a";
+			mes "você.^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Tudo isso foi bem divertido, mas";
+			mes "cansativo também. Onde será minha";
+			mes "próxima aventura?";
+			set ep12_moc_que1, 21;
+			close;
+	}
+} else if(ep12_moc_que1 == 21) {
+	mes "^A0522DO autor está escrevendo no caderno, em um ritmo feroz.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "É melhor não pertubá-lo, ainda";
+	mes "mais se ele está cheio de idéias";
+	mes "para criar. Isso não acontece a";
+	mes "toda hora.";
+	close;
+}
+mes "^A0522DUm jovem de aparência suspeita está";
+mes "vendo os rostos que passam, como se";
+mes "estive procurando por alguém.^000000";
+close;
+}
+
+//Controle de Area (que_ba)
+//======================
+que_ba,270,270,5	script	Controle#controle-a5	-1,1,1,{
+end;
+
+OnTouch:
+	if(ep12_moc_que1 != 19) end;
+	mes "...........";
+	mes "............";
+	mes "............";
+	next;
+	mes "[Homem Misterioso]";
+	mes "................";
+	mes "................";
+	mes "................";
+	mes "E...Eva, não!";
+	next;
+	mes "[Homem Misterioso]";
+	mes "Foi um sonho?";
+	mes "...............";
+	mes "...Nossa, que estranho.";
+	next;
+	mes "[Homem Misterioso]";
+	mes "Mamãe era... Era uma humana normal.";
+	mes "Eu estava ao lado dela?";
+	mes ".............";
+	next;
+	mes "^A0522DEle resmungou para si mesmo, e";
+	mes "arrumou seu cabelo suado com a mão";
+	mes "trêmula.^000000";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Mais um sonho.";
+	mes "Acho que ele não pode me ver nem me ouvir, assim como os outros.";
+	next;
+	mes "^A0522DVocê baixa a guarda, e olhe para ele.";
+	mes "De repente, o rosto dele se retorce de raiva quando ele se volta para você.^000000";
+	next;
+	mes "[Homem Misterioso]";
+	mes "Que inferno, como você me achou?!";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...Uai! Ele está me vendo! Ele está me vendo!";
+	next;
+	hideoffnpc "mque1_misteriosa";
+	mes "[Mulher Misteriosa]";
+	mes "Não há por que ficar tão bravo";
+	mes "comigo, senhor.";
+	next;
+	mes "^A0522DAssim que você ouve a outra voz,";
+	mes "você se vira e vê uma mulher parada ali.^000000";
+	next;
+	mes "[Mulher Misteriosa]";
+	mes "Estava quase tudo terminado, mas";
+	mes "então você destruiu tudo, -- até";
+	mes "mesmo ^A0522DBIIP^000000 e ^A0522DBIIP^000000 -- e se escondeu";
+	mes "aqui.";
+	next;
+	mes "[Homem Misterioso]";
+	mes "Eles não deveriam existir neste";
+	mes "mundo!";
+	next;
+	mes "[Mulher Misteriosa]";
+	mes "É a decisão dele. Seu destino está";
+	mes "nas mãos dele...";
+	next;
+	mes "[Homem Misterioso]";
+	mes "Cale-se!";
+	next;
+	specialeffect 359;
+	sleep2 500;
+	hideonnpc "mque1_misteriosa";
+	mes "^A0522DO homem enfurecido sacou uma espada e apontou para ela.";
+	mes "De repente, ela se transformou em um corvo e voou para longe.";
+	mes "Os ecos da risada dela podiam ser ouvidos pela janela.^000000";
+	next;
+	mes "[Voz]";
+	mes "Você está preso ao seu destino, não importa o quanto tente escapar...";
+	next;
+	mes "..............";
+	mes "..............";
+	mes "..............";
+	mes "..............";
+	close2;
+	set ep12_moc_que1, 20;
+	warp "yuno_in04",165,122;
+	end;
+}
+
+//Homem Misterioso (que_ba)
+//========================
+que_ba,263,276,2	script	Homem Misterioso::mque1_misterioso	755,{
+end;
+}
+
+//Homem Misterioso (que_ba)
+//========================
+que_ba,270,181,2	script	Homem Misterioso::mque1_misterioso2	755,{
+end;
+}
+
+//Mulher Misteriosa (que_ba)
+//========================
+que_ba,267,268,2	script	Mulher Misteriosa::mque1_misteriosa	982,{
+end;
+
+OnInit:
+hideonnpc "mque1_misteriosa";
+}
+
+//Warps (que_ba)
+//==============
+que_ba,265,34,0	warp	qba01	1,1,que_ba,159,38
+que_ba,156,38,0	warp	qba02	1,1,que_ba,262,34
+que_ba,184,25,0	warp	qba03	1,1,que_ba,72,25
+que_ba,68,25,0	warp	qba04	1,1,que_ba,181,25
+que_ba,184,51,0	warp	qba05	1,1,que_ba,71,51
+que_ba,68,51,0	warp	qba06	1,1,que_ba,181,51
+
+//Warps (cave)
+//============
+cave,86,167,0	warp	cave01	1,1,cave,80,182
+cave,81,178,0	warp	cave02	1,1,cave,88,164
+
+//====================================================================
+//   _           ___  _   _                      
+//  | |         / _ \| | | |                     
+//  | |__  _ __/ /_\ \ |_| |__   ___ _ __   __ _ 
+//  | '_ \| '__|  _  | __| '_ \ / _ \ '_ \ / _` |
+//  | |_) | |  | | | | |_| | | |  __/ | | | (_| |
+//  |_.__/|_|  \_| |_/\__|_| |_|\___|_| |_|\__,_| 
+//
+//		www.brathena.org
+//
+//===== brAthena Script ==============================================
+//= Quest: Sucessor do Trono (EP12.1 - Ruína de Morroc)              
+//===== Por: =========================================================
+//= Mobius                                                                     
+//===== Versão Atual: ================================================
+//= 1.1
+//===== Descrição: ===================================================
+//= Nova quest referente ao episódio 12.1 - Ruína de Morroc
+//= [ Baseado na quest oficial do bRO ]
+//===== Changelog: ===================================================
+//= 1.0 Primeira versão, ainda em fase beta.	[Mobius]
+//= 1.1 Diversos bugs corrigidos, primeira versão funcional	[Mobius]
+//====================================================================
+
+//Mensageiro (prontera)
+//====================
+prontera,153,353,4	script	Mensageiro::mque2_pt1	105,{
+
+if(!rebirth_moc_edq) {
+	mes "[Mensageiro]";
+	mes "Sou um mensageiro de Rune-Midgard.";
+	mes "Há alguma coisa estranha neste país?";
+	next;
+	mes "[Mensageiro]";
+	mes "Você viu algo misterioso?";
+	mes "Ou ouviu alguma fofoca?";
+	close;
+} else if(!ep12_moc_que2) {
+	mes "[Mensageiro]";
+	mes "Sou um mensageiro da Corte Real, enviado para encontrar um aventureiro confiável.";
+	mes "Trata-se de um assunto muito importante para nossa nação.";
+	next;
+	mes "[Mensageiro]";
+	mes "É claro que a desordem nacional deixou todos cientes";
+	mes "do renascimento do demônio.";
+	mes "O momento é para lidarmos com este assunto sem alarde.";
+	next;
+	mes "[Mensageiro]";
+	mes "O Rei não tem aparecido em público já faz algum tempo.";
+	mes "Muitos estão curiosos com a situação.";
+	next;
+	mes "[Mensageiro]";
+	mes "Odeio este meu dever de dar essa notícia triste aos outros.";
+	mes "Acho que você já entendeu algo com minhas palavras...";
+	next;
+	mes "[Mensageiro]";
+	mes "O Rei Tristam faleceu...";
+	mes "Depois de sofrer por muito tempo com uma doença crônica.";
+	next;
+	mes "[Mensageiro]";
+	mes "A Corte Real agora está no processor de escolher o próximo rei.";
+	mes "Minha missão é encontrar um aventureiro e mandá-lo à corte.";
+	next;
+	mes "[Mensageiro]";
+	mes "Eles lhe dirão o que você tem de fazer na corte.";
+	mes "Espero que você ajude a trazer a paz a Rune-Midgard.";
+	set ep12_moc_que2, 1;
+	close;
+} else if(ep12_moc_que2 == 1) {
+	mes "[Mensageiro]";
+	mes "Quero que você vá à Corte Real de Prontera para";
+	mes "ajudar na escolha do próximo Rei.";
+	next;
+	mes "[Mensageiro]";
+	mes "Ficarei aqui para encontrar outros aventureiros.";
+	mes "Que seu coração traga grande glória a Rune-Midgard!";
+	close;
+} else if(ep12_moc_que2 > 1) {
+	mes "[Mensageiro]";
+	mes "Estou em uma missão agora.";
+	mes "Pensei que você tivesse de encontrar um local em particular.";
+	mes "Pergunte a outra pessoa.";
+	close;
+}
+}
+
+//Inspetor (prt_castle)
+//==================
+prt_castle,117,163,5	script	Inspetor::mque2_pt2	755,{
+
+if(ep12_moc_que2_b == 1) {
+	mes "[Inspetor]";
+	mes "Ah, você já veio me ver antes, não?";
+	mes "Você já deve ter ido a Glastheim.";
+	next;
+	mes "[Inspetor]";
+	mes "Trouxe as 2 Rédeas que pedi?";
+	next;
+	if(countitem(1064) < 2) {
+		mes "[Inspetor]";
+		mes "Você nunca teve uma missão perigosa, não é?";
+		mes "Como ousa achar que pode cumprir esta?";
+		mes "Não acho que você possa trabalhar na avaliação dos príncipes.";
+		next;
+		mes "[Inspetor]";
+		mes "Bem, você pode voltar depois.";
+		close;
+	}
+	mes "[Inspetor]";
+	mes "Ooh!";
+	mes "Francamente, não esperava que você as trouxesse.";
+	mes "Você foi muito bem.";
+	next;
+	mes "[Inspetor]";
+	mes "Certo, muito bem. Você provou sua força por si mesmo.";
+	mes "Passou em um exame. Resta mais um.";
+	next;
+	mes "[Inspetor]";
+	mes "O avaliador dos príncipes deve ter um bom caráter.";
+	mes "A força não resolve tudo. É aí que a personalidade entra.";
+	next;
+	mes "[Inspetor]";
+	mes "Sendo assim, o próximo teste será sobre seu caráter.";
+	mes "São apenas perguntas simples, mas é melhor você relaxar e se preparar...";
+	mes "Depois venha falar comigo.";
+	delitem 1064, 2;	//Rédeas
+	set ep12_moc_que2_b, 2;
+	close;
+} else if(ep12_moc_que2_b == 2) {
+	mes "[Inspetor]";
+	mes "Então, está pronto?";
+	mes "Este teste não é tão difícil...";
+	next;
+	mes "[Inspetor]";
+	mes "Ele serve para avaliar sua atitude e comportamento em certas situações.";
+	mes "Ouça com atenção as minhas perguntas, e responda sinceramente,";
+	mes "de acordo com o que você já vivenciou.";
+	next;
+	mes "[Inspetor]";
+	mes "Agora, vou começar.";
+	next;
+	goto L_inspetor_teste;
+} else if(ep12_moc_que2 == 2) {
+	mes "[Inspetor]";
+	mes "Bem-vindo.";
+	mes "Vou lhe dar instruções sobre o que se deve fazer e com o que";
+	mes "se deve tomar cuidado, em relações aos príncipes.";
+	mes "Preste atenção.";
+	next;
+	mes "[Inspetor]";
+	mes "Primeiro, vou responder às suas perguntas.";
+	next;
+	L_menu_inspetor:
+	switch(select("O que devo fazer, exatamente?:Tristam III morreu por causa de sua doença?:Minha minha missão é confidencial?:Não tenho mais perguntas.")) {
+		case 1:
+			mes "[Inspetor]";
+			mes "Temos sete candidatos de sete famílias.";
+			mes "Um de cada família.";
+			mes "Os candidatos estarão em um lugar que lhe indicarei mais tarde.";
+			next;
+			mes "[Inspetor]";
+			mes "Você deve conhecer cada um dos candidatos e fazer perguntas sobre seu caráter,";
+			mes "ou observar suas ações, e voltar aqui e me relatar em detalhes tudo";
+			mes "o que você observar.";
+			next;
+			mes "[Inspetor]";
+			mes "A regra mais comum é que os príncipes sejam avaliados pelas famílias reais";
+			mes "por muito tempo, e que o Rei seja eleito por um decreto interno.";
+			next;
+			mes "[Inspetor]";
+			mes "Por causa da ressurreição do demônio, o povo de Morroc não está apto";
+			mes "a seguir os procedimentos normais, e o reino está instável.";
+			mes "Cada reino está ocupado, tentando impedir que o caos em Morroc se espalhe.";
+			next;
+			mes "[Inspetor]";
+			mes "Portanto, desta vez a Corte decidiu mudar os procedimentos,";
+			mes "dando a oportunidade de avaliar os candidatos a aventureiros";
+			mes "famosos e valorosos como você.";
+			mes "É por isso que você está aqui.";
+			next;
+			set .@falou1, 1;
+			goto L_menu_inspetor;
+		case 2:
+			mes "[Inspetor]";
+			mes "Que absurdo você perguntar isso!";
+			mes "Já lhe disse claramente que o Rei Tristam morreu pela doença,";
+			mes "não disse?";
+			next;
+			mes "[Inspetor]";
+			mes "Não tem alguma coisa melhor para perguntar?";
+			next;
+			set .@falou2, 1;
+			goto L_menu_inspetor;
+		case 3:
+			mes "[Inspetor]";
+			mes "Claro.";
+			mes "Seria natural anunciar a morte do Rei.";
+			mes "Mas o clima pelo qual a nação passa agora não é propício.";
+			mes "Esta é a nossa única alternativa.";
+			next;
+			mes "[Inspetor]";
+			mes "Os príncipes não podem sair por vontade própria.";
+			mes "O povo não pode vir ao palácio, onde os príncipes estão.";
+			next;
+			set .@falou3, 1;
+			goto L_menu_inspetor;
+		case 4:
+			if((!.@falou1) || (!.@falou2) || (!.@falou3)) {
+				mes "[Inspetor]";
+				mes "Você já recebeu instruções sobre o que fazer, não é?";
+				mes "Este assunto não é trão trivial para ser lidado com displicência!";
+				mes "Tenha mais cuidado!";
+				next;
+				mes "[Inspetor]";
+				mes "Se você não estiver motivado, posso encontrar outro aventureiro.";
+				mes "Você pode voltar aos seus afazeres, se quiser.";
+				next;
+				goto L_menu_inspetor;
+			}
+			mes "[Inspetor]";
+			mes "Acho que já lhe dei instruções suficientes.";
+			mes "Agora vou lhe dizer onde você pode encontrar os príncipes.";
+			next;
+			mes "[Inspetor]";
+			mes "Quando você chegar à sala do oficial médico,";
+			mes "um soldado estará a postos em um local estranho.";
+			mes "Você verá que não há nenhuma porta.";
+			next;
+			mes "[Inspetor]";
+			mes "Atrás do soldado, há uma porta secreta.";
+			mes "Se você falar com o soldado, ele permitirá que você entre.";
+			next;
+			mes "[Inspetor]";
+			mes "Como já disse, este é um assunto muito importante para o";
+			mes "Reino de Rune-Midgard.";
+			mes "Embora já tenha destacado muito isso, sempre é bom lembrar.";
+			next;
+			mes "[Inspetor]";
+			mes "Por favor, comporte-se adequadamente.";
+			mes "Obrigado pelo esforço.";
+			set ep12_moc_que2, 3;
+			close;
+	}
+} else if((ep12_moc_que2 >= 3) && (ep12_moc_que2 < 14) || (ep12_moc_que2 >= 15) && (ep12_moc_que2 < 23)) {
+	mes "[Inspetor]";
+	mes "Olá, avaliador.";
+	mes "Espero que você possa concluir sua missão.";
+	mes "Encontrou todos os príncipes?";
+	if(ep12_moc_que2 == 15) enablenpc "d_ahrum1";
+	close;
+} else if(ep12_moc_que2 == 14) {
+	mes "[Inspetor]";
+	mes "Você deve ser o avaliador.";
+	mes "Como vai? Não creio que seja fácil";
+	mes "encontrar sete candidatos e avaliá-los.";
+	next;
+	mes "[Inspetor]";
+	mes "Oh! Já terminou?";
+	mes "Você trabalhou rápido para cumprir a tarefa bem.";
+	next;
+	mes "[Inspetor]";
+	mes "Então, fale-me sobre os candidatos...";
+	next;
+	mes "- Relatei minhas impressões dos candidatos a rei ao Inspetor.";
+	mes "É claro que só forneci fatos diretos e claros a ele. -";
+	next;
+	mes "[Inspetor]";
+	mes "Hum... é isso, então? Suas palavras me ajudaram muito.";
+	mes "Obrigado por seu trabalho duro.";
+	next;
+	mes "[Inspetor]";
+	mes "Falando nisso, acabo de saber de um rumor sobre o";
+	mes "Príncipe Eigen Ahrum da família Walter.";
+	mes "Pode avaliar todos os candidatos, mais uma vez?";
+	mes "Preciso disso com urgência.";
+	next;
+	mes "[Inspetor]";
+	mes "O cenário pode mudar agora...";
+	mes "Com os outros deve estar tudo bem.";
+	mes "Mas me preocupo com Eigen Ahrum,";
+	mes "e não posso ignorar algo como um rumor sobre um candidato.";
+	next;
+	mes "[Inspetor]";
+	mes "Certo, então faça sua tarefa mais uma vez, por favor.";
+	set ep12_moc_que2, 15;
+	enablenpc "d_ahrum1";
+	close;
+} else if(ep12_moc_que2 == 23) {
+	mes "[Inspetor]";
+	mes "Como está indo?";
+	mes "Avaliar alguém não é nada fácil.";
+	mes "É realmente um trabalho duro.";
+	mes "E você está fazendo isso por nosso país.";
+	next;
+	mes "- Contei a ele sobre o incidente com Ahrum e Ernst. -";
+	next;
+	mes "[Inspetor]";
+	mes "Quê?! Não posso acreditar!?";
+	mes "Nossa, é tão...";
+	next;
+	mes "[Inspetor]";
+	mes "Pelas mãos de Ernst...";
+	mes "Sim...";
+	next;
+	mes "[Inspetor]";
+	mes "Você cumpriu sua tarefa como avaliador com maestria.";
+	mes "Agradeço muito por sua ajuda até agora.";
+	mes "Com isso, o futuro do reino estará em dívida com você.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "(Ele não parece estar surpreso,";
+	mes "não muito... Será que há algum outro motivo?";
+	mes "Que suspeito...)";
+	next;
+	mes "[Inspetor]";
+	mes "Ouça, as coias que você viu e ouviu aqui não podem ser reveladas.";
+	mes "Você deve entender que tudo isto é confidencial, é claro.";
+	mes "Então, continue com o bom trabalho.";
+	mes "Pelo Reino de Rune-Midgard!";
+	if(BaseLevel == 80) getexp 300000, 0;
+	if((BaseLevel > 80) && (BaseLevel < 85)) getexp 500000, 0;
+	if((BaseLevel >= 85) && (BaseLevel < 91)) getexp 450000, 0;
+	if((BaseLevel > 90) && (BaseLevel < 96)) getexp 500000, 0;
+	if((BaseLevel > 95) && (BaseLevel < 99)) getexp 550000, 0;
+	if(BaseLevel == 99) getexp 1100000, 0;
+	set ep12_moc_que2, 24;
+	enablenpc "mque2_pt7";
+	close;
+} else if(ep12_moc_que2 == 24) {
+	mes "[Inspetor]";
+	mes "Tudo pela glória de Rune-Midgard!";
+	close;
+}
+mes "[Inspetor]";
+mes "O que há errado com você?";
+mes "Esta área é restrita!";
+if(!ep12_moc_que2) {
+	close2;
+	warp "prontera",155,353;
+	end;
+}
+next;
+switch(select("Certo, entendi.:O Mensageiro me mandou vir aqui.")) {
+	case 1:
+		mes "[Inspetor]";
+		mes "Se entendeu, o que ainda está fazendo aqui?";
+		mes "Saia daqui!";
+		sleep2 1000;
+		warp "prontera",155,353;
+		close;
+	case 2:
+		mes "[Inspetor]";
+		mes "......";
+		next;
+		if(Class == 7 || Class == 10 || Class == 11 || Class == 12 || Class == 13 || Class == 15 || Class == 4008 ||  Class == 4011 || Class == 4012 || Class == 4013 || Class == 4014 || Class == 4016) {
+			mes "[Inspetor]";
+			mes "Não acho que você seja um aventureiro experiente...";
+			mes "E este é um assunto importante para a nação.";
+			mes "Não posso dar esse trabalho a qualquer um como você.";
+			next;
+			mes "[Inspetor]";
+			mes "Mas, se você provar ser um aventureiro forte,";
+			mes "então deixarei você passar pelo teste de qualificação.";
+			next;
+			mes "[Inspetor]";
+			mes "Já ouviu falar de Glastheim?";
+			mes "Nessa área, há monstros chamados Cavaleiros do Abismo.";
+			next;
+			mes "[Inspetor]";
+			mes "Depois de derrotar os Cavaleiros do Abismo, traga 2 ^FF0000Rédeas^000000.";
+			mes "Se você cumprir esta missão, respeitarei sua força.";
+			next;
+			mes "[Inspetor]";
+			mes "Vamos continuar nossa conversa quando você trouxer as 2 Rédeas.";
+			mes "Tchau...";
+			set ep12_moc_que2_b, 1;
+			close;
+		}
+		mes "[Inspetor]";
+		mes "O Mensageiro apenas verificou sua aptidão física e mandou você";
+		mes "vir à Corte. Esse é o único dever dele.";
+		mes "Verificar se você é qualificado é tarefa minha.";
+		next;
+		mes "[Inspetor]";
+		mes "Hum...";
+		next;
+		mes "[Inspetor]";
+		mes "Você é um viajante experiente.";
+		mes "Tem bastante força, mas...";
+		mes "A Corte não escolhe uma pessoa apenas por sua força";
+		mes "ou experiência em batalha.";
+		next;
+		mes "[Inspetor]";
+		mes "Para avaliar os outros, você precisa ter a personalidade apropriada.";
+		next;
+		mes "[Inspetor]";
+		mes "Sendo assim, preciso de um teste simples.";
+		mes "Vamos testar você. Não vai ser nada complexo.";
+		mes "Você só precisa dar uma resposta rápida, e franca, por favor.";
+		next;
+		mes "[Inspetor]";
+		mes "Então, vamos começar. Prepare-se.";
+		mes "Ouça com atenção e responda.";
+		next;
+		L_inspetor_teste:
+		mes "[Inspetor]";
+		mes "O que acha que é a coisa mais importante a se";
+		mes "considerar como líder de um grupo de caça?";
+		next;
+		select("A força e as características do monstro.:A eficiência da caçada.:O que podemos conseguir com a caçada.");
+		mes "[Inspetor]";
+		mes "E se você perder um membro do grupo durante a batalha?";
+		next;
+		select("Continuaremos lutando até conseguirmos o que buscamos.:Encontramos um outro lugar para caçar.:Paramos de caçar e nos recuperamos.");
+		mes "[Inspetor]";
+		mes "O que se ganha em uma caçada...";
+		next;
+		select("Compartilho como foi combinado.:Não quero nem pensar em dividir.:Dou a quem precisar.");
+		mes "[Inspetor]";
+		mes "Que tipo de classe no grupo precisa ser curado enquanto o inimigo ainda vive?";
+		next;
+		select("O Sacerdote, o curandeiro.:O Caçador, o 'causador de dano'.:O Lorde, o 'tanque'.");
+		mes "[Inspetor]";
+		mes "Com quem você prefe fazer amizade?";
+		next;
+		select("Uma pessoa forte.:Uma pessoa experiente.:Uma pessoa gentil.");
+		mes "[Inspetor]";
+		mes "Qual foi sua capacidade que mais lhe ajudou durante seu treinamento?";
+		next;
+		select("Relacionamento com as pessoas.:Colher muitas informações.:Discernimento e força de vontade.");
+		mes "[Inspetor]";
+		mes "Como você costuma encorajar os outros?";
+		next;
+		select("Lembrar de um erro no passado.:'Hesitar é o pior'.:'Você não está sozinho'.");
+		mes "[Inspetor]";
+		mes "Qual é a virtude que você mais busca na vida?";
+		next;
+		select("Crescimento pessoal.:Paz no mundo.:A busca da verdade.");
+		mes "[Inspetor]";
+		mes "O que você gostaria de ter se ficasse preso em uma ilha deserta?";
+		next;
+		select("Mapa:Pederneira:Arma");
+		mes "[Inspetor]";
+		mes "Que tipo de história você gosta mais?";
+		next;
+		select("História de amor.:Epopéia heróica.:Conto religioso.");
+		mes "[Inspetor]";
+		mes "Você veio combater um monstro novo em uma área nova.";
+		mes "O que você faz?";
+		next;
+		select("Ataco primeiro.:Observo à distância.:Fujo.");
+		mes "[Inspetor]";
+		mes "O que deve ser feito ao governar o Reino de Rune-Midgard?";
+		next;
+		select("Dominar outros países, reforçando a força nacional.:Desenvolver a economia e tecnologia.:Fortalecer a segurança pública.");
+		next;
+		mes "[Inspetor]";
+		mes "Seu teste está terminado.";
+		mes "Você tem vivido...";
+		next;
+		mes "[Inspetor]";
+		mes "Acho que você é qualificado para avaliar outras pessoas.";
+		mes "Peço desculpas por minha falta de educação no começo.";
+		next;
+		mes "[Inspetor]";
+		mes "Então, quero que nos faça um favor.";
+		mes "Você será nosso avaliador.";
+		if(ep12_moc_que2_b == 2) {
+			next;
+			mes "[Inspetor]";
+			mes "Ah, passamos um longo tempo aqui.";
+			mes "Você deve estar muito cansado.";
+			mes "Antes de começar o trabalho, se precisar se preparar,";
+			mes "faça isso e volte depois.";
+			mes "Estarei esperando por você aqui.";
+			set ep12_moc_que2_b, 0;
+			set ep12_moc_que2, 2;
+			close;
+		}
+		set ep12_moc_que2, 2;
+		close;
+}
+}
+
+//Guarda (prt_castle)
+//=================
+prt_castle,176,170,6	script	Guarda::mque2_pt3	105,{
+
+if(ep12_moc_que2 < 3) {
+	mes "[Guarda Estranho]";
+	mes "Só estou aqui descansando.";
+	mes "Se quiser informações, pode perguntar a outra pessoa.";
+	close;
+} else if(ep12_moc_que2 >= 3) {
+	mes "[Guarda Estranho]";
+	mes "Você pode ir à sala em que os príncipes se reúnem";
+	mes "pela porta secreta às minhas costas.";
+	mes "Por medida de segurança, ela é totalmente guardada e escondida.";
+	next;
+	mes "[Guarda Estranho]";
+	mes "Deixe-me abrir a porta.";
+	close2;
+	warp "prt_castle",220,312;
+	end;
+}
+end;
+}
+
+//Primeiro Príncipe (prt_castle)
+//==========================
+prt_castle,272,375,4	script	Príncipe::mque2_pt4	881,{
+
+
+if(ep12_moc_que2 == 15) {
+	mes "[Erich]";
+	mes "... Ultimamente, só tenho má sorte...";
+	mes "Só aborrecimentos acontecem comigo...";
+	close;
+} else if((ep12_moc_que2 > 15) && (ep12_moc_que2 < 23)) {
+	mes "[Erich]";
+	mes "...Que má sorte eu tenho!";
+	mes "Mas ele insite que eu seja corrompido, sabendo como seria...";
+	close;
+} else if(ep12_moc_que2 >= 23) {
+	mes "- Ele está obcecado em fabrir um cadeado e uma chave. -";
+	close;
+} else if(mque2_talk_pcp1) {
+	mes "[Erich]";
+	mes ".....Minha consciência!";
+	mes "Isso não está nada bom...";
+	next;
+	mes "- Ele parece estar obcecado demais para";
+	mes "se importar com qualquer outra coisa. -";
+	close;
+}
+mes "[Príncipe]";
+mes "Quem é você?";
+mes "Qualquer um precisaria ser informado sobre a entrada secreta para entrar.";
+mes "A não ser que... Você é o avaliador?";
+next;
+select("Sim, sou.");
+mes "[Príncipe]";
+mes "É você?... Faça-me um favor, então.";
+mes "Sou filho legítimo da família Nerius.";
+mes "Meu nome é Erich.";
+mes "Pode me chamar de Príncipe Erich.";
+next;
+mes "[Erich]";
+mes "Meu nome completo é...";
+next;
+mes "[Erich]";
+mes "Ah, isso basta.";
+mes "Pode pedir informações sobre mim ao meu serviçal.";
+mes "Vou descansar.";
+set mque2_talk_pcp1, 1;
+close;
+}
+
+//Servente (prt_castle)
+//===================
+prt_castle,274,372,4	script	Servente::mque2_pt5	48,{
+
+if(ep12_moc_que2 == 15) {
+	mes "- É sempre assim... -";
+	mes "- Ele treme sempre que vou falar com ele.";
+	mes "Esse tipo de atitude me dá pena. -";
+	close;
+} else if(ep12_moc_que2 > 15) {
+	mes "[Hans]";
+	mes "Ah... hum... Eu...";
+	mes "Eu... sinto muito!";
+	mes "Eu... acho que cometi um grande erro com você,";
+	mes "avaliador!";
+	next;
+	mes "[Hans]";
+	mes "Meu príncipe não fez nada de errado, mas,";
+	mes "de qualquer forma, peço desculpas por qualquer coisa!";
+	close;
+} else if(!mque2_talk_pcp1) {
+	mes "[Hans]";
+	mes "Olá?";
+	mes "Você é o novo avaliador??";
+	close;
+}
+mes "[Hans]";
+mes "Como vai, senhor?";
+mes "Meu nome é Hans, sou serviçal do Príncipe Erich.";
+next;
+mes "[Hans]";
+mes "O que posso fazer por você?";
+next;
+switch(select("O Príncipe Erich me disse para falar com você.:Nada de mais.")) {
+	case 1:
+		mes "[Hans]";
+		mes "O Príncipe Erich...?";
+		next;
+		select("Quero ouvir uma história sobre ele.");
+		mes "[Hans]";
+		mes "Ah, entendo.";
+		mes "Sinceramente, o Príncipe Erich não está não interessado assim em governar.";
+		mes "Ele escreve no diário todos os dias.";
+		mes "No dia do seu casamento, ele escreveu:";
+		mes "'Nada de especial aconteceu hoje'.";
+		mes "Ele não se importa com os eventos ou com relacionamentos humanos.";
+		next;
+		mes "[Hans]";
+		mes "O que ele gosta é de fazer cadeados.";
+		mes "Ele é excêntrico, não é?";
+		mes "às vezes ele gosta de zombar.";
+		next;
+		mes "[Hans]";
+		mes "Ele também não gosta de roupas chiques.";
+		mes "Ele nem sequer trouxe um roupa de gala para cá.";
+		mes "E assim que chegou aqui, ele se concentrou em fazer um";
+		mes "cadeado e uma chave, simplesmente isso.";
+		next;
+		mes "[Hans]";
+		mes "Não sei a melhor coisa para dizer a você...";
+		mes "Acho que não tenho nada especial a dizer sobre ele a você.";
+		mes "Você pode simplesmente avaliá-lo como o está vendo.";
+		next;
+		mes "[Hans]";
+		mes "Isso é tudo o que posso dizer.";
+		mes "Hã...";
+		next;
+		mes "[Hans]";
+		mes "Ah, Príncipe!";
+		mes "Assim você vai cortar o dedo!";
+		emotion e_gasp;
+		next;
+		mes "[Erich]";
+		mes ".........";
+		next;
+		mes "[Hans]";
+		mes "...Hum, ele nem ouve...";
+		mes "Aaahh...";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "......";
+		close;
+	case 2:
+		mes "[Hans]";
+		mes "Você conheceu os outros príncipes?";
+		next;
+		mes "[Hans]";
+		mes "Embora você possa perguntar qualquer coisa, não vai";
+		mes "ouvir nada especial dele agora.";
+		close;
+}
+}
+
+//Segundo Príncipe (prt_castle)
+//==========================
+prt_castle,339,205,2	script	Príncipe::mque2_pt6	989,{
+
+if((ep12_moc_que2 > 15) && (ep12_moc_que2 < 23)) {
+	mes "[Urugen]";
+	mes "...O quê? O que você...";
+	mes "acaba de dizer?... Hã?";
+	close;
+} else if(ep12_moc_que2 >= 23) {
+	mes "[Urugen]";
+	mes "...Não estou bonito.";
+	mes "Isso me deixa desconfortável...";
+	close;
+}
+mes "[Príncipe]";
+mes "La la la la...";
+mes "Você é a pessoa encarregada de falar comigo e me avaliar.";
+next;
+mes "[Príncipe]";
+mes "O narciso que está na sua frente agora se chama Urugen.";
+mes "Ele floresceu na família Wigner.";
+next;
+mes "[Urugen]";
+mes "Normalmente não deixo ninguém ouvir minha bela voz,";
+mes "mas desta vez, farei este favor especial a você.";
+next;
+mes "[Urugen]";
+mes "Olhe, deixe-me responder, com minha bela,";
+mes "cristalina e inesquecível voz.";
+next;
+L_urugen_menu:
+switch(select("Quero saber sua história.:Fale-me da sua visão sobre a nação.:Quais são seus gostos e passatempos?:Deixe-me ir.")) {
+	case 1:
+		mes "[Urugen]";
+		mes "Meu belo rosto, desde a infância, gerou inveja e ciúmes entre os homens,";
+		mes "e várias propostas de mulheres.";
+		mes "Fiquei enjoado com isso, então me afastei das pessoas.";
+		next;
+		mes "[Urugen]";
+		mes "Minha bela pessoa não deveria suportar coisas assim, nunca.";
+		next;
+		mes "[Urugen]";
+		mes "Fiquei tímido, aos poucos.";
+		mes "Assusto-me com homens e mulheres; independentemente da sexualidade.";
+		next;
+		set .@falou1, 1;
+		goto L_urugen_menu;
+	case 2:
+		mes "[Urugen]";
+		mes "As pessoas fazem o que devem fazer.";
+		mes "Essa é a fonte da vontade de uma nação.";
+		mes "Creio que minha existência seja suficiente para esta nação.";
+		next;
+		mes "[Urugen]";
+		mes "A presença de um Rei tão belo quanto eu será a luz para o povo e";
+		mes "a esperança e razão de suas vidas.";
+		next;
+		set .@falou2, 1;
+		goto L_urugen_menu;
+	case 3:
+		mes "[Urugen]";
+		mes "Certamente, é cuidar do meu corpo.";
+		mes "Os humanos devem buscar a beleza.";
+		mes "É natural, não é?";
+		next;
+		mes "[Urugen]";
+		mes "Mas para toda regra, há uma exceção, como sua presença nesta corte.";
+		mes "Pode ficar um pouco mais longe de mim?";
+		mes "Mal consigo respirar, com o seu cheiro.";
+		next;
+		set .@falou3, 1;
+		goto L_urugen_menu;
+	case 4:
+		mes "[Urugen]";
+		mes "Seu espírito deve ser bem forte.";
+		mes "Mesmo olhando minha beleza por tanto tempo,";
+		mes "você não perdeu a razão.";
+		if((.@falou1) && (.@falou2) && (.@falou3)) set mque2_talk_pcp2, 1;
+		close;
+}
+}
+
+//Terceiro Príncipe (prt_castle)
+//==========================
+prt_castle,314,314,4	script	Príncipe::mque2_pt7	983,{
+
+if(ep12_moc_que2 == 6) {
+	mes "[Ahrum]";
+	mes "Como está Ernst...?";
+	mes "Ele leva a sério qualquer assunto.";
+	mes "Ele não cria problemas nem revela...";
+	mes "...ações estranhas.";
+	next;
+	mes "[Ahrum]";
+	mes "Éramos amigos íntimos.";
+	mes "Ao contrário de mim, ele é gentil e misericordioso;";
+	mes "um oficial distinto para assuntos públicos.";
+	mes "Quando precisa ser rígido, ele é rigído com tudo.";
+	set ep12_moc_que2, 7;
+	close;
+} else if(ep12_moc_que2 == 7) {
+	mes "[Ahrum]";
+	mes "Eu, Eigen Ahrum, serei a luz de Rune-Midgard.";
+	close;
+} else if(ep12_moc_que2 == 8) {
+	mes "[Ahrum]";
+	mes "Quem quer que seja o rei, vamos tornar Rune-Midgard a melhor nação do mundo,";
+	mes "ajudando-nos uns aos outros.";
+	next;
+	mes "[Ernst]";
+	mes "Nós podemos.";
+	mes "Não, nós vamos conseguir. Meu irmão e eu, juntos, vamos conseguir.";
+	next;
+	mes "[Ahrum]";
+	mes "Mas... Se eu reinar, ou se você reinar; se eu me corromper...";
+	mes "mate-me... com suas próprias mãos.";
+	next;
+	mes "[Ahrum]";
+	mes "Se ao contrário acontecer, matarei você também, entendeu?";
+	mes "Então nunca se desgarre, e nunca se esqueça de sua determinação.";
+	next;
+	mes "[Ernst]";
+	mes "Irmão, o que está pensando?";
+	mes "Isso nunca vai acontecer, então...";
+	mes "Não fale deste jeito.";
+	next;
+	mes "[Ahrum]";
+	mes "Ah, é só uma suposição.";
+	mes "Não quero que isto aconteça.";
+	next;
+	mes "[Ernst]";
+	mes "Certo, certo. Não leve isso a mal.";
+	mes "Tenho agido como bom irmão neste reinado,";
+	mes "e serei o mesmo no próximo.";
+	next;
+	mes "[Ahrum]";
+	mes "Ah, o avaliador chegou.";
+	mes "Como pôde aparecer tão de repente?";
+	mes "Ernst e eu estávamos no meio da conversa.";
+	emotion e_gasp;
+	next;
+	mes "[Ernst]";
+	mes "O que tem de errado, irmão? Não falamos nada de ruim.";
+	mes "Só estavamos firmando nossa resolução...";
+	next;
+	mes "[Ahrum]";
+	mes "Você chegou em boa hora.";
+	mes "Acabamos de decidir que um matará o outro...";
+	mes "se um de nós se corromper.";
+	next;
+	mes "[Ernst]";
+	mes "Irmão?!";
+	next;
+	mes "[Ahrum]";
+	mes "Enfim, que seja você a testemunha desta promessa.";
+	mes "Você não pode recusar. Afinal, é algo muito bom de certa forma,";
+	mes "para seu trabalho, não é?";
+	next;
+	mes "[Ernst]";
+	mes "Ir-irmão. Você está forçando isso.";
+	mes "Nosso avaliador deve ter sua própria posição e opinião.";
+	next;
+	mes "[Ahrum]";
+	mes "Que personalidade fraca você ainda tem.";
+	mes "Não o estou forçando a nada difícil!";
+	mes "Ah, e daí? Vou tomar o silêncio como consentimento!";
+	mes "Consegui o que queria! E nossa promessa está firmada!";
+	next;
+	mes "[Ernst]";
+	mes "Ha... haha... Avaliador, peço desculpas por ofendemos você.";
+	mes "Desculpe, mas não há chances dessa promessa ter de ser cumprida.";
+	mes "Então, não leve isto a sério...";
+	mes "Sabe... Quando as galinhas criarem dentes... ^.^";
+	next;
+	mes "[Ernst]";
+	mes "Agora, vou voltar ao meu quarto.";
+	mes "Mantenha o bom trabalho, avaliador.";
+	set ep12_moc_que2, 9;
+	specialeffect 16;
+	disablenpc "dpcp1";
+	close;
+} else if(ep12_moc_que2 == 9) {
+	mes "[Ahrum]";
+	mes "Ouvi dizer que uma pessoa da minha família viria hoje.";
+	mes "Mas ainda não a encontrei.";
+	next;
+	mes "[Ahrum]";
+	mes "Queria saber o que você acha...";
+	mes "O que você tem a dizer desta vez?...";
+	mes "Você a viu, avaliador?";
+	set ep12_moc_que2, 10;
+	enablenpc "mque2_anciao1";
+	enablenpc "mque2_anciao2";
+	close;
+} else if(ep12_moc_que2 == 10) {
+	mes "[Ahrum]";
+	mes "Ah... tédio, tédio!";
+	mes "Em que suplício estou!";
+	enablenpc "mque2_anciao1";
+	enablenpc "mque2_anciao2";
+	close;
+} else if(ep12_moc_que2 == 11) {
+	mes "[Ahrum]";
+	mes "Você está sempre vindo aqui.";
+	mes "Sei que você é uma pessoa fiel,";
+	mes "dedicada a um assunto importante para o rei,";
+	mes "mas você vem aqui bem mais do que o necessário...";
+	next;
+	switch(select("Tem uma coisa...:Ah, sim? Então, até mais tarde.")) {
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "Vi uma pessoa da família Walter.";
+			next;
+			mes "[Ahrum]";
+			mes "Oh! É mesmo?";
+			mes "Por que não veio até mim?";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "- Conto a história a Ahrum. -";
+			next;
+			mes "[Ahrum]";
+			mes "......";
+			next;
+			mes "[Ahrum]";
+			mes "Quê?! Tem absoluta certeza de sua história?";
+			mes "Aaaaah...";
+			next;
+			mes "[Ahrum]";
+			mes "......";
+			next;
+			mes "[Ahrum]";
+			mes "Desculpe, mas quero ficar sozinho.";
+			mes "Deixe-me sozinho, agora!";
+			set ep12_moc_que2, 12;
+			close2;
+			warp "prt_castle",318,273;
+			end;
+		case 2:
+			mes "[Ahrum]";
+			mes "Tudo bem, até mais.";
+			close;
+	}
+} else if((ep12_moc_que2 > 11) && (ep12_moc_que2 < 21)) {
+	mes "[Ahrum]";
+	mes "Desculpe, mas quero ficar sozinho.";
+	mes "Deixe-me sozinho, agora!";
+	close2;
+	warp "prt_castle",318,273;
+	end;
+} else if(ep12_moc_que2 == 21) {
+	mes "[Ahrum]";
+	mes "Eu disse a você que não quero ser rei,";
+	mes "e não tenho intenção de mudar de idéia!";
+	next;
+	mes "[Ernst]";
+	mes "Irmão! Não sei por que você está sofrendo tanto!";
+	mes "Você é tão fraco assim?!";
+	next;
+	mes "[Ahrum]";
+	mes "Sofrendo? Eu? Aaahh...";
+	mes "É mesmo?... Sim... É isso.";
+	mes "Sofrimento... huhu... hahaha!";
+	next;
+	mes "[Ernst]";
+	mes "Irmão? Ahrum?";
+	next;
+	mes "[Ahrum]";
+	mes "...Só eu poderia escapar...";
+	mes "Enfim, sou alguém sem valor.... huhuhu.";
+	mes "Mas tomei uma decisão.";
+	next;
+	mes "[Ahrum]";
+	mes "Ernst.";
+	next;
+	mes "[Ernst]";
+	mes "Sim?... Sim?...";
+	next;
+	mes "[Ahrum]";
+	mes "Tome.";
+	next;
+	mes "- voosh -";
+	next;
+	mes "- Ahrum lançou uma adaga a Ernst. -";
+	emotion e_heh;
+	next;
+	mes "[Ernst]";
+	mes "Hein?... Do que isto se trata?...";
+	mes "A adaga da família Walter?... Por quê?...";
+	next;
+	mes "[Ahrum]";
+	mes "Agora é a hora certa.";
+	mes "Até nossa testemunha está aqui!";
+	mes "Ernst, você se lembra da nossa promessa, certo?";
+	next;
+	mes "[Ernst]";
+	mes "O quê? Promessa? Testemunha?... Ah...";
+	mes "É-é... sério...";
+	next;
+	mes "[Ahrum]";
+	mes "Sim, é sério. Agora é a hora.";
+	next;
+	mes "[Ernst]";
+	mes "Bobagem! Acha que posso fazer isso com você?!";
+	next;
+	mes "[Ahrum]";
+	mes "Idiota! Ser Rei quer dizer tomar ações com decisão.";
+	mes "Não tenho chance de ser Rei.";
+	mes "A corrupção, e viver desse jeito, é pior do que ser morto por você...";
+	next;
+	mes "[Ernst]";
+	mes "Ma-mas, você pode viver assim mesmo!";
+	mes "Como se nada tivesse acontecido.";
+	mes "Você só precisa voltar a ser o que era antes.";
+	mes "Irmão, me deixe ajudar.";
+	mes "Conte-me o que você sabe...";
+	next;
+	mes "[Ahrum]";
+	mes "Que idiotice! Você se considera candidato a rei?!";
+	mes "Está demonstrando simpatia por mim agora?";
+	mes "Você precisa ter bom senso!";
+	mes "Caso contrário, você não pode ser rei!";
+	next;
+	mes "[Ernst]";
+	mes "Ma-mas!...";
+	next;
+	mes "[Ahrum]";
+	mes "É inútil falar, ou hesitar! Não tem jeito.";
+	mes "Se você insiste nisso em vez de tomar a decisão certa,";
+	mes "então você não pode ser rei.";
+	next;
+	mes "[Ahrum]";
+	mes "Hã?! Irmão?!";
+	next;
+	mes "(som de golpe de adaga)";
+	specialeffect 1;
+	set ep12_moc_que2, 22;
+	disablenpc "d_ernst";
+	enablenpc "d_ernst2";
+	close;
+} else if(ep12_moc_que2 == 22) {
+	mes "I-i-ir... Irmão?... Você... me disse que me mataria...";
+	mes "Você só queria ser morto por mim?... I-i-irmão?...";
+	next;
+	mes "[Ahrum]";
+	mes "Oooh... Nada nisso. Eu só queria matar você...";
+	mes "É isso... Bom trabalho, Ernst...";
+	mes "Isso foi legítima defesa; matar um vilão... certo?";
+	next;
+	mes "[Ernst]";
+	mes "I-irmão... ainda não é tarde demais!";
+	mes "Se você for a um hospital, podemos curar você!";
+	next;
+	mes "[Ahrum]";
+	mes "É tarde demais... Quando os órgãos vitais são feridos...";
+	mes "Como será que eu poderia ficar vivo... ou como";
+	mes "eu poderia voltar a viver... Não preciso viver.";
+	next;
+	mes "[Ernst]";
+	mes "I-irmão... como... Como pôde?!";
+	next;
+	mes "[Ahrum]";
+	mes "Adeus, meu irmão... Seja rei, e muda esta nação.";
+	mes "Você... Você consegue... argh...";
+	next;
+	mes "[Ernst]";
+	mes "...Irmão... Irmão... Por quê...?";
+	mes "Por quê...?";
+	mes "Como pode ficar tão satisfeito?";
+	mes "Como...? Irmão...";
+	next;
+	mes "[Ahrum]";
+	mes "Oooh... Não precisa saber o porquê.";
+	mes "Você apenas manteve sua promessa... Você deve ser rei...";
+	mes "Mas se você se perder e se desviar do caminho,";
+	mes "virei matar você de qualquer jeito... do inferno.";
+	next;
+	mes "[Ernst]";
+	mes "Eu... Eu não sei! Eu não sei o que está acontecendo!";
+	next;
+	mes "[Ahrum]";
+	mes "Não precisa... O que você precisa saber é que eu me sacrifiquei.";
+	mes "Para que minha morte tenha sentido, você precisa ser um bom rei.";
+	mes "É isso o que eu quero... É isso... Argh...!";
+	mes "Não esqueça minhas palavras... *cof cof*";
+	next;
+	mes "[Ernst]";
+	mes "Idiota... Estúpido...";
+	next;
+	mes "[Ahrum]";
+	mes "Ahh... Avaliador, você sabe o que tem de fazer?";
+	mes "Filtrar suas palavras. O que você viu, o que ouviu...";
+	mes "Você não deve contar todo o caso ao Inspetor.";
+	next;
+	mes "[Ahrum]";
+	mes "Ernst matou um vilão que estava perturbando...";
+	mes "Eu não tive chance...";
+	mes "Ele agiu de forma decisiva, e isso lhe concede o direito de ser rei...";
+	next;
+	mes "[Ahrum]";
+	mes "Se você reagir de forma errada a este incidente,";
+	mes "minha morte terá sido inútil...";
+	mes "...*cof*... Você entendeu?";
+	next;
+	switch(select("... Certo, seguirei sua vontade...:......")) {
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "... Certo, seguirei sua vontade.";
+			mes "Não se preocupe...";
+			next;
+			goto L_ahrum_final;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "......";
+			next;
+			mes "[Ahrum]";
+			mes "Quem cala... consente...";
+			mes "Isso quer dizer... que consegui... o que queria...";
+			next;
+			L_ahrum_final:
+			mes "[Ahrum]";
+			mes "Agora... Posso morrer... em paz...";
+			mes "Muito... obrigado... vocês... dois.";
+			next;
+			mes "[Ernst]";
+			mes "Irmão...";
+			next;
+			mes "[Ahrum]";
+			mes "Então, finalmente... Adeus...";
+			mes "............";
+			mes "Desculpe... não posso mais pescar.";
+			next;
+			mes "[Ernst]";
+			mes "I-irmão?";
+			next;
+			mes "[Ahrum]";
+			mes "......";
+			next;
+			mes "[Ernst]";
+			mes "I... irmão, irmão!";
+			next;
+			mes "[Ahrum]";
+			mes "......";
+			next;
+			mes "[Ernst]";
+			mes "I-irmão... Irmããããããão!!!";
+			next;
+			specialeffect 16;
+			disablenpc "d_ernst2";
+			close2;
+			set ep12_moc_que2, 23;
+			disablenpc "mque2_pt7";
+			warp "prt_castle",318,273;
+			end;
+	}
+} else if(ep12_moc_que2 >= 23) end;
+mes "[Príncipe]";
+mes "Você é o novo avaliador?";
+mes "Sou Eigen Ahrum da família Walter.";
+mes "Pode me chamar de Príncipe Ahrum.";
+mes "Enfim, como você achar melhor.";
+next;
+mes "[Ahrum]";
+mes "Espero que me faça perguntas curtas e simples.";
+mes "Perguntas logas nem sempre resultam em respostas boas ou especiais.";
+next;
+L_ahrum_menu:
+mes "- O que devo perguntar?... -";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "Quero perguntar sobre...";
+next;
+switch(select("Sua história...:Sua visão para a nação...:Seus passatempos ou interesses...:Esqueça, volto mais tarde.")) {
+	case 1:
+		mes "[Ahrum]";
+		mes "Você não está apenas tentando satisfazer sua curiosidade a";
+		mes "família real, está?";
+		next;
+		mes "[Ahrum]";
+		mes "Desde a infância, passei por muitas coisas e aprendi com elas,";
+		mes "mas sempre tive que suportar a interferência da minha família.";
+		mes "Para eles, eu não era um membro decente da família.";
+		mes "Mas não me importo com isso, e acho que um bom rei deve esquecer";
+		mes "essas mesquinharias.";
+		next;
+		mes "[Ahrum]";
+		mes "Os outros podem dizer que meu comportamento os deixa com vergonha,";
+		mes "mas se tudo acaba bem, todos ficam satisfeitos.";
+		mes "Estou errado?";
+		next;
+		mes "[Ahrum]";
+		mes "Embora eu falte a algumas aulas, por exemplo,";
+		mes "posso muito bem recuperá-las, e facilmente.";
+		mes "Quem se importa, e quem pode me julgar?";
+		mes "É assim que penso.";
+		next;
+		mes "[Ahrum]";
+		mes "Ernst me incomoda muito com isso, não costumo criar caso.";
+		mes "Que idiota exigente ele é!";
+		next;
+		mes "[Ahrum]";
+		mes "Como eu disse, cresci ouvindo as broncas deles, e sinto que suas";
+		mes "palavras são mais duras do que as dos outros,";
+		mes "que se calam quando tenho sucesso em alguma coisa.";
+		mes "Ele sempre diz que os fins não justificam os meios.";
+		next;
+		mes "[Ahrum]";
+		mes "Antes de tudo, é uma sorte e uma glória para mim ter nascido na";
+		mes "nobre e distinta família Walter, é claro, mas às vezes minhas";
+		mes "habilidades são subestimadas por causa do meu passado.";
+		mes "Ver as coisas desta forma me entristece.";
+		next;
+		mes "[Ahrum]";
+		mes "No futuro, as pessoas falarão na família Walter do destinto Eigen Ahrum,";
+		mes "e não em Eigen Ahrum da distinta família Walter.";
+		next;
+		mes "[Ahrum]";
+		mes "A família Walter tem grande fama, mas vou fazer meu nome brilhar mais,";
+		mes "e os outros terão orgulho de mim.";
+		next;
+		set .@falou1, 1;
+		goto L_ahrum_menu;
+	case 2:
+		mes "[Ahrum]";
+		mes "A nação que eu governar não será pretensamente";
+		mes "harmoniosa e colorida como os contos de fadas.";
+		next;
+		mes "[Ahrum]";
+		mes "Certamente, os perdedores e miseráveis têm parte da culpa da sua situação,";
+		mes "por não encararem a vida como um desafio.";
+		next;
+		mes "[Ahrum]";
+		mes "Tenho alguma crença no benefício da competição livre e irrestrita.";
+		mes "Francamente, não gosto deste sistema da escolha do rei atráves das famílias nobres.";
+		next;
+		mes "[Ahrum]";
+		mes "Embora todo este sistema de classes vá sumir algum dia,";
+		mes "serei rei por direito, por minha própria capacidade e aptidão,";
+		mes "hahaha.";
+		emotion e_heh;
+		next;
+		mes "[Ahrum]";
+		mes "Conheço bem e pessoalmente os outros candidatos a rei.";
+		mes "Mas não encontro entre eles alguém distinto que possa liderar";
+		mes "bem este reino.";
+		next;
+		mes "[Ahrum]";
+		mes "Não estou dizendo que não são excepcionais, mas";
+		mes "considerado a situação de Rune-Midgard, ele não parecem ser";
+		mes "os mais incríveis dos líderes.";
+		next;
+		mes "[Ahrum]";
+		mes "Portanto, garanto que nenhum dos candidatos é mais";
+		mes "digno do trono do que eu.";
+		mes "Se eu tivesse que escolher alguém que se iguale,";
+		mes "posso dizer que seria Ernst.";
+		next;
+		mes "[Ahrum]";
+		mes "Ele tem uma personalidade gentil e às vezes pensa demais,";
+		mes "mas reconheço seus muitos méritos. Posso dizer que ele é";
+		mes "um candidato de alto padrão.";
+		next;
+		mes "[Ahrum]";
+		mes "........";
+		next;
+		mes "[Ahrum]";
+		mes "Hum, falei demais.";
+		mes "Peço desculpas por ficar me repetindo, hahaha.";
+		next;
+		set .@falou2, 1;
+		goto L_ahrum_menu;
+	case 3:
+		mes "[Ahrum]";
+		mes "Gosto de atividade.";
+		mes "Não suporto jogos passivos, como os de cartas e de tabuleiro.";
+		mes "Acho que esses jogos servem mais para acadêmicos, por exemplo.";
+		next;
+		mes "[Ahrum]";
+		mes "Meu irmão Ernst pode se ater a qualquer coisa por muito tempo,";
+		mes "como livros ou estudos.";
+		next;
+		mes "[Ahrum]";
+		mes "Quando me tornar rei, não vou ficar cuidando de documentos,";
+		mes "sentado o tempo todo.";
+		next;
+		mes "[Ahrum]";
+		mes "É muito difícil para mim fazer isso.";
+		next;
+		set .@falou3, 1;
+		goto L_ahrum_menu;
+	case 4:
+		mes "[Ahrum]";
+		mes "Certo...";
+		mes "Como quiser.";
+		if((.@falou1) && (.@falou2) && (.@falou3)) set mque2_talk_pcp3, 1;
+		close;
+}
+}				
+
+//Quarto Príncipe (prt_castle)
+//=========================
+prt_castle,289,204,2	script	Príncipe::mque2_pt8	991,{
+
+if(ep12_moc_que2 == 18) {
+	mes "- Ele está tão nervoso que dá para notar pelo seu rosto vermelho. -";
+	close;
+} else if((ep12_moc_que2 > 16) && (ep12_moc_que2 < 23)) {
+	mes "[Helmut]";
+	mes "Droga... Droga!";
+	mes "Um novato dos Walter!!";
+	mes "Como posso lidar com esse estresse?";
+	mes "Droga! Que inferno!";
+	close;
+} else if(ep12_moc_que2 >= 23) {
+	mes "[Helmut]";
+	mes "Que idiota. Eu devia ter matado antes.";
+	mes "Agora me sinto aliviado.";
+	close;
+}
+mes "[Helmut]";
+mes "Você é o novo avaliador?";
+mes "Estou cheio de tantas visitas!";
+mes "Vamos logo ao que interessa!";
+next;
+mes "- O que posso dizer para começar? -";
+next;
+switch(select("Sua história...:Sua ambição...:Sua visão para a nação...:Quero falar com os outros antes.")) {
+	case 4:
+		mes "["+strcharinfo(0)+"]";
+		mes "Certo, Príncipe, eu volto depois.";
+		next;
+		mes "[Helmut]";
+		mes "Certo, como quiser.";
+		mes "Ei! Ei, Calbern!";
+		mes "Mexa-se e traga a cerveja!";
+		mes "Quer levar uma surra?";
+		close;
+	default:
+		mes "[Helmut]";
+		mes "Não sei como os outros reagem, mas me sinto pressionado com suas perguntas.";
+		mes "Eu não deveria, mas posso evitar!";
+		next;
+		mes "[Helmut]";
+		mes "Sou o príncipe, afinal de contas!";
+		mes "Esse tipo de pergunta me cansa.";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "..........";
+		mes "Sim, eu entendo. Prossiga...";
+		next;
+		mes "[Helmut]";
+		mes "Sou Helmut, de Roewenburg.";
+		mes "Gosto de sentir o cheiro de sangue no campo de batalha,";
+		mes "e também gosto de festivais.";
+		next;
+		mes "[Helmut]";
+		mes "Odeio ter de me ater a formalidades, e falar muito.";
+		mes "Minha ambição?";
+		mes "O que vou fazer quando me tornar... rei...?";
+		mes "Já me fizeram essa pergunta muitas vezes.";
+		next;
+		mes "[Helmut]";
+		mes "Quando me tornar rei, vou reforçar nossas tropas e";
+		mes "conquistar continente atrás de continente; também vou";
+		mes "erradicar todos os montros que ameaçam meu povo!";
+		next;
+		mes "[Helmut]";
+		mes "*cof cof* Minha garganta está seca!";
+		mes "Fazia tempo que não usava minha voz assim. *cof cof*";
+		next;
+		mes "[Helmut]";
+		mes "Ei, Calbern!";
+		mes "Traga Cerveja! Cerveja!";
+		next;
+		mes "[Helmut]";
+		mes "O que ainda faz aí parado?";
+		mes "Não tenho mais nada a dizer a você!";
+		mes "Para trás!";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "......";
+		set mque2_talk_pcp4, 1;
+		close;
+}
+}
+		
+//Servente (prt_castle)
+//===================
+prt_castle,288,208,4	script	Servente::mque2_pt9	962,{
+
+mes "[Calbern]";
+mes "Como vai, senhor?";
+mes "Sou o serviçal do Príncipe Helmut...";
+mes "Calbern.";
+next;
+mes "[Helmut]";
+mes "Ei, Calbern!";
+mes "Traga Cerveja! Cerveja!";
+next;
+mes "[Calbern]";
+mes "Ops! Sinto muito.";
+mes "Tenho trabalho...";
+close;
+}
+
+//Quinto Príncipe (prt_castle)
+//=========================
+prt_castle,368,312,4	script	Príncipe::mque2_pt10	985,{
+
+if(ep12_moc_que2 == 7) {
+	mes "[Ernst]";
+	mes "Ei, muito obrigado pela sua avaliação!";
+	enablenpc "dpcp1";
+	set ep12_moc_que2, 8;
+	close;
+} else if((ep12_moc_que2 == 8) && (ep12_moc_que2 < 12)) {
+	mes "[Ernst]";
+	mes "Ah, agora preciso planejar uma coisa com o irmão Ahrum.";
+	mes "Se não tiver mais nada importante para falar comigo, devo ir.";
+	enablenpc "dpcp1";
+	close;
+} else if(ep12_moc_que2 == 12) {
+	mes "[Ernst]";
+	mes "Bem-vindo, avaliador.";
+	mes "Estamos nos encontrando muito.";
+	mes "Por que não vai com calma com seu trabalho?";
+	next;
+	mes "[Ernst]";
+	mes "Hum... não tenho mais nada a dizer.";
+	mes "Além disso, Ahrum anda estranho esses dias, isso me preocupa.";
+	mes "Espero que não seja nada grave.";
+	set ep12_moc_que2, 13;
+	close;
+} else if((ep12_moc_que2 > 12) && (ep12_moc_que2 < 21)) {
+	mes "[Ernst]";
+	mes "Ahrum anda estranho.";
+	mes "Não é uma mudança qualquer; é quase como se ele estivesse corrompido.";
+	mes "Isso me incomoda.";
+	next;
+	mes "[Ernst]";
+	mes "Vou fingir que não aconteceu.";
+	mes "Acho que Ahrum vai voltar ao normal.";
+	mes "Mesmo assim, não me sinto bem.";
+	close;
+} else if((ep12_moc_que2 > 20) && (ep12_moc_que2 < 23)) {
+	mes "[Ernst]";
+	mes "...Irmão Ahrum...";
+	close;
+} else if(ep12_moc_que2 >= 23) {
+	mes "[Ernst]";
+	mes "Ah...";
+	mes "Irmão Ahrum...";
+	mes "Eigen Ahrum... sim, senhor.";
+	next;
+	mes "[Ernst]";
+	mes "......";
+	next;
+	mes "[Ernst]";
+	mes "Por favor, saia daqui, não quero ver ninguém";
+	close;
+}
+mes "[Príncipe]";
+mes "Olá, você é o avaliador, não é?";
+mes "Sou Ernst, príncipe dos Gaebolgs.";
+next;
+mes "[Ernst]";
+mes "Deve ser um trabalho duro para jugar o trabalho dos outros.";
+mes "Farei o melhor que puder para ajudar você.";
+next;
+mes "[Ernst]";
+mes "Bem, obrigado.";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "(Ele é bastante educado, para um candidato a rei)";
+next;
+L_ernst_menu:
+mes "- Bem, vamos às perguntas. -";
+next;
+switch(select("Primeiro, sua história.:Quero saber sobre sua visão para a nação.:Seus hábitos e gostos.:Eu volto depois.")) {
+	case 1:
+		mes "[Ernst]";
+		mes "Desde jovem, cresci com uma educação real.";
+		mes "Não briguei seriamente com ninguém, mas";
+		mes "também não fui muito educado e polido.";
+		next;
+		mes "[Ernst]";
+		mes "As pessoas me achavam tímido, mas isso é porque";
+		mes "não queria que os outros me culpassem por nada.";
+		next;
+		mes "[Ernst]";
+		mes "É claro que meu irmão Eigen Ahrum é uma exceção.";
+		mes "Ele não é muito educado, mas pode concordar com";
+		mes "os outros se for convencido disso.";
+		next;
+		mes "[Ernst]";
+		mes "Acho que essa é uma grande habilidade que preciso aprender.";
+		mes "Mas a questão é que apenas de chegar a um resultado,";
+		mes "mas também de cortesia.";
+		mes "Essa é outra necessidade importante.";
+		next;
+		mes "[Ernst]";
+		mes "Para mim, os meios sempre foram mais importante que os fins.";
+		mes "Agora, tenho ambos em igual a consideração.";
+		mes "Eu não tomava o resultado como importante,";
+		mes "mas Ahrum conseguiu me convencer do contrário.";
+		next;
+		set .@falou1, 1;
+		goto L_ernst_menu;
+	case 2:
+		mes "[Ernst]";
+		mes "Minha visão para a nação, quando eu for rei?";
+		next;
+		mes "[Ernst]";
+		mes "Pode-se pensar que o poder do rei é ilimitado, mas";
+		mes "sendo ele apenas um homem, ele é limitado, sim.";
+		next;
+		mes "[Ernst]";
+		mes "Tanto o público comum quanto as pessoas de destaque se";
+		mes "encarregam da socidade, sabendo que utilizar a sabedoria";
+		mes "de cada um em conjunto é mais fácil que as coisas por conta própria.";
+		next;
+		mes "[Ernst]";
+		mes "Ahrum vai me ajudar a corrigir minhas falhas.";
+		mes "Não só Ahrum, mas todos os ministros e membros do gabinente,";
+		mes "e público... todos eles serão meus mestres.";
+		next;
+		mes "[Ernst]";
+		mes "É sorte minha ter tantos mestres, além de Ahrum.";
+		mes "Isso também é bom para o meu país.";
+		next;
+		set .@falou2, 1;
+		goto L_ernst_menu;
+	case 3:
+		mes "[Ernst]";
+		mes "Não tenho nenhum hábito especial.";
+		mes "Só me dedico a aprender e a ler livros.";
+		next;
+		mes "[Ernst]";
+		mes "E também gosto de conversar com Ahrum.";
+		mes "Ahrum é esperto o bastante para inventar idéias novas,";
+		mes "que posso acompanhar.";
+		next;
+		mes "[Ernst]";
+		mes "Bem, para dizer a verdade, o que faço de melhor é sair com Ahrum para pescar.";
+		mes "No entanto, estamos ocupados demais para pescar,";
+		mes "com essa questão do reinado.";
+		next;
+		mes "[Ernst]";
+		mes "Prometemos ir pescar depois que o novo rei assumir o trono...";
+		mes "Vamos ver...";
+		next;
+		mes "[Ernst]";
+		mes "Hum... já é o bastante, não?";
+		next;
+		set .@falou3, 1;
+		goto L_ernst_menu;
+	case 4:
+		mes "[Ernst]";
+		mes "Bem, então até mais.";
+		if((.@falou1) && (.@falou2) && (.@falou3)) set mque2_talk_pcp5, 1;
+		close;
+}
+}
+
+//Sexto Príncipe (prt_castle)
+//========================
+prt_castle,391,205,4	script	Príncipe::mque2_pt11	993,{
+
+if(ep12_moc_que2 == 18) {
+	mes "[Poe]";
+	mes "......";
+	close;
+} else if((ep12_moc_que2 > 17) && (ep12_moc_que2 < 23)) {
+	mes "[Poe]";
+	mes "Ele desistiu sem qualquer desafio.";
+	mes "Não é isso o que um homem deve fazer.";
+	mes "Ele não é tão bom quanto eu. Mas tudo bem.";
+	mes "Eigen Ahrum... estou desapontado com ele.";
+	close;
+} else if(ep12_moc_que2 >= 23) {
+	mes "[Poe]";
+	mes "Não importa sua condição, ele é apenas um perdedor no jogo da vida.";
+	close;
+}
+mes "[Príncipe]";
+mes "Venha aqui.";
+mes "Você é o aventureiro avaliador!";
+mes "Também gosto do desafio de viajar e lutar.";
+mes "Os velhos falando de suas aventuras...";
+mes "Nada poderia me fazer parar de viajar assim...";
+next;
+mes "[Príncipe]";
+mes "Meu nome é Poe, sou príncipe da família Riehart.";
+mes "Lembre-se de mim, e me apóie...";
+next;
+mes "[Poe]";
+mes "Acima de tudo, quero testar sua habilidade como aventureiro.";
+mes "O teste do inspetor não foi tão difícil.";
+mes "Só quero saber o quão precisa é sua intuição...";
+mes "Somente isso.";
+next;
+mes "[Poe]";
+mes "Não quero falar com ninguém de pouca intuição.";
+mes "Deixe-me explicar rapidamente, e testar sua intuição.";
+next;
+mes "[Poe]";
+mes "Minhas cartas tem números de 1 a 13.";
+mes "Você me responde se a carta que eu pegar será";
+mes "menor ou maior que 7.";
+next;
+mes "[Poe]";
+mes "É claro, 7 é o número do meio.";
+mes "Se sair 7, empatamos.";
+mes "O objetivo deste jogo é você dar a resposta";
+mes "certa 2 vezes seguidas.";
+mes "Vamos lá!";
+next;
+L_poe_game:
+mes "[Poe]";
+mes "Sim, agora me diga se a carta vai ser maior ou menos.";
+mes "Escolha.";
+next;
+set .@carta, rand(1,13);
+switch(select("Maior:Menor")) {
+	case 1:
+		mes "[Poe]";
+		mes "Hum... maior?...";
+		mes "Tirei a carta!";
+		next;
+		mes "[Poe]";
+		mes "Este..."+.@carta+" é...";
+		next;
+		if(.@carta == 7) {
+			mes "[Poe]";
+			mes "Pescoço a pescoço...";
+			mes "O jogo empatou.";
+			mes "Tente ir melhor da próxima vez.";
+			set .@acertos, .@acertos - 1;
+			next;
+			goto L_poe_game;
+		} else if((.@carta > 7) && (!.@acertos)) {
+			mes "[Poe]";
+			mes "Eei, você acertou!";
+			mes "Mas você só me deu uma resposta correta 1 vez,";
+			mes "falta mais uma.";
+			set .@acertos, 1;
+			next;
+			goto L_poe_game;
+		} else if((.@carta > 7) && (.@acertos == 1)) {
+			mes "[Poe]";
+			mes "Eei, você acertou!";
+			mes "Você acertou 2 vezes seguidas, certo?...";
+			set .@acertos, 2;
+			next;
+			goto L_poe_conversa;
+		}
+		mes "[Poe]";
+		mes "Errou... Vá visitar Holgren e pedir que refinem sua sorte.";
+		set .@acertos, 0;
+		close;
+	case 2:
+		mes "[Poe]";
+		mes "Ah, menor?...";
+		mes "Veja minha carta!";
+		next;
+		mes "[Poe]";
+		mes "Este..."+.@carta+" é...";
+		next;
+		if(.@carta == 7) {
+			mes "[Poe]";
+			mes "Pescoço a pescoço...";
+			mes "O jogo empatou.";
+			mes "Tente ir melhor da próxima vez.";
+			set .@acertos, .@acertos - 1;
+			next;
+			goto L_poe_game;
+		} else if((.@carta < 7) && (!.@acertos)) {
+			mes "[Poe]";
+			mes "Eei, você acertou!";
+			mes "Mas você só me deu uma resposta correta 1 vez,";
+			mes "falta mais uma.";
+			set .@acertos, 1;
+			next;
+			goto L_poe_game;
+		} else if((.@carta < 7) && (.@acertos == 1)) {
+			mes "[Poe]";
+			mes "Eei, você acertou!";
+			mes "Você acertou 2 vezes seguidas, certo?...";
+			set .@acertos, 2;
+			next;
+			goto L_poe_conversa;
+		}
+		mes "[Poe]";
+		mes "Errou... Vá visitar Holgren e pedir que refinem sua sorte.";
+		set .@acertos, 0;
+		close;
+}
+
+L_poe_conversa:
+	mes "[Poe]";
+	mes "Certo, está na hora de revelar minhas palavras a";
+	mes "alguém tão intuitico a ponto de adivinhar cartas.";
+	next;
+	mes "[Poe]";
+	mes "Eu posso conhecer você como um baralho aberto, claro,";
+	mes "mas deixe-me revelar minhas cartas desta vez!";
+	mes "Pergunte-me o que quer saber.";
+	next;
+	mes "[Poe]";
+	mes "O que você quer saber?!";
+	next;
+	L_poe_menu:
+	switch(select("Sua história...:Sua visão para a nação...:Passatempos e interesses...:Voltarei depois.")) {
+		case 1:
+			mes "[Poe]";
+			mes "Minha história... é história, só isso.";
+			mes "Não dou tanta importância a ela, por isso não me lembro de tudo...";
+			next;
+			mes "[Poe]";
+			mes "Posso dizer apenas que sobrevivi a muitos jogos e batalhas?";
+			mes "Isso combina comigo. Ha ha ha ha ha!";
+			next;
+			mes "[Poe]";
+			mes "Tive que lidar com muitos acidentes e desafios... a todos eles sobrevivi,";
+			mes "e tenho buscado coisas novas.";
+			mes "A vida é isso...";
+			next;
+			mes "[Poe]";
+			mes "Nunca se deixe abatar com as cartas que lhe dão e jogue";
+			mes "o melhor que puder!";
+			next;
+			mes "[Poe]";
+			mes "......";
+			next;
+			mes "[Poe]";
+			mes "Ei, isso foi legal, não foi?";
+			mes "Temos os mesmos gostos, não temos?";
+			next;
+			set .@falou1, 1;
+			goto L_poe_menu;
+		case 2:
+			mes "[Poe]";
+			mes "Minha opinião é que uma nação deve oferecer proteção";
+			mes "minima às pessoas para sua liberdade.";
+			next;
+			mes "[Poe]";
+			mes "Os homens devem seguir suas paixões, e a livre ação do";
+			mes "povo não deve ser destrúida por sua própria nação.";
+			next;
+			mes "[Poe]";
+			mes "Se eu fosse Rei, todas as restrições serião removidas e uma vida";
+			mes "liberal seria permitida a todos, ilimitadamente.";
+			next;
+			mes "[Poe]";
+			mes "Quando penso em minha família, vejo que ela é";
+			mes "conservadora e inflexível.";
+			next;
+			mes "[Poe]";
+			mes "Vivem dizendo para não fazer isto e aquilo,";
+			mes "que aquilo é perigoso e que isto é natural...";
+			mes "Eles têm me incomodado sem cessar, por toda a minha vida...";
+			next;
+			mes "[Poe]";
+			mes "Ah, essas últimas palavras minhas ficam só entre nós.";
+			mes "Não quero que me incomodem.";
+			next;
+			set .@falou2, 1;
+			goto L_poe_menu;
+		case 3:
+			mes "[Poe]";
+			mes "Experimentar algo novo!";
+			mes "Não importa o que seja!";
+			next;
+			mes "[Poe]";
+			mes "Se este nosso tempo é de exploração do desconhecido,";
+			mes "posso ser o capitão dos exploradores.";
+			mes "Explorar, encontrar caminhos, investigar...";
+			mes "Esses são meus apelidos.";
+			mes "E quanto a você??";
+			next;
+			mes "[Poe]";
+			mes "Muitos dizem, para denegrir meu caráter, que sou viciado em jogo.";
+			mes "Eu só tenho um espírito desafiador e gosto de ganhar dinheiro!";
+			mes "Sou um homem normal, de espírito livre.";
+			next;
+			set .@falou3, 1;
+			goto L_poe_menu;
+		case 4:
+			mes "[Poe]";
+			mes "Certo, que nos encontremos de novo em um lugar mais emocionante,";
+			mes "está bem?";
+			if((.@falou1) && (.@falou2) && (.@falou3)) set mque2_talk_pcp6, 1;
+			close;
+	}
+}
+
+//Sétimo Príncipe (prt_castle)
+//=========================
+prt_castle,364,375,4	script	Príncipe::mque2_pt12	987,{
+
+if(ep12_moc_que2 == 4) {
+	mes "[Peter]";
+	mes "Tem algo mais a falar comigo, avaliador?";
+	close;
+} else if(ep12_moc_que2 == 5) {
+	mes "[Peter]";
+	mes "Que bom que a garota gostou.";
+	mes "Assim que ficar melhor, quero encontrá-la.";
+	next;
+	mes "[Peter]";
+	mes "Enfim, obrigado pelo bom trabalho.";
+	mes "Sinto muito por incomodar você com coisas triviais.";
+	mes "Devo demonstrar minha gratidão.";
+	mes "Para compensar seu trabalho, aceite isto.";
+	getitem 644, 1;	//Caixa de Presente
+	set ep12_moc_que2, 6;
+	close;
+} else if((ep12_moc_que2 > 5) && (ep12_moc_que2 < 19)) {
+	mes "[Peter]";
+	mes "Estou realmente muito agradecido.";
+	mes "É muita gentileza sua.";
+	close;
+} else if(ep12_moc_que2 == 19) {
+	mes "[Peter]";
+	mes "......";
+	close;
+} else if((ep12_moc_que2 > 18) && (ep12_moc_que2 < 23)) {
+	mes "[Peter]";
+	mes "Filho... O que aconteceu com você?...";
+	close;
+} else if(ep12_moc_que2 >= 23) {
+	mes "[Peter]";
+	mes "...Diabos... O que aconteceu com você?";
+	mes "Não posso acreditar no que vi!";
+	mes "Meu príncipe Ahrum faleceu...";
+	close;
+}
+mes "[Príncipe]";
+mes "Olá, sou Peter, da família Heine.";
+mes "É um prazer conhecer você.";
+next;
+mes "[Peter]";	
+mes "Então, por onde começamos?";
+next;
+L_peter_menu:
+switch(select("Sua história...:Sua visão para a nação...:Passatempos e interesses...:Voltarei depois.")) {
+	case 1:
+		mes "[Peter]";
+		mes "Minha família não é tão influente.";
+		mes "Minha infância não foi tão próspera.";
+		mes "Tive que ganhar dinheiro fazendo bicos.";
+		mes "Mas me ajudou a entender a vida das pessoas e suas particularidades.";
+		mes "Esse foi o lado bom.";
+		next;
+		mes "[Peter]";
+		mes "Respondi bem à sua pergunta?";
+		next;
+		set .@falou1, 1;
+		goto L_peter_menu;
+	case 2:
+		mes "[Peter]";
+		mes "Acho que o importante é que as pessoas prosperem em";
+		mes "seu campo e o governo só aja para auxiliar quando for preciso.";
+		mes "O que quero dizer, em resumo, é que";
+		mes "o governo não deve tomar rédeas curtas.";
+		mes "O povo precisa manter a paz entre si.";
+		next;
+		mes "[Peter]";
+		mes "Além disso, vou retirar todos os benefícios da desigualdade de classes.";
+		mes "Não é uma questão de igualdade, mas de ascensão do poder nacional.";
+		next;
+		set .@falou2, 1;
+		goto L_peter_menu;
+	case 3:
+		mes "[Peter]";
+		mes "Só gosto de ler livros como passatempo.";
+		mes "Acho que os homens devem progredir,";
+		mes "devem ter uma atitude esforçada.";
+		next;
+		set .@falou3, 1;
+		goto L_peter_menu;
+	case 4:
+		mes "[Peter]";
+		mes "Ah, é só?";
+		if((!.@falou1) || (!.@falou2) || (!.@falou3) || (!mque2_talk_pcp1) || (!mque2_talk_pcp2) || (!mque2_talk_pcp3) || (!mque2_talk_pcp4) || (!mque2_talk_pcp5) || (!mque2_talk_pcp6)) close;
+		next;
+		mes "[Peter]";
+		mes "Então tenho um favor para lhe pedir...";
+		mes "Quer ouvir minha história?";
+		next;
+		mes "[Peter]";
+		mes "Antes, eu não gostava de deixar a barba crescer...";
+		mes "mas tive a chance de mudar...";
+		mes "Mudei de opinião graças a alguém que me deu essa chance.";
+		next;
+		mes "[Peter]";
+		mes "Foi graças a uma garota que me mandou uma carta...";
+		mes "O que ela disse na carta é que minha imagem era dura demais,";
+		mes "e que se eu deixasse a barba crescer, os contornos do meu";
+		mes "rosto ficariam mais ocultos, e minha aparência ficaria bem melhor.";
+		next;
+		mes "[Peter]";
+		mes "Quero compensá-la, mas porque suas palavras me ajudaram muito.";
+		mes "Nada muito especial, apenas um pequeno ramo de flores.";
+		next;
+		mes "[Peter]";
+		mes "Poderia levar estas flores e meus agradecimentos à";
+		mes "garota que está em algum lugar em Al De Baran?";
+		next;
+		switch(select("Tudo bem, sem problemas.:Por favor, peça a outra pessoa.")) {
+			case 1:
+				mes "[Peter]";
+				mes "Ah, muito obrigado.";
+				mes "Tome cuidado.";
+				getitem 744,1;	//Buquê
+				set ep12_moc_que2, 4;
+				close;
+			case 2:
+				mes "[Peter]";
+				mes "Entendo...";
+				mes "Sei que você tem seus próprios afazeres.";
+				close;
+		}
+}
+}
+
+//Garota (aldebaran)
+//=================
+aldebaran,132,184,3	script	Garota::mque2_pt13	96,{
+
+if(ep12_moc_que2 != 4) {
+	mes "[Garota]";
+	mes "Mudando de assunto, já ouviu a história do Papai Pernilongo?";
+	close;
+}
+mes "[Garota]";
+mes "Uau, o tio Peter mandou estas flores para mim?";
+mes "Hum... Têm um cheiro muito bom.";
+next;
+mes "[Garota]";
+mes "Hehe! Você deve ser amigo de Peter.";
+mes "Se você for encontrá-lo mais tarde,";
+mes "mande minhas lembranças ao tio Peter.";
+mes "Diga a ele que adorei as flores...";
+mes "Bem, até mais.";
+next;
+mes "[Garota]";
+mes "Vou para casa mais cedo, colocar estas flores em um vaso.";
+mes "La la la...";
+delitem 744,1;	//Buquê
+set ep12_moc_que2, 5;
+close;
+}
+
+//Príncipe dinâmico 1 (prt_castle)
+//============================
+prt_castle,314,312,0	script	Príncipe::dpcp1	985,{
+end;
+
+OnInit:
+disablenpc "dpcp1";
+end;
+}
+
+//Nobre Ancião 1 (prt_castle)
+//==================
+prt_castle,156,325,4	script	Nobre Ancião 1::mque2_anciao1	86,30,30,{
+end;
+
+OnTouch:
+	if(ep12_moc_que2 != 10) end;
+	mes "[Nobre Ancião]";
+	mes "Não se preocupe.";
+	mes "Assim que nosso Eigen Ahrum for escolhido rei,";
+	mes "a família Riehart terá o segundo posto.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Hehe, Ahrum já é o candidato mais favorecido e influente.";
+	mes "Que feito incrível você conseguiu.";
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Embora Ahrum seja um candidato forte, o príncipe de Gaebolg tem";
+	mes "grande reputação por suas virtudes.";
+	mes "É melhor nos garantirmos.";
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Então, tudo pronto para envenenar o Príncipe Ernst?";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "É claro. Nem mesmo uma autópsia vai descobrir.";
+	mes "..";
+	mes "Não se preocupe.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Ahrum será escolhido, logo depois de eliminarmos Ernst,";
+	mes "e então...";
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Ambas as famílias vão liderar este país, haha.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Você deve saber como os Walters e os Gaebolg eram.";
+	mes "Ambas famílias governaram o país.";
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Os Gaebolg, a mais fraca das sete famílias,";
+	mes "tomou o poder unindo-se com ^FF0000Schmidt^000000 dos Walters.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Sim, é por isso que a união de Walter e Gaebolg era perfeita.";
+	mes "Além do mais, Ahrum e Ernst...";
+	mes "É óbvio que são quase uma cópia de ^FF0000Schmidt e Heinrich^000000.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "É por isso que os Walters e os Gaebolgs não podem ficar juntos.";
+	mes "Essa coexistência traria destruição, como no passado.";
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Sendo assim, é bom nos prepararmos.";
+	mes "Todos os que conhecem o passado não querem saber de Ahrum e Ernst.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Enfim, falta pouco.";
+	mes "Vamos manter o segredo bem guardado.";
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Sim. Pela glória de Rune-Midgard.";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Tudo pela glória de Rune-Midgard.";
+	mes "...hã?";
+	next;
+	mes "[Membro da Família Walter]";
+	mes "Quieto... vem vindo alguém.";
+	mes "Ok, cuide-se.";
+	emotion e_gasp;
+	next;
+	mes "[Membro da Família Riehart]";
+	mes "Certo...";
+	specialeffect 16;
+	disablenpc "mque2_anciao1";
+	disablenpc "mque2_anciao2";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "(Walter é a família de Ahrum.";
+	mes "Riehart é a família de Poe.)";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "(O que é isso, uma conspiração das duas famílias?";
+	mes "Que diabos...)";
+	set ep12_moc_que2, 11;
+	close;
+
+OnInit:
+disablenpc "mque2_anciao1";
+}
+
+//Nobre Ancião 2 (prt_castle)
+//==================
+prt_castle,157,323,2	script	Nobre Ancião 2::mque2_anciao2	456,{
+end;
+
+OnInit:
+disablenpc "mque2_anciao2";
+end;
+}
+
+//Controle de Area
+//===============
+prt_castle,318,276,0	script	ControleDeArea	-1,1,1,{
+end;
+
+OnTouch:
+if((ep12_moc_que2 < 12) || (ep12_moc_que2 > 20)) { warp "prt_castle",318,309; end; }
+set .@dialogo, rand(1,4);
+if(.@dialogo == 4) {
+	if(ep12_moc_que2 < 13) end;
+	mes "- Pude ouvir a voz de Ahrum antes de entrar em seu aposento.";
+	mes "Ela vinha de dentro. -";
+	next;
+	mes "[Ahrum]";
+	mes "Enfim, estou só sendo usado...";
+	mes "Fiz todo o esforço para me tornar herdeiro.";
+	mes "Tudo isso era parte do plano...";
+	next;
+	mes "[Ahrum]";
+	mes "Droga, droga!!";
+	mes "Não posso aceitar, nunca, jamais!";
+	next;
+	mes "[Ahrum]";
+	mes "Meu ancestral ^FF0000Schmidt^000000...";
+	mes "O que você faria nesta situação?";
+	mes "Não... será que você foi usado como eu?...";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "......";
+	set @d4_falou, 1;
+	if((@d1_falou) && (@d2_falou) && (@d3_falou) && (@d4_falou)) set ep12_moc_que2, 14;
+	warp "prt_castle",318,309;
+	close;
+} else if(.@dialogo == 3) {
+	mes "- Pude ouvir a voz de Ahrum antes de entrar em seu aposento.";
+	mes "Ela vinha de dentro. -";
+	next;
+	mes "[Ahrum]";
+	mes "Não tenho essa qualificação.";
+	mes "Fui criado em um lugar sujo, fui tão ignorante!";
+	next;
+	mes "[Ahrum]";
+	mes "O que é preciso para ser rei, e como fazer uma política limpa?...";
+	mes "Ahhhhhhhhhhh!!";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "......";
+	set @d3_falou, 1;
+	if((@d1_falou) && (@d2_falou) && (@d3_falou) && (@d4_falou)) set ep12_moc_que2, 14;
+	warp "prt_castle",318,309;
+	close;
+} else if(.@dialogo == 2) {
+	if(ep12_moc_que2 < 13) end;
+	mes "- Pude ouvir a voz de Ahrum antes de entrar em seu aposento.";
+	mes "Ela vinha de dentro. -";
+	next;
+	mes "[Ahrum]";
+	mes "Não, isso não é bom... não...";
+	mes "Desse jeito, serei coroado.";
+	mes "Eu não devia ser o rei...";
+	mes "Ernst... Você não pode esquecer o que é ser rei de verdade...";
+	next;
+	mes "[Ahrum]";
+	mes "Para que surja o verdadeiro rei,";
+	mes "Enfrentarei a noite... a escuridão, por você.";
+	mes "...Aaaaaahhh!!!";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "......";
+	set @d2_falou, 1;
+	if((@d1_falou) && (@d2_falou) && (@d3_falou) && (@d4_falou)) set ep12_moc_que2, 14;
+	warp "prt_castle",318,309;
+	close;
+}
+mes "- Pude ouvir a voz de Ahrum antes de entrar em seu aposento.";
+mes "Ela vinha de dentro. -";
+next;
+mes "[Ahrum]";
+mes "Família nobre? Berço de ouro?..família real? ...";
+mes "O que tudo isso quer dizer?";
+next;
+mes "[Ahrum]";
+mes "Para o irmão Ernst, minha família é pecadora.";
+mes "E eu sou a parte do pecado... por ser parte da família.";
+mes "O pecado da família é o meu pecado.";
+next;
+mes "[Ahrum]";
+mes "Não posso... agüentar mais...";
+mes "Ernst... Espero que você...";
+next;
+mes "["+strcharinfo(0)+"]";
+mes "......";
+set @d1_falou, 1;
+if((@d1_falou) && (@d2_falou) && (@d3_falou) && (@d4_falou)) set ep12_moc_que2, 14;
+warp "prt_castle",318,309;
+close;
+}
+
+//Ahrum Dinâmico 1 (prt_castle)
+//==========================
+prt_castle,272,372,0	script	Príncipe::d_ahrum1	983,{
+
+if(ep12_moc_que2 < 15) end;
+mes "[Ahrum]";
+mes "Estúpido. Você nunca será rei em sua vida, entendeu?";
+mes "Um viciado em tranqueiras!";
+next;
+mes "[Erich]";
+mes "...Nem estou tentando ser rei, mas essas palavras";
+mes "rudes não me fazem sentir bem.";
+mes "O que há de errado com você, assim de repente?";
+next;
+mes "[Ahrum]";
+mes "Estou enjoado com você.";
+mes "E de cada idiota como você que é candidato a rei.";
+mes "Estou enjoado com esta disputa de sucessão.";
+next;
+mes "[Erich]";
+mes "Sim, isso até é verdade, mas sou o representante da família Nerius,";
+mes "e não posso suportar seus insultos.";
+next;
+mes "[Erich]";
+mes "Sua família está ciente de suas ações insanas?";
+mes "Você está manchando o nome da sua família.";
+next;
+mes "[Ahrum]";
+mes "...! Sim... manchando.";
+mes "E minha existência também.";
+mes "Huhu... hahahahaha!";
+next;
+mes "[Ahrum]";
+mes "Sim, você e eu não temos valor!";
+mes "Hahahaha!! O maldito cata-lixo revela a verdade.";
+mes "Sim, hahahahahaha!!";
+next;
+mes "[Erich]";
+mes "... Seu maluco. Cai fora.";
+mes "Não quero mais falar com você.";
+next;
+mes "[Ahrum]";
+mes "Sim, estou indo agora.";
+mes "Vergonha da família?! Hahahaha...";
+mes "O que é família?!";
+mes "Hahaha!! Que interessante!";
+next;
+mes "- Ahrum parecia estar fora de sai quando saiu pela porta -";
+next;
+mes "[Erich]";
+mes "...Louco.";
+specialeffect 16;
+disablenpc "d_ahrum1";
+enablenpc "d_ahrum2";
+set ep12_moc_que2, 16;
+close;
+
+OnInit:
+disablenpc "d_ahrum1";
+end;
+}
+
+//Ahrum Dinâmico 2 (prt_castle)
+//===========================
+prt_castle,336,202,6	script	Príncipe::d_ahrum2	983,{
+
+if(ep12_moc_que2 < 16) end;
+mes "[Urugen]";
+mes "O que você disse? Ahrum?";
+mes "Ei! O que você acaba de dizer para mim? Ahrum?!";
+next;
+mes "[Ahrum]";
+mes "Posso dizer um milhão de vezes!";
+mes "Urugen, você não é bonito, nem um pouco!";
+mes "Na verdade, sua aparência é feia e obscena!";
+next;
+mes "[Urugen]";
+mes "Que rude! Como pode uma pessoa suja como";
+mes "você falar assim comigo?!";
+next;
+mes "[Ahrum]";
+mes "Sujo? Sim, sou. Sou sujo.";
+mes "Mas não é um problema só meu.";
+mes "Todos são sujos! Não agüento mais!";
+next;
+mes "[Urugen]";
+mes "Hum! Até concordo com você.";
+mes "O mundo é obsceno. Mas você não pode me rebaixar assim.";
+mes "Não posso perdoar suas palavras, jamais!";
+next;
+mes "[Ahrum]";
+mes "E se você não me perdoar, o que vai fazer?";
+mes "Essa é boa. Vai me matar? Vai matar a mim? Matar-me? Haha!";
+mes "Acha que pode ser \"bonito\" desse jeito?";
+next;
+mes "[Urugen]";
+mes "Argh, não posso suportar essas palavras e esse comportamento baixo...";
+mes "Tem certeza que você é um príncipe?";
+mes "Não quero mais olhar para sua cara, saia daqui!";
+next;
+mes "[Ahrum]";
+mes "Você não tem valor.";
+mes "Como pode acreditar que sua beleza basta para reinar?";
+mes "Porcaria de homem!";
+mes "Não quero ficar perto de você também.";
+mes "Fique no seu mundinho para sempre, e não saia nunca mais!";
+next;
+mes "- Ahrum saiu da sala pisando duro e resmungando. -";
+next;
+mes "[Urugen]";
+mes "...Você é tão baixo. Julguei você mal achando que";
+mes "você tivesse alguma sensibilidade.";
+mes "Como me enganei...";
+specialeffect 16;
+disablenpc "d_ahrum2";
+enablenpc "d_ahrum3";
+set ep12_moc_que2, 17;
+close;
+
+OnInit:
+disablenpc "d_ahrum2";
+end;
+}
+
+//Ahrum Dinâmico 3 (prt_castle)
+//===========================
+prt_castle,286,201,6	script	Príncipe::d_ahrum3	983,{
+
+if(ep12_moc_que2 < 17) end;
+mes "[Ahrum]";
+mes "Maníaco militar! Idiota! Acha que o poder resolve tudo?";
+mes "Sendo assim, como as pessoas vão viver em paz?!";
+next;
+mes "[Helmut]";
+mes "Você está bem violento agora.";
+mes "Pela sua teoria, você também não é digno de ser rei,";
+mes "não é mesmo?";
+next;
+mes "[Ahrum]";
+mes "Sim, você disse bem, para variar. Não sou digno!";
+mes "Mas você é pior que eu.";
+mes "Candidato a rei? Você não passa de um belicista!";
+next;
+mes "[Helmut]";
+mes "Você veio aqui para me ofender!";
+mes "Acha que pode me derrotar, Eigen Ahrum?";
+next;
+mes "[Ahrum]";
+mes "Derrotar? Que bobagem. Não importa.";
+mes "Só vim aqui dizer o que tinha a dizer para você.";
+mes "Nem tenho vontade de brigar com você. Vou embora!";
+next;
+mes "[Helmut]";
+mes "Espere, covarde! Está fugindo agora?!";
+mes "Que covarde! Vamos terminar nossa batalha!";
+next;
+mes "[Ahrum]";
+mes "Covarde... uma palavra boa.";
+mes "Sim, sou. Estou indo.";
+mes "Você é pior do que um covarde como eu.";
+mes "Adeus, militarista.";
+next;
+mes "- Ahrum sorriu levemente ao conseguir irritar Helmut,";
+mes "e saiu da sala. -";
+next;
+mes "[Helmut]";
+mes "Esse... esse vilão!!!";
+specialeffect 16;
+disablenpc "d_ahrum3";
+enablenpc "d_ahrum4";
+set ep12_moc_que2, 18;
+close;
+
+OnInit:
+disablenpc "d_ahrum3";
+end;
+}
+
+//Ahrum Dinâmico 4 (prt_castle)
+//===========================
+prt_castle,388,205,6	script	Príncipe::d_ahrum4	983,{
+
+if(ep12_moc_que2 < 18) end;
+mes "[Ahrum]";
+mes "Você sempre está jogando, por que não se importa";
+mes "com quem está ao seu redor, hein?";
+mes "E então, jovem herdeiro de Riehart?";
+next;
+mes "[Poe]";
+mes "O que está dizendo?";
+mes "Ao menos acho que meus dados são melhores do que os seus,";
+mes "não acha?";
+next;
+mes "[Ahrum]";
+mes "Putz, lá vem você falando de dados.";
+mes "Escute. Você pode achar que rolei dados piores que você.";
+mes "Mas você já falhou antes de rolar os dados, sabia?";
+next;
+mes "[Poe]";
+mes "Do que você está falando?";
+mes "Não entendo você. Para quem eu perdi?";
+mes "Não sei por que você está falando assim.";
+next;
+mes "[Ahrum]";
+mes "Você não poderia saber! E dái, se você soubesse, o que faria?";
+mes "Você tem orgulho demais em tudo, não é?";
+mes "Acha que uma árvore de raiz ruim pode ter bons frutos?!";
+next;
+mes "[Poe]";
+mes "Se tem algo a dizer, você deve dizer claramente.";
+mes "Já está anunciando sua derrota?";
+mes "E minha sorte, é tão terrível, Eigen Ahrum?";
+next;
+mes "[Ahrum]";
+mes "Sim, anuncio minha derrota. Mas não para você.";
+mes "Você é um perdedor como eu.";
+mes "Antes de chegar ao que é importante de verdade,";
+mes "você se perde com distrações.";
+next;
+mes "[Poe]";
+mes "...Do que diabos você está falando? Distrações?";
+mes "Simplesmente não consigo entender você.";
+next;
+mes "[Ahrum]";
+mes "É melhor você não entender.";
+mes "Se soubesse, ficaria doente.";
+mes "Não se preocupe com isso, pelo resto da sua vida!";
+next;
+mes "[Poe]";
+mes "Ei, espere! Olhe, Ahrum, espere!";
+mes "Eigen Ahrum! Ei!";
+next;
+mes "- Ahrum ignorou totalmente a você que o chamava";
+mes "e saiu da sala como um semblante solitário. -";
+next;
+mes "[Poe]";
+mes "O que... foi isso? Não foi nada divertido.";
+mes "Não pude entendê-lo, nem um pouco.";
+specialeffect 16;
+disablenpc "d_ahrum4";
+enablenpc "d_ahrum5";
+set ep12_moc_que2, 19;
+close;
+
+OnInit:
+disablenpc "d_ahrum4";
+end;
+}
+
+//Ahrum Dinâmico 5 (prt_castle)
+//===========================
+prt_castle,364,372,0	script	Príncipe::d_ahrum5	983,{
+
+if(ep12_moc_que2 < 19) end;
+mes "[Ahrum]";
+mes "Peter, o que você vai fazer se seu trabalho não significa nada?";
+next;
+mes "[Peter]";
+mes "...Não sei do que você está falando, mas nada sem sentido pode existir.";
+mes "Não creio que você não saiba disso.";
+next;
+mes "[Ahrum]";
+mes "Humpf! Errado. Há uma coisa que não tem sentido em si mesma.";
+mes "Para falar claramente, a ação se torna sem sentido sem que se perceba...";
+next;
+mes "[Peter]";
+mes "Tem certeza que está 'falando claramente'?";
+mes "Você está é complicando. O que exatamente você quer dizer?";
+mes "Deixe-me entender.";
+next;
+mes "[Ahrum]";
+mes "...O que quer que eu faça, estou sendo manipulado por alguma coisa.";
+mes "Para piorar, eu machuco os outros, porque";
+mes "não entendo isso que está em mim.";
+next;
+mes "[Peter]";
+mes "......";
+next;
+mes "[Ahrum]";
+mes "A pior coisa é que sinto que fico retraído ao";
+mes "tentar entender a mim mesmo.";
+next;
+mes "[Ahrum]";
+mes "Mas o mesmo acontece com você.";
+mes "Se quisesse mesmo expressar gratidão à grota,";
+mes "deveria ter falado com ela em pessoa.";
+mes "Mas não poderia fazer isso, poderia?";
+next;
+mes "[Peter]";
+mes "...Ahrum, o que há de errado com você?";
+mes "Você não é o Ahrum que eu conheço.";
+mes "O que deixou você assim?";
+next;
+mes "[Ahrum]";
+mes "Humpf... nada. Eu só percebi a realidade como ela é.";
+mes "Foi bom falar com você.";
+mes "Adeus, e viva como você costumava ser, para sempre.";
+next;
+mes "[Peter]";
+mes "......Eigen Ahrum. Você...";
+next;
+mes "- Ahrum, com uma expressão sombria no rosto, saiu da sala. -";
+next;
+mes "[Peter]";
+mes "......";
+specialeffect 16;
+disablenpc "d_ahrum5";
+enablenpc "d_ahrum6";
+set ep12_moc_que2, 20;
+close;
+
+OnInit:
+disablenpc "d_ahrum5";
+end;
+}
+
+//Ahrum Dinâmico 6 (prt_castle)
+//===========================
+prt_castle,368,310,0	script	Príncipe::d_ahrum6	983,{
+
+if(ep12_moc_que2 < 20) end;
+mes "[Ernst]";
+mes "Irmão, repita isso que você disse!";
+next;
+mes "[Ahrum]";
+mes "Está bem. Vou dizer. Esta corte de Rune-Midgard é um lixo.";
+mes "Eu e você lutamos com o lixo por tanto tempo que...";
+mes "ficamos iguais a ele!";
+next;
+mes "[Ernst]";
+mes "Irmão, o que há de errado, está louco?";
+next;
+mes "[Ahrum]";
+mes "Louco? Estou totalmente são.";
+mes "Estou simplesmente enojado com esta realidade, meu querido irmão.";
+next;
+mes "[Ernst]";
+mes "Realidade, que realidade? O que você percebeu?";
+mes "Você já não é o mesmo de antes, não consigo entender!";
+next;
+mes "[Ahrum]";
+mes "Estou como sempre, Ernst.";
+mes "É que a realidade é suja e percebi que estou preso à sujeira.";
+mes "Não posso sair.";
+next;
+mes "[Ernst]";
+mes "Mentiroso! Você sempre me disse que acreditava nas possibilidades,";
+mes "lembra? Você sempre se comportou com orgulho!";
+next;
+mes "[Ahrum]";
+mes "Cale-se.";
+next;
+mes "[Ernst]";
+mes "Se tudo está sujo e ruim, é por isso mesmo que devemos corrigir.";
+mes "Já sabíamos que a situação era essa,";
+mes "mas por que você age assim!!";
+next;
+mes "[Ahrum]";
+mes "...Já disse para se calar!";
+next;
+mes "[Ernst]";
+mes "Nosso acordo era não nos corrompermos,";
+mes "e é graças ao seu compromisso que posso confiar no futuro!";
+next;
+mes "[Ahrum]";
+mes "Cale-se!!! Cale-se!!!";
+next;
+mes "[Ernst]";
+mes "......!";
+next;
+mes "[Ahrum]";
+mes "Uma ação sem sentido não serve para nada!";
+mes "É horrível ser manipulado pela sujeira.";
+mes "Eu não sabia, e sentia que agia por minha vontade,";
+mes "mas agora percebo que fui manipulado!";
+next;
+mes "[Ahrum]";
+mes "Para que serve ser rei? Para nada!";
+mes "Mesmo que criemos um novo mundo, será que nada vai mudar?!";
+mes "Parece uma peça de teatro. E não fomos nós que escrevemos!";
+mes "Não é?!";
+next;
+mes "[Ernst]";
+mes "Do que você está falando? Simplesmente não consigo entender!";
+mes "Você admite que está louco? Do que diabos você está falando?";
+next;
+mes "[Ahrum]";
+mes "Cale-se! Sem saber de nada, você nem sabe que pode morrer.";
+mes "Você não me entendeu... Ah...!";
+mes "Você não precisa saber disso!";
+next;
+mes "[Ernst]";
+mes "I-irmão, por que insiste nisso?";
+mes "Nosso relacionamento, de que vale?";
+next;
+mes "[Ahrum]";
+mes "Cale-se! Se não está contente, pode me matar como prometemos!";
+mes "Você... eu... eu...!!";
+mes "Argh, não quero mais falar nisso, vou voltar para o quarto!";
+next;
+mes "[Ernst]";
+mes "Ah! Espere um instante, irmão Ahrum!";
+next;
+mes "[Ahrum]";
+mes "Eu não sei! Rei? Você? Eu?...";
+next;
+mes "- Ahrum apertou o passo e saiu da sala,";
+mes "parecendo completamente exausto. -";
+next;
+mes "[Ernst]";
+mes "Ahrum... Ahrum.";
+specialeffect 16;
+disablenpc "d_ahrum6";
+enablenpc "d_ernst";
+set ep12_moc_que2, 21;
+close;
+
+OnInit:
+disablenpc "d_ahrum6";
+end;
+}
+
+//Ernst Dinâmico (prt_castle)
+//========================
+prt_castle,314,312,0	script	Príncipe::d_ernst	985,{
+
+if((ep12_moc_que2 < 21) || (ep12_moc_que2 == 22)) end;
+if(ep12_moc_que2 == 21) {
+	mes "[Ahrum]";
+	mes "Eu disse a você que não quero ser rei,";
+	mes "e não tenho intenção de mudar de idéia!";
+	next;
+	mes "[Ernst]";
+	mes "Irmão! Não sei por que você está sofrendo tanto!";
+	mes "Você é tão fraco assim?!";
+	next;
+	mes "[Ahrum]";
+	mes "Sofrendo? Eu? Aaahh...";
+	mes "É mesmo?... Sim... É isso.";
+	mes "Sofrimento... huhu... hahaha!";
+	next;
+	mes "[Ernst]";
+	mes "Irmão? Ahrum?";
+	next;
+	mes "[Ahrum]";
+	mes "...Só eu poderia escapar...";
+	mes "Enfim, sou alguém sem valor.... huhuhu.";
+	mes "Mas tomei uma decisão.";
+	next;
+	mes "[Ahrum]";
+	mes "Ernst.";
+	next;
+	mes "[Ernst]";
+	mes "Sim?... Sim?...";
+	next;
+	mes "[Ahrum]";
+	mes "Tome.";
+	next;
+	mes "- voosh -";
+	next;
+	mes "- Ahrum lançou uma adaga a Ernst. -";
+	next;
+	mes "[Ernst]";
+	mes "Hein?... Do que isto se trata?...";
+	mes "A adaga da família Walter?... Por quê?...";
+	next;
+	mes "[Ahrum]";
+	mes "Agora é a hora certa.";
+	mes "Até nossa testemunha está aqui!";
+	mes "Ernst, você se lembra da nossa promessa, certo?";
+	next;
+	mes "[Ernst]";
+	mes "O quê? Promessa? Testemunha?... Ah...";
+	mes "É-é... sério...";
+	next;
+	mes "[Ahrum]";
+	mes "Sim, é sério. Agora é a hora.";
+	next;
+	mes "[Ernst]";
+	mes "Bobagem! Acha que posso fazer isso com você?!";
+	next;
+	mes "[Ahrum]";
+	mes "Idiota! Ser Rei quer dizer tomar ações com decisão.";
+	mes "Não tenho chance de ser Rei.";
+	mes "A corrupção, e viver desse jeito, é pior do que ser morto por você...";
+	next;
+	mes "[Ernst]";
+	mes "Ma-mas, você pode viver assim mesmo!";
+	mes "Como se nada tivesse acontecido.";
+	mes "Você só precisa voltar a ser o que era antes.";
+	mes "Irmão, me deixe ajudar.";
+	mes "Conte-me o que você sabe...";
+	next;
+	mes "[Ahrum]";
+	mes "Que idiotice! Você se considera candidato a rei?!";
+	mes "Está demonstrando simpatia por mim agora?";
+	mes "Você precisa ter bom senso!";
+	mes "Caso contrário, você não pode ser rei!";
+	next;
+	mes "[Ernst]";
+	mes "Ma-mas!...";
+	next;
+	mes "[Ahrum]";
+	mes "É inútil falar, ou hesitar! Não tem jeito.";
+	mes "Se você insiste nisso em vez de tomar a decisão certa,";
+	mes "então você não pode ser rei.";
+	next;
+	mes "[Ahrum]";
+	mes "Hã?! Irmão?!";
+	next;
+	mes "(som de golpe de adaga)";
+	specialeffect 1;
+	set ep12_moc_que2, 22;
+	disablenpc "d_ernst";
+	enablenpc "d_ernst2";
+	close;
+}
+
+OnInit:
+disablenpc "d_ernst";
+}
+
+//Ernst Dinâmico 2(prt_castle)
+//==========================
+prt_castle,314,313,0	script	Príncipe::d_ernst2	985,{
+end;
+
+OnInit:
+disablenpc "d_ernst2";
+end;
+}
+
+//Popup - Quarto de Ahrum (prt_castle)
+//================================
+prt_castle,315,313,0	script	AhrumPopUp::quarto_popup	-1,2,2,{
+
+OnTouch:
+	if(ep12_moc_que2 < 23) end;
+	mes "["+strcharinfo(0)+"]";
+	mes "...............";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "O que ele pensou e como ele decidiu se tornar rei,";
+	mes "aqui neste quarto?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "E... que situação o levou a uma decisão incontornável?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "Não posso mais perguntar a ele e não sobrou nenhuma pista.";
+	mes "Só o que sobrou foi...";
+	next;
+	mes "[Ahrum]";
+	mes "Se você reagir de forma errada a este incidente,";
+	mes "minha morte terá sido inútil...";
+	mes "...*cof*... Você entendeu?";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...............";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...Manter o silêncio, por ele,";
+	mes "e carregar o fardo que ele deixou por toda a minha vida.";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "...Descanse em paz.";
+	close;
+}
+
+ein_fild01,28,263,0	script	#ein2qest1	45,1,1,{
+if(ep12_moc_que1 >= 11){ warp "cave",97,21; end; }
+}
+
+
+//Warps (prt_castle)
+//=================
+prt_castle,221,308,0	warp	prtcastleq01	1,1,prt_castle,176,167
+prt_castle,225,318,0	warp	prtcastleq02	1,1,prt_castle,276,264
+prt_castle,273,264,0	warp	prtcastleq03	1,1,prt_castle,221,318
+prt_castle,225,338,0	warp	prtcastleq04	1,1,prt_castle,275,284
+prt_castle,273,284,0	warp	prtcastleq05	1,1,prt_castle,221,338
+prt_castle,221,347,0	warp	prtcastleq06	1,1,prt_castle,163,316
+prt_castle,163,312,0	warp	prtcastleq07	1,1,prt_castle,221,343
+prt_castle,300,276,0	warp	prtcastleq08	1,1,prt_castle,273,368
+prt_castle,273,364,0	warp	prtcastleq09	1,1,prt_castle,300,273
+prt_castle,310,271,0	warp	prtcastleq10	1,1,prt_castle,340,208
+prt_castle,340,213,0	warp	prtcastleq11	1,1,prt_castle,310,274
+prt_castle,318,276,0	warp	prtcastleq12	1,1,prt_castle,318,309
+prt_castle,317,304,0	warp	prtcastleq13	1,1,prt_castle,318,273
+prt_castle,330,271,0	warp	prtcastleq14	1,1,prt_castle,290,208
+prt_castle,289,213,0	warp	prtcastleq15	1,1,prt_castle,330,274
+prt_castle,336,276,0	warp	prtcastleq16	1,1,prt_castle,368,308
+prt_castle,367,304,0	warp	prtcastleq17	1,1,prt_castle,336,273
+prt_castle,348,271,0	warp	prtcastleq18	1,1,prt_castle,390,208
+prt_castle,389,213,0	warp	prtcastleq19	1,1,prt_castle,348,274
+prt_castle,354,276,0	warp	prtcastleq20	1,1,prt_castle,366,368
+prt_castle,365,364,0	warp	prtcastleq21	1,1,prt_castle,354,273

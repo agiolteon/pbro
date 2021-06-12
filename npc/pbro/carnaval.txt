@@ -1,0 +1,267 @@
+prontera,155,180,3	script	Rei Momo	992,{
+
+show "[Rei Momo]";
+show "Ei jovem, carnaval esta chegando... Você já esta preparado?";
+show "Eu estou neste carnaval ajudando os foliões a se enfeitarem, esta interessado?";
+next;
+menu "Sim, mas como?",COMO,"Adquirir enfeites",TROCA,"Me conte sobre os enfeites",SOBRE;
+
+TROCA:
+menu "Peruca Feliz",Pfeliz,"Peruca Brilhante",Pbrilhante,"Peruca Chamativa",Pchamativa,"Peruca Fantastica",pfantastica;
+
+Pfeliz:
+show "[Rei Momo]";
+show "Você esta com os itens para a Peruca Feliz?";
+show "";
+show "1 - Espírito da Glória";
+show "1 - Espírito da Solidariedade";
+show "1 - Espírito da Cooperação";
+show "1 - Espírito da Paz";
+show "1 - Espírito da Amizade";
+show "1 - Espírito da Proteção";
+next;
+if(countitem(7245)<1 || countitem(7246)<1 || countitem(7243)<1 || countitem(7244)<1 || countitem(7250)<1 || countitem(7236)<1) goto SEMITEM;
+delitem 7245,1;
+delitem 7246,1;
+delitem 7243,1;
+delitem 7244,1;
+delitem 7250,1;
+delitem 7236,1;
+additem 5273,1;
+show "[Rei Momo]";
+show "Agora você está pronto para passar o carnaval muito bem enfeitado!!";
+show "DIvirta-se!!";
+close;
+
+Pbrilhante:
+show "[Rei Momo]";
+show "Você esta com os itens para a Peruca Brilhante?";
+show "";
+show "1 - Espírito da União";
+show "1 - Espírito da Solidariedade";
+show "1 - Espírito da Associação";
+show "1 - Espírito da Determinação";
+show "1 - Espírito da Coordenação";
+show "1 - Espírito do Serviço";
+next;
+if(countitem(7249)<1 || countitem(7237)<1 || countitem(7241)<1 || countitem(7244)<1 || countitem(7247)<1 || countitem(7238)<1) goto SEMITEM;
+delitem 7237,1;
+delitem 7241,1;
+delitem 7244,1;
+delitem 7247,1;
+delitem 7238,1;
+delitem 7249,1;
+additem 5274,1;
+show "[Rei Momo]";
+show "Agora você está pronto para passar o carnaval muito bem enfeitado!!";
+show "DIvirta-se!!";
+close;
+
+Pchamativa:
+show "[Rei Momo]";
+show "Você esta com os itens para a Peruca Chamativa?";
+show "";
+show "1 - Espírito da Vitória";
+show "1 - Espírito da Gloria";
+show "1 - Espírito da Honra";
+show "1 - Espírito da Confiança";
+show "1 - Espírito da Ataque";
+show "1 - Espírito do Avanço";
+next;
+if(countitem(7239)<1 ||countitem(7251)<1 || countitem(7250)<1 || countitem(7248)<1 || countitem(7240)<1 || countitem(7235)<1) goto SEMITEM;
+delitem 7251,1;
+delitem 7250,1;
+delitem 7248,1;
+delitem 7240,1;
+delitem 7235,1;
+delitem 7239,1;
+additem 5275,1;
+show "[Rei Momo]";
+show "Agora você está pronto para passar o carnaval muito bem enfeitado!!";
+show "DIvirta-se!!";
+close;
+
+Pfantastica:
+show "[Rei Momo]";
+show "Você esta com os itens para a Peruca Fantastica?";
+show "";
+show "1 - Espírito da Combinação";
+show "1 - Peruca Feliz";
+show "1 - Peruca Brilhante";
+show "1 - Peruca Chamativa";
+next;
+if(countitem(7242)<1 || countitem(5275)<1 || countitem(5274)<1 || countitem(5273)<1) goto SEMITEM;
+delitem 7242,1;
+delitem 5273,1;
+delitem 5274,1;
+delitem 5275,1;
+additem 5276,1;
+show "[Rei Momo]";
+show "Agora você está pronto para passar o carnaval muito bem enfeitado!!";
+show "DIvirta-se!!";
+close;
+
+COMO:
+show "[Rei Momo]";
+show "Para conseguir meus enfeites carnavalescos você precisa me trazer os espiritos que envolvem o carnaval. Os quais você pode conseguir falando com o ^FF0000desconhecido dentro do Caixão em Aldebaran^000000";
+next;
+menu "Quais eu preciso?",QUAIS,"Ok, obrigado",SAIR;
+
+QUAIS:
+show "[Rei Momo]";
+show "Para a peruca Feliz, você precisara me trazer:";
+show "";
+show "1 - Espírito da Glória ";
+show "1 - Espírito da Solidariedade ";
+show "1 - Espírito da Cooperação";
+show "1 - Espírito da Paz";
+show "1 - Espírito da Amizade";
+show "1 - Espírito da Proteção";
+next;
+show "[Rei Momo]";
+show "A Peruca Brilhante, eu quero:";
+show "";
+show "1 - Espírito da União ";
+show "1 - Espírito da Solidariedade ";
+show "1 - Espírito da Associação";
+show "1 - Espírito da Determinação";
+show "1 - Espírito da Coordenação";
+show "1 - Espírito do Serviço";
+next;
+show "[Rei Momo]";
+show "Peruca Chamativa, você precisara:";
+show "";
+show "1 - Espírito da Vitória ";
+show "1 - Espírito da Gloria ";
+show "1 - Espírito da Honra";
+show "1 - Espírito da Confiança";
+show "1 - Espírito da Ataque";
+show "1 - Espírito do Avanço";
+next;
+show "[Rei Momo]";
+show "E a rara Peruca Fantastica:";
+show "";
+show "1 - Peruca Feliz";
+show "1 - Peruca Brilhante";
+show "1 - Peruca Chamativa";
+show "1 - Espírito da Amizade";
+next;
+show "[Rei Momo]";
+show "Esses são os itens para conseguir os enfeites do carnaval!";
+close;
+
+SOBRE:
+show "[Rei Momo]";
+show "Meus enfeites carnavalescos não são apenas adornos, eles lhe dão poderes...";
+show "Isso mesmo, poderes.";
+next;
+menu "Que poderes são esses?",PODERES,"OK, obrigado",SAIR;
+
+PODERES:
+show "[Rei Momo]";
+show "Bom... vamos por partes...";
+next;
+show "[Rei Momo]";
+show "Primeiro minha Peruca feliz, alem de bonita, ela lhe oferece as seguintes vantagens:";
+show "-Vel. de movimento +10";
+show "-Defesa +5";
+show "-Sorte +5";
+show "-Destreza +5";
+next;
+show "[Rei Momo]";
+show "Tambem tenho a Peruca Brilhante:";
+show "-Vel. de movimento +10";
+show "-Defesa +5";
+show "-Inteligencia +5";
+show "-Vitalidade +5";
+next;
+show "[Rei Momo]";
+show "A minha favorita Peruca Chamativa:";
+show "-Vel. de movimento +10";
+show "-Defesa Mágica +5";
+show "-Agilidade +5";
+show "-Força +5";
+next;
+show "[Rei Momo]";
+show "E a minha rarissima Peruca Fantastica:";
+show "-Vel. de movimento +5";
+show "-Defesa +5";
+show "-Defesa Mágica +5";
+show "-Todos os status +5";
+next;
+show "[Rei Momo]";
+show "Espero que goste e venha pegar elas comigo o quanto antes, pois o canaval esta bem próximo";
+close;
+
+SEMITEM:
+show "[Rei Momo]";
+show "Lamento, mas você não os itens que eu preciso";
+close;
+
+SAIR:
+show "[Rei Momo]";
+show "Se precisar lembre-se, estarei aqui até o final do carnaval";
+close;
+}
+
+aldebaran,135,119,7	script	Desconhecido#2	801,{
+
+show "[Desconhecido]";
+show "Muahahhahhaa quem esta ai?!?!? O que quer de mim?!?!?";
+next;
+menu "Quero Espiritos",ESPIRITOS,"Quero Caveiras",CAVEIRAS,"Nada, descance em paz",SAIR2;
+
+ESPIRITOS:
+show "[Desconhecido]";
+show "Eu troco... Mas quero 50 Caveiras, você tem? Usuários VIP TOTAL necessitam de 35 Caveiras";
+next;
+menu "Sim",SIMC,"Não",SAIR2;
+
+SIMC:
+show "[Desconhecido]";
+show "Pode sair qualquer espirito, antes que me pergunte, não posso influenciar em na escolha, são o espiritos que decidem aleatoriamente.";
+next;
+set @espirito, rand(0,16);
+set @iddoitem, 7235;
+set @iddoitem, @iddoitem + @espirito;
+if(getgmlevel()> 18) {
+if(countitem(7420)<35) goto SEMCAV;
+delitem 7420,35;
+additem @iddoitem,1;
+goto FIMN;
+}
+if(countitem(7420)<50) goto SEMCAV;
+delitem 7420,50;
+additem @iddoitem,1;
+goto FIMN;
+
+FIMN:
+show "[Desconhecido]";
+show "Muahahaha... Sempre que puder me traga mais!! Eu não irei sair daqui...";
+close;
+
+CAVEIRAS:
+show "[Desconhecido]";
+show "Eu não dou caveiras, eu as quero para mim!!!";
+next;
+show "[Desconhecido]";
+show "Mas preso neste caixão não consigo por uma maldição...";
+show "Para consegui-las, você precisa derrotar seus inimigos!!";
+next;
+show "[Desconhecido]";
+show "Ao eliminar alguem no PVP/WOT/WOE você consegue uma caveira da pessoa morta, ao adquirir ^FF000030^000000, você pode trocar comigo pelos espiritos.";
+next;
+show "[Desconhecido]";
+show "Agora pare de me encomodar e vá busca-las para mim!";
+close;
+
+SEMCAV:
+show "[Desconhecido]";
+show "Eu preciso delas!!!! E você não as tem!!!!";
+close;
+
+SAIR2:
+show "[Desconhecido]";
+show "...";
+close;
+}

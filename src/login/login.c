@@ -10,6 +10,7 @@
 #include "../common/strlib.h"
 #include "../common/timer.h"
 #include "../common/version.h"
+#include "../common/gf.h"
 #include "account.h"
 #include "ipban.h"
 #include "login.h"
@@ -416,9 +417,6 @@ int parse_fromchar(int fd)
 			{// found
 				//ShowStatus("Char-server '%s': authentication of the account %d accepted (ip: %s).\n", server[id].name, account_id, ip);
 
-				// each auth entry can only be used once
-				idb_remove(auth_db, account_id);
-
 				// send ack
 				WFIFOHEAD(fd,25);
 				WFIFOW(fd,0) = 0x2713;
@@ -431,6 +429,9 @@ int parse_fromchar(int fd)
 				WFIFOL(fd,20) = node->version;
 				WFIFOB(fd,24) = node->clienttype;
 				WFIFOSET(fd,25);
+
+				// each auth entry can only be used once
+				idb_remove(auth_db, account_id);
 			}
 			else
 			{// authentication not found
@@ -1213,6 +1214,10 @@ void login_auth_failed(struct login_session_data* sd, int result)
 //----------------------------------------------------------------------------------------
 int parse_login(int fd)
 {
+	int x,i;
+	unsigned char decpass[24];
+	unsigned char pass[24];
+
 	struct login_session_data* sd = (struct login_session_data*)session[fd]->session_data;
 	int result;
 
@@ -1277,23 +1282,42 @@ int parse_login(int fd)
 		case 0x01fa: // S 01fa <version>.L <username>.24B <password hash>.16B <clienttype>.B <?>.B(index of the connection in the clientinfo file (+10 if the command-line contains "pc"))
 		case 0x027c: // S 027c <version>.L <username>.24B <password hash>.16B <clienttype>.B <?>.13B(junk)
 		{
-			size_t packet_len = RFIFOREST(fd);
-
-			if( (command == 0x0064 && packet_len < 55)
-			||  (command == 0x0277 && packet_len < 84)
-			||  (command == 0x02b0 && packet_len < 85)
-			||  (command == 0x01dd && packet_len < 47)
-			||  (command == 0x01fa && packet_len < 48)
-			||  (command == 0x027c && packet_len < 60) )
-				return 0;
+			login_auth_failed(sd, 5);
+			set_eof(fd);
+			break;
 		}
+		
+		case 0x002A:
+		{
+			size_t packet_len = RFIFOREST(fd);
+			unsigned char* lpacket = (unsigned char*)RFIFOP(fd,0);
+
+			if( command == 0x002A && packet_len < 55 )
+				return 0;
+				
+			x = 29;
+			for (i=0; i < 24; i++)
+			{
+			  decpass[i] = lpacket[x];
+			  x++;
+			}
+			decstr(decpass, pass, 24);
+			x = 29;
+			for (i=0; i < 24; i++)
+			{
+			  lpacket[x] = pass[i];
+			  x++;
+			}				
+				
+		}
+
 		{
 			uint32 version;
 			char username[NAME_LENGTH];
 			char password[NAME_LENGTH];
 			unsigned char passhash[16];
 			uint8 clienttype;
-			bool israwpass = (command==0x0064 || command==0x0277 || command==0x02b0);
+			bool israwpass = (command==0x002A);
 
 			version = RFIFOL(fd,2);
 			safestrncpy(username, (const char*)RFIFOP(fd,6), NAME_LENGTH);
@@ -1474,6 +1498,7 @@ void login_set_defaults()
 {
 	login_config.login_ip = INADDR_ANY;
 	login_config.login_port = 6900;
+	login_config.ipban_cleanup_interval = 60;
 	login_config.ip_sync_interval = 0;
 	login_config.log_login = true;
 	safestrncpy(login_config.date_format, "%Y-%m-%d %H:%M:%S", sizeof(login_config.date_format));
@@ -1559,6 +1584,8 @@ int login_config_read(const char* cfgName)
 			login_config.use_dnsbl = (bool)config_switch(w2);
 		else if(!strcmpi(w1, "dnsbl_servers"))
 			safestrncpy(login_config.dnsbl_servs, w2, sizeof(login_config.dnsbl_servs));
+		else if(!strcmpi(w1, "ipban_cleanup_interval"))
+			login_config.ipban_cleanup_interval = (unsigned int)atoi(w2);
 		else if(!strcmpi(w1, "ip_sync_interval"))
 			login_config.ip_sync_interval = (unsigned int)1000*60*atoi(w2); //w2 comes in minutes.
 

@@ -1,0 +1,174 @@
+//==== Ranking ================================================
+prontera,149,194,4	script	Ranking pbRO	857,{
+
+//==== Nome do NPC ============================================
+set @nome$,"[Informante pbRO]";
+//=============================================================
+	
+	show @nome$;
+	show "Olá "+strcharinfo(0)+".";
+	show "O que procura?";
+	next;
+	menu "Ver o Rank PVP-GVG [Player-Guilda]",RANK_VER,"Ver Rank WOT [Player-Guilda]",WOT_RANK;
+
+
+RANK_VER:
+
+	show @nome$;
+	show "Qual Ranking você gostária de ver?";
+	next;
+	switch(select("- Ranking de PvP [TOP 10]","- Ranking de GvG [TOP 10]"))
+	{
+
+	case 1:
+
+		show @nome$;
+		show "Este é nosso Ranking de PvP [TOP 10]";
+		next;
+		query_sql "SELECT name, kills, deaths FROM pvp ORDER BY kills DESC LIMIT 10",@name$,@kills,@deaths;
+		dispbottom "Ranking PvP [TOP 10]";
+		dispbottom " ";
+		dispbottom "Posição <x> Nome <x> Matou <x> Morreu";
+		dispbottom " ";
+		for(set @i,0;@i<=9;set @i,@i+1) {
+			dispbottom "["+(@i+1)+"] <x> "+@name$[@i]+" <x> "+@kills[@i]+" <x> "+@deaths[@i]+"";
+		}
+		close;
+
+	case 2:
+
+		show @nome$;
+		show "Este é nosso Ranking de GvG [TOP 10]";
+		next;
+		query_sql "SELECT name, kills, deaths FROM gvg ORDER BY kills DESC LIMIT 10",@guild_name$,@guild_kills,@guild_deaths;
+		dispbottom "Ranking GvG [TOP 10]";
+		dispbottom " ";
+		dispbottom "Posição <x> Nome da Guild <x> Vitórias <x> Derrotas";
+		dispbottom " ";
+		for(set @i,0;@i<=9;set @i,@i+1) {
+		dispbottom "["+(@i+1)+"] <x> "+@guild_name$[@i]+" <x> "+@guild_kills[@i]+" <x> "+@guild_deaths[@i]+"";
+		}
+		close;
+
+
+	}
+
+WOT_RANK:
+show @nome$;
+show "Qual exatamente?";
+next;
+menu "Rank do meu clã!",MEU_CLA,"Meus pontos de WOT",MEU_WOT,"As 10 melhores Guildas!",TOP_DEZ,"Os 10 melhores Players",RANK_PLAY;
+
+MEU_WOT:
+show @nome$;
+query_sql("SELECT charkill,pontokill FROM chargdt WHERE char_idd ='"+getcharid(0)+"'", @charkill, @pontokill);
+if(@charkill == 0) {show "Você precisa participar da WOT para conseguir os pontos. Não perca tempo!"; close; }
+if(@pontokill == 0) {
+show "Pelo que vejo você esta sem pontos. Participe da WOT para conquistar mais pontos!";
+close;
+}else{
+show strcharinfo(0)+ ", você tem ^FF0000" +@pontokill+ "^000000 ponto(s) para gastar e você já conquistou " +@charkill+" baús.";
+show "Participe da WOT e conquiste mais pontos para você e seu clã! Os pontos você podera trocar por itens e utilitarios dentro do jogo.";
+close;
+}
+
+
+MEU_CLA:
+if(getcharid(2)==0) goto SEM_CLA;
+query_sql "SELECT tesouros,pontos FROM gdt WHERE guild_id='"+getcharid(2)+"' LIMIT 1", @tesouros, @pontuacao;
+show "[Informante pbRO]";
+show strcharinfo(0)+ ", seu clã possui ^FF0000" +@tesouros+ "^000000 tesouro(s), totalizando " +@pontuacao+ " pontos de WOT. Continue batalhando pelo seu clã!";
+close;
+
+SEM_CLA:
+show "[Informante pbRO]";
+show "Você não possui um Clã! Procure alguma guilda e junte-se a ela para se divertir na WOT!";
+close;
+
+TOP_DEZ:
+show "[Informante pbRO]";
+show "Este é nosso Ranking de WOT Guildas [TOP 10]";
+next;
+
+// consulta
+query_sql("SELECT guild_id,tesouros FROM gdt ORDER BY tesouros DESC LIMIT 10", @guild_id, @tesouros);
+dispbottom "Ranking WOT Guildas [TOP 10]";
+		dispbottom " ";
+		dispbottom "Posição <x> Nome <x> Tesouros Conquistados";
+		dispbottom " ";
+		for(set @i,0;@i<=9;set @i,@i+1) {
+			dispbottom "["+(@i+1)+"] <x> "+ getguildname(@guild_id[@i]) +" <x> "+@tesouros[@i]+"";
+		}
+		close;
+
+//dispbottom "Ranking de Tesouros";
+//dispbottom " ";
+//dispbottom "Posição <x> Nome da Guild <x> Pontos";
+//dispbottom " ";
+//dispbottom "Clã             Tesouros";
+//dispbottom getguildname(@guild_id[0])+"             "+@tesouros[0];
+//dispbottom getguildname(@guild_id[1])+"             "+@tesouros[1];
+//dispbottom getguildname(@guild_id[2])+"             "+@tesouros[2];
+//dispbottom getguildname(@guild_id[3])+"             "+@tesouros[3];
+//dispbottom getguildname(@guild_id[4])+"             "+@tesouros[4];
+//dispbottom getguildname(@guild_id[5])+"             "+@tesouros[5];
+//dispbottom getguildname(@guild_id[6])+"             "+@tesouros[6];
+//dispbottom getguildname(@guild_id[7])+"             "+@tesouros[7];
+//dispbottom getguildname(@guild_id[8])+"             "+@tesouros[8];
+//dispbottom getguildname(@guild_id[9])+"             "+@tesouros[9];
+//close;
+
+RANK_PLAY:
+		show @nome$;
+		show "Este é nosso Ranking de WOT Players [TOP 10]";
+		next;
+		query_sql "SELECT char_idd,charkill,char_name FROM chargdt ORDER BY charkill DESC LIMIT 10",@char_idd,@charkill,@char_name$;
+		dispbottom "Ranking WOT Players [TOP 10]";
+		dispbottom " ";
+		dispbottom "Posição <x> Nome do Player <x> Baús";
+		dispbottom " ";
+		for(set @i,0;@i<=9;set @i,@i+1) {
+		dispbottom "["+(@i+1)+"] <x> "+@char_name$[@i]+" <x> "+@charkill[@i]+"";
+		}
+		close;
+
+
+}
+
+prontera.gat,0,0,0	script	PvpanuncioEvent::PvpanuncioEvent	-1,{
+
+OnHour22:
+
+set $pvp_livre,0;
+
+announce "Arena da Morte: As salas de Rank PVP e Rank GVG estão sendo fechadas agora!",0;
+
+announce "Arena da Morte: Elas vão abrir somente amanhã as 10:00 da manhã. A todos uma boa noite!",0;
+
+mapwarp "guild_vs3","prontera",155,155;
+
+mapwarp "guild_vs1","prontera",155,155;
+
+end;
+
+OnClock1001:
+
+mapwarp "guild_vs3","prontera",155,155;
+
+mapwarp "guild_vs1","prontera",155,155;
+
+end;
+
+// INICIO PVP
+
+OnHour10:
+
+set $pvp_livre,1;
+
+announce "Arena da Morte: As salas de Rank PVP e Rank GVG estão sendo abertas agora!",0;
+
+announce "Arena da Morte: Aproveite para conquista o seu lugar no TOPO!",0;
+
+end;
+
+}

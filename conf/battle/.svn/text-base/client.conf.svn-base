@@ -1,0 +1,117 @@
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/  _ \ /    \|  |  \/  ___/
+// \     \____|  | \(  <_> )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/   
+//-------------------------------------------------------------------
+// Cronus - Configuração do Cliente
+//-------------------------------------------------------------------
+// Originally Translated by Peter Kieser <pfak@telus.net>
+// Made in to plainer English by Ancyker
+//--------------------------------------------------------------
+// Nota 1: O valor é um parâmetro de configuração (on/off, yes/no ou 1/0)
+// Nota 2: O valor é em porcentagem (100 quer dizer 100%)
+//--------------------------------------------------------------
+
+// Selecione aqui as versões de client que você aceita. Adicione todos os valores do client:
+// Clients mais velhos do que as versões aceitas, e versões não 'aceitas'
+// aqui serão rejeitados quando entrarem.
+// 0x0001: Clients mais antigos que 2004-09-06aSakray (versão de packet 5-9)
+// 0x0002: 2004-09-06aSakexe (versão 10)
+// 0x0004: 2004-09-20aSakexe (versão 11)
+// 0x0008: 2004-10-05aSakexe (versão 12)
+// 0x0010: 2004-10-25aSakexe (versão 13)
+// 0x0020: 2004-11-29aSakexe (versão 14)
+// 0x0040: 2005-01-10bSakexe (versão 15)
+// 0x0080: 2005-05-09aSakexe (versão 16)
+// 0x0100: 2005-06-28aSakexe (versão 17)
+// 0x0200: 2005-07-18aSakexe (versão 18)
+// 0x0400: 2005-07-19bSakexe (versão 19)
+// 0x0800: 2006-03-27aSakexe (versão 20)
+// 0x1000: 2007-01-08aSakexe (versão 21)
+// 0x2000: 2007-02-12aSakexe (versão 22)
+// 0x4000: 2008-09-10aSakexe (versão 23)
+// default value: 0xFFFF (todos clients)
+packet_ver_flag: 0xFFFF
+
+// Atraso mínimo entre as mensagens privadas/global/grupo/clã (em milissegundos)
+// As mensagens que ultrapassarem esse limite são silenciosamente omitidas.
+min_chat_delay: 0
+
+// Números válidos de cores e estilos de cabelos.
+// NOTA: Configure somente com o que seu client suporta, se aumentar esses valores
+// tenha certeza que possui os arquivos necessários.
+min_hair_style: 0
+max_hair_style: 25
+min_hair_color: 0
+max_hair_color: 8
+min_cloth_color: 0 
+max_cloth_color: 4
+
+// Quando ajustado para 'yes', o campo de danos nos packets enviados pelos mapas de gde serão ajustados
+// para -1, fazendo impossível que GMs, Bots e Hexed clients saibam o dano atual causado pelos ataques. (Nota 1)
+hide_woe_damage: no
+
+// Número de 'estilo de cabelo' que identifica o bichinho de estimação.
+// NOTA: O client usa o 'estilo de cabelo' para identificar os monstros.
+// Este valor é sempre maior que o valor máximo de estilo de cabelo que é ajustado no client.
+// Valores que funcionam (todos os clients de 2005):
+// sakexes antigos: 20
+// sakexe 0614: 24
+// sakexe 0628 (e posteriores): 100
+pet_hair_style: 100
+
+// Área visível (quantos quadrados a partir do personagem o jogador pode ver).
+area_size: 14
+
+// Nível máximo
+// (O padrão é 99, nunca passe de 127 se você não configurou o arquivo db/exp_db.txt)
+// Isso só funciona se você ajustou seu client para ter níveis maiores que 99.
+// NOTA: Você deve configurar o arquivo db/exp_db.txt em ordem para usar um nível máximo maior que 99.
+max_lv: 99
+
+// Nível no qual a aura aparece.
+// NOTA: Colocando o nível máximo o client mostrará a aura ao atingir o nível máximo.
+// Exemplo: Se o nível máximo for 99, e o nível da aura 150, os personagens entre os níveis 99~149 serão todos como nível 98 (sem aura),
+// e apenas os de nível 150 serão considerados como tendo level 99 (com aura).
+aura_lv: 99
+
+// O Smoking e o Vestido de Noiva aparecem quando são equipados? (Nota 1)
+wedding_modifydisplay: yes
+
+// Salvar a cor das roupas? (Isso diminuirá a performance do servidor) (Nota 1)
+// NOTA: Se ajustado para 'no', toda vez que um personagem sair do jogo e entrar novamente
+// ele terá que trocar a cor da roupa novamente.
+save_clothcolor: yes
+
+// Não mostrar cor das roupas para classes de casamento?
+// NOTA: O save_clothcolor e o wedding_modifydisplay tem que estar ativados
+// para que essa opção funcione. Coloque 'yes' se os sua palheta de cores de roupas
+// não tem as palheta de cores das roupas de casamento (ou tem menos que as outras classes).
+// NOTA: Se ajustado para 'yes' eles serão mostrados nas cores padrão apenas.
+wedding_ignorepalette: no
+
+// Não mostrar cores para a roupa de natal?
+// Coloque 'yes' se sua palheta de cores de roupas não tem as palheta de cores de natal (ou tem menos que as outras classes).
+// NOTA: Se ajustado para 'yes' ela será mostrada na cor padrão apenas.
+xmas_ignorepalette: no
+
+// Não mostrar cores para a roupa de verão?
+// Coloque 'yes' se o sua palheta de cores não tem as cores de verão (ou tem menos que as outras classes).
+// NOTA: Se ajustado para 'yes' ela será mostrada na cor padrão apenas.
+summer_ignorepalette: no
+
+// Coloque '1' se seus usuários tem problemas com a linguagem e não conseguem ver o texto do motd.
+motd_type: 0
+
+// Mostrar a versão do Cronus para os usúarios quando eles entrarem?
+display_version: yes
+
+// Quando afetados por efeito da 'Alucinação', mandar o efeito para o client? (Nota 1)
+// NOTA: Coloque 'no' se o client apresentar lentidão durante o efeito.
+display_hallucination: yes
+
+// Coloque 'yes' se o seu client suporta o controlador de tempo dos status e você quer usá-lo.
+// NOTA: Somente clients do ano 2009 para frente suportam essa função, usar clients mais antigos com esta função não irá mostrar o ícone dos status (buffs).
+display_status_timers: no

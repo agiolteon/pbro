@@ -1,0 +1,30 @@
+new_1-1,56,114,4	script	Assistente Baby	729,{
+
+	show "[Assistente Baby]";
+	show "Olá, deseja se tornar um Baby? Posso transformá-lo em um, sem nenhum custo.";
+	next;
+	switch(select("Não, prefiro continuar normal.","Sim, é claro!")){
+		case 1:
+			show "[Assistente Baby]";
+			show "Bem, é uma escolha sua. Caso mude de idéia, fale comigo.";
+			show "Até logo.";
+			close;
+
+		case 2:
+			if(BaseJob == Job_Novice && BaseLevel == 1 && JobLevel == 1){
+				setjob Job_Baby;
+				show "[Assistente Baby]";
+				show "Feito! Você será teletransportando em seguida para Prontera.";
+				show "Até mais!";
+				close2;
+				savepoint "prontera",156,191;
+				warp "prontera",156,191;
+				end;
+			}else{
+				show "[Assistente Baby]";
+				show "Sinto muito mas você é velho demais para ser adotado.";
+				close;
+			}
+	}
+
+}

@@ -1,0 +1,232 @@
+//===== Cronus Script ========================================
+//= Cidade de Brasilis
+//===== Por: =================================================
+//= RoM
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Descrição: ===========================================
+//= Npcs da Cidade de Brasilis
+//===== Changelog: ===========================================
+//= 1.0 Versão Inicial. [RoM]
+//============================================================
+
+//==== Marinheiro de acesso a Brasilis =======================
+alberta,246,116,4	script	Marinheiro#bra1	709,{
+	mes "[Marinheiro]";
+	mes "Ei, já ouviu falar de Brasilis?";
+	mes "É um lugar acolhedor e muito bonito, mas guarda seus mistérios...";
+	next;
+	mes "[Marinheiro]";
+	mes "Podemos levar você para conhecer.";
+	mes "10000 zenys pela viagem de ida e volta! Que tal?";
+	switch(select("Vamos para Brasilis!!:Não fiz minhas malas"))
+	{
+	case 1:
+		if(zeny < 10000)
+		{
+			mes "[Marinheiro]";
+			mes "Me desculpe, mas você não têm o dinheiro suficiente.";
+			next;
+			mes "[Marinheiro]";
+			mes "Não poderei te levar.";
+			close;
+		}
+		mes "[Marinheiro]";
+		mes "Legal! Vamos lá pegar um sol na bela Brasilis!";
+		close2;
+		set zeny,zeny-10000;
+		warp "brasilis",314,60;
+		close;
+	case 2:
+		mes "[Marinheiro]";
+		mes "Ah, tudo bem. Eu esperarei aqui.";
+		mes "Volte logo! Sinto falta daquela paisagem...";
+		close;
+	}
+}
+
+//==== Marinheiro para Alberta =============================
+brasilis,316,57,4	script	Marinheiro#bra2	709,{
+	mes "[Marinheiro]";
+	mes "Ah, que pena... Agora meu navio vai voltar a Alberta, quer ir conosco?";
+	next;
+	if(select("Voltar para Alberta.:Ainda não.") == 1)
+	{
+		mes "[Marinheiro]";
+		mes "Ah, que pena... Sentirei saudades.";
+		warp "alberta",240,113;
+		close;
+	}
+	mes "[Marinheiro]";
+	mes "Tudo bem, ainda não vamos voltar.";
+	close;
+}
+
+//==== Placas ================================================
+brasilis,240,248,4	script	Placa#bra01	858,{
+	mes ":: Feirinha de Brasilis ::";
+	close;
+}
+
+brasilis,303,309,4	script	Placa#bra02	858,{
+	mes ":: Teleférico da Selva ::";
+	mes "- Não é recomendado para pessoas de coração fraco -";
+	close;
+}
+
+brasilis,155,165,4	script	Placa#bra03	858,{
+	mes ":: MAB, Museu de Arte de Brasilis ::";
+	close;
+}
+
+brasilis,278,137,4	script	Placa#bra04	858,{
+	mes ":: Pousada Tucano Feliz ::";
+	close;
+}
+
+//==== Vendedor de Sorvete ===================================
+brasilis,137,77,4	script	Vendedor de Sorvete#bra	85,{
+	mes "[Vendedor de Sorvete]";
+	mes "Picolé e sorvete de massa!";
+	mes "Não tem nada melhor para espantar o calor.";
+	mes "Só ^0000FF100 zenys^000000 hein?";
+	next;
+	switch(select("Eu quero!:Picolé?:Não quero agora"))
+	{
+	case 1:
+		mes "[Vendedor de Sorvete]";
+		mes "Muita gente está pedindo os sorvetes, então só posso lhe vender 5.";
+		mes "Senão, me canso!...?";
+		next;
+		input .@qnt;
+		while(.@qnt > 5)
+		{
+			mes "Uau.";
+			mes "Você pediu demais.";
+			mes "Ei, se você comer mais de 5, vai acabar com dor de barriga! Vá com calma!";
+			next;
+			input .@qnt;
+		}
+		if(.@qnt < 1)
+		{
+			mes "[Vendedor de Sorvete]";
+			mes "Se não quer tomar nenhum, tem mais gente querendo, camarada.";
+			mes "Esse é o sorvete mais popular daqui. Picolé caseiro!";
+			close;
+		}
+		if (Zeny < .@qnt*100)
+		{
+			mes "[Vendedor de Sorvete]";
+			mes "Parece que você não tem a quantia necessária de Zenys...";
+			mes "Volte mais tarde!";
+			close;
+		}
+		set Zeny,Zeny-.@qnt*100;
+		getitem 536,.@qnt;
+		close;
+	case 2:
+		mes "[Vendedor de Sorvete]";
+		mes "O sorvete de é...";
+		mes "Não sabe como é?";
+		mes "Usamos leite, açúcar, ovos...";
+		next;
+		mes "[Vendedor de Sorvete]";
+		mes "Frutas, aroma, corante.. Então batemos tudo e congelamos.";
+		mes "Aí temos um delicioso sorvete.";
+		mes "Caseiro, sabe? Só ingredientes fresquinhos e da melhor qualidade freguesia.";
+		mes "É bem calórico e nutritivo, então faz bem para a saúde se voCê tomar na quantidade certa.";
+		next;
+		mes "[Vendedor de Sorvete]";
+		mes "Mas...";
+		mes "Se você comer demais e ficar com dor de barriga, a culpa não é minha!";
+		close;
+	case 3:
+		mes "[Vendedor de Sorvete]";
+		mes "Se perder esta chance, talvez não consiga mais até o próximo verão.";
+		mes "Aproveite! Vamos!";
+		close;
+	}
+}
+
+brasilis,201,225,4	script	Funcionária Kafra::kaf_bra	94,{
+			cutin "kafra_01",2;
+			callfunc "F_Kafra",0,7,1,150,0; 
+	        M_Save: 
+                savepoint "brasilis",179,223; 
+                callfunc "F_KafEnd",1,1,"na cidade de Brasilis."; 
+} 
+
+
+bra_in01,27,24,3	script	Recepcionista#bra	478,{
+        mes "[Recepcionista]";
+        mes "Bem-vindo à Pousada Tucano Feliz,";
+        mes "temos tudo para fazer você se";
+        mes "sentir em casa.";
+        next;
+        switch(select("Salvar:Descansar -> 5000 zeny:Cancelar")) 
+        {
+                case 1:
+                        mes "[Recepcionista]";
+                        mes "Quer salvar seu ponto de retorno aqui na Pousada?";
+                        next;
+                        if (select("Agora não.","Com certeza!") == 1)
+                        {
+                                mes "Então, tudo bem. Volte se mudar de idéia.";
+                                close;
+                        }
+                        mes "Está salvo. Aproveite bem sua";
+                        mes "estadia em Brasilis e não deixe de";
+                        mes "conferir nossas belezas naturais.";
+                        savepoint "bra_in01",143,68;
+                        close;
+                case 2:
+                        mes "[Recepcionista]";
+                        if(Zeny < 5000){
+                                mes "A taxa de serviço é de 5000 zenys.";
+                                close;
+                        }
+                        mes "Desfrute da sua estadia!";
+                        close2;
+                        set Zeny,Zeny - 5000;
+                        percentheal 100,100;
+                        warp "bra_in01",144,69;
+                        end;
+                case 3:
+                        close;
+        }
+}
+
+
+
+
+
+
+
+//=======================================================
+// Brasilis SHOPS :)
+//=======================================================
+brasilis,242,255,4	shop	Vendedora de Utilidades	478,1750:-1,1751:-1,1752:-1,1753:-1,1770:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,657:-1,611:-1,1065:-1,610:-1
+brasilis,245,255,4	shop	Vendedor de Armas#bra	477,1401:-1,1404:-1,1451:-1,1454:-1,1460:-1,1463:-1,1410:-1,1354:-1,1519:-1,13003:-1,1407:-1,1457:-1,1701:-1,1201:-1,1204:-1,1207:-1,1601:-1,1101:-1,1104:-1,1107:-1,1110:-1,1113:-1,1122:-1,1119:-1,1123:-1,1126:-1,1129:-1,1116:-1,1301:-1
+brasilis,248,255,4	shop	Vendedor de Armaduras#b	477,2101:-1,2103:-1,2401:-1,2403:-1,2501:-1,2503:-1,2220:-1,2226:-1,2301:-1,2303:-1,2305:-1,2328:-1,2307:-1,2309:-1,2312:-1,2314:-1,2628:-1,2627:-1
+brasilis,251,255,3	shop	Treinador de Bichinhos	476,537:-1,643:-1,10013:-1,10014:-1
+brasilis,174,132,4	shop	Feirante#bra	477,11515:-1,513:-1,11516:-1,512:-1,515:-1,516:-1,535:-1
+brasilis,177,132,4	shop	Leiteira#bra	478,519:-1
+brasilis,180,132,4	shop	Açougueiro#bra	477,517:-1,528:-1
+brasilis,192,322,6	shop	Vendedor Mágico#bra	700,717:-1,1601:-1,1604:-1,1607:-1,1610:-1,2232:-1,2321:-1,2332:-1
+
+
+brasilis,103,73,299,85	monster	Rato de Praia	1209,5,900000,0,0
+
+brasilis	mapflag	nobranch
+brasilis	mapflag	noicewall
+
+bra_in01	mapflag	noicewall
+bra_in01	mapflag	nobranch
+bra_in01	mapflag	noteleport
+
+bra_fild01	mapflag	nobranch
+
+bra_dun02	mapflag	nomemo
+bra_dun02	mapflag	nobranch
+bra_dun01	mapflag	nomemo
+bra_dun01	mapflag	nobranch

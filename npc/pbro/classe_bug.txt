@@ -1,0 +1,189 @@
+prontera,149,186,5	script	Irmã Mestra das Classes	864,{
+
+set .@nome2$,"[Irmã da Mestra das Classes]";
+
+if(Class > 4000) goto VERIFICADO;
+show .@nome2$;
+show "Oi, eu sou Irmã da Mestra das Classes, eu ajudo ela com as pessoas que não conseguem mudar de classe.";
+close;
+
+VERIFICADO:
+if(Job1 == 0) goto SEM_CLASSE1;
+if(Classe == 0) goto SEM_CLASSE2;
+show .@nome2$;
+show "Oi, eu sou Irmã da Mestra das Classes, eu ajudo ela com as pessoas que não conseguem mudar de classe.";
+close;
+
+SEM_CLASSE1:
+if(Class >= 4023) goto FALAR;
+show .@nome2$;
+show "Qual classe gostaria de se transformar?";
+next;
+menu "Espadachim",ESPACHIM1,"Mago",MAGO1,"Arqueiro",ARQUEIRO1,"Noviço",NOVICO1,"Mercador",MERCADOR1,"Gatuno",GATUNO1;
+
+ESPACHIM1:
+set Job1, 1;
+show .@nome2$;
+show "Agora preciso saber qual será sua próxima classe!";
+next;
+if(Job1 >= 1) goto SEM_CLASSE2;
+
+MAGO1:
+set Job1, 2;
+show .@nome2$;
+show "Agora preciso saber qual será sua próxima classe!";
+next;
+if(Job1 >= 1) goto SEM_CLASSE2;
+
+ARQUEIRO1:
+set Job1, 3;
+show .@nome2$;
+show "Agora preciso saber qual será sua próxima classe!";
+next;
+if(Job1 >= 1) goto SEM_CLASSE2;
+
+NOVICO1:
+set Job1, 4;
+show .@nome2$;
+show "Agora preciso saber qual será sua próxima classe!";
+next;
+if(Job1 >= 1) goto SEM_CLASSE2;
+
+MERCADOR1:
+set Job1, 5;
+show .@nome2$;
+show "Agora preciso saber qual será sua próxima classe!";
+next;
+if(Job1 >= 1) goto SEM_CLASSE2;
+
+GATUNO1:
+set Job1, 6;
+show .@nome2$;
+show "Agora preciso saber qual será sua próxima classe!";
+next;
+if(Job1 >= 1) goto SEM_CLASSE2;
+
+SEM_CLASSE2:
+if(Job1 == 1) goto ESPADACHIM2;
+if(Job1 == 2) goto MAGO2;
+if(Job1 == 3) goto ARQUEIRO2;
+if(Job1 == 4) goto NOVICO2;
+if(Job1 == 5) goto MERCADOR2;
+if(Job1 == 6) goto GATUNO2;
+
+
+//*******************************************************************
+ESPADACHIM2:
+show .@nome2$;
+show "Então, já sabe qual vai ser?";
+menu "Lord",C_4008,"Paladino",C_4015;
+
+C_4008:
+set Classe, 1;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+C_4015:
+set Classe, 2;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+
+//*******************************************************************
+MAGO2:
+show .@nome2$;
+show "Então, já sabe qual vai ser?";
+menu "Arquimago",C_4010,"Professor",C_4017;
+
+C_4010:
+set Classe, 1;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+C_4017:
+set Classe, 2;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+//*******************************************************************
+ARQUEIRO2:
+show .@nome2$;
+show "Então, já sabe qual vai ser?";
+menu "Atirador de Elite",C_4012,"Menestrel/Cigana",C_4021;
+
+C_4012:
+set Classe, 1;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+C_4021:
+set Classe, 2;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+//*******************************************************************
+NOVICO2:
+show .@nome2$;
+show "Então, já sabe qual vai ser?";
+menu "Sumo Sacerdote",C_4009,"Mestre",C_4016;
+
+C_4009:
+set Classe, 1;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+C_4016:
+set Classe, 2;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+//*******************************************************************
+MERCADOR2:
+show .@nome2$;
+show "Então, já sabe qual vai ser?";
+menu "Mestre-Ferreiro",C_4011,"Criador",C_4019;
+
+C_4011:
+set Classe, 1;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+C_4019:
+set Classe, 2;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+//*******************************************************************
+GATUNO2:
+show .@nome2$;
+show "Então, já sabe qual vai ser?";
+menu "Algoz",C_4013,"Desordeiro",C_4018;
+
+C_4013:
+set Classe, 1;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+C_4018:
+set Classe, 2;
+show .@nome2$;
+show "Agora converse com a Mestra das classes, ela irá lhe atender!";
+close;
+
+FALAR:
+show .@nome2$;
+show "Fale com minha irmã, Mestra das Classes.";
+close;
+
+}

@@ -1,0 +1,123 @@
+-	script	quiz_event	-1,{
+OnInit:
+OnTimer60000:
+initnpctimer;
+if($quizon>0) {
+set $quizon, $quizon - 1;
+if($quizon==0) {
+announce "Quiz da Copa: Acabou o tempo do Quiz da Copa, a resposta correta era a "+$certa+"°. Aguardem a próxima pergunta!",0;
+set $id,0;
+}else{
+announce "Quiz da Copa: Falta "+$quizon+" minuto para encerrar o tempo do Quiz da Copa!",0;
+}
+}else{
+query_sql("SELECT id,certa FROM quiz WHERE mes="+gettime(6)+" AND dia="+gettime(5)+" AND hora="+gettime(3)+" AND min="+gettime(2),$id,$certa);
+if($id>0) {
+query_sql("SELECT certa FROM quiz WHERE id="+$id,$certa);
+set $quizon, 2;
+announce "Quiz da Copa: Existe uma nova pergunta no Quiz da Copa! Corra pois o tempo para responder é de 2 minutos apartir de agora.",0;
+}
+}
+}
+
+prontera,153,176,4	script	Quiz da Copa	913,{
+set .@name$, "[Quiz da Copa]";
+
+show .@name$;
+show "Olá, eu sou o responsavel pelo Quiz da Copa. O que deseja de mim?";
+next;
+menu "- Responder Quiz",RESPONDER_QUIZ,"- Ver meus Pontos",VER_PT,"- Trocar Pontos por CASH",CASH_QUIZ;
+
+CASH_QUIZ:
+show .@name$;
+show "Somente ao termino do evento esta opção será liberada, enquanto isso continue acumulando pontos!";
+close;
+
+VER_PT:
+show .@name$;
+if($quizon!=0) {
+show "Enquanto estiver uma pergunta ativa não é possivel visualizar seus pontos, volte mais tarde!";
+close;
+}
+query_sql("SELECT quiz FROM login WHERE account_id="+getcharid(3),@pts_quiz);
+show "Seus pontos atuais são: "+@pts_quiz;
+show " ";
+show "Continue respondendo os Quiz para acumular mais pontos!";
+close;
+
+RESPONDER_QUIZ:
+show .@name$;
+if($quizon==0) {
+goto QUIZ_OFF;
+}
+if($id==#quiz) {
+goto JA_RESP;
+}
+show "Responda a pergunta abaixo, o tempo esta passando!";
+query_sql("SELECT pergunta,r1,r2,r3,r4,r5,certa FROM quiz WHERE id="+$id,@pergunta$,@r1$,@r2$,@r3$,@r4$,@r5$,@certa);
+show " ";
+show "P: ^FF0000"+@pergunta$+"^000000";
+next;
+if(@r5$!="") {
+menu "1° - "+@r1$,R01,"2° - "+@r2$,R02,"3° - "+@r3$,R03,"4° - "+@r4$,R04,"5° - "+@r5$,R05;
+}else if(@r4$!="") {
+menu "1° - "+@r1$,R01,"2° - "+@r2$,R02,"3° - "+@r3$,R03,"4° - "+@r4$,R04;
+}else if(@r3$!="") {
+menu "1° - "+@r1$,R01,"2° - "+@r2$,R02,"3° - "+@r3$,R03;
+}else{
+menu "1° - "+@r1$,R01,"2° - "+@r2$,R02;
+}
+
+R01:
+if(@certa==1) { goto ACERTOU; }
+set #quiz, $id;
+show .@name$;
+show "Ok, já tenho sua pergunta comigo. Aguarde o tempo acabar e anunciarei a resposta para todos!";
+close;
+R02:
+if(@certa==2) { goto ACERTOU; }
+set #quiz, $id;
+show .@name$;
+show "Ok, já tenho sua pergunta comigo. Aguarde o tempo acabar e anunciarei a resposta para todos!";
+close;
+R03:
+if(@certa==3) { goto ACERTOU; }
+set #quiz, $id;
+show .@name$;
+show "Ok, já tenho sua pergunta comigo. Aguarde o tempo acabar e anunciarei a resposta para todos!";
+close;
+R04:
+if(@certa==4) { goto ACERTOU; }
+set #quiz, $id;
+show .@name$;
+show "Ok, já tenho sua pergunta comigo. Aguarde o tempo acabar e anunciarei a resposta para todos!";
+close;
+R05:
+if(@certa==5) { goto ACERTOU; }
+set #quiz, $id;
+show .@name$;
+show "Ok, já tenho sua pergunta comigo. Aguarde o tempo acabar e anunciarei a resposta para todos!";
+close;
+
+JA_RESP:
+show "Você já respondeu esta pergunta, aguarde o anuncio da resposta!";
+close;
+
+QUIZ_OFF:
+show "Neste momento não há perguntas disponiveis. Fique atento aos anuncios!";
+close;
+
+QUIZ_TEMPO:
+show "Infelizmente o tempo se esgotou, seja mais rápido da próxima vez!";
+close;
+
+ACERTOU:
+show .@name$;
+if($quizon==0) {
+goto QUIZ_TEMPO;
+}
+show "Ok, já tenho sua pergunta comigo. Aguarde o tempo acabar e anunciarei a resposta para todos!";
+query_sql("UPDATE login SET quiz = quiz + 1 WHERE account_id = "+getcharid(3));
+set #quiz, $id;
+close;
+}

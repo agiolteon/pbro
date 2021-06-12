@@ -1,0 +1,352 @@
+//===== Cronus Script ========================================
+//= Mestra das Classes
+//===== Por: =================================================
+//= Reply.
+//===== Versão: ==============================================
+//= 1.3e
+//===== Descrição: ===========================================
+//= Muda a classe do personagem.
+//===== Changelog: ===========================================
+//= 1.0 - NPC Criado. [Reply.]
+//= 1.1 - Corrigido alguns erros. [Reply.]
+//= 1.2 - Corrigido a checagem de job para Baby Aprendiz. [RoM]
+//=     - Corrigido onde mostra o nome na função.
+//= 1.3 - Adicionada uma verificação de peso ao rebornar para não perder itens. [RoM]
+//= 1.3a - Algumas correções de gramática. [Puncker]
+//= 1.3b - Uma pequena correção. [RoM]
+//= 1.3c - Corrigido erro de "Frase desnecessária" [Heaven]
+//= 1.3d - Não há necessidade de usar uma variável no nome do npc, retirado. [Mooka]
+//= 1.3e - Corrição no if() da função checkconditions(), problema com classes baby. [Mooka]
+//============================================================
+prontera,153,193,6	script	Mestra das Classes::mcl	123,{
+
+	show "[Mestra das Classes]";
+	callfunc "checkconditions";
+	if(!Class)
+	{
+		show "Olá "+strcharinfo(0)+".";
+		show "Por favor, escolha qual profissão deseja seguir.";
+		switch(select("Espadachim","Mago","Arqueiro","Noviço","Mercador","Gatuno","Super Aprendiz","Taekwon","Justiceiro","Ninja"))
+		{
+			default:
+				callfunc "nextshowname";
+				callfunc "changejob",@menu;
+				break;				
+			case 7:
+				if(BaseLevel < 45)
+				{
+					next;
+					show "[Mestra das Classes]";
+					show "Você não tem nível suficiente para mudar para Super Aprendiz.";
+					close;
+				}
+				callfunc "nextshowname";
+				callfunc "changejob",@menu + 16;
+				break;				
+			case 8:
+				callfunc "nextshowname";
+				callfunc "changejob",4046;
+				break;				
+			case 9:
+			case 10:
+				callfunc "nextshowname";
+				callfunc "changejob",@menu + 15;
+				break;
+		}
+	}
+	else if((Class > 0) && (Class < 7) || (Class == 4046))
+	{
+		show "Olá "+strcharinfo(0)+".";
+		show "Vejo que você voltou!";
+		show "E então, qual classe deseja seguir agora?";
+		switch(Class)
+		{
+			case 1:
+				if(select("Cavaleiro:Templário") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob",7;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob",14;
+				}
+				break;			
+			case 2:
+				if(select("Bruxo:Sábio") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob",9;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob",16;
+				}
+				break;				
+			case 3:
+				if(Sex){
+					if(select("Caçador:Bardo") == 1){
+						callfunc "nextshowname";
+						callfunc "changejob",11;
+					}else{
+						callfunc "nextshowname";
+						callfunc "changejob",19;
+					}
+				}else{
+					if(select("Caçadora:Odalisca") == 1){
+						callfunc "nextshowname";
+						callfunc "changejob",11;
+					}else{
+						callfunc "nextshowname";
+						callfunc "changejob",20;
+					}
+				break;			
+				}
+			case 4:
+				if(select("Sacerdote:Monge") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob",8;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob",15;
+				}
+				break;				
+			case 5:
+				if(select("Ferreiro:Alquimista") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob",10;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob",18;
+				}
+				break;				
+			case 6:
+				if(select("Mercenário:Arruaceiro") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob",12;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob",17;
+				}
+				break;				
+			case 4046:
+				if(select("Mestre Taekwon:Espiritualista") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob",4047;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob",4049;
+				}
+				break;
+		}
+	}
+	else if((Class > Job_Thief) && (Class < 22))
+	{
+		show "Olá "+strcharinfo(0)+".";
+		show "Vejo que já está bem forte.";
+		show "Gostaria de renascer agora?";
+		if(select("Sim:Não") == 2) close;
+		next;
+		show "[Mestra das Classes]";
+		if(Weight >= 1935){
+			show "Você está acima do peso permitido, guarde alguns itens e volte mais tarde.";
+			close;
+		}
+		set lastjob, Class;
+		setjob Job_Novice_High;
+		resetlvl(1);
+		show "Certo, vai ganhar 100 pontos de atributos";
+		show "para lhe ajudar nessa nova jornada";
+		show "e mais algumas habilidades.";
+		close;
+	}
+	else if(Class == Job_Novice_High)
+	{
+		switch(lastjob)
+		{
+			case 7:
+			case 14:
+				set @job, 4002;
+				break;			
+			case 9:
+			case 16:
+				set @job, 4003;
+				break;				
+			case 11:
+			case 19:
+			case 20:
+				set @job, 4004;
+				break;				
+			case 8:
+			case 15:
+				set @job, 4005;
+				break;				
+			case 10:
+			case 18:
+				set @job, 4006;
+				break;				
+			case 12:
+			case 17:
+				set @job, 4007;
+				break;
+		}
+		show "Olá "+strcharinfo(0)+".";
+		show "Que bom que já retornou.";
+		show "Deseja se tornar um "+jobname(@job)+"?";
+		if(select("- Sim, claro:- Não, obrigado") == 2) close;
+		next;
+		setjob @job;
+		show "[Mestra das Classes]";
+		show "Parabéns "+strcharinfo(0)+".";
+		close;
+	}
+	else if(Class > 4001 && Class < 4008)
+	{
+		show "Olá "+strcharinfo(0)+".";
+		show "Que bom que já retornou.";
+		set @job, lastjob + 4001;
+		callfunc "nextshowname";
+		callfunc "changejob", @job;
+	}
+	else if(Class == 4023)
+	{
+		show "Olá "+strcharinfo(0)+".";
+		show "Por favor, escolha qual profissão deseja seguir.";
+		switch(select("Bebê Espadachim","Bebê Mago","Bebê Arqueiro","Bebê Noviço","Bebê Mercador","Bebê Gatuno","Super Bebê"))
+		{
+			default:
+				callfunc "nextshowname";
+				callfunc "changejob",@menu + 4023;
+				break;
+				
+			case 7:
+				callfunc "nextshowname";
+				callfunc "changejob", 4045;
+				break;
+		}
+	}
+	else if(Class > 4023 && Class < 4030)
+	{
+		show "Olá "+strcharinfo(0)+".";
+		show "Vejo que você voltou!";
+		show "E então, qual classe deseja seguir agora?";
+		switch(Class)
+		{
+			case 4024:
+				if(select("Bebê Cavaleiro:Bebê Templário") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob", 4030;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob", 4037;
+				}
+				break;
+				
+			case 4025:
+				if(select("Bebê Bruxo:Bêbe Sábio") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob", 4032;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob", 4039;
+				}
+				break;
+				
+			case 4026:
+				if(Sex){
+					if(select("Bebê Caçador:Bebê Bardo") == 1){
+						callfunc "nextshowname";
+						callfunc "changejob", 4034;
+					}else{
+						callfunc "nextshowname";
+						callfunc "changejob", 4042;
+					}
+				}else{
+					if(select("Bebê Caçador:Bebê Odalisca") == 1){
+						callfunc "nextshowname";
+						callfunc "changejob", 4034;
+					}else{
+						callfunc "nextshowname";
+						callfunc "changejob", 4043;
+					}
+				break;
+				}
+				
+			case 4027:
+				if(select("Bebê Sacerdote:Bebê Monge") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob", 4031;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob", 4038;
+				}
+				break;
+				
+			case 4028:
+				if(select("Bebê Ferreiro:Bebê Alquimista") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob", 4033;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob", 4041;
+				}
+				break;
+				
+			case 4029:
+				if(select("Bebê Mercenário:Bebê Arruaceiro") == 1){
+					callfunc "nextshowname";
+					callfunc "changejob", 4035;
+				}else{
+					callfunc "nextshowname";
+					callfunc "changejob", 4040;
+				}
+				break;
+		}
+	}
+}
+			
+function	script	checkconditions	{
+	if(Class > 22 && Class < 26 || Class > 4007 && Class < 4023 || Class > 4029 && Class < 4046 || Class > 4046 && Class <= 4049)
+	{
+		show "Você já chegou ao limite de mudança de classe.";
+		show "Sinto muito, mas não posso mais lhe ajudar.";
+		close;
+	}
+	if(Class == 0 && JobLevel < 10 || Class == 4001 && JobLevel < 10 || Class == 4023 && JobLevel < 10 || Class > 4023 && Class <= 4043 && JobLevel < 40 || Class > 0 && Class < 7 && JobLevel < 40 || Class > 4001 && Class < 4008 && JobLevel < 40 || Class == 4046 && JobLevel < 40)
+	{
+		show "Você não está apto a mudar de classe ainda.";
+		show "Volte quando estiver mais forte.";
+		close;
+	}
+	if(checkcart() || checkfalcon() || checkriding())
+	{
+		show "Sinto muito mas você não pode mudar de classe se estiver com falcão, carrinho ou peco-peco.";
+		close;
+	}
+	if(Class > 6 && Class < 22 && BaseLevel < 99)
+	{
+		show "Sinto muito, mas você não está apto a mudar de classe ainda.";
+		show "Volte quando estiver mais forte.";
+		close;
+	}
+	if(SkillPoint)
+	{
+		show "Por favor utilize todos seus pontos de habilidade antes de mudar de classe.";
+		close;
+	}
+	return;
+}
+	
+function	script	changejob	{
+	set @jobc, getarg(0);
+	show "Você tem certeza que quer se tornar um ^FF0000"+jobname(@jobc)+"^000000?";
+	if(select("Sim:Não") == 2) close;
+	next;
+	show "[Mestra das Classes]";
+	setjob @jobc;
+	show "Muito bem "+strcharinfo(0);
+	show "Você agora é um ^FF0000"+jobname(@jobc)+"^000000";
+	close;
+}
+
+function	script	nextshowname	{
+	next;
+	show "[Mestra das Classes]";
+	return;
+}

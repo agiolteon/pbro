@@ -1,0 +1,21 @@
+// ---- MVP ARENA!!!!!! By Darkchild with 16 diff MVP's inside
+// -- Optimised The MVP arena!!!! By massdriller
+// - NPC in prontera
+// --- Optimising Functions
+
+function	script	Ramvp_M	{
+
+	show "Do que você precisa?.";
+	menu "Cura",L_Heal,"Sair",L_Leave;
+
+	L_Heal:
+
+		percentheal 100,100;
+		close;
+
+	L_Leave:
+
+		warp "prontera.gat",156,179;
+		close;
+
+}

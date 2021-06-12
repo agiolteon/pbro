@@ -468,6 +468,7 @@ extern struct Battle_Config
 	int skill_add_heal_rate;	//skills that bHealPower has effect on [Inkfish]
 	int eq_single_target_reflectable;
 	int invincible_nodamage;
+	int mob_slave_keep_target;
 
 	// [BattleGround Settings]
 	int bg_update_interval;
@@ -477,6 +478,13 @@ extern struct Battle_Config
 	int bg_magic_damage_rate;
 	int bg_misc_damage_rate;
 	int bg_flee_penalty;
+
+	// Cronus Custom
+	int no_prt_vending; //[Minos]
+	int no_prt_chating;
+	int vending_overflow; // Battle para max zenys [theultramage]
+	int no_warp_ress; //[LEOzinn]
+
 } battle_config;
 
 void do_init_battle(void);

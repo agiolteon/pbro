@@ -1,35 +1,42 @@
-// Skill Times Database
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/  _ \ /    \|  |  \/  ___/
+// \     \____|  | \(  <_> )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//-----------------------------------------------
+// Proibido a distribuição e sem remover as autorias.
+//---------------------------------------------------
+// * Traduzido por Cronus Devel Team
+// Tempos das Habilidades Banco de Dados
 //
-// Structure of Database:
+// Estrutura do Banco de dados:
 // SkillID,CastingTime,AfterCastActDelay,AfterCastWalkDelay,Duration1,Duration2
 //
 //==========================================
-// Rough list of Contents:
+// Lista de Conteúdos:
 //==========================================
-//  1.  1st Jobs Skills
-//  2.  2-1 Jobs Skills
-//  3.  1st Jobs Quest Skills
-//  4.  NPC Skills (1)
-//  5.  2-2 Jobs Skills
-//  6.  Wedding Skills
-//  7.  NPC Skills (2)
-//  8.  Advanced Jobs Skills (1)
-//  9.  Adoption Skills
-// 10.  Taekwon Jobs Skills (1)
-// 11.  Advanced Jobs Skills (2)
-// 12.  Taekwon Jobs Skills (2)
-// 13.  2nd Jobs Quest Skills
-// 14.	Homunculus Skills
-// 15.	Mercenary Skills
-// 16.  Guild Skills
+//  1. Habilidades das Classes 1
+//  2.  Habilidades das Classes 2-1
+//  3.  Habilidades de Quests das Classes 1
+//  4.  NPC Habilidades  (1)
+//  5.  Habilidades das Classes 2-2
+//  6.  Habilidades de Casamento
+//  7.  NPC Habilidades (2)
+//  8.  Habilidades das Classes Transcedentes (1)
+//  9.  Habilidades de adoção
+// 10.  Habilidades das Classes Taekwon (1)
+// 11.  Habilidades das Classes Transcedentes (2)
+// 12.  Habilidades das Classes Taekwon (2)
+// 13.  Habilidades de Quests das Classes 2
+// 14.	Habilidades  de Homunculus
+// 15.	Habilidades do Sistema de Mercenários
+// 16.  Habilidades do Clã
 //==========================================
-// This is just a rough overview to help
-// giving an overview on the document and
-// help navigating through it. (Vedurin)
+// Esta é uma avaliação para ajudar
+// a navegação por este
+// Documento.(Vedurin)
 //==========================================
-
-
-
 
 
 //===== Swordman ===========================
@@ -247,6 +254,8 @@
 135,0,0,0,500:1000:2000:3000:4000:5000:6000:7000:8000:9000,0
 //-- AS_SONICBLOW
 136,0,2000,2000,0,5000
+//-- AS_GRIMTOOTH
+137,0,0,0,0,1000
 //-- AS_ENCHANTPOISON
 138,0,0,0,30000:45000:60000:75000:90000:105000:120000:135000:150000:165000,10000:20000:30000:40000:50000:60000:70000:80000:90000:100000
 //-- AS_POISONREACT
@@ -259,7 +268,7 @@
 //==========================================
 
 
-//===== 1st Jobs Quest Skills===============
+//===== Habilidades de Quests das Classes 1===============
 //-- NV_TRICKDEAD
 143,0,0,0,600000,0
 
@@ -285,7 +294,7 @@
 //==========================================
 
 
-//===== NPC Skills Part 1 ==================
+//===== NPC Habilidades  (1) ==================
 //-- NPC_ATTRICHANGE
 161,0,0,0,1800000,0
 //-- NPC_CHANGEWATER
@@ -331,8 +340,10 @@
 
 //-- NPC_BARRIER
 204,0,0,0,60000:70000:80000:90000:100000:110000:120000:130000:140000:150000,0
-//-- NPC_DEFENDER
+
+//-- NPC_DEFENDER 
 205,0,0,0,60000:70000:80000:90000:100000:110000:120000:130000:140000:150000,0
+
 //-- NPC_LICK
 206,0,0,0,0,3000
 //-- NPC_HALLUCINATION
@@ -524,7 +535,7 @@
 //==========================================
 
 
-//===== Wedding Skills =====================
+//===== Habilidades de Casamento =====================
 //-- WE_MALE
 334,3000,0,0,0,0
 //-- WE_FEMALE
@@ -534,7 +545,7 @@
 //==========================================
 
 
-//===== NPC Skills Part 2 ==================
+//===== NPC Habilidades  (2) ==================
 //-- NPC_GRANDDARKNESS
 339,2000,1500,900,900,10000:11000:12000:13000:14000:15000:16000:17000:18000:19000
 //-- NPC_STOP
@@ -686,7 +697,7 @@
 //==========================================
 
 
-//===== Adoption Skills ====================
+//===== Habilidades de adoção ====================
 //-- WE_BABY
 408,3000,0,0,300000,0
 //-- WE_CALLPARENT
@@ -840,11 +851,11 @@
 //-- KN_ONEHAND
 495,0,0,0,300000,0
 //-- AM_TWILIGHT1
-496,3000,10000,0,50,0
+496,3000,10000,0,0,0
 //-- AM_TWILIGHT2
-497,3000,10000,0,50,0
+497,3000,10000,0,0,0
 //-- AM_TWILIGHT3
-498,3000,10000,0,50,0
+498,3000,10000,0,0,0
 //-- HT_POWER
 499,0,0,0,100,0
 //==========================================
@@ -931,7 +942,7 @@
 //-- NPC_ICEBREATH
 655,0,0,0,0,12000
 //-- NPC_ACIDBREATH
-657,0,0,0,0,60000
+657,0,0,0,0,30000
 //-- NPC_DRAGONFEAR (Upkeep2 times are duration of: Stun(lv1), Silence(lv2), Confusion(lv3) and Bleeding(lv4))
 659,0,0,0,0,5000:30000:30000:120000
 //-- NPC_BLEEDING
@@ -989,7 +1000,7 @@
 691,0,0,0,20000:40000:60000:80000:100000,0
 //==========================================
 
-//===== 2nd Jobs Quest Skills ==============
+//===== Habilidades de Quests das Classes 2 ==============
 //-- KN_CHARGEATK
 1001,300,300,0,0,0
 //-- CR_SHRINK
@@ -1027,7 +1038,7 @@
 1019,2000,1000,0,1800000,0
 //==========================================
 
-//===== Homunculus Skills ==================
+//===== Habilidades  de Homunculus ==================
 //-- HLIF_HEAL
 8001,0,2000,0,0,0
 //-- HLIF_AVOID
@@ -1054,7 +1065,7 @@
 8016,0,0,1000,0,0
 //==========================================
 
-//===== Mercenary Skills ===================
+//===== Habilidades do Sistema de Mercenários ===================
 //-- MS_MAGNUM
 8202,0,0,0,2000,10000
 //-- KN_BOWLINGBASH
@@ -1109,7 +1120,7 @@
 8236,0,3000,0,30000:35000:40000:45000:50000:60000:60000:60000:60000:60000,0
 //==========================================
 
-//===== Guild Skills =======================
+//===== Habilidades do Clã =======================
 //-- GD_LEADERSHIP
 10006,0,0,0,300000,0
 //-- GD_GLORYWOUNDS

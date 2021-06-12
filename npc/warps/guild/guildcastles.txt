@@ -1,15 +1,12 @@
-//===== eAthena Script =======================================
+//===== Cronus Script ========================================
 //= Guild Castles Warp Script
-//===== By: ==================================================
+//===== Por: =================================================
 //= Athena (1.0)
-//===== Current Version: =====================================
-//= 2.5
-//===== Compatible With: =====================================
-//= Any Athena Version
-//===== Description: =========================================
-//= Warp Points for Al de Baran, Payon, Prontera, Geffen,
-//= and Juno Guild Castles
-//===== Additional Comments: =================================
+//===== Versão Atual: ========================================
+//= 2.5a
+//===== Compatível com: ======================================
+//= Cronus SVN
+//===== Changelog: ===========================================
 //= Split off npc_warp.txt
 //= fixed aldg504-1 warp [Lupus]
 //= 2.0 Added Novice Guilds warps, optimized aldg408r warp [Lupus]
@@ -22,8 +19,8 @@
 //=	as I get more information.
 //= 2.4b Corrected Warp points for Juno castles 1, 4 and 5. [L0ne_W0lf]
 //= 2.5 Updated Schwaltzvalt warps and added Arunafeltz. [L0ne_W0lf]
+//= 2.5a Otimizado. [RoM]
 //============================================================
-
 
 //Al de Baran Guild Castles Map Connection
 aldebaran,35,140,0	warp	aldg001	1,1,alde_gld,280,160
@@ -101,16 +98,13 @@ aldeg_cas04,121,168,0	warp	aldg406-1	1,1,aldeg_cas04,25,123
 aldeg_cas04,132,209,0	warp	aldg407	1,1,aldeg_cas04,14,196
 aldeg_cas04,17,196,0	warp	aldg407-1	1,1,aldeg_cas04,132,228
 aldeg_cas04,132,231,4	script	aldg408r	45,1,1,{
-	set @l0,rand(5);
-	if(@l0==1) goto w2;
-	if(@l0==2) goto w3;
-	if(@l0==3) goto w4;
-	if(@l0==4) goto w5;
-	warp "aldeg_cas04",152,210; end;
-w2:	warp "aldeg_cas04",111,210; end;
-w3:	warp "aldeg_cas04",129,212; end;
-w4:	warp "aldeg_cas04",129,212; end;
-w5:	warp "aldeg_cas04",14,196; end;
+switch(rand(1,5)){
+	case 1: warp "aldeg_cas04",152,210; end;
+	case 2: warp "aldeg_cas04",111,210; end;
+	case 3: warp "aldeg_cas04",129,212; end;
+	case 4: warp "aldeg_cas04",129,212; end;
+	case 5: warp "aldeg_cas04",14,196; end;
+}
 }
 aldeg_cas05,194,71,0	warp	aldg501	1,1,aldeg_cas05,129,194
 aldeg_cas05,125,194,0	warp	aldg501-1	1,1,aldeg_cas05,199,70
@@ -491,7 +485,7 @@ nguild_gef,62,9,0	warp	ngefg101-1	1,1,nguild_gef,39,192
 nguild_gef,90,51,0	warp	ngefg102-1	1,1,nguild_gef,54,185	
 
 //Novices Guild: Payon Guild Castles Map
-n_castle,18,181,0	warp	npayg01	1,1,nguild_pay,214,48
+//n_castle,18,181,0	warp	npayg01	1,1,nguild_pay,214,48
 nguild_pay,214,44,0	warp	npayg01-1	1,1,n_castle,18,178
 
 nguild_pay,201,125,0	warp	npayg101	1,1,nguild_pay,102,19
@@ -508,7 +502,7 @@ nguild_pay,53,111,0	warp	npayg106	1,1,nguild_pay,115,147
 nguild_pay,115,151,0	warp	npayg106-1	1,1,nguild_pay,53,115
 
 //Novices Guild: Prontera Castles Map
-n_castle,16,14,0	warp	nprtg01	1,1,nguild_prt,99,32
+//n_castle,16,14,0	warp	nprtg01	1,1,nguild_prt,99,32
 nguild_prt,103,32,0	warp	nprtg01-1	1,1,n_castle,19,14
 
 nguild_prt,109,163,0	warp	nprtg107	1,1,nguild_prt,202,183

@@ -1,56 +1,67 @@
-//===== eAthena Script =======================================
-//= War of Emperium Second Edition
-//===== By: ==================================================
+//===== Cronus Script =======================================
+//= Guerra do Emperium segunda Edição
+//===== Por: ==================================================
 //= L0ne_W0lf
-//===== Current Version: =====================================
+//===== Versão Atual: =====================================
 //= 1.0
-//===== Compatible With: =====================================
+//===== Compatível com: =====================================
 //= eAthena SVN
-//===== Description: =========================================
-//= WoE SE Guild Flags in Juno and Rachel
-//===== Additional Comments: =================================
+//===== Descrição: =========================================
+//= WoE SE Bandeiras das Guild em Juno e Rachel
+//===== Comentários Adicionais: =================================
 //= 1.0 First Version [L0ne_W0lf]
+//= 1.1 Fixado os nome dos Castelos de Acordo com o bRo [Asus]
 //============================================================
 
 // Juno
 yuno,109,167,5	script	Himinn	722,{
 	end;
 
-OnRecvCastlesc01:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("schg_cas01",1);
-	end;
+	sleep 10000;
+	}
 }
 
 yuno,110,171,5	script	Andlangr	722,{
 	end;
 
-OnRecvCastlesc02:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("schg_cas02",1);
-	end;
+	sleep 10000;
+	}
 }
 
 yuno,111,175,5	script	Viblainn	722,{
 	end;
 
-OnRecvCastlesc03:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("schg_cas03",1);
-	end;
+	sleep 10000;
+	}
 }
 
 yuno,112,179,5	script	Hljod	722,{
 	end;
 
-OnRecvCastlesc04:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("schg_cas04",1);
-	end;
+	sleep 10000;
+	}
 }
 
-yuno,114,183,5	script	Skidbladnir	722,{
+yuno,114,183,5	script	Skatyrnir	722,{
 	end;
 
-OnRecvCastlesc05:
+OnInit:
+while(TRUE){
 	FlagEmblem GetCastleData("schg_cas05",1);
-	end;
+	sleep 10000;
+	}
 }
 
 // Arunafeltz
@@ -62,7 +73,7 @@ OnRecvCastlear01:
 	end;
 }
 
-rachel,136,120,5	script	Cyr	722,{
+rachel,136,120,5	script	Syr	722,{
 	end;
 
 OnRecvCastlear02:
@@ -93,3 +104,4 @@ OnRecvCastlear05:
 	FlagEmblem GetCastleData("arug_cas05",1);
 	end;
 }
+

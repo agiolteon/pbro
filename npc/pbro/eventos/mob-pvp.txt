@@ -1,0 +1,66 @@
+//===== pbRO Script ======================================== 
+
+//= Spawns EVENTO pbRO
+
+//===== Por: =================================================
+
+//= Thiago Ortega
+
+//===== Versão Atual: ======================================== 
+
+//= 1.0
+
+//===== Descrição: =========================================== 
+
+//= Spawns para eventos de MOBS com PVP nos mapas
+
+//===== Changelog: =========================================== 
+
+//= 1.0 Criado [Thiago Ortega]
+
+//============================================================
+
+// Mapas e Monstros
+
+gonryun.gat,0,0,0,0	monster	Ghostring	1120,1,18000000,9000000,1
+
+gonryun.gat,0,0,0,0	monster	RSX-0806	1623,1,10800000,5400000,1
+
+gonryun.gat,0,0,0,0	monster	Angeling	1096,1,3600000,1800000,1
+
+gonryun.gat,0,0,0,0	monster	Orc Herói	1087,1,3600000,1800000,1
+
+
+beach_dun3.gat,0,0,0,0	monster	Amon Ra	1511,1,18000000,9000000,1
+
+beach_dun3.gat,0,0,0,0	monster	Bafomé	1399,1,10800000,5400000,1
+
+beach_dun3.gat,0,0,0,0	monster	Dracula	1389,1,3600000,1800000,1
+
+beach_dun3.gat,0,0,0,0	monster	Drake	1112,1,3600000,1800000,1
+
+
+gef_fild05.gat,0,0,0,0	monster	Ghostring	1120,1,18000000,9000000,1
+
+gef_fild05.gat,0,0,0,0	monster	Orc Herói	1087,1,10800000,5400000,1
+
+gef_fild05.gat,0,0,0,0	monster	Bafomé	1399,1,3600000,1800000,1
+
+gef_fild05.gat,0,0,0,0	monster	Angeling	1096,1,3600000,1800000,1
+
+
+mjo_dun02.gat,0,0,0,0	monster	Cavaleiro da Tempestade	1251,1,18000000,9000000,1
+
+mjo_dun02.gat,0,0,0,0	monster	Faraó	1157,1,10800000,5400000,1
+
+mjo_dun02.gat,0,0,0,0	monster	Dracula	1389,1,3600000,1800000,1
+
+mjo_dun02.gat,0,0,0,0	monster	Drake	1112,1,3600000,1800000,1
+
+
+// PvP Ativado nos Campos
+
+beach_dun3.gat	mapflag	pvp
+gef_fild05.gat	mapflag	pvp
+mjo_dun02.gat	mapflag	pvp
+gonryun.gat	mapflag	pvp

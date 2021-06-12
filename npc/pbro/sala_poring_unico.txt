@@ -1,0 +1,212 @@
+// $jogador$ = nick do ganhador
+// $hats = ID do hat
+// $markjog$ = nick visuais dos ganhadores
+
+prontera.gat,155,192,5	script	Sala dos Porings 	402,{
+if(getgmlevel() > 30){
+show "[Sala dos Porings]";
+show "Oque deseja?";
+next;
+menu "Adicionar Jogador",add,"Limpar jogador",ex,"Ver ultimo jogador",vlist;
+
+
+vlist:
+set @j, 0;
+dispbottom "Ultimo Jogadores que foi para a Sala dos Porings:";
+for(set @i, 0; @i < 1; set @i, @i + 1){
+if($markjog$[@i] !=$jogador$[@i]){ dispbottom $markjog$[@i]; set @j,1; }
+if( !@j && @i == 1){ dispbottom "O ultimo jogador premiado não foi ainda."; }
+}
+close;
+end;
+
+add:
+if($hats[0] !=0){ show "[Sala dos Porings]"; show "Já existe um jogador para ir."; close; }
+set @r, 0;
+for(set @i, 0; @i < 1; set @i, @i + 1){
+set @r, @r + 1;
+show "[Sala dos Porings]";
+show "Entre com o nick do jogador.";
+next;
+input @nick$; 
+show "[Sala dos Porings]";
+show "Entre com o ID do hat";
+next;
+input @hat;
+show "[Sala dos Porings]";
+show "Nick: ^FF0000"+@nick$+"^000000";
+show "Hat: ^FF0000"+getitemname(@hat)+"^000000 ID: ^FF0000"+@hat+"^000000";
+show "Confirmar isto?";
+next;
+if(select("Confirmar.:Cancelar.")==2){ set @i, @i-1; set @r, @r-1; continue; }
+setarray $hats[@i], @hat;
+setarray $jogador$[@i], @nick$;
+setarray $markjog$[@i], @nick$;
+show "[Sala dos Porings]";
+show "Jogador adicionado.";
+next;
+}
+show "[Sala dos Porings]";
+show "PRONTO, Chame o jogador para participar!";
+close;
+end;
+
+
+
+ex:
+next;
+show "[Sala dos Porings]";
+show "Deseja mesmo retirar o jogador cadastrado?";
+next;
+menu "Não",-,"Sim",gogo;
+close;
+end;
+
+gogo:
+deletearray $jogador$[0],getarraysize($jogador$);
+deletearray $hats[0],getarraysize($hats);
+deletearray $markjog$[0],getarraysize($markjog$);
+show "[Sala dos Porings]";
+show "Lista resetada!";
+close;
+end;
+
+end;
+
+
+}else{
+for(set @i, 0; @i < getarraysize($markjog$); set @i, @i + 1){
+if(strcharinfo(0) == $jogador$[@i]){ goto L_sort; }
+}
+goto L_End;
+
+
+L_sort:
+show "[Sala dos Porings]";
+show "Parabéns!";
+show "Você foi sorteado !";
+next;
+show "[Sala dos Porings]";
+show "Deseja ir para sala dos porings agora?";
+next;
+menu "Sim!",goo,"Não, agora não...",-;
+close;
+end;
+
+goo:
+next;
+show "[Sala dos Porings]";
+show "Antes de entrar na sala, vou lhe lembrar";
+show "Um dos 10 porings da sala contém seu chapéu escolhido.";
+next;
+show "[Sala dos Porings]";
+show "Os outros 9 contém itens ROPs de menor valor";
+show "Só é permitido matar 1 poring, logo após isto você é teleportado de volta para Prontera!";
+next;
+show "[Sala dos Porings]";
+show "Você tem 1 minuto para matar o poring...";
+show "Após este 1 minuto, se alguém tentar entrar na sala você será jogado para fora.";
+next;
+if(getmapusers("pvp_n_1-1") == 0){ 
+show "[Sala dos Porings]";
+show "Boa sorte...";
+warp "pvp_n_1-1",105,102;
+for(set @i, 0; @i < getarraysize($markjog$); set @i, @i + 1){
+if(strcharinfo(0) == $jogador$[@i]){ setarray $jogador$[@i], ""; }
+}
+close;
+}else{
+show "[Sala dos Porings]";
+show "Um instante...";
+show "Parece que alguém já está na sala";
+show "Por favor, aguarde!";
+sleep2 15000;
+mapwarp "pvp_n_1-1","prontera",156,193;
+next;
+show "[Sala dos Porings]";
+show "Pronto";
+show "Fale comigo novamente para entrar";
+close;
+}
+end;
+
+
+
+L_End:
+if($markjog$[0] == ""){ goto L_SPFIM; }
+show "[Sala dos Porings]";
+show "Jogador:";
+for(set @m, 0; @m < getarraysize($markjog$); set @m, @m + 1){
+show "^ACB000"+$markjog$[@m]+"^000000";
+} //^8A0000
+next;
+L_SPFIM:
+show "[Sala dos Porings]";
+for(set @i, 0; @i < getarraysize($markjog$); set @i, @i + 1){
+if(strcharinfo(0) == $markjog$[@i]){ show "Você já foi para a sala."; close; }
+}
+show "Você não ganhou nenhum evento.";
+show "Participe dos eventos promovidos pelos GMs para ganhar sua entrada na Sala dos Poring.";
+close;
+end;
+
+
+
+
+
+
+
+}
+}
+
+pvp_n_1-1,1,1,4	script	Monst	-1,{
+end;
+
+OnInit:
+monster "pvp_n_1-1",0,0,"Poring",1002,10,"Monst::OnDie";
+end;
+
+OnDie:
+set @kporin, @kporin+1;
+killmonster "pvp_n_1-1","All";
+atcommand "@option 5";
+setarray @premio[0],12900,12909,12911;
+set @p,rand(getarraysize(@premio));
+set @number,2;
+sleep2 2500;
+if(@kporin > 1){ dispbottom "Você matou mais de um poring."; set @kporin, 0; atcommand "@option 0"; monster "pvp_n_1-1",0,0,"Poring",1002,10,"Monst::OnDie"; end; }
+for(set @l, 0; @l < 10; set @l, @l + 1){
+if(strcharinfo(0) == $markjog$[@l]){ set @q, @l; set @pslp, 1; }
+if(@l == 9 && @pslp == 0){ dispbottom "Sala dos Porings: Você não está entre os sorteados..."; monster "pvp_n_1-1",0,0,"Poring",1002,10,"Monst::OnDie"; warp "prontera",156,193; atcommand "@option 0"; end; }
+}
+if(rand(1,8) <= @number){
+specialeffect2 410;
+additem $hats[@q],1;
+announce "Sala dos Porings: Parabéns, "+strcharinfo(0)+" matou o poring certo e ganhou "+getitemname($hats[@q])+"!",bc_yellow|bc_all;
+sleep2 5000;
+warp "prontera",156,193;
+monster "pvp_n_1-1",0,0,"Poring",1002,10,"Monst::OnDie";
+atcommand "@option 0";
+}
+else{
+specialeffect2 372;
+sleep2 400;
+specialeffect2 372;
+specialeffect2 360;
+announce "Sala dos Porings: Que pena, "+strcharinfo(0)+" não matou o poring certo!",bc_yellow|bc_all;
+additem @premio[@p],1;
+sleep2 5000;
+warp "prontera",156,193;
+monster "pvp_n_1-1",0,0,"Poring",1002,10,"Monst::OnDie";
+atcommand "@option 0";
+}
+end;
+
+
+}
+
+
+
+
+pvp_n_1-1	mapflag	noskill
+pvp_n_1-1	mapflag	nobranch

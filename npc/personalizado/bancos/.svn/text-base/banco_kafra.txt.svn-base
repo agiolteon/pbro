@@ -1,0 +1,87 @@
+//===== Cronus Script ========================================  
+//= Banco Kafra de Prontera
+//===== Por: =================================================
+//= Lupus
+//===== Versão Atual: ======================================== 
+//= 1.8
+//===== Changelog: =========================================== 
+//= 1.6 Traduzido o Npc [Kamper]
+//= 1.7 Organizado [Kamper]
+//= 1.8 Otimizado e adicionado comentários [Reply.]
+//====== Comentários Adicionais: ==============================
+// Veja esta fórmula e configure seu banco
+// #kafrabank/1000 = 0.1% de renda por dia
+// #kafrabank/100  =  1%  de renda por dia
+// #kafrabank/10   =  10% de renda por dia
+//==========================================================
+prontera,132,217,5	script	Banco Kafra	113,{
+
+set .n$, "[Kafra]";
+set @kb_int,(gettime(6)*31)+gettime(5); 
+set @income,(#kafrabank/1000)*(@kb_int-#kb_int); 
+set #kb_int,@kb_int; 
+
+	cutin "kafra_05",2;
+	show .n$;
+	show strcharinfo(0)+", bem-vindo ao Banco Kafra";
+	if(#kafrabank == 0) show "Nós poderíamos abrir uma conta";
+	if(@income > 0) show "Renda de hoje: ^135445" + @income + "^000000 zeny.";
+	set #kafrabank,#kafrabank+@income;
+	if(#kafrabank > 0) show "Sua conta: ^135445" + #kafrabank + "^000000 zeny.";
+	show "O que você deseja?";
+	if(#kafrabank == 0) select("-Abrir uma conta no banco::-Sair");
+	if(#kafrabank > 0) select("-Depositar","-Retirar","-Sair");
+	next;
+	switch(@menu)
+	{
+		case 1:
+			while(1)
+			{
+				show .n$;
+				if(Zeny < 1000) { show "A mínima quantia de zeny aceita para depósito é 1000, e você não a possui."; cutin "",255; close; }
+				show "Por favor, diga-me quantos zenys você gostaria de depositar.";
+				show "A mínima quantia aceita é 1000(1k) zeny e a máxima 1000000(1kk) zeny.";
+				digit @kafrabank;
+				next;
+				if((@kafrabank < 1000) || (@kafrabank > 1000000)) { show .n$; show "Quantia inválida."; next; continue; } else { break; }
+			}
+			set Zeny, Zeny - @kafrabank;
+			set #kafrabank, #kafrabank + @kafrabank;
+			show .n$;
+			show "Você fez um depósito de ^135445" + @kafrabank + "z^000000.";
+			show "Muito bem, venha quando precisar.";
+			show "Obrigado por usar nosso serviço.";
+			cutin "",255;
+			break;
+			
+		case 2:
+			while(1)
+			{
+				if(!#kafrabank) { show .n$; show "Você não tem nenhum zeny em sua conta."; cutin "",255; close; }
+				show .n$;
+				show "Sua conta: ^135445" + #kafrabank + "^000000 zeny.";
+				show "Quantos zenys você gostaria de retirar?";
+				show "A mínima quantia aceita é 1 zeny e a máxima 1000000 zeny.";
+				digit @kafrabank;
+				next;
+				if((@kafrabank < 1) || (@kafrabank > 1000000)) { show .n$; show "Quantia inválida."; next; continue; }
+				else if(@kafrabank > #kafrabank) { show "Você não tem tanto zeny em sua conta."; close; }
+				else { break; }
+			}
+			set #kafrabank, #kafrabank - @kafrabank;
+			set Zeny, Zeny + @kafrabank;
+			show .n$;
+			show "Aqui, ^135445" + @kafrabank + "z^000000, ponha sua assinatura aqui";
+			show "Muito bem, venha quando precisar.";
+			show "Obrigado por usar nosso serviço.";
+			cutin "",255;
+			break;
+			
+		case 3:
+			show .n$;
+			show "Obrigado por usar nosso serviço.";
+			cutin "",255;
+			break;
+	}
+	close;
+}

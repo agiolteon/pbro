@@ -1,0 +1,475 @@
+// ===================================================================== //
+// ================= NPC Presence worths golden ======================== //
+// ============= Made and updated by Jujuba[pbGO.net] ================== //
+// ===================================================================== //
+
+
+//SQL Table settings
+//=====================================================//
+//Table.Row `login`.`pontos` int(10) NOT NULL = unique presence points 
+//Table.Row `login`.`apelido` varchar(39) NOT NULL = nick name identifier of account
+//Table.Row `login`.`referencia` int(11) NOT NULL = account id of reference pl. account
+//Table.Row `login`.`pontos_referencia` int(11) NOT NULL = every point shared with the reference must be logged here
+//====================================================//
+
+
+
+-	script	Presença	-1,{ //Source npc, every single player will prompt this npc when it gets trigger by any "duplicates"(see below)
+
+OnStart: //Trigger label pointed by duplicates THIS MUST BE BEFORE EVERYTHING
+
+
+
+
+//Settings variables
+//==========================================//
+set @sharep, 0; //Número mínimo de pontos para compartilhar com o player que o indicou.
+set @quantpv, 5; //Pontos Recebidos por cada presença(VIP TOTAL).
+set @quantpn, 3; //Pontos Recebidos por cada presença(SEM VIP).
+set @quants, 1; //Pontos Recebidos por cada serviço, ainda não implementado.
+set @qsharep, 1; //Número de pontos a compartilhar por cada presença.
+set @npc$, "[Presença Vale Ouro]"; //NPC name.
+//==========================================//
+
+
+//Query variables
+//==========================================//
+query_sql "SELECT pontos FROM login WHERE account_id ='"+getcharid(3)+"'", @pontosindi;
+query_sql "SELECT referencia FROM login WHERE account_id ='"+getcharid(3)+"'", @referencia;
+query_sql "SELECT apelido FROM login WHERE account_id ='"+getcharid(3)+"'", @apelidop$;
+query_sql "SELECT apelido FROM login WHERE account_id ='"+@referencia+"'", @apelidor$;
+query_sql "SELECT pontos_referencia FROM login WHERE account_id ='"+getcharid(3)+"'", @pontosref;
+//=========================================//
+
+
+
+
+cutin "nyuang_1",2; //Kinda cute sprite xD
+show @npc$;
+show "Olá ^B00400"+strcharinfo(0)+"^000000.";
+show "Você tem: ^FF0000"+@pontosindi+"^000000 ponto(s) de indicação";
+if(@apelidop$ !=""){
+show "Seu apelido é: ^FF0000"+@apelidop$+"^000000"; }else{ show "Você não tem um apelido cadastrado"; }
+show "O seu número de referência é ^FF0000"+getcharid(3)+"^000000";
+if(@referencia !=0){
+show "Você foi indicado por: ^FF0000"+@apelidor$+"^000000"; }else{ show "Você não foi indicado por ninguém."; }
+show "Oque Deseja?";
+next;
+menu "Marcar Presença",apont,"Trocar Apelido",apel,"Ver Pontos de Indicados",pcon,"Trocar Pontos por Itens",scash,"Como Funciona?",inform,"Sair",-; //Need to be a menu, it's painful, but, damn dude, these are so many options!
+cutin "",255;
+close;
+
+
+scash: //Cash room.
+Init:
+	query_sql "SELECT pontos FROM login WHERE account_id ='"+getcharid(3)+"'", @indipts;
+	show @npc$;
+	show "^FF0000"+strcharinfo(0)+"^000000, deseja trocar Pontos de Indicação por Itens?";
+	show " ";
+	show "Você tem ^0941C4"+@indipts+"^000000 Pontos de Indicação.";
+	next;
+	if(@indipts == 25 || @indipts == 28){ if(#lbaccess < 3 && !#PI_bought && !getgmlevel() ){ show @npc$; show "Você precisa confirmar sua presença 3 vezes antes de comprar algo.";  close; } } //Prevent exploit creating new accounts with 25 points
+	if( !#PI_bought ){ set #PI_bought, 1; }
+	switch(select(
+		"Cartão Kafra (10un) ^FF0000[25 pontos]^000000",
+		"Neuralizador (10un) ^FF0000[60 pontos]^000000",
+		"Assumptio (20un) ^FF0000[50 pontos]^000000",
+		"Pergaminho Benção (20un) ^FF0000[20 pontos]^000000",
+		"Pergaminho Agilidade (20un) ^FF0000[20 pontos]^000000",
+		"Elunium Enriquecido (10un) ^FF0000[50 pontos]^000000",
+		"Oridecon Enriquecido (10un) ^FF0000[50 pontos]^000000",
+		"Passe Anti-Gravitacional ^FF0000[280 pontos]^000000",
+		"Taça Nevada ^FF0000[30 pontos]^000000",
+		"Caixão Tenebroso ^FF0000[30 pontos]^000000",
+		"Carta de Amor ^FF0000[30 pontos]^000000",
+		"Roupa de Praia ^FF0000[5 pontos]^000000",
+		"Bolsa do Papai Noel ^FF0000[5 pontos]^000000",
+		"Pudim de Guyak (10un) ^FF0000[35 pontos]^000000",
+		"Caixa de Veneno Mortal (10un) ^FF0000[30 pontos]^000000",
+		"Teia de Aranha (30un) ^FF0000[30 pontos]^000000",
+		"Caixa de Adrenalina(30un) ^FF0000[30 pontos]^000000",
+		"Kit Reparação de Barricada ^FF0000[20 pontos]^000000",
+		"","","",""))
+		{
+			case 1: set @id,12909; set @price,25; break;
+			case 2: set @id,12911; set @price,60; break;
+			case 3: set @id,12916; set @price,50; break;
+			case 4: set @id,12913; set @price,20; break;
+			case 5: set @id,12914; set @price,20; break;
+			case 6: set @id,12920; set @price,50; break;
+			case 7: set @id,12921; set @price,50; break;
+			case 8: set @id,13710; set @price,280; break;
+			case 9: set @id,12361; set @price,30; break;
+			case 10: set @id,12363; set @price,30; break;
+			case 11: set @id,12370; set @price,30; break;
+			case 12: set @id,12260; set @price,5; break;
+			case 13: set @id,12132; set @price,5; break;
+			case 14: set @id,12710; set @price,35; break;
+			case 15: set @id,14004; set @price,30; break;
+			case 16: set @id,1025; set @price,30; break;
+			case 17: set @id,12918; set @price,40; break;
+			case 28: set @id,14287; set @price,20; break;
+			case 29: 
+			case 20: 
+			case 21: 
+			case 22: 
+			case 23: 
+			case 24: 
+			case 25:
+		}
+		show @npc$;
+		show "Isto vai custar ^FF0000"+@price+" pontos^000000";
+		show "Deseja mesmo continuar?";
+		next;
+		if(select("Sim.:Não.")==2){ callsub Init; }
+		show @npc$;
+		if(@indipts < @price){ show "Você não tem ^FF0000"+@price+"^000000 Pontos de Indicação."; next; callsub Init; }
+		query_sql("UPDATE login SET pontos = pontos-'"+@price+"' WHERE account_id ='"+getcharid(3)+"'");
+		switch(@id)
+		{
+			case 12710: getitem @id,10; break;
+			case 1025: getitem @id,30; break;
+			case 12258: getitem @id,25; break;
+			default: getitem @id,1; break;
+		}
+	show "Pronto... Aqui está!";
+	next;
+	cutin "",255;
+	close;
+	end;
+
+tcash: //Cash exchange
+show @npc$;
+show "Quantos pontos ^0107F8de indicação^000000 deseja trocar?";
+show "^1F9B00Para cada 30 pontos de indicação lhe darei 1 ponto de cash^000000";
+next;
+input @bidd;
+next;
+set @divi, @bidd % 30;
+set @bidd, @bidd-@divi;
+set @bidt, @bidd / 30;
+show @npc$;
+if(@bidd < 30){ show "Você vai precisar de mais de 30 pontos para trocar por cash."; cutin "",255; close; }
+if(@bidd > @pontosindi){ show "Você não tem ^FF0000"+@bidd+"^000000 pontos."; cutin "",255; close; }
+show "Tem certeza que deseja converter ^FF0000"+@bidd+"^000000 pontos em ^0000FF"+@bidt+"^000000 cash?";
+next;
+if(select("Cancelar:Confirmar")==1){ close; }
+query_sql("UPDATE login SET pontos = pontos-'"+@bidd+"' WHERE account_id ='"+getcharid(3)+"'");
+atcommand "@cash "+@bidt+""; //Use the atcommand for show the dispbottom in the chat.
+show @npc$;
+show "Pronto!";
+show "Agora você tem ^FF0000"+#CASHPOINTS+"^000000 pontos de cash.";
+cutin "",255;
+close;
+end;
+
+inform: //Information about how presence works
+cutin "nyuang_3",2;
+next;
+switch(select("Pontos com Indicação.","Pontos com Presença.","Como trocar os pontos.")){
+case 1: // <- Indication
+		show @npc$;
+		show "Para ganhar pontos com indicação é simples, basta você pegar o seu Numero de Referencia, passar para um amigo que você convide para jogar, no momento que o mesmo for fazer o cadastro da conta no site, ele deve preencher o campo referencia com o numero de referencia que você informou para ele.";
+		next;
+		show @npc$;
+		show "Quando você convida alguém e o mesmo se registra como sua referencia os dois irão ganhar pontos.";
+		show "No momento que o seu convidado se registra ele já ganha 25 pontos. Já você ganha 1 ponto a cada 4 pontos adquiridos pelo seu convidado, quanto mais pontos seu convidado fizer mais pontos você irá adquirir.";
+		next;
+		show @npc$;
+		show "Começe agora mesmo a convidar seus amigos e adquira pontos para trocar por itens exclusivos!";
+		cutin "",255;
+		close;
+		break;
+case 3: // <- Changing
+		show @npc$;
+		show "Depois de adquirir os pontos marcando presença e convidando amigos basta você escolher a opção Trocar Pontos por Cash, os pontos serão convertidos em Cash que você irá utilizar na Central de Lojas pbRO.";
+		next;
+		show @npc$;
+		show "Então junte seus pontos para trocar por itens exclusivos!";
+		cutin "",255;
+		close;
+		break;
+case 2: // <- Presence
+		show @npc$;
+		show "Ganhe pontos com sua preseça no pbRO, é muito simples basta escolher a opção no NPC e ficar online durante 1 hora(podendo relogar, trocar de personagem, etc). Apos o tempo terminar você receberá um aviso que a presença foi marcada, basta retornar aqui e receber os 3^FF0000(5 pontos para VIP TOTAL)^000000 pontos pela sua presença.";
+		next;
+		show @npc$;
+		show "Comece agora mesmo a marcar sua presença e adquira pontos para trocar por itens exclusivos!";
+		cutin "",255;
+		close;
+		break;
+}
+end;
+
+
+pcon:
+query_sql("SELECT apelido,pontos_referencia FROM `login` WHERE `referencia` = '"+getcharid(3)+"' ORDER BY pontos_referencia DESC LIMIT 100 ", @apelidosc$, @pontosc);
+if(@apelidosc$[0] == ""){ dispbottom "[Presença Vale Ouro] Você não convidou ninguém."; cutin "",255; close; }
+for(set @auxv, 0; @auxv < getarraysize(@apelidosc$); set @auxv, @auxv + 1){
+dispbottom "Apelido: "+@apelidosc$[@auxv]+" - Pontos dados: "+@pontosc[@auxv]+"";
+}
+cutin "",255;
+close;
+end;
+
+
+rank: //Not used yet.
+query_sql("SELECT apelido,pontos FROM `login` ORDER BY pontos DESC LIMIT 10", @apelidos$, @pontoss);
+dispbottom "[Presença Vale Ouro] Pontos de Referência - TOP 10";
+dispbottom "1° - Apelido: "+@apelidos$[0]+" - Pontos: "+@pontoss[0]+"";
+dispbottom "2° - Apelido: "+@apelidos$[1]+" - Pontos: "+@pontoss[1]+"";
+dispbottom "3° - Apelido: "+@apelidos$[2]+" - Pontos: "+@pontoss[2]+"";
+dispbottom "4° - Apelido: "+@apelidos$[3]+" - Pontos: "+@pontoss[3]+"";
+dispbottom "5° - Apelido: "+@apelidos$[4]+" - Pontos: "+@pontoss[4]+"";
+dispbottom "6° - Apelido: "+@apelidos$[5]+" - Pontos: "+@pontoss[5]+"";
+dispbottom "7° - Apelido: "+@apelidos$[6]+" - Pontos: "+@pontoss[6]+"";
+dispbottom "8° - Apelido: "+@apelidos$[7]+" - Pontos: "+@pontoss[7]+"";
+dispbottom "9° - Apelido: "+@apelidos$[8]+" - Pontos: "+@pontoss[8]+"";
+dispbottom "10° - Apelido: "+@apelidos$[9]+" - Pontos: "+@pontoss[9]+"";
+cutin "",255;
+close;
+end;
+
+apel: //Subscribe a nick.
+show @npc$;
+show "Qual apelido deseja?";
+next;
+input @apel$;
+next;
+show @npc$;
+show "Seu apelido escolhido é: ^0000FF"+@apel$+"^000000";
+show "Deseja continuar?";
+next;
+if(select("Não:Confirmar") == 1){ cutin "",255; close; }
+show @npc$;
+query_sql "SELECT apelido FROM login WHERE apelido ='"+@apel$+"'", @debugap$;
+if(@debugap$ !=""){ show "Este apelido já está sendo usado."; show "Relogue e tente novamente."; cutin "",255; close; }
+show "Seu apelido foi trocado!";
+query_sql("UPDATE login SET apelido = '"+@apel$+"' WHERE account_id ='"+getcharid(3)+"'");
+cutin "",255;
+close;
+end;
+
+
+apont: //Mark presence
+if(!Class){ show @npc$; show "Lamento, mas aprendizes não podem marcar presença."; cutin "",255; close; }
+if(@apelidop$ == ""){
+show @npc$;
+show "Você precisa cadastrar um apelido antes.";
+cutin "",255;
+close;
+}
+if(#PV_time > 59){ //Detect time over
+cutin "nyuang_3",2;
+if(getgmlevel() >= 20){ set @quant, @quantpv; }else{ set @quant, @quantpn; }
+show @npc$;
+show "Parabéns, você confirmou sua presença!";
+set #PV_time, 0;
+query_sql("UPDATE login SET pontos = pontos+'"+@quant+"' WHERE account_id ='"+getcharid(3)+"'");
+if(@pontosindi > @sharep){ //Sharing the points
+	query_sql "SELECT last_ip FROM login WHERE account_id ='"+@referencia+"'", @ipr$;
+	query_sql "SELECT last_ip FROM login WHERE account_id ='"+getcharid(3)+"'", @ipm$;
+	set @quantr, @qsharep;
+	query_sql("UPDATE login SET pontos_referencia = pontos_referencia+'"+@quantr+"' WHERE account_id ='"+getcharid(3)+"'");
+//	if(@ipr$ !=@ipm$) //Throw off the '//' for pl with the same IP adress don't share points.
+//	{
+		query_sql("UPDATE login SET pontos = pontos+'"+@quantr+"' WHERE account_id ='"+@referencia+"'");
+//	}
+}
+detachnpctimer;
+stopnpctimer;
+set #lbaccess, #lbaccess+1; //Allow to use npc presence exchanger
+next;
+show @npc$;
+show "E ganhou mais ^FF0000"+@quant+"^000000 pontos!";
+next;
+show @npc$;
+show "Continue a marcar sua presença e a ajudar o servidor!";
+cutin "",255;
+close;
+}
+if(#PV_time < 1){ //No time detected, trigger the npc timer 
+show @npc$;
+show "OK, venha confirmar sua presença daqui a ^FD00001(uma) hora^000000.";
+show "^259C91O contador de tempo é parado assim que você desloga, quando loga novamente(qualquer personagem da conta) o contador volta a contar o tempo de onde parou^000000";
+attachnpctimer strcharinfo(0);
+initnpctimer;
+cutin "",255;
+close;
+}else{ //Time elapsed is not over
+show @npc$;
+set @countt, 60-#PV_time;
+show "Ainda não está na hora de confirmar sua presença.";
+show "Faltam ^FF0000"+@countt+"^000000 minutos para confirmar sua presença.";
+show "^AE0000Para ver o tempo restante a qualquer momento, envie uma mensagem pessoal para 'npc:Presença'^000000";
+cutin "",255;
+close;
+}
+end;
+
+OnTimer60000: //Incrementation every minute
+if (checkVending(strcharinfo(0))){ detachnpctimer; stopnpctimer; end; } //Avoid @at
+set #PV_time, #PV_time+1;
+if(#PV_time == 60){ message strcharinfo(0),"[Presença Vale Ouro] Você já pode voltar para confirmar sua presença e ganhar seus pontos!"; detachnpctimer; stopnpctimer; end; } //Time up
+attachnpctimer strcharinfo(0);
+initnpctimer;
+if(#PV_time == 15){ dispbottom "[Presença Vale Ouro] Faltam 45 Minutos para confirmar sua presença."; }
+if(#PV_time == 30){ dispbottom "[Presença Vale Ouro] Faltam 30 Minutos para confirmar sua presença."; }
+if(#PV_time == 45){ dispbottom "[Presença Vale Ouro] Faltam 15 Minutos para confirmar sua presença."; }
+if(#PV_time == 55){ dispbottom "[Presença Vale Ouro] Faltam 5 Minutos para confirmar sua presença."; }
+end;
+
+
+OnPCLogoutEvent: //Detach time when the player logoff
+if( !#PV_time ){ end; }
+if(#PV_time > 59){ end; }
+detachnpctimer;
+stopnpctimer;
+end;
+
+
+OnPCLoginEvent: //Must run on every char of pl. account
+if( !#PV_time ){ end; }
+if(#PV_time > 59){ dispbottom "[Presença Vale Ouro] Você já pode confirmar sua presença."; end; }
+dispbottom "[Presença Vale Ouro] Já se passaram "+#PV_time+" minutos.";
+attachnpctimer strcharinfo(0);
+initnpctimer;
+end;
+
+OnWhisperGlobal: //Whisper timer information
+if( !#PV_time ){ message strcharinfo(0),"[Presença Vale Ouro] Você não marcou sua presença."; end; }
+if(#PV_time > 59){ message strcharinfo(0),"[Presença Vale Ouro] Você já pode confirmar sua presença."; end; }
+set @countt, 60-#PV_time; //Calculate time remaining
+message strcharinfo(0),"[Presença Vale Ouro] Faltam "+@countt+" minutos para confirmar sua presença.";
+end;
+
+}
+
+
+
+//NOTE about "duplicates": they must trigger the src npc by doevent, the common way to make a source npc and just duplicate he doesn't work in this case, it will duplicate all labels(mainly the pcloginevent that will fill the whole event queue of login) and will cause unwelcome pain for the map-server, such a full queue of pcloginevent, gotcha?
+
+//Towns.
+//=======================================//
+prontera,157,192,3	script	Presença Vale Ouro#1-1	877,{
+doevent "Presença::OnStart";
+}
+
+
+brasilis,200,225,3	script	Presença Vale Ouro#1-2	877,{
+doevent "Presença::OnStart";
+}
+
+izlude,135,120,3	script	Presença Vale Ouro#1-3	877,{
+doevent "Presença::OnStart";
+}
+
+morocc,154,95,5	script	Presença Vale Ouro#1-4	877,{
+doevent "Presença::OnStart";
+}
+
+payon,186,104,5	script	Presença Vale Ouro#1-5	877,{
+doevent "Presença::OnStart";
+}
+
+moscovia,223,195,5	script	Presença Vale Ouro#1-6	877,{
+doevent "Presença::OnStart";
+}
+
+hugel,87,149,5	script	Presença Vale Ouro#1-7	877,{
+doevent "Presença::OnStart";
+}
+
+aldebaran,147,116,5	script	Presença Vale Ouro#1-8	877,{
+doevent "Presença::OnStart";
+}
+
+louyang,209,101,5	script	Presença Vale Ouro#1-9	877,{
+doevent "Presença::OnStart";
+}
+
+comodo,198,149,5	script	Presença Vale Ouro#2-0	877,{
+doevent "Presença::OnStart";
+}
+
+xmas,145,136,5	script	Presença Vale Ouro#2-1	877,{
+doevent "Presença::OnStart";
+}
+
+ayothaya,144,111,5	script	Presença Vale Ouro#2-2	877,{
+doevent "Presença::OnStart";
+}
+
+gonryun,162,130,5	script	Presença Vale Ouro#2-3	877,{
+doevent "Presença::OnStart";
+}
+
+umbala,126,136,5	script	Presença Vale Ouro#2-4	877,{
+doevent "Presença::OnStart";
+}
+
+lighthalzen,162,100,5	script	Presença Vale Ouro#2-5	877,{
+doevent "Presença::OnStart";
+}
+
+geffen,126,64,5	script	Presença Vale Ouro#2-6	877,{
+doevent "Presença::OnStart";
+}
+
+rachel,135,117,5	script	Presença Vale Ouro#2-7	877,{
+doevent "Presença::OnStart";
+}
+
+einbech,86,101,5	script	Presença Vale Ouro#2-8	877,{
+doevent "Presença::OnStart";
+}
+
+veins,211,136,5	script	Presença Vale Ouro#2-9	877,{
+doevent "Presença::OnStart";
+}
+
+splendide,210,186,5	script	Presença Vale Ouro#2-10	877,{
+doevent "Presença::OnStart";
+}
+
+manuk,298,197,5	script	Presença Vale Ouro#2-11	877,{
+doevent "Presença::OnStart";
+}
+
+//Other points.
+//=======================================//
+nameless_i,173,259,5	script	Presença Vale Ouro#3-0	877,{
+doevent "Presença::OnStart";
+}
+
+moc_ruins,62,167,5	script	Presença Vale Ouro#3-1	877,{
+doevent "Presença::OnStart";
+}
+
+mjolnir_02,89,358,5	script	Presença Vale Ouro#3-2	877,{
+doevent "Presença::OnStart";
+}
+
+izlu2dun,111,46,5	script	Presença Vale Ouro#3-3	877,{
+doevent "Presença::OnStart";
+}
+
+alb2trea,53,65,5	script	Presença Vale Ouro#3-4	877,{
+doevent "Presença::OnStart";
+}
+
+bat_room,161,146,5	script	Presença Vale Ouro#3-5	877,{
+doevent "Presença::OnStart";
+}
+
+pay_arche,53,123,5	script	Presença Vale Ouro#3-6	877,{
+doevent "Presença::OnStart";
+}
+
+gef_fild10,75,341,5	script	Presença Vale Ouro#3-7	877,{
+doevent "Presença::OnStart";
+}
+
+mid_camp,201,235,5	script	Presença Vale Ouro#3-8	877,{
+doevent "Presença::OnStart";
+}

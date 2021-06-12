@@ -1,11 +1,12 @@
-//===== eAthena Script =======================================
+//===== Cronus Script ========================================
 //= Map flags that disable use of fly wings
-//===== By: ==================================================
+//===== Por: =================================================
 //= eAthena Dev Team
+//===== Versão Atual: ========================================
 //= 1.6a [Lupus]
-//===== Notes: ===============================================
-//= For disabling Butterfly wings use noreturn
-//===== Current Version: =====================================
+//===== Changelog: ===========================================
+//= 
+//============================================================
 
 // Cities ========================
 ayo_in01	mapflag	noteleport
@@ -331,3 +332,46 @@ que_qaru04	mapflag	noteleport
 que_qaru04	mapflag	monster_noteleport
 que_qaru05	mapflag	noteleport
 que_qaru05	mapflag	monster_noteleport
+
+//Sealed Shrine ==================
+1@cata	mapflag	noteleport
+1@cata	mapflag	monster_noteleport
+2@cata	mapflag	noteleport
+2@cata	mapflag	monster_noteleport
+
+// Torre sem Fim =================
+e_tower	mapflag	noteleport
+1@tower	mapflag	noteleport
+1@tower	mapflag	monster_noteleport
+2@tower	mapflag	noteleport
+2@tower	mapflag	monster_noteleport
+3@tower	mapflag	noteleport
+3@tower	mapflag	monster_noteleport
+4@tower	mapflag	noteleport
+4@tower	mapflag	monster_noteleport
+5@tower	mapflag	noteleport
+5@tower	mapflag	monster_noteleport
+6@tower	mapflag	noteleport
+6@tower	mapflag	monster_noteleport
+
+// Episódio 13 ===================
+mid_campin	mapflag	noteleport
+moc_fild22b	mapflag	noteleport
+que_dan01	mapflag	noteleport
+que_dan02	mapflag	noteleport
+schg_que01	mapflag	noteleport
+arug_que01	mapflag	noteleport
+man_in01	mapflag	noteleport
+spl_in01	mapflag	noteleport
+
+// Calabouço Memorial dos Orcs ===
+1@orcs	mapflag	noteleport
+1@orcs	mapflag	monster_noteleport
+2@orcs	mapflag	noteleport
+2@orcs	mapflag	monster_noteleport
+
+// Entrada de Nidhoggr ===========
+1@nyd	mapflag	noteleport
+1@nyd	mapflag	monster_noteleport
+2@nyd	mapflag	noteleport
+2@nyd	mapflag	monster_noteleport

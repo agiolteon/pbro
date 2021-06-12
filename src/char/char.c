@@ -88,7 +88,6 @@ int char_name_option = 0; // Option to know which letters/symbols are authorised
 char unknown_char_name[1024] = "Unknown"; // Name to use when the requested name cannot be determined
 #define TRIM_CHARS "\032\t\x0A\x0D " //The following characters are trimmed regardless because they cause confusion and problems on the servers. [Skotlex]
 char char_name_letters[1024] = ""; // list of letters/symbols authorised (or not) in a character name. by [Yor]
-bool char_rename = true;
 
 int log_char = 1;	// loggin char or not [devil]
 int log_inter = 1;	// loggin inter or not [devil]
@@ -192,6 +191,33 @@ static void* create_online_char_data(DBKey key, va_list args)
 	return character;
 }
 
+void set_char_charselect(int account_id)
+{
+	struct online_char_data* character;
+
+	character = (struct online_char_data*)idb_ensure(online_char_db, account_id, create_online_char_data);
+
+	if( character->server > -1 )
+		server[character->server].users--;
+
+	character->char_id = -1;
+	character->server = -1;
+
+	if(character->waiting_disconnect != -1) {
+		delete_timer(character->waiting_disconnect, chardb_waiting_disconnect);
+		character->waiting_disconnect = -1;
+	}
+
+	if (login_fd > 0 && !session[login_fd]->flag.eof)
+	{
+		WFIFOHEAD(login_fd,6);
+		WFIFOW(login_fd,0) = 0x272b;
+		WFIFOL(login_fd,2) = account_id;
+		WFIFOSET(login_fd,6);
+	}
+
+}
+
 void set_char_online(int map_id, int char_id, int account_id)
 {
 	struct online_char_data* character;
@@ -199,14 +225,14 @@ void set_char_online(int map_id, int char_id, int account_id)
 	character = (struct online_char_data*)idb_ensure(online_char_db, account_id, create_online_char_data);
 	if( character->char_id != -1 && character->server > -1 && character->server != map_id )
 	{
-		//char == 99 <- Character logging in, so someone has logged in while one
-		//char is still on map-server, so kick him out, but don't print "error"
-		//as this is normal behaviour. [Skotlex]
-		if (char_id != 99)
-			ShowNotice("set_char_online: Character %d:%d marked in map server %d, but map server %d claims to have (%d:%d) online!\n",
-				character->account_id, character->char_id, character->server, map_id, account_id, char_id);
+		ShowNotice("set_char_online: Character %d:%d marked in map server %d, but map server %d claims to have (%d:%d) online!\n",
+			character->account_id, character->char_id, character->server, map_id, account_id, char_id);
 		mapif_disconnectplayer(server[character->server].fd, character->account_id, character->char_id, 2);
 	}
+
+	//Update state data
+	character->char_id = char_id;
+	character->server = map_id;
 
 	if( character->server > -1 )
 		server[character->server].users++;
@@ -214,12 +240,6 @@ void set_char_online(int map_id, int char_id, int account_id)
 	if(character->waiting_disconnect != -1) {
 		delete_timer(character->waiting_disconnect, chardb_waiting_disconnect);
 		character->waiting_disconnect = -1;
-	}
-
-	//If user is NOT at char screen, delete entry [Kevin]
-	if(character->char_id != -1)
-	{
-		idb_remove(online_char_db, account_id);
 	}
 
 	if (login_fd > 0 && !session[login_fd]->flag.eof)
@@ -1655,14 +1675,19 @@ int count_users(void)
 	return users;
 }
 
-/// Writes char data to the buffer in the format used by the client.
-/// Used in packets 0x6b (chars info) and 0x6d (new char info)
-/// Returns the size (106 or 108)
-int mmo_char_tobuf(uint8* buf, struct mmo_charstatus* p)
+// Writes char data to the buffer in the format used by the client.
+// Used in packets 0x6b (chars info) and 0x6d (new char info)
+// Returns the size
+#define MAX_CHAR_BUF 110 //Max size (for WFIFOHEAD calls)
+int mmo_char_tobuf(uint8* buffer, struct mmo_charstatus* p)
 {
-	if( buf == NULL || p == NULL )
+	unsigned short offset = 0;
+	uint8* buf;
+
+	if( buffer == NULL || p == NULL )
 		return 0;
 
+	buf = WBUFP(buffer,0);
 	WBUFL(buf,0) = p->char_id;
 	WBUFL(buf,4) = min(p->base_exp, LONG_MAX);
 	WBUFL(buf,8) = p->zeny;
@@ -1674,8 +1699,15 @@ int mmo_char_tobuf(uint8* buf, struct mmo_charstatus* p)
 	WBUFL(buf,32) = p->karma;
 	WBUFL(buf,36) = p->manner;
 	WBUFW(buf,40) = min(p->status_point, SHRT_MAX);
+#if PACKETVER > 20081217
+	WBUFL(buf,42) = p->hp;
+	WBUFL(buf,46) = p->max_hp;
+	offset+=4;
+	buf = WBUFP(buffer,offset);
+#else
 	WBUFW(buf,42) = min(p->hp, SHRT_MAX);
 	WBUFW(buf,44) = min(p->max_hp, SHRT_MAX);
+#endif
 	WBUFW(buf,46) = min(p->sp, SHRT_MAX);
 	WBUFW(buf,48) = min(p->max_sp, SHRT_MAX);
 	WBUFW(buf,50) = DEFAULT_WALK_SPEED; // p->speed;
@@ -1698,12 +1730,11 @@ int mmo_char_tobuf(uint8* buf, struct mmo_charstatus* p)
 	WBUFB(buf,102) = min(p->dex, UCHAR_MAX);
 	WBUFB(buf,103) = min(p->luk, UCHAR_MAX);
 	WBUFW(buf,104) = p->slot;
-	if (char_rename) {
-		WBUFW(buf,106) = 1;// Rename bit (0=rename,1=no rename)
-		return 108;
-	} else {
-		return 106;
-	}
+#if PACKETVER >= 20061023
+	WBUFW(buf,106) = ( p->rename > 0 ) ? 0 : 1;
+	offset += 2;
+#endif
+	return 106+offset;
 }
 
 //----------------------------------------
@@ -1725,7 +1756,7 @@ int mmo_char_send006b(int fd, struct char_session_data* sd)
 		sd->found_char[i] = -1;
 
 	j = 24; // offset
-	WFIFOHEAD(fd,j + found_num*108); // or 106(!)
+	WFIFOHEAD(fd,j + found_num*MAX_CHAR_BUF);
 	WFIFOW(fd,0) = 0x6b;
 	memset(WFIFOP(fd,4), 0, 20); // unknown bytes
 	for(i = 0; i < found_num; i++)
@@ -1916,7 +1947,7 @@ static void char_auth_ok(int fd, struct char_session_data *sd)
 	sd->auth = true;
 
 	// set char online on charserver
-	set_char_online(-1, 99, sd->account_id);
+	set_char_charselect(sd->account_id);
 
 	// continues when account data is received...
 }
@@ -2764,7 +2795,7 @@ int parse_frommap(int fd)
 			idb_put(auth_db, account_id, node);
 
 			//Set char to "@ char select" in online db [Kevin]
-			set_char_online(-3, 99, account_id);
+			set_char_charselect(account_id);
 
 			WFIFOHEAD(fd,7);
 			WFIFOW(fd,0) = 0x2b03;
@@ -3451,7 +3482,7 @@ int parse_char(int fd)
 			{
 				int len;
 				// send to player
-				WFIFOHEAD(fd,110);
+				WFIFOHEAD(fd,MAX_CHAR_BUF+2);
 				WFIFOW(fd,0) = 0x6d;
 				len = 2 + mmo_char_tobuf(WFIFOP(fd,2), &char_dat[i].status);
 				WFIFOSET(fd,len);
@@ -3589,6 +3620,28 @@ int parse_char(int fd)
 			FIFOSD_CHECK(34);
 			//not implemented
 			RFIFOSKIP(fd,34);
+		break;
+
+		// captcha code request (not implemented)
+		// R 07e5 <?>.w <aid>.l
+		case 0x7e5:
+			WFIFOHEAD(fd,5);
+			WFIFOW(fd,0) = 0x7e9;
+			WFIFOW(fd,2) = 5;
+			WFIFOB(fd,4) = 1;
+			WFIFOSET(fd,5);
+			RFIFOSKIP(fd,8);
+			break;
+
+		// captcha code check (not implemented)
+		// R 07e7 <len>.w <aid>.l <code>.b10 <?>.b14
+		case 0x7e7:
+			WFIFOHEAD(fd,5);
+			WFIFOW(fd,0) = 0x7e9;
+			WFIFOW(fd,2) = 5;
+			WFIFOB(fd,4) = 1;
+			WFIFOSET(fd,5);
+			RFIFOSKIP(fd,32);
 		break;
 
 		// login as map-server
@@ -4075,8 +4128,6 @@ int char_config_read(const char *cfgName)
 			char_name_option = atoi(w2);
 		} else if (strcmpi(w1, "char_name_letters") == 0) {
 			strcpy(char_name_letters, w2);
-		} else if (strcmpi(w1, "char_rename") == 0) {
-			char_rename = config_switch(w2);
 // online files options
 		} else if (strcmpi(w1, "online_txt_filename") == 0) {
 			strcpy(online_txt_filename, w2);
@@ -4125,7 +4176,7 @@ int char_config_read(const char *cfgName)
 	}
 	fclose(fp);
 
-	ShowInfo("Done reading %s.\n", cfgName);
+	ShowInfo("Leitura de %s concluida.\n", cfgName);
 	return 0;
 }
 
@@ -4137,7 +4188,7 @@ int chardb_final(int key, void* data, va_list va)
 }
 void do_final(void)
 {
-	ShowStatus("Terminating server.\n");
+	ShowStatus("Fechando o servidor.\n");
 
 	mmo_char_sync();
 	inter_save();
@@ -4195,16 +4246,16 @@ int do_init(int argc, char **argv)
 	char_lan_config_read((argc > 3) ? argv[3] : LAN_CONF_NAME);
 
 	if (strcmp(userid, "s1")==0 && strcmp(passwd, "p1")==0) {
-		ShowError("Using the default user/password s1/p1 is NOT RECOMMENDED.\n");
-		ShowNotice("Please edit your save/account.txt file to create a proper inter-server user/password (gender 'S')\n");
-		ShowNotice("And then change the user/password to use in conf/char_athena.conf (or conf/import/char_conf.txt)\n");
+		ShowError("Usando o usuario/senha padrao s1/p1 NAO E RECOMENDADO.\n");
+		ShowNotice("Por favor edite seu arquivo save/account.txt para criar um usuario/senha apropriado para a comunicacao dos servidores (genero 'S')\n");
+		ShowNotice("E entao mude seu usuario/senha no conf/char_athena.conf (ou conf/import/char_conf.txt)\n");
 	}
 
-	ShowInfo("Finished reading the char-server configuration.\n");
+	ShowInfo("Terminada de ler a configuracao do Servidor de Personagens.\n");
 
 	// a newline in the log...
 	char_log("");
-	char_log("The char-server starting...\n");
+	char_log("Iniciando o Servidor de Personagens...\n");
 
 	ShowInfo("Initializing char server.\n");
 	auth_db = idb_alloc(DB_OPT_RELEASE_DATA);
@@ -4215,7 +4266,7 @@ int do_init(int argc, char **argv)
 	status_init();
 #endif
 	inter_init_txt((argc > 2) ? argv[2] : inter_cfgName);	// inter server ‰Šú‰»
-	ShowInfo("char server initialized.\n");
+	ShowInfo("Servidor de Personagens inicializado.\n");
 
 	set_defaultparse(parse_char);
 
@@ -4225,9 +4276,9 @@ int do_init(int argc, char **argv)
 		ip2str(addr_[0], ip_str);
 
 		if (naddr_ > 1)
-			ShowStatus("Multiple interfaces detected..  using %s as our IP address\n", ip_str);
+			ShowStatus("Multiplas interfaces detectadas..  usando %s como seu endereco de IP.\n", ip_str);
 		else
-			ShowStatus("Defaulting to %s as our IP address\n", ip_str);
+			ShowStatus("Padronizando %s como seu endereco de IP.\n", ip_str);
 		if (!login_ip) {
 			strcpy(login_ip_str, ip_str);
 			login_ip = str2ip(login_ip_str);
@@ -4272,7 +4323,7 @@ int do_init(int argc, char **argv)
 
 	char_fd = make_listen_bind(bind_ip, char_port);
 	char_log("The char-server is ready (Server is listening on the port %d).\n", char_port);
-	ShowStatus("The char-server is "CL_GREEN"ready"CL_RESET" (Server is listening on the port %d).\n\n", char_port);
+	ShowStatus("O Servidor de Personagens esta "CL_GREEN"pronto"CL_RESET" (servidor rodando na porta %d).\n\n", char_port);
 
 	return 0;
 }

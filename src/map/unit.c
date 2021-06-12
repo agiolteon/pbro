@@ -171,6 +171,10 @@ static int unit_walktoxy_timer(int tid, unsigned int tick, int id, intptr data)
 				return 0;
 		} else
 			sd->areanpc_id=0;
+
+		if( sd->ontouch.npc_id )
+			npc_touchnext_areanpc(sd,false);
+
 		if (sd->state.gmaster_flag &&
 			(battle_config.guild_aura&((agit_flag || agit2_flag)?2:1)) &&
 			(battle_config.guild_aura&(map_flag_gvg2(bl->m)?8:4))
@@ -520,6 +524,10 @@ int unit_movepos(struct block_list *bl, short dst_x, short dst_y, int easy, bool
 				return 0;
 		} else
 			sd->areanpc_id=0;
+
+		if( sd->ontouch.npc_id )
+			npc_touchnext_areanpc(sd,false);
+
 		if( sd->status.pet_id > 0 && sd->pd && sd->pd->pet.intimate > 0 )
 		{ // Check if pet needs to be teleported. [Skotlex]
 			int flag = 0;
@@ -1035,7 +1043,11 @@ int unit_skilluse_id2(struct block_list *src, int target_id, short skill_num, sh
 		if( k > 2 ) k = 2; // ...but hard-limited to 300%.
 		casttime += casttime * k; 
 		}
-	break;
+	break;	
+	case GD_EMERGENCYCALL: //Emergency Call double cast when the user has learned Leap [Daegaladh]
+		if( sd && pc_checkskill(sd,TK_HIGHJUMP) )
+			casttime *= 2;
+		break;
 	}
   	
 	// moved here to prevent Suffragium from ending if skill fails
@@ -1043,7 +1055,7 @@ int unit_skilluse_id2(struct block_list *src, int target_id, short skill_num, sh
 		casttime = skill_castfix_sc(src, casttime);
 
 	if( casttime > 0 || temp )
-	{ 
+	{
 		unit_stop_walking(src,1);
 		clif_skillcasting(src, src->id, target_id, 0,0, skill_num, skill_get_ele(skill_num, skill_lv), casttime);
 
@@ -1804,6 +1816,8 @@ int unit_remove_map_(struct block_list *bl, int clrtype, const char* file, int l
 			guild_reply_reqalliance(sd,sd->guild_alliance_account,0);
 		if(sd->menuskill_id)
 			sd->menuskill_id = sd->menuskill_val = 0;
+		if( sd->ontouch.npc_id )
+			npc_touchnext_areanpc(sd,true);
 
 		sd->npc_shopid = 0;
 		sd->adopt_invite = 0;
@@ -1860,7 +1874,10 @@ int unit_remove_map_(struct block_list *bl, int clrtype, const char* file, int l
 	case BL_MOB:
 	{
 		struct mob_data *md = (struct mob_data*)bl;
-		md->target_id=0;
+		// Drop previous target mob_slave_keep_target: no.
+		if (!battle_config.mob_slave_keep_target)
+			md->target_id=0;
+
 		md->attacked_id=0;
 		md->state.skillstate= MSS_IDLE;
 
@@ -1968,7 +1985,7 @@ int unit_free(struct block_list *bl, int clrtype)
 			pc_delautobonus(sd,sd->autobonus,ARRAYLENGTH(sd->autobonus),false);
 			pc_delautobonus(sd,sd->autobonus2,ARRAYLENGTH(sd->autobonus),false);
 			pc_delautobonus(sd,sd->autobonus3,ARRAYLENGTH(sd->autobonus),false);
-			
+
 			if( sd->followtimer != -1 )
 				pc_stop_following(sd);
 				

@@ -1,0 +1,178 @@
+//===== Cronus Script ================================================= 
+//= Removedora de Cartas
+//===== Por: ==========================================================
+//= TyrNemesis^
+//===== Versão Atual: ================================================= 
+//= 1.3
+//===== Descrição: ==================================================== 
+//= Retira cartas equipadas em um item
+//===== Changelog: ==================================================== 
+//= 1.1 Iniciado o Npc [TyrNemesis^]
+//= 1.2 Traduzido [Ramon]
+//= 1.3 Organizado [Kamper]
+//=====================================================================
+
+function	script	VIP_RET	{
+
+UPGRADEROOT:
+REMOVEMENU:
+	show "[Atendente]";
+	show "Tudo bem. Qual ítem quer que eu examine para você?";
+	next;
+	menu "Deixe-me pensar.",CLOSEOUT,
+	     getequipname(1),SLOT1,
+	     getequipname(2),SLOT2,
+	     getequipname(3),SLOT3,
+	     getequipname(4),SLOT4,
+	     getequipname(5),SLOT5,
+	     getequipname(6),SLOT6,
+	     getequipname(7),SLOT7,
+	     getequipname(8),SLOT8,
+	     getequipname(9),SLOT9,
+	     getequipname(10),SLOT10;
+
+SLOT1:
+	set @part,1;
+	goto CARDNUMCHECK;
+
+SLOT2:
+	set @part,2;
+	goto CARDNUMCHECK;
+
+SLOT3:
+	set @part,3;
+	goto CARDNUMCHECK;
+
+SLOT4:
+	set @part,4;
+	goto CARDNUMCHECK;
+
+SLOT5:
+	set @part,5;
+	goto CARDNUMCHECK;
+
+SLOT6:
+	set @part,6;
+	goto CARDNUMCHECK;
+
+SLOT7:
+	set @part,7;
+	goto CARDNUMCHECK;
+
+SLOT8:
+	set @part,8;
+	goto CARDNUMCHECK;
+
+SLOT9:
+	set @part,9;
+	goto CARDNUMCHECK;
+
+SLOT10:
+	set @part,10;
+	goto CARDNUMCHECK;
+
+CARDNUMCHECK:
+	for(set @idnot, 4700; @idnot <= 4759; set @idnot, @idnot + 1){
+	if(getequipcardid(2,3) == @idnot){ goto L_RUNA; }
+	}
+	if(getequipcardcnt(@part) == 0) goto DENYCARDCOUNT;
+	set @cardcount,getequipcardcnt(@part);
+	if(@cardcount > 1) goto CARDNUMMULTIMSG;
+	show "[Atendente]";
+	show "Esse ítem tem " + @cardcount + " uma carta equipado em sí.";
+	goto CARDNUMPOSTMSG;
+CARDNUMMULTIMSG:
+	show "[Atendente]";
+	show "Esse ítem tem " + @cardcount + " cards equipado em sí.";
+CARDNUMPOSTMSG:
+	next;
+	menu "Ok, estou pronto.",REMOVECARDWARNING,
+	     "Não, não faça isso.",CLOSEOUT;
+
+REMOVECARDWARNING:
+	show "[Atendente]";
+	show "Dependendo da sua chance, você pode falhar. Se isso acontecer, as cartas serão destruídas, o ítem, tudo. Eu não aceito devolução do seu dinheiro. Tenho uma pergunta, o que é mais importante para você: As cartas, ou os itens?";
+	next;
+	menu "Quero pensar mais sobre isso.",CLOSEOUT,
+	     "O ítem.",PRIORITYITEM,
+	     "As cartas.",PRIORITYCARD;
+
+PRIORITYITEM:
+	set @failtype,1;
+	goto REMOVECARD;
+
+PRIORITYCARD:
+	set @failtype,2;
+	goto REMOVECARD;
+
+REMOVECARD:
+	show "[Atendente]";
+	show "Muito bem. Vamos nessa!";
+	set @failchance,rand(100);
+//	if(@failchance < 2) goto FAILREMOVECARD0;
+//	if((@failchance < 8) && (@failtype == 1)) goto FAILREMOVECARD1;
+//	if((@failchance < 8) && (@failtype == 2)) goto FAILREMOVECARD2;
+	if(@failchance < 10) goto FAILREMOVECARD3;
+	successremovecards @part;
+	next;
+	show "[Atendente]";
+	show "O processo foi um grande sucesso. Tome suas cartas e seus ítens.";
+	cutin "",255;
+	close;
+
+FAILREMOVECARD0:
+	failedremovecards @part,0;
+	next;
+	show "[Atendente]";
+	show "O processo foi uma falha total. Estou com muita pena, suas cartas e seus ítens foram destruídos.";
+	cutin "",255;
+	close;
+
+FAILREMOVECARD1:
+	failedremovecards @part,1;
+	next;
+	show "[Atendente]";
+	show "Eu falhei tentando remover as cartas do seu ítem, suas cartas foram destruídas durante o processo. O ítem, está em perfeito estado.";
+	cutin "",255;
+	close;
+
+FAILREMOVECARD2:
+	failedremovecards @part,2;
+	next;
+	show "[Atendente]";
+	show "Menos mal. Eu tive sucesso em remover as cartas, só que o ítem foi destruído no processo.";
+	close;
+
+FAILREMOVECARD3:
+	failedremovecards @part,3;
+	next;
+	show "[Atendente]";
+	show "Eu falhei tentando remover as cartas. Sorte sua, os ítens e as cartas estão perfeitos.";
+	cutin "",255;
+	close;
+
+DENYCARDCOUNT:
+	show "[Atendente]";
+	show "Meu jovem não há cartas equipadas neste ítem. Não posso trabalhar assim.";
+	cutin "",255;
+	close;
+
+DENYMATERIAL:
+	next;
+	show "[Atendente]";
+	show "Você não tem todos os ítens necessários para a minha mágica, garoto. Volte quando conseguí-los.";
+	cutin "",255;
+	close;
+
+CLOSEOUT:
+	show "[Atendente]";
+	show "Tudo bem. Volte quando precisar dos meus serviços.";
+	cutin "",255;
+	close;
+L_RUNA:
+	show "[Atendente]";
+	show "Não posso remover um equipamento que possui a magia inquebrável das runas.";
+	cutin "",255;
+	close;
+
+}

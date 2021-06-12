@@ -1,0 +1,50 @@
+prontera.gat,159,193,4	script	Eventos Bandeira	704,{
+
+show "[Essa Bandeira Vale Ouro]";
+show "Olá, eu levo as pessoas para locais onde pode se adquirir bandeiras, você gostaria de ir a algum lugar?";
+next;
+menu "Sim, Sala dos Cristais",SIM_CRISTAL,"Sim, Areas de Cristais",SIM_AREA,"Não",NAO;
+
+SIM_CRISTAL:
+warp "izlude.gat",147,123;
+end;
+
+SIM_AREA:
+if(getgmlevel() > 0) {
+show "[Essa Bandeira Vale Ouro]";
+show "Qual area gostaria de ir?";
+next;
+menu "Campo 1",CAMPO01,"Campo 2",CAMPO02,"Campo 3",CAMPO03,"Campo 4",CAMPO04,"Campo 5",CAMPO05;
+}else{
+show "[Essa Bandeira Vale Ouro]";
+show "Desculpe mas esta opção esta liberada apenas para usuários VIPs.";
+show "Os campos onde você pode encontrar os cristais são nos arredores de prontera prt_fild00, prt_fild01, prt_fild02, prt_fild03, prt_fild04.";
+close;
+}
+
+CAMPO01:
+warp "prt_fild00.gat",0,0;
+end;
+
+CAMPO02:
+warp "prt_fild01.gat",0,0;
+end;
+
+CAMPO03:
+warp "prt_fild02.gat",0,0;
+end;
+
+CAMPO04:
+warp "prt_fild03.gat",0,0;
+end;
+
+CAMPO05:
+warp "prt_fild04.gat",0,0;
+end;
+
+NAO:
+show "[Corrida do Poring]";
+show "Ok, espero que saiba o caminho até lá.";
+close;
+
+}

@@ -1,7 +1,6 @@
-
-// Cookie Bag Obtainable Items Database
+// Banco de Dados de Itens Obtidos no Cookie Bag
 //
-// Structure of Database:
+// Estrutura do Banco de Dados:
 // GroupID,ItemID,Rate
 
 7,529,5	//Candy
@@ -20,3 +19,4 @@
 7,12122,1	//Sesame Pastry
 7,12123,1	//Honey Pastry
 7,12124,1	//Rainbow Cake
+7,12710,1	//Guyak Pie

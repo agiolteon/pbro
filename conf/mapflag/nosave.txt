@@ -1,9 +1,12 @@
-//===== eAthena Script =======================================
+//===== Cronus Script ========================================
 //= Map flags that disable auto saving
-//===== By: ==================================================
+//===== Por: =================================================
 //= eAthena Dev Team
+//===== Versão Atual: ========================================
 //= 1.7 [Lupus]
-//===== Current Version: =====================================
+//===== Changelog: ===========================================
+//= 
+//============================================================
 
 // Job Quests ====================
 job_sword1	mapflag	nosave	SavePoint
@@ -225,3 +228,36 @@ que_qaru02	mapflag	nosave	SavePoint
 que_qaru03	mapflag	nosave	SavePoint
 que_qaru04	mapflag	nosave	SavePoint
 que_qaru05	mapflag	nosave	SavePoint
+
+// Templo Selado =================
+1@cata	mapflag	nosave	SavePoint
+2@cata	mapflag	nosave	SavePoint
+
+// Torre sem Fim =================
+e_tower	mapflag	nosave	SavePoint
+1@tower	mapflag	nosave	SavePoint
+2@tower	mapflag	nosave	SavePoint
+3@tower	mapflag	nosave	SavePoint
+4@tower	mapflag	nosave	SavePoint
+5@tower	mapflag	nosave	SavePoint
+6@tower	mapflag	nosave	SavePoint
+
+// Episódio 13 ===================
+moc_fild22b	mapflag	nosave	SavePoint
+que_dan01	mapflag	nosave	SavePoint
+que_dan02	mapflag	nosave	SavePoint
+schg_que01	mapflag	nosave	SavePoint
+schg_dun01	mapflag	nosave	SavePoint
+arug_que01	mapflag	nosave	SavePoint
+arug_dun01	mapflag	nosave	SavePoint
+
+// Calabouço Memorial dos Orcs ===
+1@orcs	mapflag	nosave	SavePoint
+2@orcs	mapflag	nosave	SavePoint
+
+// Entrada de Nidhoggr ===========
+1@nyd	mapflag	nosave	SavePoint
+2@nyd	mapflag	nosave	SavePoint
+
+arug_dun01	mapflag	nosave	SavePoint
+schg_dun01	mapflag	nosave	SavePoint

@@ -63,19 +63,19 @@ int quest_add(TBL_PC * sd, int quest_id)
 
 	if( sd->num_quests >= MAX_QUEST_DB )
 	{
-		ShowError("quest_add: Character %d has got all the quests.(max quests: %d)\n", sd->status.char_id, MAX_QUEST_DB);
+		ShowError("quest_add: Personagem %d têm todas as quests.(max quests: %d)\n", sd->status.char_id, MAX_QUEST_DB);
 		return 1;
 	}
 
 	if( quest_check(sd, quest_id, HAVEQUEST) >= 0 )
 	{
-		ShowError("quest_add: Character %d already has quest %d.\n", sd->status.char_id, quest_id);
+		ShowError("quest_add: Personagem %d já tem a quest %d.\n", sd->status.char_id, quest_id);
 		return -1;
 	}
 
 	if( (j = quest_search_db(quest_id)) < 0 )
 	{
-		ShowError("quest_add: quest %d not found in DB.\n", quest_id);
+		ShowError("quest_add: Quest %d nao encontrada na DB.\n", quest_id);
 		return -1;
 	}
 
@@ -92,6 +92,7 @@ int quest_add(TBL_PC * sd, int quest_id)
 	sd->quest_index[i] = j;
 	sd->num_quests++;
 	sd->avail_quests++;
+	sd->save_quest = true;
 
 	clif_quest_add(sd, &sd->quest_log[i], sd->quest_index[i]);
 
@@ -108,26 +109,26 @@ int quest_change(TBL_PC * sd, int qid1, int qid2)
 
 	if( quest_check(sd, qid2, HAVEQUEST) >= 0 )
 	{
-		ShowError("quest_change: Character %d already has quest %d.\n", sd->status.char_id, qid2);
+		ShowError("quest_change: Personagem %d já tem a quest %d.\n", sd->status.char_id, qid2);
 		return -1;
 	}
 
 	if( quest_check(sd, qid1, HAVEQUEST) < 0 )
 	{
-		ShowError("quest_change: Character %d doesn't have quest %d.\n", sd->status.char_id, qid1);
+		ShowError("quest_change: Personagem %d não tem a quest %d.\n", sd->status.char_id, qid1);
 		return -1;
 	}
 
 	if( (j = quest_search_db(qid2)) < 0 )
 	{
-		ShowError("quest_change: quest %d not found in DB.\n",qid2);
+		ShowError("quest_change: Quest %d nao encontrada na DB.\n",qid2);
 		return -1;
 	}
 
 	ARR_FIND(0, sd->avail_quests, i, sd->quest_log[i].quest_id == qid1);
 	if(i == sd->avail_quests)
 	{
-		ShowError("quest_change: Character %d has completed quests %d.\n", sd->status.char_id, qid1);
+		ShowError("quest_change: Personagem %d completou a quest %d.\n", sd->status.char_id, qid1);
 		return -1;
 	}
 
@@ -138,6 +139,7 @@ int quest_change(TBL_PC * sd, int qid1, int qid2)
 	sd->quest_log[i].state = Q_ACTIVE;
 
 	sd->quest_index[i] = j;
+	sd->save_quest = true;
 
 	clif_quest_delete(sd, qid1);
 	clif_quest_add(sd, &sd->quest_log[i], sd->quest_index[i]);
@@ -156,7 +158,7 @@ int quest_delete(TBL_PC * sd, int quest_id)
 	ARR_FIND(0, sd->num_quests, i, sd->quest_log[i].quest_id == quest_id);
 	if(i == sd->num_quests)
 	{
-		ShowError("quest_delete: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
+		ShowError("quest_delete: Personagem %d não tem a quest %d.\n", sd->status.char_id, quest_id);
 		return -1;
 	}
 
@@ -169,6 +171,7 @@ int quest_delete(TBL_PC * sd, int quest_id)
 	}
 	memset(&sd->quest_log[sd->num_quests], 0, sizeof(struct quest));
 	sd->quest_index[sd->num_quests] = 0;
+	sd->save_quest = true;
 
 	clif_quest_delete(sd, quest_id);
 
@@ -213,6 +216,7 @@ void quest_update_objective(TBL_PC * sd, int mob)
 			if( quest_db[sd->quest_index[i]].mob[j] == mob && sd->quest_log[i].count[j] < quest_db[sd->quest_index[i]].count[j] ) 
 			{
 				sd->quest_log[i].count[j]++;
+				sd->save_quest = true;
 				clif_quest_update_objective(sd,&sd->quest_log[i],sd->quest_index[i]);
 			}
 	}
@@ -226,11 +230,12 @@ int quest_update_status(TBL_PC * sd, int quest_id, quest_state status)
 	ARR_FIND(0, sd->avail_quests, i, sd->quest_log[i].quest_id == quest_id);
 	if(i == sd->avail_quests)
 	{
-		ShowError("quest_update_status: Character %d doesn't have quest %d.\n", sd->status.char_id, quest_id);
+		ShowError("quest_update_status: Personagem %d não tem a quest %d.\n", sd->status.char_id, quest_id);
 		return -1;
 	}
 
 	sd->quest_log[i].state = status;
+	sd->save_quest = true;
 
 	if( status < Q_COMPLETE )
 	{
@@ -283,7 +288,7 @@ int quest_check(TBL_PC * sd, int quest_id, quest_check_type type)
 			return 2;
 		}
 	default:
-		ShowError("quest_check_quest: Unknown parameter %d",type);
+		ShowError("quest_check_quest: Parâmetro desconhecido %d",type);
 		break;
 	}
 
@@ -299,7 +304,7 @@ int quest_read_db(void)
 
 	sprintf(line, "%s/quest_db.txt", db_path);
 	if( (fp=fopen(line,"r"))==NULL ){
-		ShowError("can't read %s\n", line);
+		ShowError("nao pode ler %s\n", line);
 		return -1;
 	}
 	
@@ -319,7 +324,7 @@ int quest_read_db(void)
 			}
 			else
 			{
-				ShowError("quest_read_db: insufficient columes in line %s\n", line);
+				ShowError("quest_read_db: Insuficientes colunas na linha %s\n", line);
 				continue;
 			}
 		}
@@ -343,7 +348,7 @@ int quest_read_db(void)
 		k++;
 	}
 	fclose(fp);
-	ShowStatus("Done reading '"CL_WHITE"%s"CL_RESET"'.\n","quest_db.txt");
+	ShowStatus("Leitura de '"CL_WHITE"%s"CL_RESET"' concluida.\n","quest_db.txt");
 	return 0;
 }
 

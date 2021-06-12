@@ -1,0 +1,8 @@
+splendide	mapflag	nobranch
+splendide	mapflag	noicewall
+spl_fild01	mapflag	nobranch
+spl_fild01	mapflag	nomemo
+spl_fild02	mapflag	nobranch
+spl_fild02	mapflag	nomemo
+spl_fild03	mapflag	nobranch
+spl_fild03	mapflag	nomemo

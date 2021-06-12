@@ -1,0 +1,79 @@
+prontera,158,176,5	script	Loja Pontos pbGO	109,{
+while(TRUE){
+Init:
+	set .@npc$, "[Pontos pbGO]";
+	query_sql "SELECT pbgo FROM login WHERE account_id ='"+getcharid(3)+"'", @pbgopts;
+	show .@npc$;
+	show "^FF0000"+strcharinfo(0)+"^000000 aqui você troca Pontos pbGO por itens exclusivos, você consegue pontos adquirindo VIP e os pontos acumulam!";
+	show " ";
+	show "Você tem ^0941C4"+@pbgopts+"^000000 Pontos pbGO.";
+	next;
+		switch(select(
+		"Ovo Surpresa ^FF0000[65 pontos]^000000",
+		"Pergaminho de Arma +6 ^FF0000[7 pontos]^000000",
+		"Pergaminho de Arma +7 ^FF0000[21 pontos]^000000",
+		"Pergaminho de Arma +8 ^FF0000[36 pontos]^000000",
+		"Pergaminho de Armadura +6 ^FF0000[7 pontos]^000000",
+		"Pergaminho de Armadura +7 ^FF0000[21 pontos]^000000",
+		"Pergaminho de Armadura +8 ^FF0000[36 pontos]^000000",
+		"Galho Sangrento ^FF0000[5 pontos]^000000",
+		"Grimório de Combate (10un) ^FF0000[22 pontos]^000000",
+		"Goma de Mascar ^FF0000[9 pontos]^000000",
+		"Espelho Convexo (3un) ^FF0000[18 pontos]^000000",
+		"Amuleto de Ziegfried (10un) ^FF0000[8 pontos]^000000",
+		"","","",""))
+		{
+			case 1: set @id,12925; set @price,65; set .@desc$, "Ovo Surpresa que ser aberto pode lhe dar um dos seguintes itens: Armadura De Brynhildr - Manto de Asfrika - Brisingamen - Megingjard - Mjolnir - Sleipnir - Chifre de Lord Kaho - Espírito do Dragão de Bronze - Espírito do Dragão de Ouro - Espírito do Dragão de Prata - Orelhas de Elfo [1] - Chapéu Goma de Mascar - Boneca de Alice - Antique Pipe - Rubor de Batalha - Coroa de Freya - Óculos [1] - Óculos Escuros [1] - Fruto do Amor - Boina Charmosa - Máscara Juvenil - Cartola de Coelho - Máscara da Morte - Máscara Colorida - Chapéu de Bebê Selvagem - Máscara do Exterminador - Máscara do Mason - Chapéu Formoso - Lápis Mordido - Fúria Brilhante - Chifres Majestosos Gigantes - Chapéu da Bandeira Australiana - Venda da Takius - Chapéu de Satélite - Chapéu de Poring Saltitante - Chapéu de Poporing - Chapéu do Capitão - Chapéu do Milênio - Chapéu do Cowboy Errante - Orgulho de Pirata - Boina de Coelho - Chapéu Formoso - Touca de Pijama Rosa"; break;
+			case 2: set @id,6231; set @price,7; set .@desc$, "Pergaminho de Arma +6 que ao ser usado refina sua arma para +6, não importando o atual refinamento."; break;
+			case 3: set @id,6230; set @price,21; set .@desc$, "Pergaminho de Arma +7 que ao ser usado refina sua arma para +7, não importando o atual refinamento."; break;
+			case 4: set @id,6229; set @price,36; set .@desc$, "Pergaminho de Arma +8 que ao ser usado refina sua arma para +8, não importando o atual refinamento."; break;
+			case 5: set @id,6235; set @price,7; set .@desc$, "Pergaminho de Armadura +6 que ao ser usado refina sua armadura para +6, não importando o atual refinamento."; break;
+			case 6: set @id,6234; set @price,21; set .@desc$, "Pergaminho de Armadura +7 que ao ser usado refina sua armadura para +7, não importando o atual refinamento."; break;
+			case 7: set @id,6233; set @price,36; set .@desc$, "Pergaminho de Armadura +8 que ao ser usado refina sua armadura para +8, não importando o atual refinamento."; break;
+			case 8: set @id,12103; set @price,5; set .@desc$, "Galho Sangrento que ao ser usuado invoca um MVP ao seu lado."; break;
+			case 9:	set @id,14533; set @price,22; set .@desc$, "Grimório de Combate que ao ser usuado aumenta o XP ganho ao derrotar monstros em 100% durante 30 minutos."; break;
+			case 10: set @id,12210; set @price,9; set .@desc$, "Goma de Mascar que ao ser usuado aumenta a chance de derrubar itens ao derrotar monstros durante 30 minutos."; break;
+			case 11: set @id,12214; set @price,18; set .@desc$, "Espelho Convexo que ao ser usuado pode detectar a aparição de MVPs durante 10 minutos."; break;
+			case 12: set @id,7621; set @price,8; set .@desc$, "Se você tiver o Amuleto de Ziegfried em seu inventário quando morrer, uma nova opção surgira para que você possa ressussitar no lugar em que você morreu."; break;
+			case 13:
+			case 14:
+			case 15:
+			case 16:
+			case 17:
+			case 18:
+			case 19:
+			case 20:
+			case 21: 
+			case 22: 
+			case 23: 
+			case 24: 
+			case 25: 
+			case 26: 
+			case 27: 
+			case 29: 
+			case 30: 
+		}
+		show .@npc$;
+		show "Preço: ^FF0000"+@price+" Pontos pbGO^000000";
+		show "Item: ^0000FF"+.@desc$;
+		show " ";
+		show "^000000Deseja mesmo adquirir este item?";
+		next;
+		if(select("Sim.:Não.")==2){ callsub Init; }
+		show .@npc$;
+		if(@pbgopts < @price){ show "Você não tem ^FF0000"+@price+"^000000 pontos pbGO."; next; callsub Init; }
+		query_sql("UPDATE login SET pbgo = pbgo-'"+@price+"' WHERE account_id ='"+getcharid(3)+"'");
+		switch(@id)
+		{
+			case 14533: getitem @id,10; break;
+			case 12214: getitem @id,3; break;
+			case 7621: getitem @id,10; break;
+			default: getitem @id,1; break;
+		}
+		show "Pronto! Obrigado por trocar seus pontos...";
+		next;
+		callsub Init;
+		break;
+	}
+	end;
+} //While end.

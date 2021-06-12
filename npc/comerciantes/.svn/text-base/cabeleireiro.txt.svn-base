@@ -1,0 +1,148 @@
+//===== Cronus Script ========================================
+//= Cabeleireiro
+//===== Por: =================================================
+//= kobra_k88; L0ne_W0lf;
+//===== Versão Atual: ========================================
+//= 1.4b
+//===== Compatível Com: ======================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Muda a cor do cabelo sobre as pallets padrões.
+//===== Comentários Adicionais: ==============================
+//= Fully working
+//= 1.1 Bugfix: fixed missing menu label LEnd->M_End [Lupus]
+//= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.3 Fixed problem what "freezes" the NPC. (bugreport:509) [Samuray22]
+//= 1.4 Fixed getlook checking the wrong color. (bugreport:2392) [L0ne_W0lf]
+//= 1.4a Traduzido o NPC. [Masche]
+//= 1.4b Revisado. [RoM]
+//============================================================
+
+prt_in,243,168,4	script	Jovovich	91,{
+	show "[Cabeleireiro Jovovich]";
+	show "Bem-vindo~!";
+	show "Como posso ajudá-lo?";
+	next;
+	show "[Cabeleireiro Jovovich]";
+	if (sex) show "Oh, não! Seu cabelo está danificado. Parece necessitar de um tratamento profissional. Sente aqui, por favor. Venha.";
+	else {
+		if (rand(20) > 11) {
+			show "Eh!? Oh! Ah, não não não não! Seu cabelo está danificado. Não é bom deixar seu cabelo assim.";
+			next;
+			show "[Cabeleireiro Jovovich]";
+			show "Você deixa eu dar uma olhada no seu cabelo, por favor?";
+		}
+		else show "Uau! Seu cabelo ficaria perfeito se você tingisse~ Que tal tingir o seu cabelo para uma mudança?";
+	}
+	next;
+	while(1) {
+		switch(select("Tingir o Cabelo:Dicas e Informações:Cancelar")) {
+		case 1:
+			show "[Cabeleireiro Jovovich]";
+			show "Sim, sim, uma boa escolha~";
+			show "essa e sua chance de florecer, escolha a cor que você gostaria.";
+			next;
+			while(1) {
+				if (.@choose_success == 1) {
+					show "[Cabeleireiro Jovovich]";
+					show "O que você acha? Você deseja uma cor diferente?";
+					next;
+					if (select("Sim:Não") == 1) {
+						show "[Cabeleireiro Jovovich]";
+						show "Ok! Escolha a cor que você gostaria.";
+						next;
+					}
+					else  {
+						show "[Cabeleireiro Jovovich]";
+						show "Hmm, estou decepicionado, eu queria ter feito um trabalho melhor. Mas eu prometo que que farei melhor da próxima vez. Volte sempre~";
+						close;
+					}
+				}
+				while(1) {
+					switch(select("Vermelho, por favor.:Amarelo, por favor.:Roxo, por favor.:Laranja, por favor.:Verde, por favor.:Azul, por favor.:Branco, por favor.:Preto, por favor.:Na verdade, prefiro meu cabelo como ele é.")) {
+					case 1: set .@headpalette,8; break;
+					case 2: set .@headpalette,1; break;
+					case 3: set .@headpalette,2; break;
+					case 4: set .@headpalette,3; break;
+					case 5: set .@headpalette,4; break;
+					case 6: set .@headpalette,5; break;
+					case 7: set .@headpalette,6; break;
+					case 8: set .@headpalette,7; break;
+					case 9:
+						if (.@choose_success != 0) {
+							show "[Cabeleireiro Jovovich]";
+							show "Você deve gostar da cor do seu cabelo~";
+							close;
+						}
+						show "[Cabeleireiro Jovovich]";
+						show "Eehh~? Você não irá tingir o seu cabelo? Estou triste...";
+						close;
+					}
+					if (.@headpalette == getlook(7)) {
+						show "[Cabeleireiro Jovovich]";
+						show "Eh? Mas essa é a cor de cabelo que você já tem. Escolha uma cor diferente.";
+						next;
+					}
+					else {
+						switch(.@headpalette) {
+						case 1: callsub S_NoDye,976,"amarelo";
+						case 2: callsub S_NoDye,978,"roxo";
+						case 3: callsub S_NoDye,979,"laranja";
+						case 4: callsub S_NoDye,980,"verde";
+						case 5: callsub S_NoDye,981,"azul";
+						case 6: callsub S_NoDye,982,"branco"; 
+						case 7: callsub S_NoDye,983,"preto";
+						Case 8: callsub S_NoDye,975,"vermelho";
+						}
+						if (zeny < 1000) {
+							show "[Cabeleireiro Jovovich]";
+							show "A taxa é de 1000 zeny. Você não tem o suficiente...?";
+							close;
+						}
+						switch(.@headpalette) {
+						case 1: delitem 976,1; //corante_limão
+						case 2: delitem 978,1; //corante_roxo
+						case 3: delitem 979,1; //corante_laranja
+						case 4: delitem 980,1; //corante_verdeescuro
+						case 5: delitem 981,1; //corante_azul
+						case 6: delitem 982,1; //corante_branco
+						case 7: delitem 983,1; //corante_preto
+						case 8: delitem 975,1; //corante_escarlatina
+						}
+						set Zeny,Zeny-1000;
+						setlook 6,.@headpalette;
+						set .@choose_success,1;
+						break;
+					}
+				}
+			}
+		case 2:
+			show "[Cabeleireiro Jovovich]";
+			show "Quando voce se sentir para baixo, quando quiser impressionar alguém, ou mesmo quando quiser apenas mudar um pouco...";
+			next;
+			show "[Cabeleireiro Jovovich]";
+			show "Desde que você tenha a tintura apropriada eu fareu seu cabelo ficar lindo.";
+			next;
+			show "[Cabeleireiro Jovovich]";
+			show "Tente não se preocupar com a taxa. Aquisição de beleza é o mesmo que adquirir tudo. Hehe~";
+			next;
+			show "[Cabeleireiro Jovovich]";
+			show "* Taxas e Informações *";
+			show "- 1 Tintura da cor do cabelo que você quer.";
+			show "- Taxa de 1000 zeny.";
+			break;
+		case 3:
+			show "[Cabeleireiro Jovovich]";
+			show "Homens ou Mulheres...";
+			show "Toda a pessoa tem o direito e a obrigação de ser bonito.";
+			close;
+		}
+	}
+
+S_NoDye:
+	if (countitem(getarg(0)) == 0) {
+		show "[Cabeleireiro Jovovich]";
+		show "Eh?! Mas você precisa do item '"+getitemname(getarg(0))+"' para tingir seu cabelo de "+getarg (1)+"...";
+		close;
+	}
+}

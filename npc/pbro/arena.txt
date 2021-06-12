@@ -1,0 +1,354 @@
+//===== Arena da Morte ========================================
+prontera,151,193,5	script	Arena da Morte	752,{
+//===== Nome do npc. ==========================================
+set @nome$,"[ ^FF0000 Arena da Morte ^000000 ]";
+//===== Arena PvP =============================================
+set $pvp$[0],"guild_vs3";
+set $n_pvp$[0],"guild_vs2-1";
+//===== Arena GvG =============================================
+set $gvg$[0],"guild_vs1";
+set $n_gvg$[0],"guild_vs2-2";
+//===== Arena Baby =============================================
+set $n_baby$[0],"guild_vs2";
+//===== Bloquear o Uso dos Items no PvP [ 2 = Não e 1 = Sim ] =
+set $pvpmosca,1;
+set $pvpantonio,1;
+set $pvpygg,2;
+set $pvpseed,2;
+set $pvpfolha,2;
+//===== Bloquear o Uso dos Items na GvG [ 2 = Não e 1 = Sim ] =
+set $gvgmosca,1;
+set $gvgantonio,1;
+set $gvgygg,2;
+set $gvgseed,2;
+set $gvgfolha,2;
+set s_kill, 0;
+//===== Items bloqueados... ===================================
+// Asa de Mosca = [ID: 601]
+// Carta Antonio = [ID: 4243]
+// Fruto de Yggdrasil = [ID: 607]
+// Semente de Yggdrasil = [ID: 608]
+// Folha de Yggdrasil = [ID: 610]
+//=============================================================
+
+	show @nome$;
+	show "Olá "+strcharinfo(0)+".";
+	show "Escolha qual destino deseja ir";
+	next;
+	switch(select("- Escolher Anuncio/Voz [NOVO]","- Playes vs Player [Rank] ^0000FF["+getmapusers($pvp$[$pvp])+"]^000000","- Guild vs Guild [Rank] ^0000FF["+getmapusers($gvg$[$gvg])+"]^000000","- Playes vs Player [No-Rank] ^0000FF["+getmapusers($n_pvp$[$n_pvp])+"]^000000","- Guild vs Guild [No-Rank] ^0000FF["+getmapusers($n_gvg$[$n_gvg])+"]^000000","- Baby vs Baby [No-Rank] ^0000FF["+getmapusers($n_baby$[$n_baby])+"]^000000","- Sair"))
+	{
+
+// PVP vs3 - Com Rank PVP
+case 1:
+	show @nome$;
+	if (getgmlevel()<20) { show "Esta opção não está liberada para você. Os anuncios de Vozes e Mensagens da ARENA são beneficios apenas para usuários VIP TOTAL, os quais podem escolher entre ^FF0000vários tipos de anuncios^000000."; close; }
+	show "Escolha uma das vozes que você pode utilizar durante o PVP.";
+	next;
+	menu "Padrão",voz01,"Funny",voz02,"Ladie",voz03,"Badass",voz04;
+	end;
+
+case 2:
+	if($pvp_livre == 0) goto FECHA_RANK;
+	if(BaseLevel < 40) goto DESCULPE;
+	if (($pvpmosca == 1 & countitem(601)>0)){ show @nome$; show "A entrada da Asa de Mosca não é permitida!"; close; }
+	if (($pvpantonio == 1 & countitem(4243)>0)){ show @nome$; show "A entrada da Carta Antonio não é permitida!"; close; }
+	if (($pvpygg == 1 & countitem(607)>0)){ show @nome$; show "A entrada do Fruto de Yggdrasil não é permitida!"; close; }
+	if (($pvpseed == 1 & countitem(608)>0)){ show @nome$; show "A entrada da Semente de Yggdrasil não é permitida!"; close; }
+	if (($pvpfolha == 1 & countitem(610)>0)){ show @nome$; show "A entrada da Folha de Yggdrasil não é permitida!"; close; }
+	soundeffect "goarena.wav",0;
+	sleep2 1000;
+	warp $pvp$,0,0;
+	end;
+
+// PVP vs1 - Com Rank GVG
+case 3:
+	if($pvp_livre == 0) goto FECHA_RANK;
+	if(BaseLevel < 40) goto DESCULPE;
+	if(getcharid(2) == 0) {	show @nome$; show "Eu não posso ajudá-lo, você não possui uma guild."; close;}
+	if (($gvgmosca == 1 & countitem(601)>0)){ show @nome$; show "A entrada da Asa de Mosca não é permitida!"; close; }
+	if (($gvgantonio == 1 & countitem(4243)>0)){ show @nome$; show "A entrada da Carta Antonio não é permitida!"; close; }
+	if (($gvgygg == 1 & countitem(607)>0)){ show @nome$; show "A entrada do Fruto de Yggdrasil não é permitida!"; close; }
+	if (($gvgseed == 1 & countitem(608)>0)){ show @nome$; show "A entrada da Semente de Yggdrasil não é permitida!"; close; }
+	if (($gvgfolha == 1 & countitem(610)>0)){ show @nome$; show "A entrada da Folha de Yggdrasil não é permitida!"; close; }
+	soundeffect "goarena.wav",0;
+	sleep2 1000;
+	warp $gvg$,0,0;
+	end;
+
+// PVP VS2-1 - Sem Rank PVP
+case 4:
+	warp $n_pvp$,0,0;
+	end;
+
+// PVP VS2-2 - Sem Rank GVG
+case 5:
+	warp $n_gvg$,0,0;
+	end;
+
+// PVP VS2 - PVP BABY
+case 6:
+	if(class >= 4023 && class <= 4045){ warp $n_baby$,0,0;
+	close;
+	}else{
+	show @nome$; show "Desculpe esta arena é somente para classes Baby";
+	close;
+	end;
+	}
+
+// SAIR
+case 7:
+	show @nome$;
+	show "Volte sempre que quiser.";
+	close;
+}
+
+voz01:
+	set tipo_ann$, "01";
+	goto endchatvoz;
+	end;
+
+voz02:
+	set tipo_ann$, "02";
+	goto endchatvoz;
+	end;
+
+voz03:
+	set tipo_ann$, "03";
+	goto endchatvoz;
+	end;
+
+voz04:
+	set tipo_ann$, "04";
+	goto endchatvoz;
+	end;
+
+endchatvoz:
+	show @nome$;
+	show "Sua voz do pvp foi alterada! Faça temerem seu nome na arena!";
+	close;
+
+FECHA_RANK:
+	show @nome$;
+	show "Desculpe, mas nossas arenas com Rank estão fechadas. Volte as 10 da manhã, que estarão abertas.";
+	close;
+
+DESCULPE:
+	show @nome$;
+	show "Sua entrada nesta arena não é permitida, pois esta muito fraco. Vá treinar um pouco e volte aqui que deixarei você entrar.";
+	close;
+}
+
+// -- Inicio do Script
+
+-	script	Arena#PCKill	-1,{
+
+OnPCKillEvent:
+	getmapxy @map$,@x,@y,0;
+	if ( @map$ == $pvp$[$pvp] ) goto PvP;
+	if ( @map$ == $gvg$[$gvg] ) goto GvG;
+	end;
+
+
+
+PvP:
+	set @CID,getcharid(0);set @name$,"";set @points,0;
+	query_sql "SELECT `kills` FROM `pvp` WHERE `char_id`="+@CID+"",@points;
+	query_sql "SELECT `name` FROM `pvp` WHERE `char_id`="+@CID+"",@name$;
+	if ( @name$ == "" ) { query_sql "INSERT INTO `pvp` (`char_id`,`name`,`kills`) VALUES ("+@CID+",'"+strcharinfo(0)+"',1)",@esc$; dispbottom "Sua Pontuação: 1"; end; }
+	query_sql "UPDATE `pvp` SET `kills` = `kills` +1 WHERE `char_id`="+@CID+"",@esc$;
+	set @points,@points+1;
+	dispbottom "Sua Pontuação: "+@points;
+	if (getgmlevel()>=20) { goto SOM_KILL; }
+	end;
+
+GvG:
+	set @GID, getcharid(2); set @name$,""; set @points,0;
+	query_sql "SELECT `kills` FROM `gvg` WHERE `guild_id`="+@GID+"",@gpoints;
+	query_sql "SELECT `name` FROM `gvg` WHERE `guild_id`="+@GID+"",@name$;
+	if ( @name$ == "" ) { query_sql "INSERT INTO `gvg` (`guild_id`,`name`,`kills`) VALUES ("+@GID+",'"+strcharinfo(2)+"',1)",@esc$; dispbottom "Pontuação da Guild: 1"; end; }
+	query_sql "UPDATE `gvg` SET `kills` = `kills` + 1 WHERE `guild_id`="+@GID+"",@esc$;
+	set @gpoints,@gpoints+1;
+	dispbottom "Pontuação da Guild: "+@gpoints;
+	if (getgmlevel()>=20) { goto SOM_KILL; }
+	end;
+
+SOM_KILL:
+	if(tipo_ann$=="") { set tipo_ann$, "01"; }
+	if(rid2name(killedrid)==s_killed$) {
+	soundeffectall tipo_ann$+"_noob.wav",0,@map$;
+	announce strcharinfo(0)+" está humilhando "+s_killed$+" NA ARENA!!!",bc_map,0xFF66BB;
+	set s_killed$,rid2name(killedrid);
+	end;
+	}
+	else if(s_killer$==rid2name(killedrid)){
+	soundeffectall tipo_ann$+"_vinganca.wav",0,@map$;
+	announce strcharinfo(0)+" teve sua vingança contra "+s_killer$+" NA ARENA!!!",bc_map,0xFF8000;
+	set s_killed$,rid2name(killedrid);
+	set s_killer$,"";
+	end;
+	}
+	else{
+	set s_killed$,rid2name(killedrid);
+	}
+
+	set s_kill, s_kill + 1;
+
+	//announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0xFFFFFF;
+	if(s_kill==3) { soundeffectall tipo_ann$+"_3_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0xFFFFFF;
+	}
+	else if(s_kill==4) { soundeffectall tipo_ann$+"_4_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0xFFFFFF;
+	}
+	else if(s_kill==5) { soundeffectall tipo_ann$+"_5_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0xFFFFFF;
+	}
+	else if(s_kill==6) { soundeffectall tipo_ann$+"_6_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FFFF;
+	}
+	else if(s_kill==7) { soundeffectall tipo_ann$+"_7_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FFFF;
+	}
+	else if(s_kill==8) { soundeffectall tipo_ann$+"_8_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FFFF;
+	}
+	else if(s_kill==9) { soundeffectall tipo_ann$+"_9_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FFFF;
+	}
+	else if(s_kill>9 && s_kill<12) { soundeffectall tipo_ann$+"_10_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FF00;
+	}
+	else if(s_kill>11 && s_kill<14) { soundeffectall tipo_ann$+"_12_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FF00;
+	}
+	else if(s_kill>13 && s_kill<16) { soundeffectall tipo_ann$+"_14_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0x00FF00;
+	}
+	else if(s_kill>15) { soundeffectall tipo_ann$+"_16_kills.wav",0,@map$; 
+	announce strcharinfo(0)+" já matou "+s_kill+" SEM MORRER!!!",bc_map,0xFF0000;
+	}
+	else { end; }
+	end;
+	}
+
+// -- Fim do Script
+
+-	script	Arena#PCDie	-1,{
+
+OnPCDieEvent:
+	getmapxy @map$,@x,@y,0;
+	if ( @map$ == $pvp$[$pvp] ) goto PvP;
+	if ( @map$ == $gvg$[$gvg] ) goto GvG;
+	end;
+
+PvP:
+	set @CID,getcharid(0);set @name$,"";set @points,0;
+	query_sql "SELECT `deaths` FROM `pvp` WHERE `char_id`="+@CID+"",@points;
+	query_sql "SELECT `name` FROM `pvp` WHERE `char_id`="+@CID+"",@name$;
+	if ( @name$ == "" ) { query_sql "INSERT INTO `pvp` (`char_id`,`name`,`deaths`) VALUES ("+@CID+",'"+strcharinfo(0)+"',1)",@esc$; dispbottom "Sua Pontuação: 1"; end; }
+	query_sql "UPDATE `pvp` SET `deaths` = `deaths` + 1 WHERE `char_id`="+@CID+"",@esc$;
+	if (getgmlevel()>=20) { goto SOM_DIE; }
+	end;
+
+GvG:
+	set @GID,getcharid(2);set @name$,"";set @gpoints,0;
+	query_sql "SELECT `deaths` FROM `gvg` WHERE `guild_id`="+@GID+"",@gpoints;
+	query_sql "SELECT `name` FROM `gvg` WHERE `guild_id`="+@GID+"",@name$;
+	if ( @name$ == "" ) { query_sql "INSERT INTO`gvg` (`guild_id`,`name`,`deaths`) VALUES ("+@GID+",'"+strcharinfo(2)+"',1)",@esc$; dispbottom "Pontuação da Guild: 1"; end; }
+	query_sql "UPDATE `gvg` SET `deaths` = `deaths` + 1 WHERE `guild_id`="+@GID+"",@esc$;
+	if (getgmlevel()>=20) { goto SOM_DIE; }
+end;
+
+
+SOM_DIE:
+	sleep2 1500;
+	soundeffect "dead.wav",0;	
+	set s_kill, 0;
+	set s_killer$,rid2name(killerrid);
+	set s_killed$,"";
+	end;
+}
+
+//============== Saída ==================
+
+//PvP
+//guild_vs3,12,50,0	warp	gvs01	1,1,prontera,155,191
+//guild_vs3,50,87,0	warp	gvs02	1,1,prontera,155,191
+//guild_vs3,87,49,0	warp	gvs03	1,1,prontera,155,191
+//guild_vs3,50,12,0	warp	gvs04	1,1,prontera,155,191
+
+//Guild
+//guild_vs1,50,8,0	warp	gvs05	1,1,prontera,155,191
+//guild_vs1,91,49,0	warp	gvs06	1,1,prontera,155,191
+//guild_vs1,49,91,0	warp	gvs07	1,1,prontera,155,191
+//guild_vs1,8,49,0	warp	gvs08	1,1,prontera,155,191
+
+//============== MAP FLAG ===============
+
+// Player
+
+guild_vs3	mapflag	nosave
+guild_vs3	mapflag	noteleport
+guild_vs3	mapflag	nowarpto
+guild_vs3	mapflag	nowarp
+guild_vs3	mapflag	nomemo
+guild_vs3	mapflag	gvg	off
+guild_vs3	mapflag	pvp
+guild_vs3	mapflag	nopenalty
+guild_vs3	mapflag	nobranch
+guild_vs3	mapflag	pvp_noguild
+guild_vs3	mapflag	noexp
+
+// Guild
+
+guild_vs1	mapflag	nosave
+guild_vs1	mapflag	noteleport
+guild_vs1	mapflag	nowarpto
+guild_vs1	mapflag	nowarp
+guild_vs1	mapflag	nomemo
+guild_vs1	mapflag	gvg	off
+guild_vs1	mapflag	pvp
+guild_vs1	mapflag	nopenalty
+guild_vs1	mapflag	nobranch
+guild_vs1	mapflag	noexp
+
+// No rank Player
+
+guild_vs2-1	mapflag	nosave
+guild_vs2-1	mapflag	noteleport
+guild_vs2-1	mapflag	nowarpto
+guild_vs2-1	mapflag	nowarp
+guild_vs2-1	mapflag	nomemo
+guild_vs2-1	mapflag	gvg	off
+guild_vs2-1	mapflag	pvp
+guild_vs2-1	mapflag	nopenalty
+guild_vs2-1	mapflag	nobranch
+guild_vs2-1	mapflag	pvp_noguild
+guild_vs2-1	mapflag	noexp
+
+// No rank Guild
+
+guild_vs2-2	mapflag	nosave
+guild_vs2-2	mapflag	noteleport
+guild_vs2-2	mapflag	nowarpto
+guild_vs2-2	mapflag	nowarp
+guild_vs2-2	mapflag	nomemo
+guild_vs2-2	mapflag	gvg	off
+guild_vs2-2	mapflag	pvp
+guild_vs2-2	mapflag	nopenalty
+guild_vs2-2	mapflag	nobranch
+guild_vs2-2	mapflag	noexp
+
+// Baby
+
+guild_vs2	mapflag	nosave
+guild_vs2	mapflag	noteleport
+guild_vs2	mapflag	nowarpto
+guild_vs2	mapflag	nowarp
+guild_vs2	mapflag	nomemo
+guild_vs2	mapflag	gvg	off
+guild_vs2	mapflag	pvp
+guild_vs2	mapflag	nopenalty
+guild_vs2	mapflag	nobranch
+guild_vs2	mapflag	pvp_noguild
+guild_vs2	mapflag	noexp

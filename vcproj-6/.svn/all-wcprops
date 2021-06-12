@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/vcproj-6
+END
+login-server_sql.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/vcproj-6/login-server_sql.dsp
+END
+login-server_txt.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/vcproj-6/login-server_txt.dsp
+END
+char-server_sql.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/vcproj-6/char-server_sql.dsp
+END
+char-server_txt.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/cronusemulator/!svn/ver/2461/Server/trunk/vcproj-6/char-server_txt.dsp
+END
+map-server_sql.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/vcproj-6/map-server_sql.dsp
+END
+map-server_txt.dsp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/cronusemulator/!svn/ver/2784/Server/trunk/vcproj-6/map-server_txt.dsp
+END

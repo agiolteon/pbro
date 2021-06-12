@@ -287,16 +287,16 @@
 33,5042,5	// Bao Bao
 33,5066,1	// Succubus Horn
 // Lotto Box
-35,7391,1	// Lotto Ball 31
-35,7392,1	// Lotto Ball 32
-35,7393,1	// Lotto Ball 33
-35,7394,1	// Lotto Ball 34
-35,7395,1	// Lotto Ball 35
-35,7396,1	// Lotto Ball 36
-35,7397,1	// Lotto Ball 37
-35,7398,1	// Lotto Ball 38
-35,7540,1	// Lotto Ball 39
-35,7541,1	// Lotto Ball 40
+//35,7391,1	// Lotto Ball 31
+//35,7392,1	// Lotto Ball 32
+//35,7393,1	// Lotto Ball 33
+//35,7394,1	// Lotto Ball 34
+//35,7395,1	// Lotto Ball 35
+//35,7396,1	// Lotto Ball 36
+//35,7397,1	// Lotto Ball 37
+//35,7398,1	// Lotto Ball 38
+//35,7540,1	// Lotto Ball 39
+//35,7541,1	// Lotto Ball 40
 // Food Package
 36,512,1	// Apple
 36,513,1	// Banana
@@ -393,7 +393,7 @@
 41,5182,1	// Puppy Hat
 // Old Yellow Box
 42,5259,1	// Elephant Hat
-42,5260,1	// Cookie Hat
+//42,5260,1	// Cookie Hat
 42,5261,1	// Silver Tiara
 42,5262,1	// Golden Tiara
 // Old Gift Box
@@ -433,18 +433,18 @@
 44,4396,3	// Thanatos Odium Card
 44,4397,3	// Thanatos Despero Card
 // Hometown Gift
-45,12195,1	// Plain Rice Cake
-45,12196,1	// Hearty Rice Cake
-45,12197,1	// Salty Rice Cake
-45,12198,1	// Lucky Rice Cake
+//45,12195,1	// Plain Rice Cake
+//45,12196,1	// Hearty Rice Cake
+//45,12197,1	// Salty Rice Cake
+//45,12198,1	// Lucky Rice Cake
 45,12122,1	// Sesame Pastry
 45,12123,1	// Honey Pastry
 45,12124,1	// Rainbow Cake
 45,663,1	// Korean Rice Cake
 // Masquerade Ball Box
-46,5296,10	// Drooping Nine Tail
-46,5297,1	// Soul Wing
-46,5298,10	// Dokebi's Wig
+//46,5296,10	// Drooping Nine Tail
+//46,5297,1	// Soul Wing
+//46,5298,10	// Dokebi's Wig
 46,5299,10	// Pagdayaw
 // Tresure Box WoE
 47,12010,24	// Wind Arrow Quiver
@@ -460,7 +460,7 @@
 47,12108,9	// Scroll Package
 47,12702,8	// Old Bleu Box
 47,12130,48	// Cookie Bag
-47,12194,6	// Present from Home
+//47,12194,6	// Present from Home
 47,12260,22	// Summer Event Suit
 47,658,6	// Tribal Solidarity
 47,12107,2	// Wrapped Mask
@@ -517,12 +517,173 @@
 50,603,11	// Old Blue Box
 50,12103,1	// Bloody Branch
 // Cherish Box
-51,5454,1	// Puppy Hat
-51,5455,4	// Decorative Geographer
-51,5456,4	// Summer Hat
+//51,5454,1	// Puppy Hat
+//51,5455,4	// Decorative Geographer
+//51,5456,4	// Summer Hat
 // Cherish Box Ori
 52,5256,1	// Valkyrie Feather Band
 52,5212,2	// Solar Panels
 52,5305,2	// Pirate Dagger
 52,5332,2	// Loki Mask
-52,2712,2	// Collector's Edition Book
+//52,2712,2	// Collector's Edition Book
+
+// Pacote Surpresa de Natal
+53,5380,1
+53,5381,1
+53,5382,1
+53,5074,1
+53,5068,1
+53,5210,1
+53,5286,1
+53,2277,1
+53,2269,1
+53,5077,1
+53,12244,1
+53,617,1
+53,607,1
+53,610,1
+53,730,1
+
+// Pacote Surpresa Angelical
+54,2254,1
+54,2358,1
+54,5074,1
+54,5125,1
+54,5132,1
+54,5153,1
+54,5207,1
+54,4054,1
+54,12913,1
+54,4241,1
+
+// Pacote Surpresa Maligno
+55,2255,1
+55,642,1
+55,5068,1
+55,1039,1
+55,12925,1
+55,12923,1
+55,5066,1
+55,5072,1
+55,13819,1
+
+// Mochila do Viajante
+56,5291,1
+56,5254,1
+56,5286,1
+56,5283,1
+56,5287,1
+56,5191,1
+56,5192,1
+56,5193,1
+56,14527,1
+56,14539,1
+56,14540,1
+56,14534,1
+56,14535,1
+56,14541,1
+56,14543,1
+56,14537,1
+
+// Mochila do Herói
+57,5187,1
+57,5140,1
+57,5194,1
+57,5196,1
+57,5197,1
+57,5288,1
+57,13553,1
+57,13744,1
+57,13741,1
+57,13712,1
+57,13715,1
+57,13747,1
+57,13753,1
+57,12208,1
+57,13720,1
+57,5801,1
+
+// Ovo dos Namorados
+58,5801,2
+58,12900,60
+58,12901,30
+58,13804,10
+58,13805,10
+58,13806,10
+//10 Torta de Chocolate – 13%
+//10 Chocolate com Morangos – 12%
+//10 Biscoito da Sorte: Glória – 5%
+//10 Biscoito da Sorte: Magnificat – 5%
+//10 Biscoito da Sorte: Impositio Manus – 5%
+//5 Velha Caixa Azul – 6%
+//10 Doce de Guyak – 5%
+//10 Pudim de Guyak – 4,8%
+//10 Amuleto de Ziegfried – 5%
+
+// Ovo de Amatsu
+//10 Manuais de Combate - 17%
+//10 Seguros de Vida - 16%
+//10 Gomas de Mascar - 16%
+//15 Cartão Kafra - 17%
+//2 Sementes de Yggdrasil - 15%
+59,2254,2
+59,2255,2
+59,2257,2
+59,2259,1
+59,4144,1
+59,4121,1
+59,2298,2
+59,5094,2
+59,5284,2
+59,5143,2
+59,5117,2
+
+// Pergaminho da Fauna
+61,5098,1
+61,5177,1
+61,5030,1
+61,5059,1
+61,5033,1
+61,5084,1
+61,5198,1
+61,5259,1
+61,5078,1
+61,5111,1
+61,5217,1
+61,5058,1
+//5 Gratinado de Chilli e Camarão
+//5 Nove Caudas Cozidas
+//5 Pé de Urso Especial
+//5 Chá de Ervas e Mel
+//5 Sopa de Dragão Ascendente
+
+// Ovo de Majoruros
+62,12902,150
+62,12922,30
+62,14232,100
+62,12908,150
+62,5261,34
+62,12911,5
+62,12920,55
+//10 Pudim de Guyak - 15%
+62,5205,30
+62,12103,1
+62,12921,80
+62,2702,31
+62,13534,150
+62,5262,34
+
+// Ovo da Fada-Serpente
+//10 Bolo Mágico Lunar - 15%
+//10 Bolo Lunar - 15%
+//10 Bolo Especial Lunar - 15%
+63,5343,5
+63,5344,5
+63,5345,5
+63,12913,180
+63,7553,25
+63,5140,30
+63,12259,1
+63,5464,14
+//5 Seguro de Vida - 13.5%
+//5 Pudim de Guyak - 15%

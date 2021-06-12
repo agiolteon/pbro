@@ -130,7 +130,8 @@ struct map_session_data {
 		unsigned int bg_id;
 		unsigned skillonskill : 1;
 		unsigned short user_font;
-		unsigned short autobonus;
+		unsigned short script_parsed; //flag to indicate if the script of an autobonus is parsed. [Inkfish]
+		unsigned short autobonus; //flag to indicate if an autobonus is activated. [Inkfish]
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -161,6 +162,10 @@ struct map_session_data {
 	unsigned char head_dir; //0: Look forward. 1: Look right, 2: Look left.
 	unsigned int client_tick;
 	int npc_id,areanpc_id,npc_shopid;
+	struct {
+		int npc_id;
+		short x,y;
+	} ontouch;
 	int npc_item_flag; //Marks the npc_id with which you can use items during interactions with said npc (see script command enable_itemuse)
 	int npc_menu; // internal variable, used in npc menu handling
 	int npc_amount;
@@ -387,6 +392,7 @@ struct map_session_data {
 	int avail_quests;
 	int quest_index[MAX_QUEST_DB];
 	struct quest quest_log[MAX_QUEST_DB];
+	bool save_quest;
 
 	// temporary debug [flaviojs]
 	const char* debug_file;

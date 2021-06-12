@@ -1,0 +1,147 @@
+prontera,156,179,4	script	Sexta Premiada	907,{
+
+if(getgmlevel()==0) goto AVISO;
+show "[VIP]";
+show "Leia com atenção! Caso não siga as instruções corretamente poderá perder o item!";
+next;
+show "^FF0000Preste atenção nas informações:^000000";
+show " ";
+show "Primeiro: Não relogue, não feche o jogo, não faça nada que perca conexão com o jogo, por que após pedir o item ROPS ao NPC você não podera fazer outra solicitação.";
+show " ";
+show "Segundo: O premio será aleatorio dentro dos que estavam no site da pbGO.";
+show " ";
+show "Terceiro: O premio dependem de você e de sua sorte.";
+show " ";
+show "Quarto: Caso você cancele ou saia do jogo antes de receber o premio, iremos considerar como entregue, por isso tome cuidado para que isso nao acorra!";
+show " ";
+show "Quinto: Boa sorte!";
+show " ";
+show "Aguarde um momento... Após liberar o botão próx, você pode continuar.";
+sleep2 10000;
+next;
+show "[VIP]";
+show "Após ter lido as regras gostaria de iniciar a conversa com o NPC de troca? Lembrando que ao aceitar você deve ir até o final da conversa seguindo todas as instruções como serão esclarecidas!";
+next;
+menu "Aceito",SIM,"Não",NAO;
+
+SIM:
+set @creditos,0;
+query_sql "SELECT promocao FROM login WHERE account_id ='"+getcharid(3)+"'", @creditos;
+if(@creditos<1) goto SEMPONTO;
+set @creditos, @creditos - 1;
+query_sql("UPDATE login SET promocao = '"+@creditos+"' WHERE account_id = '"+getcharid(3)+"'");
+
+show "[Atendente de troca VIP]";
+show "Olá, vamos ao que importa? Você quer seu premio não é? Bom apartir daqui você não poderá mais cancelar nossa conversa, caso isso aconteça eu entenderei que o seu premio foi entregue.";
+next;
+show "[Atendente de troca VIP]";
+show "Você deve estar se perguntando, por que perco saindo da conversa antes de terminar? Simples, o seu premio vai depender de sua sorte e de suas escolhas daqui para frente, e para isso será dado apenas uma chance, faça bem as suas escolhas daqui para frente.";
+next;
+show "[Atendente de troca VIP]";
+show "Chega de papo, vamos ver qual premio será o seu. Me diga 5 numeros de 0 até 10. ATENÇÃO, caso você escolha alguma coisa diferende do que lhe peço, eu estarei escolhendo aleatoriamente um numero para você.";
+next;
+show "[Atendente de troca VIP]";
+show "Digite os 5 numeros de 0 a 10.";
+input @nume1;
+set @esco1, rand(0,10);
+input @nume2;
+set @esco2, rand(0,10);
+input @nume3;
+set @esco3, rand(0,10);
+input @nume4;
+set @esco4, rand(0,10);
+input @nume5;
+set @esco5, rand(0,10);
+show " ";
+show "Um momento por favor... Após liberar o botão próx, você pode continuar.";
+sleep2 4000;
+next;
+show "[Atendente de troca VIP]";
+show "O resultado de suas escolhas foram:";
+set @premiacao, rand(0,10);
+if(@premiacao==0) {
+additem 5375,1;
+show "-> Elmo Artesanal de Orc Herói [1]";
+next;
+}
+
+if(@premiacao==1) {
+additem 5220,1;
+show "-> Smoking Pipe";
+next;
+}
+
+if(@premiacao==2) {
+additem 5371,1;
+show "-> Chapéu do Milênio";
+next;
+}
+
+if(@premiacao==3) {
+additem 5385,1;
+show "-> Chapéu de Yoyo";
+next;
+}
+
+if(@premiacao==4) {
+additem 5395,1;
+show "-> Chapéu do Gato";
+next;
+}
+
+if(@premiacao==5) {
+additem 5299,1;
+show "-> Cocar [1]";
+next;
+}
+
+if(@premiacao==6) {
+additem 5397,1;
+show "-> Máscara de Mergulho";
+next;
+}
+
+if(@premiacao==7) {
+additem 5305,1;
+show "-> Adaga do Arremesso";
+next;
+}
+
+if(@premiacao==8) {
+additem 5333,1;
+show "-> Antena de Rádio";
+next;
+}
+
+if(@premiacao==9) {
+additem 5367,1;
+show "-> Chapéu de Yao Jun [1]";
+next;
+}
+
+if(@premiacao==10) {
+additem 5385,1;
+show "-> Chapéu de Yoyo";
+next;
+}
+
+show "[Atendente de troca VIP]";
+show "Seu premio esta entregue, obrigado por ajudar o pbRO!";
+close;
+
+SEMPONTO:
+show "[VIP]";
+show "Você não pode fazer trocas comigo! Você ja recebeu ou não tem direito a receber o item!!";
+close;
+
+NAO:
+show "[VIP]";
+show "Até breve!";
+close;
+
+AVISO:
+show "[VIP]";
+show "Eu entrego o ROPS dos usuários que fizeram doações na sexta-feira dia 16 de outubro.";
+close;
+}
+
